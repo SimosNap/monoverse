@@ -1,85 +1,87 @@
 # Monoverse
 
-**An open-source framework for building communities around IRC.**
+**Un framework open source per costruire community con al centro un canale IRC.**
 
-Monoverse is an open-source community framework designed around a simple idea: **the IRC channel is the center of the community**.
+[English version](README.en.md)
 
-It combines real-time IRC communication with a modern web community layer, bringing together profiles, short-form posts, discussions, editorial content, media, widgets and external integrations without replacing the open protocol at its core.
+Monoverse è un framework open source per community nato attorno a un'idea semplice: **il canale IRC è il centro della community**.
 
-Monoverse can be adapted to different kinds of communities, including:
+Unisce la comunicazione in tempo reale di IRC a un moderno livello web dedicato alla community, integrando profili, contenuti brevi, discussioni, contenuti editoriali, media, widget e servizi esterni senza sostituire il protocollo aperto che ne costituisce il cuore.
 
-- traditional online communities;
-- developer communities;
-- web radios;
-- crypto communities.
+Monoverse può adattarsi a diversi tipi di community, tra cui:
 
-## IRC at the center
+- community online tradizionali;
+- community di sviluppatori;
+- web radio;
+- community crypto.
 
-IRC is not an additional chat feature embedded into Monoverse.
+## IRC al centro
 
-It is the starting point.
+IRC non è una funzionalità di chat aggiunta a Monoverse.
 
-The web interface extends the community around the channel: it can expose presence, activity and content while providing persistent spaces for things that do not naturally belong to a real-time conversation.
+È il punto di partenza.
 
-Even the names **Ping** and **Pong**, used for posts and their replies, come directly from IRC.
+L'interfaccia web estende la community attorno al canale: può mostrare presenza, attività e contenuti, offrendo allo stesso tempo spazi persistenti per tutto ciò che non appartiene naturalmente a una conversazione in tempo reale.
 
-## Community features
+Anche i nomi **Ping** e **Pong**, utilizzati per i post e le relative risposte, derivano direttamente da IRC.
 
-Monoverse currently includes:
+## Funzionalità della community
 
-- **Ping & Pong** — short-form community posts and conversations;
-- **Chanzine** — an editorial area with articles, categories and user submissions subject to editorial review;
-- **Profiles and presence** — community identities connected with IRC activity;
-- **Media** — image, audio and video support;
-- **Widgets** — configurable blocks that allow each community to build its own identity;
-- **Developer integrations** — including GitHub-oriented widgets;
-- **Web radio integrations** — including Icecast and AzuraCast;
-- **Crypto integrations** — designed around self-custodial wallets rather than storing users' private keys;
-- **RSS feeds** — for Chanzine and Ping, allowing content to flow outside the website and back into IRC through bots and other tools;
-- **Moderation and community tools** — reporting, moderation, follows, saved content and notifications;
-- **Multilingual interface** — with the infrastructure for community-specific translations.
+Monoverse include attualmente:
 
-## Different communities, one framework
+- **Ping & Pong** — contenuti brevi, conversazioni e interazioni della community;
+- **Chanzine** — un'area editoriale con articoli, categorie e proposte degli utenti sottoposte a revisione editoriale;
+- **Profili e presenza** — identità della community collegate all'attività IRC;
+- **Media** — supporto per immagini, audio e video;
+- **Widget** — blocchi configurabili che permettono a ogni community di costruire la propria identità;
+- **Integrazioni per sviluppatori** — inclusi widget dedicati a GitHub;
+- **Integrazioni per web radio** — inclusi Icecast e AzuraCast;
+- **Integrazioni crypto** — progettate attorno a wallet self-custodial, senza conservare le chiavi private degli utenti;
+- **Feed RSS** — per Chanzine e Ping, permettendo ai contenuti di uscire dal sito e tornare anche dentro IRC attraverso bot e altri strumenti;
+- **Moderazione e strumenti per la community** — segnalazioni, moderazione, follow, contenuti salvati e notifiche;
+- **Interfaccia multilingua** — con un'infrastruttura che permette traduzioni specifiche per ogni community.
 
-Monoverse is not intended to impose the same experience on every community.
+## Community diverse, un unico framework
 
-A developer community may focus on repositories, releases and pull requests.  
-A web radio may put its live stream, listeners and requests at the center.  
-A crypto community may expose wallet-related functionality.  
-A traditional community may simply focus on its people, conversations and content.
+Monoverse non vuole imporre la stessa esperienza a ogni community.
 
-The framework provides the common foundation; widgets and configuration give each installation its own identity.
+Una community di sviluppatori può concentrarsi su repository, release e pull request.  
+Una web radio può mettere al centro lo streaming live, gli ascoltatori e le richieste.  
+Una community crypto può integrare funzionalità legate ai wallet.  
+Una community tradizionale può semplicemente concentrarsi sulle persone, sulle conversazioni e sui propri contenuti.
 
-## Open by design
+Il framework fornisce una base comune; widget e configurazione permettono a ogni installazione di costruire la propria identità.
 
-Monoverse is built around the idea of an **Open Internet**.
+## Aperto per progettazione
 
-Instead of trying to own every part of the user's digital identity or activity, it is designed to integrate with open protocols and external services whenever possible: IRC, OAuth, RSS, GitHub, Icecast, AzuraCast and self-custodial wallets.
+Monoverse nasce attorno all'idea di un **Internet aperto**.
 
-Sensitive information should not be managed by Monoverse when it does not need to be.
+Invece di cercare di possedere ogni parte dell'identità digitale o dell'attività dell'utente, è progettato per integrarsi, quando possibile, con protocolli aperti e servizi esterni: IRC, OAuth, RSS, GitHub, Icecast, AzuraCast e wallet self-custodial.
 
-## Installation
+Le informazioni sensibili non dovrebbero essere gestite da Monoverse quando Monoverse non ha bisogno di gestirle.
 
-### Requirements
+## Installazione
 
-Monoverse requires:
+### Requisiti
 
-- PHP 8.2 or newer;
-- PDO and PDO MySQL;
+Monoverse richiede:
+
+- PHP 8.2 o successivo;
+- PDO e PDO MySQL;
 - JSON;
 - mbstring;
 - cURL;
-- GD with JPEG, PNG and WebP support;
+- GD con supporto JPEG, PNG e WebP;
 - FFmpeg;
-- a MySQL or MariaDB database;
-- a writable `storage/` directory;
-- Nginx or another web server capable of routing requests through `index.php`.
+- un database MySQL o MariaDB;
+- la directory `storage/` scrivibile;
+- Nginx o un altro web server in grado di instradare le richieste attraverso `index.php`.
 
 ### Nginx
 
-The document root must point to the root of the Monoverse installation, where `index.php` is located.
+La document root deve puntare alla directory principale dell'installazione di Monoverse, dove si trova `index.php`.
 
-A minimal routing configuration looks like:
+Una configurazione minima per il routing è:
 
 ```nginx
 location / {
@@ -87,55 +89,55 @@ location / {
 }
 ```
 
-PHP requests must also be passed to your PHP-FPM installation according to your server configuration.
+Le richieste PHP devono inoltre essere inoltrate alla propria installazione PHP-FPM secondo la configurazione del server.
 
-### Setup
+### Configurazione
 
-Clone the repository into the directory served by your web server:
+Clona il repository nella directory servita dal web server:
 
 ```bash
 git clone https://github.com/SimosNap/monoverse.git
 cd monoverse
 ```
 
-Make sure the `storage/` directory is writable by the web server.
+Assicurati che la directory `storage/` sia scrivibile dal web server.
 
-Create an empty MySQL or MariaDB database and then open the Monoverse URL in your browser.
+Crea un database MySQL o MariaDB vuoto e apri quindi l'indirizzo di Monoverse nel browser.
 
-On a fresh installation, Monoverse automatically starts the installation wizard.
+Su una nuova installazione Monoverse avvierà automaticamente la procedura guidata.
 
-The wizard will guide you through:
+L'installer guiderà attraverso:
 
-1. system requirements;
-2. Community Edition selection;
-3. database configuration;
-4. OAuth configuration;
-5. administrator account creation;
-6. final installation.
+1. verifica dei requisiti di sistema;
+2. selezione della Community Edition;
+3. configurazione del database;
+4. configurazione OAuth;
+5. creazione dell'account amministratore;
+6. installazione finale.
 
-Local database and OAuth credentials are written to:
+Le credenziali locali del database e di OAuth vengono salvate in:
 
 ```text
 config/database.php
 config/oauth.php
 ```
 
-These files are excluded from Git and must never be committed.
+Questi file sono esclusi da Git e non devono mai essere inseriti nel repository.
 
-The completed installation is marked by:
+Il completamento dell'installazione viene registrato attraverso:
 
 ```text
 storage/installed.lock
 ```
 
-which is also excluded from Git.
+anch'esso escluso da Git.
 
-## License
+## Licenza
 
-Monoverse is free and open-source software released under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+Monoverse è software libero e open source distribuito secondo i termini della **GNU Affero General Public License v3.0 (AGPL-3.0)**.
 
-See [LICENSE](LICENSE) for the full license text.
+Consulta [LICENSE](LICENSE) per il testo completo della licenza.
 
 ---
 
-**One channel. People. A community.**
+**Un canale. Delle persone. Una community.**

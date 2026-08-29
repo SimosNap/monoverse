@@ -1,0 +1,11 @@
+{
+  "id": "hub",
+  "name": "Hub",
+  "description": "Edition dedicata alla creazione di hub Monoverse.",
+  "version": "0.1.0",
+  "author": "SimosNap",
+  "website": "https://monoverse.org",
+  "icon": "network-wired",
+  "modules": [],
+  "status": "coming_soon"
+}

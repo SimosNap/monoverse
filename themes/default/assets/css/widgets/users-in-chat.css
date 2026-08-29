@@ -1,0 +1,368 @@
+/* ==========================================================
+   Block — Adesso in chat
+   ========================================================== */
+
+.mv-users-in-chat-widget {
+    display: grid;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    gap: 14px;
+}
+
+.mv-users-in-chat-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--mv-border);
+}
+
+.mv-users-in-chat-header h3 {
+    margin: 0;
+    color: var(--mv-text);
+    font-size: 16px;
+    font-weight: 850;
+    line-height: 1.25;
+    letter-spacing: -.02em;
+}
+
+.mv-users-in-chat-header p {
+    margin: 5px 0 0;
+    color: var(--mv-muted);
+    font-size: 11px;
+    font-weight: 650;
+    line-height: 1.4;
+}
+
+
+/* ==========================================================
+   Lista
+   ========================================================== */
+
+.mv-users-in-chat-list {
+    display: grid;
+    width: 100%;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.mv-users-in-chat-list li {
+    width: 100%;
+    min-width: 0;
+}
+
+.mv-users-in-chat-item {
+    border-radius: 9px;
+}
+
+.mv-users-in-chat-user {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr) 14px;
+    align-items: start;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    gap: 9px;
+    padding: 8px;
+    border-radius: 9px;
+    color: var(--mv-text);
+    transition: background-color .16s ease;
+}
+
+.mv-users-in-chat-user:hover {
+    background: rgba(66, 185, 146, .06);
+}
+
+
+/* ==========================================================
+   Avatar
+   ========================================================== */
+
+.mv-users-in-chat-avatar {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    overflow: visible;
+    border-radius: 50%;
+    background: var(--mv-surface);
+    box-shadow: 0 0 0 1px rgba(23, 33, 43, .06);
+}
+
+.mv-users-in-chat-avatar img,
+.mv-users-in-chat-avatar > span:first-child {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.mv-users-in-chat-avatar img {
+    object-fit: cover;
+}
+
+.mv-users-in-chat-avatar > span:first-child {
+    display: grid;
+    place-items: center;
+    color: var(--mv-text);
+    font-size: 13px;
+    font-weight: 850;
+    line-height: 1;
+}
+
+
+/* ==========================================================
+   Presenza account
+   ========================================================== */
+
+.mv-users-in-chat-presence {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    width: 9px;
+    height: 9px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    font-size: 0;
+}
+
+.mv-users-in-chat-presence.is-online {
+    background: #1f9d63;
+}
+
+.mv-users-in-chat-presence.is-away {
+    background: #d99113;
+}
+
+
+/* ==========================================================
+   Identità
+   ========================================================== */
+
+.mv-users-in-chat-info {
+    display: grid;
+    min-width: 0;
+    gap: 5px;
+}
+
+.mv-users-in-chat-identity {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 6px;
+    min-height: 17px;
+}
+
+.mv-users-in-chat-name {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--mv-text);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.3;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+a.mv-users-in-chat-name:hover {
+    color: var(--mv-primary);
+}
+
+.mv-users-in-chat-account-label {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 3px;
+    color: var(--mv-muted);
+    font-size: 8.5px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.mv-users-in-chat-account-label i {
+    font-size: 8px;
+    opacity: .8;
+}
+
+
+/* ==========================================================
+   Connessioni / alias
+   ========================================================== */
+
+.mv-users-in-chat-connections {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    gap: 3px;
+}
+
+.mv-users-in-chat-connection {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        auto;
+    align-items: center;
+    min-width: 0;
+    gap: 7px;
+    color: var(--mv-muted);
+    font-size: 9px;
+    line-height: 1.25;
+}
+
+.mv-users-in-chat-alias {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 4px;
+}
+
+.mv-users-in-chat-alias > span {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--mv-muted);
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* ==========================================================
+   Ramo visuale account → alias
+   ========================================================== */
+
+.mv-users-in-chat-branch {
+    flex: 0 0 auto;
+    width: 9px;
+    color: var(--mv-muted);
+    font-size: 7px;
+    opacity: .55;
+    transform: rotate(90deg);
+}
+
+
+/* ==========================================================
+   Tipo client
+   ========================================================== */
+
+.mv-users-in-chat-client {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    white-space: nowrap;
+    color: var(--mv-muted);
+    font-weight: 650;
+}
+
+.mv-users-in-chat-client i {
+    width: 9px;
+    font-size: 8px;
+    text-align: center;
+    opacity: .75;
+}
+
+
+/* ==========================================================
+   Stato singola connessione
+   ========================================================== */
+
+.mv-users-in-chat-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    white-space: nowrap;
+    color: var(--mv-muted);
+    font-weight: 650;
+}
+
+.mv-users-in-chat-status i {
+    font-size: 5px;
+}
+
+.mv-users-in-chat-status.is-online i {
+    color: #1f9d63;
+}
+
+.mv-users-in-chat-status.is-away i {
+    color: #d99113;
+}
+
+
+/* ==========================================================
+   Link profilo
+   ========================================================== */
+
+.mv-users-in-chat-profile-link {
+    display: grid;
+    place-items: center;
+    align-self: center;
+    width: 14px;
+    height: 24px;
+    color: var(--mv-muted);
+    text-decoration: none;
+    opacity: .45;
+    transition:
+        color .16s ease,
+        opacity .16s ease,
+        transform .16s ease;
+}
+
+.mv-users-in-chat-profile-link i {
+    font-size: 9px;
+}
+
+.mv-users-in-chat-profile-link:hover {
+    color: var(--mv-primary);
+    opacity: 1;
+    transform: translateX(2px);
+}
+
+
+/* ==========================================================
+   Empty
+   ========================================================== */
+
+.mv-users-in-chat-empty {
+    margin: 0;
+    padding: 14px;
+    border: 1px dashed var(--mv-border);
+    border-radius: 10px;
+    background: var(--mv-bg);
+    color: var(--mv-muted);
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+
+/* ==========================================================
+   Widget stretto
+   ========================================================== */
+
+@media (max-width: 520px) {
+
+    .mv-users-in-chat-user {
+        grid-template-columns: 34px minmax(0, 1fr) 12px;
+        gap: 8px;
+        padding: 7px 6px;
+    }
+
+    .mv-users-in-chat-avatar {
+        width: 34px;
+        height: 34px;
+    }
+
+    .mv-users-in-chat-connection {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 5px;
+    }
+
+    .mv-users-in-chat-status {
+        grid-column: 1 / -1;
+        padding-left: 13px;
+    }
+}

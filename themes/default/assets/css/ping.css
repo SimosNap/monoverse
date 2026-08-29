@@ -1,0 +1,8080 @@
+.ping-card {
+	background: #fff;
+	border: 1px solid #e2e5e8;
+	border-radius: 8px;
+	padding: 16px;
+	margin-bottom: 16px;
+}
+
+/* ==========================================================
+   Dogecoin Tip Ping
+   ========================================================== */
+
+.ping-card-doge-tip {
+	border-color: #e6d8a8;
+
+	background:
+		linear-gradient(
+			135deg,
+			#fffdf7 0%,
+			#fff 58%,
+			#fcfaf4 100%
+		);
+}
+
+.ping-card-doge-tip .ping-header {
+	margin-bottom: 12px;
+}
+
+.ping-doge-tip-label {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+
+	width: fit-content;
+	margin: 0 0 12px;
+	padding: 5px 9px 5px 6px;
+
+	border: 1px solid #eadcab;
+	border-radius: 999px;
+
+	background: #fffaf0;
+	color: #7b6322;
+
+	font-size: 11px;
+	font-weight: 750;
+	line-height: 1;
+	letter-spacing: .015em;
+}
+
+.ping-doge-tip-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 24px;
+	width: 24px;
+	height: 24px;
+
+	border-radius: 50%;
+
+	background: #c9a633;
+	color: #fff;
+
+	font-family:
+		Arial,
+		Helvetica,
+		sans-serif;
+
+	font-size: 17px;
+	font-weight: 800;
+	line-height: 1;
+}
+
+.ping-card-doge-tip .ping-content {
+	padding: 11px 13px;
+
+	border: 1px solid #efe5c7;
+	border-radius: 9px;
+
+	background: rgba(255, 250, 235, .58);
+
+	color: #3e3829;
+
+	font-size: 15px;
+	line-height: 1.55;
+}
+
+.ping-card-doge-tip .ping-content .mention {
+	color: #8a6d18;
+	font-weight: 750;
+}
+
+.ping-card-doge-tip .ping-actions {
+	border-top-color: #eee7d5;
+}
+
+.ping-header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 14px;
+}
+
+.ping-avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 48px;
+	width: 48px;
+	height: 48px;
+	margin-right: 12px;
+
+	border-radius: 50%;
+	background: #f3f3f3;
+
+	font-size: 22px;
+	overflow: hidden;
+}
+
+.ping-avatar img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+/* ==========================================================
+   Autore Ping
+   ========================================================== */
+
+.ping-author {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.ping-author-name {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	min-width: 0;
+}
+
+.ping-author-name .mv-user-presence {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	line-height: 1;
+}
+
+.ping-author-name .mv-user-presence i {
+	color: currentColor !important;
+	font-size: 9px;
+}
+
+.ping-author-name .mv-user-presence.is-online,
+.ping-author-name .mv-user-presence.is-online i {
+	color: #1f9d63 !important;
+}
+
+.ping-author-name .mv-user-presence.is-away,
+.ping-author-name .mv-user-presence.is-away i {
+	color: #d99113 !important;
+}
+
+.ping-author-name .mv-user-presence.is-offline,
+.ping-author-name .mv-user-presence.is-offline i {
+	color: #9aa4af !important;
+}
+
+.ping-author-name .ping-username {
+	min-width: 0;
+}
+
+.ping-username {
+	color: #222;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+a.ping-username:hover {
+	color: var(--mv-primary);
+}
+
+/* ==========================================================
+   Autore senza profilo pubblico
+   ========================================================== */
+
+.ping-username-static {
+	color: #222;
+	font-weight: 600;
+	text-decoration: none;
+	cursor: default;
+}
+
+.ping-avatar-static {
+	cursor: default;
+}
+
+.ping-avatar-static i {
+	color: #6f767c;
+	font-size: 20px;
+}
+
+.ping-author-status {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	min-width: 0;
+
+	margin: 4px 0 2px;
+
+	color: #727980;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 1.3;
+}
+
+.ping-author-status i {
+	flex: 0 0 auto;
+
+	color: #6b7278;
+	font-size: 11px;
+	opacity: 1;
+}
+
+.ping-author-status span {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* ==========================================================
+   Autore con account non più esistente
+   ========================================================== */
+
+.ping-username-missing {
+	color: #7f4545;
+	font-weight: 600;
+}
+
+.ping-username-missing + .ping-author-status {
+	color: #8d6666;
+}
+
+.ping-date {
+	display: inline-block;
+	color: #777;
+	font-size: .85rem;
+	text-decoration: none;
+}
+
+.ping-date:hover {
+	color: var(--brand-primary);
+	text-decoration: underline;
+}
+
+.ping-avatar-chanzine {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--brand-primary);
+	color: #fff;
+	text-decoration: none;
+}
+
+.ping-avatar-chanzine i {
+	font-size: 18px;
+}
+
+.ping-username-chanzine {
+	color: var(--brand-primary);
+	font-weight: 700;
+}
+
+.chanzine-discussion {
+	margin-top: 32px;
+	padding-top: 24px;
+	border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.chanzine-discussion .button {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.ping-date {
+	display: inline-block;
+	color: #777;
+	font-size: .85rem;
+	text-decoration: none;
+}
+
+.ping-date:hover {
+	color: var(--brand-primary);
+	text-decoration: underline;
+}
+
+.ping-content {
+	color: #222;
+	line-height: 1.6;
+	word-break: break-word;
+}
+
+.ping-content a {
+	display: inline-block;
+
+	max-width: 100%;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	vertical-align: bottom;
+}
+
+/* Editor inline Ping */
+
+.ping-editor,
+.pong-editor {
+	margin-top: 2px;
+}
+
+.ping-editor form,
+.pong-editor form {
+	margin: 0;
+}
+
+.ping-editor textarea,
+.pong-editor textarea {
+	display: block;
+	width: 100%;
+	min-height: 110px;
+	margin: 0;
+	padding: 12px 14px;
+
+	resize: vertical;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 7px;
+	outline: 0;
+	background: #fff;
+
+	color: #222;
+	font: inherit;
+	font-size: 15px;
+	line-height: 1.6;
+
+	box-sizing: border-box;
+}
+
+.ping-editor textarea:focus,
+.pong-editor textarea:focus {
+	border-color: var(--mv-primary);
+	box-shadow: 0 0 0 3px rgba(66, 185, 146, .12);
+}
+
+.ping-editor-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 8px;
+
+	margin-top: 10px;
+}
+
+.ping-editor-actions .btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	width: auto;
+	min-width: 90px;
+	margin: 0;
+	padding: 9px 16px;
+
+	border-radius: 7px;
+}
+
+.ping-editor-actions .ping-edit-cancel {
+	background: #f1f3f4;
+	border-color: #dfe3e6;
+	color: #555;
+}
+
+.ping-editor-actions .ping-edit-cancel:hover {
+	background: #e7eaec;
+	color: #222;
+}
+
+.ping-edit-timer {
+	display: inline-flex;
+	align-items: center;
+
+	margin-left: 0px;
+
+	font-size: 12px;
+	color: #7a7a7a;
+	white-space: nowrap;
+}
+
+.ping-edit-timer.warning {
+	color: #d97706;
+	font-weight: 600;
+}
+
+.ping-edit-timer.danger {
+	color: #dc2626;
+	font-weight: 700;
+}
+
+/* Composer */
+
+.ping-composer {
+	margin-bottom: 24px;
+	padding: 16px;
+
+	background: #fff;
+	border: 1px solid #dfe3e6;
+	border-radius: 8px;
+
+	transition:
+		border-color .2s ease,
+		box-shadow .2s ease;
+}
+
+.ping-composer:focus-within {
+	border-color: var(--mv-primary);
+	box-shadow: 0 0 0 3px rgba(66, 185, 146, .12);
+}
+
+.ping-composer-header {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+}
+
+.ping-composer .ping-avatar {
+	flex-basis: 48px;
+	margin-right: 0;
+}
+
+.ping-composer-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.ping-composer-textarea {
+	display: block;
+	width: 100%;
+	min-height: 110px;
+	margin: 0;
+	padding: 0;
+
+	resize: none;
+	overflow: hidden;
+	border: 0;
+	outline: 0;
+	background: transparent;
+
+	color: #222;
+	font: inherit;
+	font-size: 15px;
+	line-height: 1.6;
+}
+
+.ping-composer-footer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 8px;
+}
+
+.ping-character-counter {
+	font-size: 12px;
+	color: #888;
+	user-select: none;
+}
+
+.ping-composer-textarea::placeholder {
+	color: #929292;
+}
+
+.ping-composer-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+
+	margin-top: 14px;
+	padding-top: 12px;
+	border-top: 1px solid #edf0f2;
+}
+
+.ping-composer-submit {
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+
+	width: auto !important;
+	min-width: 120px;
+	height: 40px;
+
+	margin: 0;
+	padding: 0 18px;
+
+	border: 0;
+	border-radius: 7px;
+	background: var(--mv-primary) !important;
+	box-shadow: none;
+
+	color: #fff !important;
+	font: inherit;
+	font-weight: 600;
+	line-height: 1;
+	text-decoration: none;
+
+	opacity: 1 !important;
+	visibility: visible !important;
+	cursor: pointer;
+}
+
+.ping-composer-submit:hover {
+	background: var(--mv-primary-hover, #36a982) !important;
+	filter: none;
+}
+
+/* ==========================================================
+   Feed tabs
+   ========================================================== */
+
+
+.ping-feed-tabs {
+	display: flex;
+	align-items: stretch;
+	
+	width: 100%;
+	margin: 0 0 28px;
+	padding: 0;
+	
+	border: 0;
+	border-radius: 0;
+	
+	background: transparent;
+}
+   
+.ping-feed-tabs::-webkit-scrollbar {
+	display: none;
+}
+
+.ping-feed-tab {
+	position: relative;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 7px;
+
+	flex: 1 1 0;
+
+	min-width: 0;
+	padding: 13px 16px 12px;
+
+	border: 0;
+	border-radius: 0;
+
+	background: transparent;
+
+	color: #4f565d;
+	font-weight: 650;
+
+	font-size: 13px;
+	line-height: 1;
+
+	text-decoration: none;
+	white-space: nowrap;
+
+	transition:
+		color .15s ease,
+		background-color .15s ease;
+}
+
+.ping-feed-tab:hover {
+	background: rgba(0, 0, 0, .025);
+
+	color: #111820;
+	text-decoration: none;
+}
+
+.ping-feed-tab::after {
+	content: "";
+
+	position: absolute;
+	right: 14px;
+	bottom: -1px;
+	left: 14px;
+
+	height: 3px;
+
+	border-radius: 999px 999px 0 0;
+
+	background: transparent;
+
+	transform: scaleX(.45);
+	transform-origin: center;
+
+	transition:
+		background-color .15s ease,
+		transform .15s ease;
+}
+
+.ping-feed-tab i {
+	flex: 0 0 auto;
+
+	color: #697178;
+	font-size: 12px;
+
+	transition: color .15s ease;
+}
+
+.ping-feed-tab.is-active {
+	background: transparent;
+
+	color: #111820;
+	font-weight: 800;
+}
+
+.ping-feed-tab.is-active::after {
+	background: var(--mv-primary);
+
+	transform: scaleX(1);
+}
+
+.ping-feed-tab.is-active i {
+	color: var(--mv-primary);
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-feed-tabs {
+		width: 100%;
+		margin-bottom: 16px;
+	}
+
+	.ping-feed-tab {
+		gap: 0;
+
+		min-width: 0;
+		padding:
+			11px
+			3px
+			10px;
+
+		font-size: 10px;
+		font-weight: 700;
+		line-height: 1;
+
+		white-space: nowrap;
+	}
+
+	.ping-feed-tab i {
+		display: none;
+	}
+
+	.ping-feed-tab::after {
+		right: 4px;
+		left: 4px;
+
+		height: 3px;
+	}
+
+}
+
+.ping-media-preview {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+
+	margin-top: 12px;
+}
+
+/* ==========================================================
+   Audio metadata
+   ========================================================== */
+
+.ping-audio-metadata {
+	margin-top: 14px;
+	padding: 13px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 8px;
+
+	background: #fbfcfd;
+}
+
+.ping-audio-metadata-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	margin-bottom: 12px;
+}
+
+.ping-audio-metadata-header strong {
+	color: #2f3438;
+
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.ping-audio-metadata-header span {
+	flex: 0 0 auto;
+
+	padding: 3px 6px;
+
+	border-radius: 999px;
+	background: rgba(66, 185, 146, .10);
+
+	color: var(--mv-primary);
+
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.ping-audio-metadata-fields {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.ping-audio-metadata-field {
+	display: grid;
+	gap: 6px;
+
+	min-width: 0;
+}
+
+.ping-audio-metadata-field > span {
+	color: #5f676d;
+
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.ping-audio-metadata-field input,
+.ping-audio-metadata-field textarea {
+	width: 100%;
+	min-width: 0;
+
+	padding: 9px 10px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 7px;
+
+	background: #fff;
+
+	color: #252a2e;
+
+	font: inherit;
+	font-size: 12px;
+	line-height: 1.4;
+
+	box-sizing: border-box;
+
+	transition:
+		border-color .15s ease,
+		box-shadow .15s ease,
+		background .15s ease;
+}
+
+.ping-audio-metadata-field input::placeholder,
+.ping-audio-metadata-field textarea::placeholder {
+	color: #9aa1a6;
+}
+
+.ping-audio-metadata-field input:focus,
+.ping-audio-metadata-field textarea:focus {
+	outline: none;
+
+	border-color: var(--mv-primary);
+	background: #fff;
+
+	box-shadow:
+		0 0 0 3px rgba(66, 185, 146, .10);
+}
+
+.ping-audio-metadata-field textarea {
+	min-height: 120px;
+
+	resize: vertical;
+}
+
+.ping-audio-metadata-tracklist {
+	grid-column: 1 / -1;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-audio-metadata {
+		padding: 11px;
+	}
+
+	.ping-audio-metadata-fields {
+		grid-template-columns: 1fr;
+	}
+
+	.ping-audio-metadata-tracklist {
+		grid-column: auto;
+	}
+
+}
+
+/* ==========================================================
+   Upload progress
+   ========================================================== */
+
+.ping-upload-progress {
+	margin-top: 14px;
+	padding: 12px 13px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 8px;
+
+	background: #fff;
+}
+
+.ping-upload-progress-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	margin-bottom: 8px;
+}
+
+.ping-upload-progress-header span {
+	color: #4f565d;
+
+	font-size: 12px;
+	font-weight: 650;
+	line-height: 1.2;
+}
+
+.ping-upload-progress-header strong {
+	flex: 0 0 auto;
+
+	color: var(--mv-primary);
+
+	font-size: 12px;
+	font-weight: 800;
+	line-height: 1;
+}
+
+.ping-upload-progress-track {
+	position: relative;
+
+	width: 100%;
+	height: 8px;
+
+	overflow: hidden;
+
+	border-radius: 999px;
+	background: #edf1f2;
+}
+
+.ping-upload-progress-bar {
+	width: 0%;
+	height: 100%;
+
+	border-radius: inherit;
+	background: var(--mv-primary);
+
+	transition: width .18s ease;
+}
+
+.ping-upload-progress-details {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+
+	margin-top: 7px;
+
+	color: #7a8289;
+
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+.ping-upload-progress.is-processing
+.ping-upload-progress-bar {
+	width: 100% !important;
+
+	background:
+		linear-gradient(
+			90deg,
+			var(--mv-primary) 0%,
+			rgba(66, 185, 146, .55) 50%,
+			var(--mv-primary) 100%
+		);
+
+	background-size: 200% 100%;
+
+	animation:
+		ping-upload-processing
+		1.1s linear infinite;
+}
+
+@keyframes ping-upload-processing {
+	from {
+		background-position: 200% 0;
+	}
+
+	to {
+		background-position: 0 0;
+	}
+}
+
+@media (max-width: 640px) {
+
+	.ping-upload-progress {
+		padding: 11px;
+	}
+
+	.ping-upload-progress-header {
+		gap: 8px;
+	}
+
+}
+
+.ping-media-preview-item {
+	position: relative;
+
+	width: 100px;
+	height: 100px;
+
+	border: 1px solid #ddd;
+	border-radius: 8px;
+
+	background: #fafafa;
+	overflow: hidden;
+}
+
+.ping-media-preview-item img {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+}
+
+.ping-media-preview-item-file {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	height: 100%;
+
+	padding: 8px;
+
+	text-align: center;
+}
+
+.ping-media-preview-icon {
+	font-size: 28px;
+	line-height: 1;
+
+	margin-bottom: 6px;
+}
+
+.ping-media-preview-name {
+	font-size: 11px;
+	line-height: 1.3;
+
+	word-break: break-word;
+}
+
+.ping-media-preview-remove {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 24px;
+	height: 24px;
+
+	border: 0;
+	border-radius: 50%;
+
+	background: rgba(0, 0, 0, .65);
+	color: #fff;
+
+	font-size: 18px;
+	line-height: 1;
+
+	cursor: pointer;
+
+	opacity: 0;
+	transition: opacity .2s ease;
+}
+
+.ping-media-preview-item:hover .ping-media-preview-remove {
+	opacity: 1;
+}
+
+.ping-media-preview-remove:hover {
+	background: rgba(220, 38, 38, .95);
+}
+
+.ping-composer-media {
+	position: relative;
+	transition: .2s;
+}
+
+.ping-composer-media.dragover {
+	border-color: #42b992;
+	background: rgba(66, 185, 146, .08);
+}
+
+.ping-composer-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+
+	margin-top: 12px;
+	padding-top: 12px;
+
+	border-top: 1px solid #edf0f2;
+}
+
+.ping-composer-attachments-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+
+	width: auto;
+	margin: 0;
+	padding: 5px 9px;
+
+	border: 1px solid #d8dde1;
+	border-radius: 6px;
+
+	background: #fff;
+	color: #626970;
+
+	font: inherit;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1;
+
+	cursor: pointer;
+
+	transition:
+		background-color .15s ease,
+		border-color .15s ease,
+		color .15s ease;
+}
+
+.ping-composer-attachments-toggle:hover,
+.ping-composer-attachments-toggle[aria-expanded="true"] {
+	background: #f3f5f6;
+	border-color: #bfc6cb;
+	color: #25292d;
+}
+
+.ping-composer-attachments-toggle i {
+	font-size: 12px;
+}
+
+.ping-composer-media {
+	position: relative;
+
+	margin-top: 12px;
+	padding: 14px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 8px;
+
+	background: #fafbfb;
+
+	transition:
+		border-color .15s ease,
+		background-color .15s ease;
+}
+
+.ping-composer-media.dragover {
+	border-color: var(--mv-primary);
+	background: rgba(66, 185, 146, .06);
+}
+
+.ping-composer-media-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	margin-bottom: 12px;
+}
+
+.ping-composer-media-header strong {
+	font-size: 14px;
+}
+
+.ping-composer-media-info {
+	display: grid;
+	gap: 8px;
+
+	margin: 0 0 12px;
+}
+
+.ping-composer-media-allowed {
+	color: #6f777d;
+
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 1.45;
+}
+
+.ping-composer-media-error {
+	padding: 9px 11px;
+
+	border: 1px solid #efc5c5;
+	border-radius: 7px;
+
+	background: #fff5f5;
+	color: #8f2d2d;
+
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.ping-composer-media-error[hidden] {
+	display: none;
+}
+
+.ping-composer-media-close {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 28px;
+	height: 28px;
+	margin: 0;
+	padding: 0;
+
+	border: 0;
+	border-radius: 6px;
+
+	background: transparent;
+	color: #777;
+
+	font-size: 20px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.ping-composer-media-close:hover {
+	background: #eceff1;
+	color: #222;
+}
+
+.ping-composer-dropzone {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	min-height: 150px;
+	padding: 24px;
+
+	border: 2px dashed #ccd2d6;
+	border-radius: 8px;
+
+	background: #fff;
+	cursor: pointer;
+	text-align: center;
+}
+
+.ping-composer-dropzone:hover {
+	border-color: #aeb7bd;
+	background: #fcfcfc;
+}
+
+.ping-composer-dropzone input {
+	display: none;
+}
+
+.ping-composer-dropzone-icon {
+	margin-bottom: 10px;
+
+	color: #707980;
+	font-size: 28px;
+}
+
+.ping-composer-dropzone-title {
+	margin-bottom: 4px;
+
+	font-size: 14px;
+	font-weight: 600;
+	color: #303438;
+}
+
+.ping-composer-dropzone-help {
+	font-size: 12px;
+	color: #7b8389;
+}
+
+.alert {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+
+	margin: 0 0 16px;
+	padding: 12px 14px;
+
+	border: 1px solid transparent;
+	border-radius: 8px;
+
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.alert::before {
+	flex: 0 0 auto;
+
+	font-family: "Font Awesome 7 Free";
+	font-weight: 900;
+	line-height: 1.5;
+}
+
+.alert-danger {
+	border-color: #efc5c5;
+	background: #fff5f5;
+	color: #8f2d2d;
+}
+
+.alert-danger::before {
+	content: "\f071";
+	color: #c74444;
+}
+
+/* ==========================================================
+   Flash messages
+   ========================================================== */
+
+.alert {
+	margin-bottom: 20px;
+	padding: 14px 18px;
+
+	border-left: 4px solid transparent;
+	border-radius: 8px;
+
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.5;
+}
+
+.alert-success {
+	background: #ecfdf5;
+	border-color: #10b981;
+	color: #065f46;
+}
+
+.alert-warning {
+	background: #fffbeb;
+	border-color: #f59e0b;
+	color: #92400e;
+}
+
+.alert-danger {
+	background: #fef2f2;
+	border-color: #ef4444;
+	color: #991b1b;
+}
+
+/* Azioni Ping */
+
+.ping-actions {
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+
+	margin-top: 16px;
+	padding-top: 12px;
+	border-top: 1px solid #edf0f2;
+}
+
+.ping-action {
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+
+	flex: 0 0 auto;
+	width: auto;
+	min-width: 0;
+	margin: 0;
+	padding: 5px 7px;
+
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	box-shadow: none;
+
+	color: #6f757b;
+
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1;
+
+	cursor: pointer;
+
+	transition:
+		background .15s ease,
+		color .15s ease;
+}
+
+.ping-action i {
+	font-size: 14px;
+}
+
+.ping-action:hover {
+	background: #f3f5f5;
+	color: var(--mv-primary);
+}
+
+/* Dogecoin tip action */
+
+.ping-doge-tip-action {
+	appearance: none;
+	font: inherit;
+}
+
+.ping-doge-tip-action-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 18px;
+	width: 18px;
+	height: 18px;
+
+	border-radius: 50%;
+
+	background: #c9a633;
+	color: #fff;
+
+	font-family:
+		Arial,
+		Helvetica,
+		sans-serif;
+
+	font-size: 12px;
+	font-weight: 800;
+	line-height: 1;
+}
+
+.ping-doge-tip-action:hover {
+	background: #fffaf0;
+	color: #7b6322;
+}
+
+.ping-doge-tip-action:hover
+.ping-doge-tip-action-icon {
+	background: #b79327;
+}
+
+/* ==========================================================
+   Menu altre azioni Ping
+   ========================================================== */
+
+.ping-more-menu {
+	position: relative;
+	flex: 0 0 auto;
+	margin: 0;
+	padding: 0;
+}
+
+.ping-more-menu[open] {
+	z-index: 30;
+}
+
+.ping-more-toggle {
+	list-style: none;
+	justify-content: center;
+	width: 34px;
+	height: 34px;
+	padding: 0;
+}
+
+.ping-more-toggle::-webkit-details-marker {
+	display: none;
+}
+
+.ping-more-toggle::marker {
+	display: none;
+	content: "";
+}
+
+.ping-more-menu[open] .ping-more-toggle {
+	background: #f3f5f5;
+	color: var(--mv-primary);
+}
+
+.ping-more-dropdown {
+	position: absolute;
+	top: calc(100% + 8px);
+	left: 0;
+	z-index: 40;
+
+	width: 220px;
+	padding: 6px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 9px;
+	background: #fff;
+	box-shadow: 0 12px 30px rgba(22, 30, 38, .14);
+}
+
+.ping-more-form {
+	display: block;
+	margin: 0;
+}
+
+.ping-more-action {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	width: 100%;
+	min-height: 38px;
+	margin: 0;
+	padding: 8px 10px;
+
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	box-shadow: none;
+
+	color: #454b50;
+	font: inherit;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.3;
+	text-align: left;
+
+	cursor: pointer;
+}
+
+.ping-more-action:hover,
+.ping-more-action:focus-visible {
+	background: #f3f5f5;
+	color: #222;
+	outline: 0;
+}
+
+.ping-more-action i {
+	flex: 0 0 18px;
+	width: 18px;
+	color: #747c83;
+	font-size: 14px;
+	text-align: center;
+}
+
+.ping-more-action.is-active,
+.ping-more-action.is-active i {
+	color: var(--mv-primary);
+}
+
+.ping-more-danger,
+.ping-more-danger i {
+	color: #b93636;
+}
+
+.ping-more-danger:hover,
+.ping-more-danger:focus-visible {
+	background: #fff1f1;
+	color: #9f2929;
+}
+
+.ping-more-separator {
+	height: 1px;
+	margin: 6px 4px;
+	background: #edf0f2;
+}
+
+.ping-more-timer {
+	display: block;
+	margin: -2px 10px 6px 38px;
+	white-space: normal;
+	font-size: 11px;
+	line-height: 1.35;
+}
+
+.ping-save-form {
+	display: contents;
+	margin: 0;
+}
+
+.ping-save-button {
+	appearance: none;
+}
+
+.ping-save-button i {
+	font-size: 14px;
+}
+
+.ping-save-button.active {
+	background: rgba(66, 185, 146, .10);
+	color: var(--mv-primary);
+}
+
+.ping-save-button.active:hover {
+	background: rgba(66, 185, 146, .18);
+	color: var(--mv-primary);
+}
+
+.ping-votes {
+	display: inline-flex;
+	align-items: center;
+	flex: 0 0 auto;
+
+	margin-left: auto;
+	padding: 2px;
+
+	border: 1px solid #e3e6e8;
+	border-radius: 7px;
+	background: #fafafa;
+}
+
+.ping-votes form {
+	margin: 0;
+	display: contents;
+}
+
+.ping-vote {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 30px;
+	width: 30px;
+	min-width: 30px;
+	height: 30px;
+	margin: 0;
+	padding: 0;
+
+	border: 0;
+	border-radius: 5px;
+	background: transparent;
+	box-shadow: none;
+
+	color: #777;
+	font: inherit;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1;
+	cursor: pointer;
+
+	transition:
+		background .15s ease,
+		color .15s ease;
+}
+
+.ping-vote:hover {
+	background: #ecefef;
+}
+
+.ping-vote-up:hover {
+	color: #2e7d32;
+}
+
+.ping-vote-down:hover {
+	color: #c62828;
+}
+
+/* Stato voto selezionato */
+
+.ping-vote.active {
+	color: var(--mv-primary);
+	background: rgba(66, 185, 146, .10);
+}
+
+.ping-vote.active:hover {
+	color: var(--mv-primary);
+	background: rgba(66, 185, 146, .18);
+}
+
+.ping-score {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	min-width: 32px;
+	height: 30px;
+	padding: 0 6px;
+
+	color: #555;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.ping-content .mention,
+.pong-content .mention {
+	color: var(--mv-primary);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.ping-content .mention:hover,
+.pong-content .mention:hover {
+	text-decoration: underline;
+}
+
+
+/* Link Preview */
+
+.ping-link-preview {
+	display: grid;
+	grid-template-columns: 176px minmax(0, 1fr);
+
+	margin-top: 14px;
+
+	background: #fbfcfc;
+	border: 1px solid #e1e5e8;
+	border-radius: 8px;
+	overflow: hidden;
+
+	color: inherit;
+	text-decoration: none;
+
+	transition:
+		border-color .15s ease,
+		box-shadow .15s ease,
+		transform .15s ease,
+		background .15s ease;
+}
+
+.ping-link-preview:hover {
+	background: #fff;
+	border-color: #d1d8dc;
+	box-shadow: 0 5px 16px rgba(0, 0, 0, .06);
+	transform: translateY(-1px);
+	text-decoration: none;
+}
+
+.ping-link-image-wrapper {
+	position: relative;
+
+	display: block;
+	width: 176px;
+	min-height: 128px;
+
+	overflow: hidden;
+	background: #eef1f2;
+	border-right: 1px solid #e4e8ea;
+}
+
+.ping-link-image {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+	min-height: 128px;
+
+	object-fit: cover;
+
+	transition: transform .2s ease;
+}
+
+.ping-link-preview:hover .ping-link-image {
+	transform: scale(1.025);
+}
+
+.ping-link-play {
+	position: absolute;
+	inset: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background: rgba(0, 0, 0, .18);
+
+	color: #fff;
+	font-size: 34px;
+	text-shadow: 0 2px 5px rgba(0, 0, 0, .45);
+
+	transition: background .2s ease;
+}
+
+.ping-link-preview:hover .ping-link-play {
+	background: rgba(0, 0, 0, .30);
+}
+
+.ping-link-body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	min-width: 0;
+	padding: 14px 16px;
+}
+
+.ping-link-site {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	margin-bottom: 6px;
+
+	color: var(--mv-primary);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: .045em;
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+
+.ping-link-favicon {
+	display: block;
+
+	flex: 0 0 14px;
+	width: 14px;
+	height: 14px;
+
+	border-radius: 3px;
+	object-fit: contain;
+}
+
+.ping-link-title {
+	margin: 0 0 5px;
+
+	color: #202326;
+	font-size: 16px;
+	font-weight: 650;
+	line-height: 1.35;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ping-link-description {
+	display: -webkit-box;
+
+	margin: 0;
+
+	color: #646a70;
+	font-size: 13px;
+	line-height: 1.45;
+
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+/* ==========================================================
+   GitHub Technical Preview
+   ========================================================== */
+
+.ping-github-preview {
+	margin-top: 14px;
+
+	overflow: hidden;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 8px;
+	background: #fff;
+
+	color: #24292f;
+}
+
+/* Header GitHub */
+
+.ping-github-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	padding: 10px 13px;
+
+	border-bottom: 1px solid #e7eaed;
+	background: #f6f8fa;
+
+	color: #24292f;
+	text-decoration: none;
+
+	transition:
+		background .15s ease,
+		color .15s ease;
+}
+
+.ping-github-header:hover {
+	background: #f1f3f5;
+	color: var(--mv-primary);
+	text-decoration: none;
+}
+
+.ping-github-provider {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	min-width: 0;
+
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1;
+}
+
+.ping-github-provider .fa-github {
+	font-size: 17px;
+	color: #24292f;
+}
+
+.ping-github-provider span {
+	color: #4f565d;
+}
+
+.ping-github-provider strong {
+	display: inline-flex;
+	align-items: center;
+
+	padding: 4px 6px;
+
+	border-radius: 5px;
+	background: rgba(66, 185, 146, .11);
+
+	color: var(--mv-primary);
+
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: .045em;
+	line-height: 1;
+}
+
+.ping-github-header > .fa-arrow-up-right-from-square {
+	flex: 0 0 auto;
+
+	color: #7a8289;
+	font-size: 11px;
+}
+
+/* Repository */
+
+.ping-github-repository {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	min-width: 0;
+	padding: 11px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+
+	font-size: 13px;
+	line-height: 1.3;
+}
+
+.ping-github-repository > i {
+	flex: 0 0 auto;
+
+	color: #656d76;
+	font-size: 12px;
+}
+
+.ping-github-repository strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+	font-weight: 650;
+}
+
+.ping-github-repository span {
+	min-width: 0;
+	margin-left: auto;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #6e7781;
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+	font-size: 11px;
+}
+
+/* File */
+
+.ping-github-file {
+	min-width: 0;
+}
+
+.ping-github-file-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	min-width: 0;
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #dfe3e6;
+	background: #fbfcfd;
+}
+
+.ping-github-file-path {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	min-width: 0;
+
+	color: #3e454c;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.ping-github-file-path i {
+	flex: 0 0 auto;
+
+	color: #687078;
+	font-size: 12px;
+}
+
+.ping-github-file-path span {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ping-github-lines {
+	flex: 0 0 auto;
+
+	padding: 3px 6px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 5px;
+	background: #fff;
+
+	color: #6b737a;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+	font-size: 10px;
+	line-height: 1.2;
+}
+
+/* Code viewer */
+
+.ping-github-code {
+	width: 100%;
+	max-height: 480px;
+
+	overflow: auto;
+
+	background: #fff;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 12px;
+	line-height: 1.55;
+
+	tab-size: 4;
+}
+
+.ping-github-code-line {
+	display: grid;
+	grid-template-columns: 54px minmax(max-content, 1fr);
+
+	min-width: max-content;
+}
+
+.ping-github-code-line:hover {
+	background: #f6f8fa;
+}
+
+.ping-github-line-number {
+	display: block;
+
+	padding: 2px 12px 2px 8px;
+
+	border-right: 1px solid #edf0f2;
+
+	color: #8c959f;
+	text-align: right;
+
+	user-select: none;
+}
+
+.ping-github-code-line code {
+	display: block;
+
+	min-width: 0;
+	padding: 2px 14px;
+
+	background: transparent;
+	border: 0;
+
+	color: #24292f;
+
+	font: inherit;
+	white-space: pre;
+}
+
+/* ==========================================================
+   GitHub Commit Preview
+   ========================================================== */
+
+.ping-github-commit {
+	min-width: 0;
+}
+
+.ping-github-commit-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+
+	padding: 12px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-commit-author {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+
+	min-width: 0;
+}
+
+.ping-github-commit-author img,
+.ping-github-commit-avatar-fallback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 32px;
+	width: 32px;
+	height: 32px;
+
+	border-radius: 50%;
+	background: #f1f3f4;
+
+	color: #656d76;
+
+	object-fit: cover;
+}
+
+.ping-github-commit-avatar-fallback {
+	border: 1px solid #e1e5e8;
+	font-size: 12px;
+}
+
+.ping-github-commit-author > div {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+
+	min-width: 0;
+}
+
+.ping-github-commit-author strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.25;
+}
+
+.ping-github-commit-author span {
+	color: #7a8289;
+
+	font-size: 10px;
+	line-height: 1.2;
+}
+
+.ping-github-commit-sha {
+	flex: 0 0 auto;
+
+	padding: 4px 7px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 6px;
+	background: #fff;
+
+	color: #656d76;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 1;
+}
+
+
+/* Messaggio commit */
+
+.ping-github-commit-message {
+	padding: 13px;
+
+	border-bottom: 1px solid #edf0f2;
+
+	color: #24292f;
+
+	font-size: 13px;
+	line-height: 1.5;
+
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+
+/* Statistiche commit */
+
+.ping-github-commit-stats {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px 12px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.ping-github-commit-stats span {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.ping-github-commit-stats .is-files {
+	color: #656d76;
+}
+
+.ping-github-commit-stats .is-additions {
+	color: #1a7f37;
+}
+
+.ping-github-commit-stats .is-deletions {
+	color: #cf222e;
+}
+
+
+/* File modificati */
+
+.ping-github-commit-files {
+	display: grid;
+	min-width: 0;
+}
+
+.ping-github-commit-file {
+	min-width: 0;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-commit-file:last-child {
+	border-bottom: 0;
+}
+
+.ping-github-commit-file-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	min-width: 0;
+	padding: 9px 13px;
+
+	background: #fff;
+}
+
+.ping-github-commit-file-name {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #3e454c;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.ping-github-commit-file-stats {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	flex: 0 0 auto;
+
+	font-size: 10px;
+	line-height: 1;
+}
+
+.ping-github-commit-file-stats .is-additions {
+	color: #1a7f37;
+}
+
+.ping-github-commit-file-stats .is-deletions {
+	color: #cf222e;
+}
+
+
+/* Diff */
+
+.ping-github-commit-diff {
+	width: 100%;
+	max-height: 360px;
+
+	overflow: auto;
+
+	border-top: 1px solid #edf0f2;
+	background: #fff;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 11px;
+	line-height: 1.5;
+
+	tab-size: 4;
+}
+
+.ping-github-commit-diff-line {
+	display: block;
+
+	min-width: max-content;
+}
+
+.ping-github-commit-diff-line code {
+	display: block;
+
+	min-width: max-content;
+	padding: 2px 12px;
+
+	background: transparent;
+	border: 0;
+
+	color: #24292f;
+
+	font: inherit;
+	white-space: pre;
+}
+
+
+/* Riga di contesto */
+
+.ping-github-commit-diff-line.is-context {
+	background: #fff;
+}
+
+
+/* Hunk */
+
+.ping-github-commit-diff-line.is-hunk {
+	background: #ddf4ff;
+}
+
+.ping-github-commit-diff-line.is-hunk code {
+	color: #0969da;
+	font-weight: 600;
+}
+
+
+/* Aggiunte */
+
+.ping-github-commit-diff-line.is-addition {
+	background: #dafbe1;
+}
+
+.ping-github-commit-diff-line.is-addition code {
+	color: #116329;
+}
+
+
+/* Rimozioni */
+
+.ping-github-commit-diff-line.is-deletion {
+	background: #ffebe9;
+}
+
+.ping-github-commit-diff-line.is-deletion code {
+	color: #82071e;
+}
+
+
+/* Hover */
+
+.ping-github-commit-diff-line.is-context:hover {
+	background: #f6f8fa;
+}
+
+.ping-github-commit-diff-line.is-addition:hover {
+	background: #c7f0d2;
+}
+
+.ping-github-commit-diff-line.is-deletion:hover {
+	background: #ffd8d3;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-github-commit-heading,
+	.ping-github-commit-message,
+	.ping-github-commit-stats,
+	.ping-github-commit-file-heading {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+	.ping-github-commit-heading {
+		align-items: flex-start;
+	}
+
+	.ping-github-commit-sha {
+		margin-top: 2px;
+	}
+
+	.ping-github-commit-diff {
+		max-height: 300px;
+		font-size: 10px;
+	}
+
+	.ping-github-commit-diff-line code {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+}
+
+/* ==========================================================
+   GitHub Pull Request Preview
+   ========================================================== */
+
+.ping-github-pr {
+	min-width: 0;
+}
+
+.ping-github-pr-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+
+	padding: 12px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-pr-author {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+
+	min-width: 0;
+}
+
+.ping-github-pr-author img,
+.ping-github-pr-avatar-fallback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 32px;
+	width: 32px;
+	height: 32px;
+
+	border-radius: 50%;
+	background: #f1f3f4;
+
+	color: #656d76;
+
+	object-fit: cover;
+}
+
+.ping-github-pr-avatar-fallback {
+	border: 1px solid #e1e5e8;
+	font-size: 12px;
+}
+
+.ping-github-pr-author > div {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+
+	min-width: 0;
+}
+
+.ping-github-pr-author a,
+.ping-github-pr-author strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.25;
+	text-decoration: none;
+}
+
+.ping-github-pr-author a:hover {
+	color: var(--mv-primary);
+}
+
+.ping-github-pr-author span {
+	color: #7a8289;
+
+	font-size: 10px;
+	line-height: 1.2;
+}
+
+.ping-github-pr-state {
+	flex: 0 0 auto;
+
+	padding: 4px 7px;
+
+	border-radius: 999px;
+
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.ping-github-pr-state.is-open {
+	background: #dafbe1;
+	color: #1a7f37;
+}
+
+.ping-github-pr-state.is-merged {
+	background: #f0e6ff;
+	color: #8250df;
+}
+
+.ping-github-pr-state.is-closed {
+	background: #ffebe9;
+	color: #cf222e;
+}
+
+.ping-github-pr-state.is-draft {
+	background: #f1f3f4;
+	color: #656d76;
+}
+
+
+/* Titolo */
+
+.ping-github-pr-title {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+
+	padding: 13px;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-pr-title span {
+	flex: 0 0 auto;
+
+	color: #6e7781;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.ping-github-pr-title strong {
+	min-width: 0;
+
+	color: #24292f;
+
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.4;
+}
+
+
+/* Branch */
+
+.ping-github-pr-branches {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 7px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #656d76;
+
+	font-size: 11px;
+}
+
+.ping-github-pr-branches code {
+	padding: 3px 6px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 5px;
+	background: #fff;
+
+	color: #3e454c;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 10px;
+	font-weight: 600;
+}
+
+
+/* Label */
+
+.ping-github-pr-labels {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+
+	padding: 9px 13px 0;
+}
+
+.ping-github-pr-labels span {
+	padding: 4px 7px;
+
+	border-radius: 999px;
+	background: #f1f3f4;
+
+	color: #4f565d;
+
+	font-size: 9px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+
+/* Body */
+
+.ping-github-pr-body {
+	max-height: 210px;
+	padding: 13px;
+
+	overflow: auto;
+
+	border-bottom: 1px solid #edf0f2;
+
+	color: #3e454c;
+
+	font-size: 13px;
+	line-height: 1.55;
+
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+
+/* Statistiche */
+
+.ping-github-pr-stats {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px 12px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #656d76;
+
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.ping-github-pr-stats span {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.ping-github-pr-stats .is-additions {
+	color: #1a7f37;
+}
+
+.ping-github-pr-stats .is-deletions {
+	color: #cf222e;
+}
+
+
+/* File */
+
+.ping-github-pr-files {
+	display: grid;
+
+	max-height: 620px;
+
+	overflow: auto;
+}
+
+.ping-github-pr-file {
+	min-width: 0;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-pr-file:last-child {
+	border-bottom: 0;
+}
+
+.ping-github-pr-file-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	min-width: 0;
+	padding: 9px 13px;
+
+	background: #fff;
+}
+
+.ping-github-pr-file-name {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #3e454c;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.ping-github-pr-file-stats {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	flex: 0 0 auto;
+
+	font-size: 10px;
+	line-height: 1;
+}
+
+.ping-github-pr-file-stats .is-additions {
+	color: #1a7f37;
+}
+
+.ping-github-pr-file-stats .is-deletions {
+	color: #cf222e;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-github-pr-heading,
+	.ping-github-pr-title,
+	.ping-github-pr-branches,
+	.ping-github-pr-body,
+	.ping-github-pr-stats,
+	.ping-github-pr-file-heading {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+	.ping-github-pr-heading {
+		align-items: flex-start;
+	}
+
+	.ping-github-pr-title {
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.ping-github-pr-body {
+		max-height: 180px;
+		font-size: 12px;
+	}
+
+	.ping-github-pr-files {
+		max-height: 520px;
+	}
+
+}
+
+/* ==========================================================
+   GitHub Issue Preview
+   ========================================================== */
+
+.ping-github-issue {
+	min-width: 0;
+}
+
+.ping-github-issue-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+
+	padding: 12px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-issue-author {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+
+	min-width: 0;
+}
+
+.ping-github-issue-author img,
+.ping-github-issue-avatar-fallback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 32px;
+	width: 32px;
+	height: 32px;
+
+	border-radius: 50%;
+	background: #f1f3f4;
+
+	color: #656d76;
+
+	object-fit: cover;
+}
+
+.ping-github-issue-avatar-fallback {
+	border: 1px solid #e1e5e8;
+	font-size: 12px;
+}
+
+.ping-github-issue-author > div {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+
+	min-width: 0;
+}
+
+.ping-github-issue-author a,
+.ping-github-issue-author strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.25;
+	text-decoration: none;
+}
+
+.ping-github-issue-author a:hover {
+	color: var(--mv-primary);
+}
+
+.ping-github-issue-author span {
+	color: #7a8289;
+
+	font-size: 10px;
+	line-height: 1.2;
+}
+
+
+/* Stato */
+
+.ping-github-issue-state {
+	flex: 0 0 auto;
+
+	padding: 4px 7px;
+
+	border-radius: 999px;
+
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.ping-github-issue-state.is-open {
+	background: #dafbe1;
+	color: #1a7f37;
+}
+
+.ping-github-issue-state.is-closed {
+	background: #ffebe9;
+	color: #cf222e;
+}
+
+
+/* Titolo */
+
+.ping-github-issue-title {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+
+	padding: 13px;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-issue-title span {
+	flex: 0 0 auto;
+
+	color: #6e7781;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.ping-github-issue-title strong {
+	min-width: 0;
+
+	color: #24292f;
+
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.4;
+}
+
+
+/* Labels */
+
+.ping-github-issue-labels {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+
+	padding: 9px 13px 0;
+}
+
+.ping-github-issue-labels span {
+	padding: 4px 7px;
+
+	border-radius: 999px;
+	background: #f1f3f4;
+
+	color: #4f565d;
+
+	font-size: 9px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+
+/* Body */
+
+.ping-github-issue-body {
+	max-height: 260px;
+	padding: 13px;
+
+	overflow: auto;
+
+	border-bottom: 1px solid #edf0f2;
+
+	color: #3e454c;
+
+	font-size: 13px;
+	line-height: 1.55;
+
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+
+/* Assignee / Milestone / Reason */
+
+.ping-github-issue-meta {
+	display: grid;
+	gap: 0;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-issue-meta > div {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	min-width: 0;
+	padding: 8px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-issue-meta > div:last-child {
+	border-bottom: 0;
+}
+
+.ping-github-issue-meta > div > span {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+
+	flex: 0 0 auto;
+
+	color: #7a8289;
+
+	font-size: 10px;
+	font-weight: 700;
+	line-height: 1.2;
+	text-transform: uppercase;
+	letter-spacing: .025em;
+}
+
+.ping-github-issue-meta strong,
+.ping-github-issue-meta a {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #3e454c;
+
+	font-size: 11px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.ping-github-issue-meta a:hover {
+	color: var(--mv-primary);
+}
+
+.ping-github-issue-assignee img {
+	flex: 0 0 22px;
+
+	width: 22px;
+	height: 22px;
+
+	border-radius: 50%;
+
+	object-fit: cover;
+}
+
+
+/* Commenti */
+
+.ping-github-issue-stats {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px 12px;
+
+	padding: 9px 13px;
+
+	background: #fbfcfd;
+
+	color: #656d76;
+
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.ping-github-issue-stats span {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-github-issue-heading,
+	.ping-github-issue-title,
+	.ping-github-issue-body,
+	.ping-github-issue-meta > div,
+	.ping-github-issue-stats {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+	.ping-github-issue-heading {
+		align-items: flex-start;
+	}
+
+	.ping-github-issue-title {
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.ping-github-issue-body {
+		max-height: 210px;
+		font-size: 12px;
+	}
+
+	.ping-github-issue-meta > div {
+		flex-wrap: wrap;
+	}
+
+}
+
+/* ==========================================================
+   GitHub Release Preview
+   ========================================================== */
+
+.ping-github-release {
+	min-width: 0;
+}
+
+
+/* Header / autore */
+
+.ping-github-release-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+
+	padding: 12px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-release-author {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+
+	min-width: 0;
+}
+
+.ping-github-release-author img,
+.ping-github-release-avatar-fallback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 32px;
+	width: 32px;
+	height: 32px;
+
+	border-radius: 50%;
+	background: #f1f3f4;
+
+	color: #656d76;
+
+	object-fit: cover;
+}
+
+.ping-github-release-avatar-fallback {
+	border: 1px solid #e1e5e8;
+	font-size: 12px;
+}
+
+.ping-github-release-author > div {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+
+	min-width: 0;
+}
+
+.ping-github-release-author a,
+.ping-github-release-author strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.25;
+	text-decoration: none;
+}
+
+.ping-github-release-author a:hover {
+	color: var(--mv-primary);
+}
+
+.ping-github-release-author span {
+	color: #7a8289;
+
+	font-size: 10px;
+	line-height: 1.2;
+}
+
+
+/* Stato */
+
+.ping-github-release-state {
+	flex: 0 0 auto;
+
+	padding: 4px 7px;
+
+	border-radius: 999px;
+
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.ping-github-release-state.is-stable {
+	background: #dafbe1;
+	color: #1a7f37;
+}
+
+.ping-github-release-state.is-prerelease {
+	background: #fff8c5;
+	color: #9a6700;
+}
+
+.ping-github-release-state.is-draft {
+	background: #f1f3f4;
+	color: #656d76;
+}
+
+
+/* Titolo / tag */
+
+.ping-github-release-title {
+	display: flex;
+	align-items: center;
+	gap: 11px;
+
+	min-width: 0;
+	padding: 13px;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-release-title > i {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 36px;
+	width: 36px;
+	height: 36px;
+
+	border-radius: 9px;
+	background: rgba(66, 185, 146, .10);
+
+	color: var(--mv-primary);
+
+	font-size: 15px;
+}
+
+.ping-github-release-title > div {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+
+	min-width: 0;
+}
+
+.ping-github-release-title strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-size: 15px;
+	font-weight: 750;
+	line-height: 1.3;
+}
+
+.ping-github-release-title code {
+	width: fit-content;
+	max-width: 100%;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	padding: 3px 6px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 5px;
+	background: #f6f8fa;
+
+	color: #656d76;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 10px;
+	font-weight: 600;
+}
+
+
+/* Target */
+
+.ping-github-release-target {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #656d76;
+
+	font-size: 10px;
+	font-weight: 700;
+}
+
+.ping-github-release-target > i {
+	color: #656d76;
+}
+
+.ping-github-release-target > span {
+	text-transform: uppercase;
+	letter-spacing: .025em;
+}
+
+.ping-github-release-target code {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	padding: 3px 6px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 5px;
+	background: #fff;
+
+	color: #3e454c;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 10px;
+}
+
+
+/* Changelog */
+
+.ping-github-release-body {
+	max-height: 280px;
+	padding: 13px;
+
+	overflow: auto;
+
+	border-bottom: 1px solid #edf0f2;
+
+	color: #3e454c;
+
+	font-size: 13px;
+	line-height: 1.55;
+
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+
+/* Assets */
+
+.ping-github-release-assets {
+	display: grid;
+
+	max-height: 320px;
+
+	overflow: auto;
+
+	background: #fff;
+}
+
+.ping-github-release-assets-heading {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	position: sticky;
+	top: 0;
+	z-index: 1;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #3e454c;
+
+	font-size: 11px;
+}
+
+.ping-github-release-assets-heading > i {
+	color: #656d76;
+}
+
+.ping-github-release-assets-heading strong {
+	font-weight: 700;
+}
+
+.ping-github-release-assets-heading span {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	min-width: 20px;
+	height: 20px;
+	margin-left: auto;
+	padding: 0 6px;
+
+	border-radius: 999px;
+	background: #f1f3f4;
+
+	color: #656d76;
+
+	font-size: 9px;
+	font-weight: 800;
+}
+
+
+/* Singolo asset */
+
+.ping-github-release-asset {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+
+	min-width: 0;
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-release-asset:last-child {
+	border-bottom: 0;
+}
+
+.ping-github-release-asset > div:first-child {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	min-width: 0;
+}
+
+.ping-github-release-asset > div:first-child > i {
+	flex: 0 0 auto;
+
+	color: #656d76;
+
+	font-size: 12px;
+}
+
+.ping-github-release-asset a,
+.ping-github-release-asset strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #3e454c;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 10px;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.ping-github-release-asset a:hover {
+	color: var(--mv-primary);
+}
+
+.ping-github-release-asset-meta {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	flex: 0 0 auto;
+
+	color: #7a8289;
+
+	font-size: 9px;
+	font-weight: 650;
+	line-height: 1;
+}
+
+.ping-github-release-asset-meta span {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-github-release-heading,
+	.ping-github-release-title,
+	.ping-github-release-target,
+	.ping-github-release-body,
+	.ping-github-release-assets-heading,
+	.ping-github-release-asset {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+	.ping-github-release-heading {
+		align-items: flex-start;
+	}
+
+	.ping-github-release-body {
+		max-height: 220px;
+		font-size: 12px;
+	}
+
+	.ping-github-release-assets {
+		max-height: 280px;
+	}
+
+	.ping-github-release-asset {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.ping-github-release-asset-meta {
+		padding-left: 20px;
+	}
+
+}
+
+/* ==========================================================
+   GitHub Repository Preview
+   ========================================================== */
+
+.ping-github-repository-preview {
+	min-width: 0;
+}
+
+
+/* Header / owner */
+
+.ping-github-repository-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+
+	padding: 12px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-repository-owner {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+
+	min-width: 0;
+}
+
+.ping-github-repository-owner img,
+.ping-github-repository-avatar-fallback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 32px;
+	width: 32px;
+	height: 32px;
+
+	border-radius: 50%;
+	background: #f1f3f4;
+
+	color: #656d76;
+
+	object-fit: cover;
+}
+
+.ping-github-repository-avatar-fallback {
+	border: 1px solid #e1e5e8;
+	font-size: 13px;
+}
+
+.ping-github-repository-owner > div {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+
+	min-width: 0;
+}
+
+.ping-github-repository-owner a,
+.ping-github-repository-owner strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.25;
+	text-decoration: none;
+}
+
+.ping-github-repository-owner a:hover {
+	color: var(--mv-primary);
+}
+
+.ping-github-repository-owner span {
+	color: #7a8289;
+
+	font-size: 10px;
+	line-height: 1.2;
+}
+
+
+/* Branch */
+
+.ping-github-repository-branch {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+
+	flex: 0 0 auto;
+
+	max-width: 45%;
+	padding: 4px 7px;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 6px;
+	background: #fff;
+
+	color: #656d76;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 1;
+}
+
+
+/* Titolo repository */
+
+.ping-github-repository-title {
+	display: flex;
+	align-items: flex-start;
+	gap: 11px;
+
+	min-width: 0;
+	padding: 13px;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-repository-title > i {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 36px;
+	width: 36px;
+	height: 36px;
+
+	border-radius: 9px;
+	background: rgba(66, 185, 146, .10);
+
+	color: var(--mv-primary);
+
+	font-size: 15px;
+}
+
+.ping-github-repository-title > div {
+	min-width: 0;
+}
+
+.ping-github-repository-title a {
+	display: block;
+
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-size: 15px;
+	font-weight: 750;
+	line-height: 1.3;
+	text-decoration: none;
+}
+
+.ping-github-repository-title a:hover {
+	color: var(--mv-primary);
+}
+
+.ping-github-repository-title p {
+	margin: 5px 0 0;
+
+	color: #646b72;
+
+	font-size: 12px;
+	line-height: 1.45;
+}
+
+
+/* Statistiche */
+
+.ping-github-repository-stats {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px 12px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #656d76;
+
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.ping-github-repository-stats span {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+
+/* Homepage */
+
+.ping-github-repository-homepage {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	min-width: 0;
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+
+	color: #3e454c;
+
+	font-size: 11px;
+	font-weight: 650;
+	text-decoration: none;
+}
+
+.ping-github-repository-homepage:hover {
+	background: #fbfcfc;
+	color: var(--mv-primary);
+}
+
+.ping-github-repository-homepage > i:first-child {
+	flex: 0 0 auto;
+
+	color: #656d76;
+}
+
+.ping-github-repository-homepage > span {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ping-github-repository-homepage > i:last-child {
+	flex: 0 0 auto;
+
+	margin-left: auto;
+
+	color: #7a8289;
+	font-size: 10px;
+}
+
+
+/* README */
+
+.ping-github-repository-readme {
+	min-width: 0;
+}
+
+.ping-github-repository-readme-heading {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #3e454c;
+
+	font-size: 11px;
+}
+
+.ping-github-repository-readme-heading i {
+	color: #656d76;
+	font-size: 13px;
+}
+
+.ping-github-repository-readme-heading strong {
+	font-weight: 700;
+}
+
+.ping-github-repository-readme pre {
+	max-height: 320px;
+	margin: 0;
+	padding: 13px;
+
+	overflow: auto;
+
+	background: #fff;
+
+	color: #3e454c;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 11px;
+	line-height: 1.55;
+
+	tab-size: 4;
+}
+
+.ping-github-repository-readme code {
+	display: block;
+
+	min-width: max-content;
+
+	background: transparent;
+	border: 0;
+
+	color: inherit;
+	font: inherit;
+
+	white-space: pre;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-github-repository-heading,
+	.ping-github-repository-title,
+	.ping-github-repository-stats,
+	.ping-github-repository-homepage,
+	.ping-github-repository-readme-heading,
+	.ping-github-repository-readme pre {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+	.ping-github-repository-heading {
+		align-items: flex-start;
+	}
+
+	.ping-github-repository-branch {
+		max-width: 40%;
+	}
+
+	.ping-github-repository-title {
+		gap: 9px;
+	}
+
+	.ping-github-repository-title > i {
+		flex-basis: 32px;
+		width: 32px;
+		height: 32px;
+
+		font-size: 13px;
+	}
+
+	.ping-github-repository-title a {
+		font-size: 14px;
+	}
+
+	.ping-github-repository-readme pre {
+		max-height: 260px;
+		font-size: 10px;
+	}
+
+}
+
+/* ==========================================================
+   GitHub Discussion Preview
+   ========================================================== */
+
+.ping-github-discussion {
+	min-width: 0;
+}
+
+
+/* Header / autore */
+
+.ping-github-discussion-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+
+	padding: 12px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-discussion-author {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+
+	min-width: 0;
+}
+
+.ping-github-discussion-author img,
+.ping-github-discussion-avatar-fallback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 32px;
+	width: 32px;
+	height: 32px;
+
+	border-radius: 50%;
+	background: #f1f3f4;
+
+	color: #656d76;
+
+	object-fit: cover;
+}
+
+.ping-github-discussion-avatar-fallback {
+	border: 1px solid #e1e5e8;
+	font-size: 12px;
+}
+
+.ping-github-discussion-author > div {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+
+	min-width: 0;
+}
+
+.ping-github-discussion-author a,
+.ping-github-discussion-author strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.25;
+	text-decoration: none;
+}
+
+.ping-github-discussion-author a:hover {
+	color: var(--mv-primary);
+}
+
+.ping-github-discussion-author span {
+	color: #7a8289;
+
+	font-size: 10px;
+	line-height: 1.2;
+}
+
+
+/* Stato */
+
+.ping-github-discussion-state {
+	flex: 0 0 auto;
+
+	padding: 4px 7px;
+
+	border-radius: 999px;
+
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.ping-github-discussion-state.is-open {
+	background: #dafbe1;
+	color: #1a7f37;
+}
+
+.ping-github-discussion-state.is-closed {
+	background: #ffebe9;
+	color: #cf222e;
+}
+
+
+/* Titolo */
+
+.ping-github-discussion-title {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+
+	padding: 13px;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-discussion-title span {
+	flex: 0 0 auto;
+
+	color: #6e7781;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.ping-github-discussion-title strong {
+	min-width: 0;
+
+	color: #24292f;
+
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.4;
+}
+
+
+/* Categoria */
+
+.ping-github-discussion-category {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-discussion-category span {
+	flex: 0 0 auto;
+
+	font-size: 16px;
+	line-height: 1;
+}
+
+.ping-github-discussion-category strong {
+	color: #4f565d;
+
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+
+/* Body */
+
+.ping-github-discussion-body {
+	max-height: 260px;
+	padding: 13px;
+
+	overflow: auto;
+
+	border-bottom: 1px solid #edf0f2;
+
+	color: #3e454c;
+
+	font-size: 13px;
+	line-height: 1.55;
+
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+
+/* Statistiche */
+
+.ping-github-discussion-stats {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px 12px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #656d76;
+
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.ping-github-discussion-stats span {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.ping-github-discussion-stats .is-locked {
+	color: #9a6700;
+}
+
+
+/* Accepted answer */
+
+.ping-github-discussion-answer {
+	min-width: 0;
+
+	border-top: 1px solid #d8eadf;
+	background: #f6fff8;
+}
+
+.ping-github-discussion-answer-heading {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #d8eadf;
+
+	color: #1a7f37;
+
+	font-size: 11px;
+	line-height: 1.2;
+}
+
+.ping-github-discussion-answer-heading > i {
+	flex: 0 0 auto;
+
+	font-size: 13px;
+}
+
+.ping-github-discussion-answer-heading strong {
+	font-weight: 750;
+}
+
+.ping-github-discussion-answer-heading span {
+	margin-left: auto;
+
+	color: #5b6b60;
+
+	font-size: 10px;
+	font-weight: 650;
+}
+
+.ping-github-discussion-answer-body {
+	max-height: 220px;
+	padding: 13px;
+
+	overflow: auto;
+
+	color: #31543d;
+
+	font-size: 12px;
+	line-height: 1.55;
+
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+.ping-github-discussion-answer-link {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+
+	padding: 9px 13px;
+
+	border-top: 1px solid #d8eadf;
+
+	color: #1a7f37;
+
+	font-size: 11px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.ping-github-discussion-answer-link:hover {
+	background: #effbf3;
+	color: var(--mv-primary);
+}
+
+.ping-github-discussion-answer-link i {
+	flex: 0 0 auto;
+
+	font-size: 10px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-github-discussion-heading,
+	.ping-github-discussion-title,
+	.ping-github-discussion-category,
+	.ping-github-discussion-body,
+	.ping-github-discussion-stats,
+	.ping-github-discussion-answer-heading,
+	.ping-github-discussion-answer-body,
+	.ping-github-discussion-answer-link {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+	.ping-github-discussion-heading {
+		align-items: flex-start;
+	}
+
+	.ping-github-discussion-title {
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.ping-github-discussion-body {
+		max-height: 210px;
+		font-size: 12px;
+	}
+
+	.ping-github-discussion-answer-body {
+		max-height: 180px;
+		font-size: 11px;
+	}
+
+}
+
+/* ==========================================================
+   GitHub Gist Preview
+   ========================================================== */
+
+.ping-github-gist {
+	min-width: 0;
+}
+
+
+/* Header / autore */
+
+.ping-github-gist-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+
+	padding: 12px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-gist-author {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+
+	min-width: 0;
+}
+
+.ping-github-gist-author img,
+.ping-github-gist-avatar-fallback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 32px;
+	width: 32px;
+	height: 32px;
+
+	border-radius: 50%;
+	background: #f1f3f4;
+
+	color: #656d76;
+
+	object-fit: cover;
+}
+
+.ping-github-gist-avatar-fallback {
+	border: 1px solid #e1e5e8;
+	font-size: 12px;
+}
+
+.ping-github-gist-author > div {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+
+	min-width: 0;
+}
+
+.ping-github-gist-author a,
+.ping-github-gist-author strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.25;
+	text-decoration: none;
+}
+
+.ping-github-gist-author a:hover {
+	color: var(--mv-primary);
+}
+
+.ping-github-gist-author span {
+	color: #7a8289;
+
+	font-size: 10px;
+	line-height: 1.2;
+}
+
+
+/* Stato */
+
+.ping-github-gist-state {
+	flex: 0 0 auto;
+
+	padding: 4px 7px;
+
+	border-radius: 999px;
+	background: #dafbe1;
+
+	color: #1a7f37;
+
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+
+/* Descrizione */
+
+.ping-github-gist-description {
+	padding: 13px;
+
+	border-bottom: 1px solid #edf0f2;
+
+	color: #3e454c;
+
+	font-size: 13px;
+	line-height: 1.5;
+
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+
+/* Statistiche */
+
+.ping-github-gist-stats {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px 12px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #656d76;
+
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.ping-github-gist-stats span {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+
+/* Lista file */
+
+.ping-github-gist-files {
+	display: grid;
+
+	max-height: 720px;
+
+	overflow: auto;
+
+	background: #fff;
+}
+
+.ping-github-gist-file {
+	min-width: 0;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-gist-file:last-child {
+	border-bottom: 0;
+}
+
+
+/* Header file */
+
+.ping-github-gist-file-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	position: sticky;
+	top: 0;
+	z-index: 1;
+
+	min-width: 0;
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-gist-file-name {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	min-width: 0;
+}
+
+.ping-github-gist-file-name > i {
+	flex: 0 0 auto;
+
+	color: #656d76;
+
+	font-size: 12px;
+}
+
+.ping-github-gist-file-name strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #3e454c;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 11px;
+	font-weight: 650;
+	line-height: 1.3;
+}
+
+.ping-github-gist-file-meta {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	flex: 0 0 auto;
+
+	color: #7a8289;
+
+	font-size: 9px;
+	font-weight: 650;
+	line-height: 1;
+}
+
+.ping-github-gist-file-meta span {
+	display: inline-flex;
+	align-items: center;
+
+	padding: 3px 5px;
+
+	border: 1px solid #e1e5e8;
+	border-radius: 5px;
+	background: #fff;
+}
+
+
+/* Code viewer */
+
+.ping-github-gist-code {
+	width: 100%;
+	max-height: 360px;
+
+	margin: 0;
+	padding: 13px;
+
+	overflow: auto;
+
+	background: #fff;
+
+	color: #24292f;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 11px;
+	line-height: 1.55;
+
+	tab-size: 4;
+}
+
+.ping-github-gist-code code {
+	display: block;
+
+	min-width: max-content;
+
+	padding: 0;
+
+	border: 0;
+	background: transparent;
+
+	color: inherit;
+	font: inherit;
+
+	white-space: pre;
+}
+
+
+/* File troncato */
+
+.ping-github-gist-truncated {
+	padding: 8px 13px;
+
+	border-top: 1px solid #edf0f2;
+	background: #fff8c5;
+
+	color: #7d5b00;
+
+	font-size: 10px;
+	font-weight: 650;
+	line-height: 1.3;
+}
+
+
+/* Link finale */
+
+.ping-github-gist-link {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+
+	padding: 10px 13px;
+
+	border-top: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #3e454c;
+
+	font-size: 11px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.ping-github-gist-link:hover {
+	background: #f6f8fa;
+	color: var(--mv-primary);
+}
+
+.ping-github-gist-link i {
+	flex: 0 0 auto;
+
+	color: #7a8289;
+	font-size: 10px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-github-gist-heading,
+	.ping-github-gist-description,
+	.ping-github-gist-stats,
+	.ping-github-gist-file-heading,
+	.ping-github-gist-code,
+	.ping-github-gist-truncated,
+	.ping-github-gist-link {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+	.ping-github-gist-heading {
+		align-items: flex-start;
+	}
+
+	.ping-github-gist-files {
+		max-height: 600px;
+	}
+
+	.ping-github-gist-file-heading {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.ping-github-gist-file-meta {
+		padding-left: 19px;
+	}
+
+	.ping-github-gist-code {
+		max-height: 300px;
+
+		font-size: 10px;
+		line-height: 1.5;
+	}
+
+}
+
+/* ==========================================================
+   GitHub Tree Preview
+   ========================================================== */
+
+.ping-github-tree {
+	min-width: 0;
+}
+
+
+/* Header branch */
+
+.ping-github-tree-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	padding: 11px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-tree-heading > div {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	min-width: 0;
+}
+
+.ping-github-tree-heading > div > i {
+	flex: 0 0 auto;
+
+	color: #656d76;
+	font-size: 12px;
+}
+
+.ping-github-tree-heading strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.ping-github-tree-heading > span {
+	flex: 0 0 auto;
+
+	padding: 4px 7px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 6px;
+	background: #fff;
+
+	color: #656d76;
+
+	font-size: 10px;
+	font-weight: 650;
+	line-height: 1;
+}
+
+
+/* Path */
+
+.ping-github-tree-path {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	min-width: 0;
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+
+	color: #3e454c;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.35;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ping-github-tree-path > i {
+	flex: 0 0 auto;
+
+	color: #656d76;
+	font-size: 12px;
+}
+
+
+/* Statistiche */
+
+.ping-github-tree-stats {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px 12px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #656d76;
+
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.ping-github-tree-stats span {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+
+/* Lista */
+
+.ping-github-tree-items {
+	display: grid;
+
+	max-height: 460px;
+
+	overflow: auto;
+
+	background: #fff;
+}
+
+
+/* Elemento */
+
+.ping-github-tree-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	min-width: 0;
+	padding: 8px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-tree-item:last-child {
+	border-bottom: 0;
+}
+
+.ping-github-tree-item:hover {
+	background: #f6f8fa;
+}
+
+.ping-github-tree-item > div {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	min-width: 0;
+}
+
+.ping-github-tree-item > div > i {
+	flex: 0 0 auto;
+
+	width: 14px;
+
+	color: #656d76;
+	font-size: 12px;
+	text-align: center;
+}
+
+
+/* Nome file / directory */
+
+.ping-github-tree-item a,
+.ping-github-tree-item strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #3e454c;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.35;
+	text-decoration: none;
+}
+
+.ping-github-tree-item a:hover {
+	color: var(--mv-primary);
+}
+
+
+/* Dimensione */
+
+.ping-github-tree-item > span {
+	flex: 0 0 auto;
+
+	color: #7a8289;
+
+	font-size: 9px;
+	font-weight: 650;
+	line-height: 1;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-github-tree-heading,
+	.ping-github-tree-path,
+	.ping-github-tree-stats,
+	.ping-github-tree-item {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+	.ping-github-tree-items {
+		max-height: 380px;
+	}
+
+	.ping-github-tree-heading {
+		align-items: flex-start;
+	}
+
+	.ping-github-tree-item {
+		gap: 8px;
+	}
+
+	.ping-github-tree-item a,
+	.ping-github-tree-item strong {
+		font-size: 10px;
+	}
+
+}
+
+/* ==========================================================
+   GitHub Compare Preview
+   ========================================================== */
+
+.ping-github-compare {
+	min-width: 0;
+}
+
+
+/* Header */
+
+.ping-github-compare-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	padding: 11px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-compare-heading > div {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	min-width: 0;
+}
+
+.ping-github-compare-heading > div > i {
+	flex: 0 0 auto;
+
+	color: #656d76;
+	font-size: 12px;
+}
+
+.ping-github-compare-heading strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.ping-github-compare-heading > span {
+	flex: 0 0 auto;
+
+	padding: 4px 7px;
+
+	border-radius: 999px;
+	background: #dafbe1;
+
+	color: #1a7f37;
+
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+
+/* Statistiche */
+
+.ping-github-compare-stats {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px 12px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #656d76;
+
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.ping-github-compare-stats span {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+
+/* Commit */
+
+.ping-github-compare-commits {
+	display: grid;
+
+	max-height: 320px;
+
+	overflow: auto;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fff;
+}
+
+.ping-github-compare-commit {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	min-width: 0;
+	padding: 8px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-compare-commit:last-child {
+	border-bottom: 0;
+}
+
+.ping-github-compare-commit:hover {
+	background: #f6f8fa;
+}
+
+.ping-github-compare-commit > div {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	min-width: 0;
+}
+
+.ping-github-compare-commit code {
+	flex: 0 0 auto;
+
+	padding: 3px 5px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 5px;
+	background: #f6f8fa;
+
+	color: #656d76;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 9px;
+	font-weight: 650;
+	line-height: 1;
+}
+
+.ping-github-compare-commit a,
+.ping-github-compare-commit strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #3e454c;
+
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.35;
+	text-decoration: none;
+}
+
+.ping-github-compare-commit a:hover {
+	color: var(--mv-primary);
+}
+
+.ping-github-compare-commit > span {
+	flex: 0 0 auto;
+
+	color: #7a8289;
+
+	font-size: 9px;
+	font-weight: 650;
+	line-height: 1;
+}
+
+
+/* File modificati */
+
+.ping-github-compare-files {
+	display: grid;
+
+	max-height: 360px;
+
+	overflow: auto;
+
+	background: #fff;
+}
+
+.ping-github-compare-file {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	min-width: 0;
+	padding: 8px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-compare-file:last-child {
+	border-bottom: 0;
+}
+
+.ping-github-compare-file:hover {
+	background: #f6f8fa;
+}
+
+.ping-github-compare-file > strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #3e454c;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.35;
+}
+
+.ping-github-compare-file > div {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	flex: 0 0 auto;
+
+	font-size: 9px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.ping-github-compare-file > div span:first-child {
+	padding: 3px 5px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 5px;
+	background: #f6f8fa;
+
+	color: #656d76;
+}
+
+.ping-github-compare-file > div span:nth-last-child(2) {
+	color: #1a7f37;
+}
+
+.ping-github-compare-file > div span:last-child {
+	color: #cf222e;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-github-compare-heading,
+	.ping-github-compare-stats,
+	.ping-github-compare-commit,
+	.ping-github-compare-file {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+	.ping-github-compare-heading {
+		align-items: flex-start;
+	}
+
+	.ping-github-compare-heading > div {
+		flex-wrap: wrap;
+	}
+
+	.ping-github-compare-commits {
+		max-height: 280px;
+	}
+
+	.ping-github-compare-files {
+		max-height: 300px;
+	}
+
+	.ping-github-compare-commit {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.ping-github-compare-commit > span {
+		padding-left: 52px;
+	}
+
+	.ping-github-compare-file {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+}
+
+/* ==========================================================
+   GitHub Comment Preview
+   ========================================================== */
+
+.ping-github-comment {
+	min-width: 0;
+
+	border-top: 1px solid #dfe3e6;
+	background: #fff;
+}
+
+
+/* Header */
+
+.ping-github-comment-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+
+	padding: 12px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-comment-author {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+
+	min-width: 0;
+}
+
+.ping-github-comment-author img,
+.ping-github-comment-avatar-fallback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 32px;
+	width: 32px;
+	height: 32px;
+
+	border-radius: 50%;
+	background: #f1f3f4;
+
+	color: #656d76;
+
+	object-fit: cover;
+}
+
+.ping-github-comment-avatar-fallback {
+	border: 1px solid #e1e5e8;
+	font-size: 12px;
+}
+
+.ping-github-comment-author > div {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+
+	min-width: 0;
+}
+
+.ping-github-comment-author a,
+.ping-github-comment-author strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.25;
+	text-decoration: none;
+}
+
+.ping-github-comment-author a:hover {
+	color: var(--mv-primary);
+}
+
+.ping-github-comment-author span {
+	color: #7a8289;
+
+	font-size: 10px;
+	line-height: 1.2;
+}
+
+
+/* Label */
+
+.ping-github-comment-label {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+
+	flex: 0 0 auto;
+
+	padding: 4px 7px;
+
+	border-radius: 999px;
+	background: rgba(66, 185, 146, .11);
+
+	color: var(--mv-primary);
+
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	line-height: 1;
+}
+
+
+/* Association */
+
+.ping-github-comment-association {
+	padding: 7px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #656d76;
+
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+
+/* Body */
+
+.ping-github-comment-body {
+	max-height: 260px;
+	padding: 13px;
+
+	overflow: auto;
+
+	border-bottom: 1px solid #edf0f2;
+
+	color: #3e454c;
+
+	font-size: 13px;
+	line-height: 1.55;
+
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+
+/* Link finale */
+
+.ping-github-comment-link {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+
+	padding: 10px 13px;
+
+	background: #fbfcfd;
+
+	color: #3e454c;
+
+	font-size: 11px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.ping-github-comment-link:hover {
+	background: #f6f8fa;
+	color: var(--mv-primary);
+}
+
+.ping-github-comment-link i {
+	flex: 0 0 auto;
+
+	color: #7a8289;
+	font-size: 10px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-github-comment-heading,
+	.ping-github-comment-association,
+	.ping-github-comment-body,
+	.ping-github-comment-link {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+	.ping-github-comment-heading {
+		align-items: flex-start;
+	}
+
+	.ping-github-comment-body {
+		max-height: 210px;
+
+		font-size: 12px;
+	}
+
+}
+
+/* ==========================================================
+   GitHub Workflow Run Preview
+   ========================================================== */
+
+.ping-github-workflow {
+	min-width: 0;
+}
+
+
+/* Header / actor */
+
+.ping-github-workflow-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+
+	padding: 12px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-github-workflow-actor {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+
+	min-width: 0;
+}
+
+.ping-github-workflow-actor img,
+.ping-github-workflow-avatar-fallback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 32px;
+	width: 32px;
+	height: 32px;
+
+	border-radius: 50%;
+	background: #f1f3f4;
+
+	color: #656d76;
+
+	object-fit: cover;
+}
+
+.ping-github-workflow-avatar-fallback {
+	border: 1px solid #e1e5e8;
+	font-size: 12px;
+}
+
+.ping-github-workflow-actor > div {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+
+	min-width: 0;
+}
+
+.ping-github-workflow-actor a,
+.ping-github-workflow-actor strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.25;
+	text-decoration: none;
+}
+
+.ping-github-workflow-actor a:hover {
+	color: var(--mv-primary);
+}
+
+.ping-github-workflow-actor span {
+	color: #7a8289;
+
+	font-size: 10px;
+	line-height: 1.2;
+}
+
+
+/* Stato */
+
+.ping-github-workflow-state {
+	flex: 0 0 auto;
+
+	padding: 4px 7px;
+
+	border-radius: 999px;
+	background: #dafbe1;
+
+	color: #1a7f37;
+
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+
+/* Titolo workflow */
+
+.ping-github-workflow-title {
+	display: flex;
+	align-items: flex-start;
+	gap: 11px;
+
+	min-width: 0;
+	padding: 13px;
+
+	border-bottom: 1px solid #edf0f2;
+}
+
+.ping-github-workflow-title > i {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 36px;
+	width: 36px;
+	height: 36px;
+
+	border-radius: 9px;
+	background: rgba(66, 185, 146, .10);
+
+	color: var(--mv-primary);
+
+	font-size: 15px;
+}
+
+.ping-github-workflow-title > div {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+
+	min-width: 0;
+}
+
+.ping-github-workflow-title strong {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #24292f;
+
+	font-size: 14px;
+	font-weight: 750;
+	line-height: 1.3;
+}
+
+.ping-github-workflow-title span {
+	color: #646b72;
+
+	font-size: 12px;
+	line-height: 1.4;
+
+	overflow-wrap: anywhere;
+}
+
+
+/* Meta */
+
+.ping-github-workflow-meta {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px 12px;
+
+	padding: 9px 13px;
+
+	border-bottom: 1px solid #edf0f2;
+	background: #fbfcfd;
+
+	color: #656d76;
+
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.ping-github-workflow-meta span {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.ping-github-workflow-meta span:nth-child(3) {
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+}
+
+
+/* Commit */
+
+.ping-github-workflow-commit {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+
+	padding: 13px;
+
+	border-bottom: 1px solid #edf0f2;
+
+	background: #fff;
+}
+
+.ping-github-workflow-commit strong {
+	color: #3e454c;
+
+	font-size: 12px;
+	font-weight: 650;
+	line-height: 1.45;
+
+	overflow-wrap: anywhere;
+}
+
+.ping-github-workflow-commit span {
+	color: #7a8289;
+
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+
+/* Link finale */
+
+.ping-github-workflow-link {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+
+	padding: 10px 13px;
+
+	background: #fbfcfd;
+
+	color: #3e454c;
+
+	font-size: 11px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.ping-github-workflow-link:hover {
+	background: #f6f8fa;
+	color: var(--mv-primary);
+}
+
+.ping-github-workflow-link i {
+	flex: 0 0 auto;
+
+	color: #7a8289;
+	font-size: 10px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-github-workflow-heading,
+	.ping-github-workflow-title,
+	.ping-github-workflow-meta,
+	.ping-github-workflow-commit,
+	.ping-github-workflow-link {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+	.ping-github-workflow-heading {
+		align-items: flex-start;
+	}
+
+	.ping-github-workflow-title {
+		gap: 9px;
+	}
+
+	.ping-github-workflow-title > i {
+		flex-basis: 32px;
+		width: 32px;
+		height: 32px;
+
+		font-size: 13px;
+	}
+
+	.ping-github-workflow-title strong {
+		font-size: 13px;
+	}
+
+	.ping-github-workflow-title span {
+		font-size: 11px;
+	}
+
+}
+
+/* Fallback GitHub per tipi non ancora specializzati */
+
+.ping-github-fallback {
+	display: block;
+
+	padding: 14px;
+
+	color: inherit;
+	text-decoration: none;
+}
+
+.ping-github-fallback:hover {
+	background: #fbfcfc;
+	text-decoration: none;
+}
+
+.ping-github-fallback strong {
+	display: block;
+
+	color: #24292f;
+	font-size: 15px;
+	font-weight: 650;
+	line-height: 1.35;
+}
+
+.ping-github-fallback p {
+	display: -webkit-box;
+
+	margin: 6px 0 0;
+
+	color: #646b72;
+	font-size: 13px;
+	line-height: 1.45;
+
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-github-header,
+	.ping-github-repository,
+	.ping-github-file-heading {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+	.ping-github-repository {
+		flex-wrap: wrap;
+	}
+
+	.ping-github-repository span {
+		flex: 1 1 100%;
+		margin-left: 20px;
+	}
+
+	.ping-github-code {
+		max-height: 380px;
+		font-size: 11px;
+	}
+
+	.ping-github-code-line {
+		grid-template-columns: 46px minmax(max-content, 1fr);
+	}
+
+	.ping-github-line-number {
+		padding-left: 6px;
+		padding-right: 9px;
+	}
+
+	.ping-github-code-line code {
+		padding-left: 11px;
+		padding-right: 11px;
+	}
+
+}
+
+/* ==========================================================
+   Dogecoin Tip Pong
+   ========================================================== */
+
+.pong-doge-tip {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	margin: 0;
+	padding: 9px 11px;
+
+	border: 1px solid #eadcab;
+	border-radius: 8px;
+
+	background:
+		linear-gradient(
+			135deg,
+			#fffaf0 0%,
+			#fffdf8 100%
+		);
+
+	color: #4a4025;
+}
+
+.pong-doge-tip-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 30px;
+	width: 30px;
+	height: 30px;
+
+	border-radius: 50%;
+
+	background: #c9a633;
+	color: #fff;
+
+	font-family:
+		Arial,
+		Helvetica,
+		sans-serif;
+
+	font-size: 20px;
+	font-weight: 800;
+	line-height: 1;
+}
+
+.pong-doge-tip-info {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+
+	min-width: 0;
+}
+
+.pong-doge-tip-label {
+	color: #8a742e;
+
+	font-size: 10px;
+	font-weight: 750;
+	line-height: 1.15;
+
+	letter-spacing: .035em;
+	text-transform: uppercase;
+}
+
+.pong-doge-tip-value {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 6px;
+
+	min-width: 0;
+
+	color: #514726;
+
+	font-size: 13px;
+	line-height: 1.3;
+}
+
+.pong-doge-tip-value strong {
+	color: #3e351c;
+
+	font-size: 14px;
+	font-weight: 800;
+}
+
+.pong-doge-tip-value > span {
+	color: #a18c4c;
+
+	font-size: 11px;
+}
+
+.pong-doge-tip-value a {
+	color: #7b6322;
+
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.pong-doge-tip-value a:hover {
+	color: #5f4b17;
+	text-decoration: underline;
+}
+
+.pong-doge-tip-message {
+	margin-top: 9px;
+	padding: 9px 11px 1px;
+
+	border-top: 1px solid #eee6cf;
+
+	color: #343434;
+
+	font-size: 14px;
+	line-height: 1.55;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.pong-doge-tip {
+		align-items: flex-start;
+
+		padding: 9px 10px;
+	}
+
+	.pong-doge-tip-icon {
+		flex-basis: 28px;
+		width: 28px;
+		height: 28px;
+
+		font-size: 18px;
+	}
+
+	.pong-doge-tip-value {
+		font-size: 12px;
+	}
+
+	.pong-doge-tip-value strong {
+		font-size: 13px;
+	}
+
+}
+
+/* ==========================================================
+   Pong
+   ========================================================== */
+
+.pong-card {
+	margin: 0 0 16px 60px;
+	padding: 14px 16px;
+
+	border: 1px solid #e6eaed;
+	border-radius: 8px;
+	background: #fafbfc;
+}
+
+.pong-card:last-child {
+	margin-bottom: 0;
+}
+
+.pong-header {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 10px;
+}
+
+.pong-avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 38px;
+	width: 38px;
+	height: 38px;
+	margin-top: 1px;
+	margin-right: 10px;
+
+	overflow: hidden;
+	border-radius: 8px;
+	background: #f0f2f3;
+
+	color: #6f767c;
+	font-size: 18px;
+	text-decoration: none;
+}
+
+.pong-avatar img {
+	display: block;
+	width: 100%;
+	height: 100%;
+
+	border-radius: 8px;
+	object-fit: cover;
+}
+
+.pong-avatar-static {
+	cursor: default;
+}
+
+.pong-avatar-static i {
+	color: #6f767c;
+	font-size: 17px;
+}
+
+.pong-author {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	min-width: 0;
+	padding-top: 0;
+}
+
+.pong-author-name {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	min-width: 0;
+
+	font-size: 13px;
+	line-height: 1.2;
+}
+
+.pong-author-name .mv-user-presence {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 auto;
+	line-height: 1;
+}
+
+.pong-author-name .mv-user-presence i {
+	color: currentColor !important;
+	font-size: 8px;
+}
+
+.pong-author-name .mv-user-presence.is-online,
+.pong-author-name .mv-user-presence.is-online i {
+	color: #1f9d63 !important;
+}
+
+.pong-author-name .mv-user-presence.is-away,
+.pong-author-name .mv-user-presence.is-away i {
+	color: #d99113 !important;
+}
+
+.pong-author-name .mv-user-presence.is-offline,
+.pong-author-name .mv-user-presence.is-offline i {
+	color: #9aa4af !important;
+}
+
+.pong-author-name .pong-username {
+	min-width: 0;
+}
+
+.pong-username {
+	color: #222;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1.2;
+	text-decoration: none;
+}
+
+a.pong-username:hover {
+	color: var(--mv-primary);
+}
+
+.pong-username-static {
+	color: #222;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1.2;
+	cursor: default;
+	text-decoration: none;
+}
+
+.pong-username-missing {
+	color: #7f4545;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+.pong-author-status {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	min-width: 0;
+
+	margin: 2px 0 0;
+
+	color: #727980;
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 1.25;
+}
+
+.pong-author-status i {
+	flex: 0 0 auto;
+
+	color: #6b7278;
+	font-size: 9px;
+	line-height: 1;
+}
+
+.pong-author-status span {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.pong-date {
+	margin-top: 2px;
+
+	color: #888;
+	font-size: 10px;
+	line-height: 1.2;
+}
+
+.pong-content {
+	color: #222;
+	line-height: 1.6;
+	word-break: break-word;
+}
+
+/* ==========================================================
+   Media
+   ========================================================== */
+
+.ping-media {
+	display: grid;
+	gap: 8px;
+	margin-top: 12px;
+
+	width: 100%;
+	aspect-ratio: 16 / 10;
+}
+
+/* 1 immagine */
+
+.ping-layout-1 {
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	aspect-ratio: 16 / 9;
+}
+
+/* 2 immagini */
+
+.ping-layout-2 {
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+}
+
+/* 3 immagini */
+
+.ping-layout-3 {
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+}
+
+.ping-layout-3 .ping-media-item:first-child {
+	grid-column: 1 / -1;
+}
+
+/* 4 immagini */
+
+.ping-layout-4 {
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+}
+
+/* 5 immagini */
+
+.ping-layout-5 {
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+}
+
+.ping-layout-5 .ping-media-item:first-child {
+	grid-column: 1 / -1;
+}
+
+/* 6 immagini */
+
+.ping-layout-6 {
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+}
+
+/* 7 immagini */
+
+.ping-layout-7 {
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+}
+
+.ping-layout-7 .ping-media-item:first-child {
+	grid-column: span 2;
+	grid-row: span 3;
+}
+
+/* 8 immagini */
+
+.ping-layout-8 {
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+}
+
+/* 9 immagini */
+
+.ping-layout-9 {
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+}
+
+/* 10 immagini */
+
+.ping-layout-10 {
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+}
+
+.ping-layout-10 .ping-media-item:first-child {
+	grid-column: span 2;
+	grid-row: span 2;
+}
+
+.ping-media-item {
+	position: relative;
+	min-width: 0;
+	min-height: 0;
+
+	overflow: hidden;
+	border-radius: 8px;
+	background: #f3f4f5;
+}
+
+.ping-media-item img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+/* Galleria immagini Ping */
+
+.ping-media {
+	display: grid;
+	width: 100%;
+	margin-top: 12px;
+	gap: 6px;
+
+	aspect-ratio: 16 / 10;
+	overflow: hidden;
+	border-radius: 8px;
+}
+
+/* 1 immagine
+ *
+ * ┌───────────┐
+ * │     1     │
+ * └───────────┘
+ */
+
+.ping-layout-1 {
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	aspect-ratio: 16 / 9;
+}
+
+/* 2 immagini
+ *
+ * ┌─────┬─────┐
+ * │  1  │  2  │
+ * └─────┴─────┘
+ */
+
+.ping-layout-2 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-rows: 1fr;
+}
+
+/* 3 immagini
+ *
+ * ┌─────┬─────┐
+ * │     │  2  │
+ * │  1  ├─────┤
+ * │     │  3  │
+ * └─────┴─────┘
+ */
+
+.ping-layout-3 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.ping-layout-3 .ping-media-item:nth-child(1) {
+	grid-column: 1;
+	grid-row: 1 / 3;
+}
+
+.ping-layout-3 .ping-media-item:nth-child(2) {
+	grid-column: 2;
+	grid-row: 1;
+}
+
+.ping-layout-3 .ping-media-item:nth-child(3) {
+	grid-column: 2;
+	grid-row: 2;
+}
+
+/* 4 immagini
+ *
+ * ┌─────┬─────┐
+ * │  1  │  2  │
+ * ├─────┼─────┤
+ * │  3  │  4  │
+ * └─────┴─────┘
+ */
+
+.ping-layout-4 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+/* 5 immagini
+ *
+ * ┌───────────┬─────┬─────┐
+ * │           │  2  │  3  │
+ * │     1     ├─────┼─────┤
+ * │           │  4  │  5  │
+ * └───────────┴─────┴─────┘
+ */
+
+.ping-layout-5 {
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.ping-layout-5 .ping-media-item:nth-child(1) {
+	grid-column: 1 / 3;
+	grid-row: 1 / 3;
+}
+
+.ping-layout-5 .ping-media-item:nth-child(2) {
+	grid-column: 3;
+	grid-row: 1;
+}
+
+.ping-layout-5 .ping-media-item:nth-child(3) {
+	grid-column: 4;
+	grid-row: 1;
+}
+
+.ping-layout-5 .ping-media-item:nth-child(4) {
+	grid-column: 3;
+	grid-row: 2;
+}
+
+.ping-layout-5 .ping-media-item:nth-child(5) {
+	grid-column: 4;
+	grid-row: 2;
+}
+
+/* 6 immagini
+ *
+ * ┌─────┬─────┬─────┐
+ * │  1  │  2  │  3  │
+ * ├─────┼─────┼─────┤
+ * │  4  │  5  │  6  │
+ * └─────┴─────┴─────┘
+ */
+
+.ping-layout-6 {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+/* 7 immagini
+ *
+ * ┌─────┬─────┬─────┬─────┐
+ * │     │  2  │  3  │  4  │
+ * │  1  ├─────┼─────┼─────┤
+ * │     │  5  │  6  │  7  │
+ * └─────┴─────┴─────┴─────┘
+ */
+
+.ping-layout-7 {
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.ping-layout-7 .ping-media-item:nth-child(1) {
+	grid-column: 1;
+	grid-row: 1 / 3;
+}
+
+.ping-layout-7 .ping-media-item:nth-child(2) {
+	grid-column: 2;
+	grid-row: 1;
+}
+
+.ping-layout-7 .ping-media-item:nth-child(3) {
+	grid-column: 3;
+	grid-row: 1;
+}
+
+.ping-layout-7 .ping-media-item:nth-child(4) {
+	grid-column: 4;
+	grid-row: 1;
+}
+
+.ping-layout-7 .ping-media-item:nth-child(5) {
+	grid-column: 2;
+	grid-row: 2;
+}
+
+.ping-layout-7 .ping-media-item:nth-child(6) {
+	grid-column: 3;
+	grid-row: 2;
+}
+
+.ping-layout-7 .ping-media-item:nth-child(7) {
+	grid-column: 4;
+	grid-row: 2;
+}
+
+/* 8 immagini
+ *
+ * ┌─────┬─────┬─────┬─────┐
+ * │  1  │  2  │  3  │  4  │
+ * ├─────┼─────┼─────┼─────┤
+ * │  5  │  6  │  7  │  8  │
+ * └─────┴─────┴─────┴─────┘
+ */
+
+.ping-layout-8 {
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+/* 9 immagini
+ *
+ * ┌─────┬─────┬─────┐
+ * │  1  │  2  │  3  │
+ * ├─────┼─────┼─────┤
+ * │  4  │  5  │  6  │
+ * ├─────┼─────┼─────┤
+ * │  7  │  8  │  9  │
+ * └─────┴─────┴─────┘
+ */
+
+.ping-layout-9 {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+/* 10 immagini
+ *
+ * ┌─────────┬─────┬─────┬─────┐
+ * │         │  2  │  3  │  4  │
+ * │    1    ├─────┼─────┼─────┤
+ * │         │  5  │  6  │  7  │
+ * │         ├─────┼─────┼─────┤
+ * │         │  8  │  9  │ 10  │
+ * └─────────┴─────┴─────┴─────┘
+ */
+
+.ping-layout-10 {
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+.ping-layout-10 .ping-media-item:nth-child(1) {
+	grid-column: 1;
+	grid-row: 1 / 4;
+}
+
+.ping-layout-10 .ping-media-item:nth-child(2) {
+	grid-column: 2;
+	grid-row: 1;
+}
+
+.ping-layout-10 .ping-media-item:nth-child(3) {
+	grid-column: 3;
+	grid-row: 1;
+}
+
+.ping-layout-10 .ping-media-item:nth-child(4) {
+	grid-column: 4;
+	grid-row: 1;
+}
+
+.ping-layout-10 .ping-media-item:nth-child(5) {
+	grid-column: 2;
+	grid-row: 2;
+}
+
+.ping-layout-10 .ping-media-item:nth-child(6) {
+	grid-column: 3;
+	grid-row: 2;
+}
+
+.ping-layout-10 .ping-media-item:nth-child(7) {
+	grid-column: 4;
+	grid-row: 2;
+}
+
+.ping-layout-10 .ping-media-item:nth-child(8) {
+	grid-column: 2;
+	grid-row: 3;
+}
+
+.ping-layout-10 .ping-media-item:nth-child(9) {
+	grid-column: 3;
+	grid-row: 3;
+}
+
+.ping-layout-10 .ping-media-item:nth-child(10) {
+	grid-column: 4;
+	grid-row: 3;
+}
+
+/* Elementi della galleria */
+
+.ping-media-item {
+	position: relative;
+	display: block;
+
+	min-width: 0;
+	min-height: 0;
+
+	overflow: hidden;
+	background: #f1f3f4;
+	border-radius: 6px;
+}
+
+.ping-media-item img {
+	display: block;
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+	object-position: center;
+
+	transition: transform .2s ease;
+}
+
+.ping-media-item:hover img {
+	transform: scale(1.02);
+}
+
+/* PDF */
+
+.ping-document-item {
+	background: linear-gradient(180deg,#ffffff,#f8f9fb);
+	border: 1px solid #dfe5e8;
+}
+
+.ping-document-item:hover {
+	border-color: var(--mv-primary);
+	box-shadow: 0 4px 14px rgba(0,0,0,.08);
+}
+
+.ping-document-link {
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+
+	width:100%;
+	height:100%;
+
+	padding:18px;
+
+	color:inherit;
+	text-decoration:none;
+}
+
+.ping-document-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 84px;
+	height: 84px;
+
+	margin: 0 auto 16px;
+
+	font-size: 64px;
+	color: #dc2626;
+}
+
+.ping-document-body{
+	width:100%;
+	text-align:center;
+}
+
+.ping-document-title{
+	font-size:14px;
+	font-weight:600;
+	line-height:1.35;
+
+	display:-webkit-box;
+	-webkit-line-clamp:2;
+	-webkit-box-orient:vertical;
+
+	overflow:hidden;
+}
+
+.ping-document-meta{
+	margin-top:8px;
+
+	font-size:12px;
+	color:#8b9096;
+
+	text-transform:uppercase;
+	letter-spacing:.05em;
+}
+
+.ping-lightbox {
+	position: fixed;
+	inset: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	padding: 32px;
+
+	background: rgba(0, 0, 0, .88);
+
+	opacity: 0;
+	visibility: hidden;
+
+	transition:
+		opacity .18s ease,
+		visibility .18s ease;
+
+	z-index: 9999;
+}
+
+.ping-lightbox.is-open {
+	opacity: 1;
+	visibility: visible;
+}
+
+.ping-lightbox-content {
+	position: relative;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: auto;
+	height: auto;
+	max-width: 95vw;
+	max-height: 95vh;
+}
+
+.ping-lightbox-image {
+	display: block;
+
+	max-width: 95vw;
+	max-height: 95vh;
+
+	border-radius: 8px;
+
+	box-shadow: 0 10px 40px rgba(0,0,0,.45);
+}
+
+.ping-lightbox-arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 48px;
+	height: 48px;
+
+	border: 0;
+	border-radius: 8px;
+
+	background: rgba(0, 0, 0, .35);
+	backdrop-filter: blur(6px);
+
+	color: #fff;
+	font-size: 28px;
+	line-height: 1;
+
+	cursor: pointer;
+
+	transition:
+		background .15s ease,
+		transform .15s ease,
+		opacity .15s ease;
+
+	z-index: 20;
+}
+
+.ping-lightbox-arrow:hover {
+	background: rgba(0, 0, 0, .55);
+}
+
+.ping-lightbox-arrow:active {
+	transform: translateY(-50%) scale(.96);
+}
+
+.ping-lightbox-arrow-prev {
+	left: 24px;
+}
+
+.ping-lightbox-arrow-next {
+	right: 24px;
+}
+
+.ping-lightbox-arrow:focus-visible {
+	outline: 2px solid #42b992;
+	outline-offset: 3px;
+}
+
+.ping-lightbox-thumbnails {
+	display: flex;
+	gap: 8px;
+
+	position: absolute;
+	left: 50%;
+	bottom: 24px;
+
+	transform: translateX(-50%);
+
+	max-width: calc(100vw - 140px);
+
+	padding: 8px;
+
+	overflow-x: auto;
+	overflow-y: hidden;
+
+	scrollbar-width: thin;
+}
+
+.ping-lightbox-thumbnail {
+	width: 64px;
+	height: 64px;
+
+	flex: 0 0 auto;
+
+	object-fit: cover;
+
+	border-radius: 6px;
+
+	cursor: pointer;
+
+	opacity: .55;
+
+	border: 2px solid transparent;
+
+	transition:
+		opacity .15s ease,
+		border-color .15s ease,
+		transform .15s ease;
+}
+
+.ping-lightbox-thumbnail:hover {
+	opacity: .9;
+	transform: translateY(-2px);
+}
+
+.ping-lightbox-thumbnail.is-active {
+	opacity: 1;
+	border-color: #42b992;
+}
+
+.ping-lightbox-image {
+	transition:
+		opacity .15s ease,
+		transform .15s ease;
+}
+
+.ping-lightbox-image.is-loading {
+	opacity: 0;
+	transform: scale(.98);
+}
+
+/* ==========================================================
+   Video
+   ========================================================== */
+
+.ping-video {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 12px;
+	background: #000;
+}
+
+/* Audio singolo: nessun aspect-ratio da galleria */
+
+.ping-media.ping-layout-1:has(> .ping-audio-item) {
+	aspect-ratio: auto;
+	overflow: visible;
+}
+
+/* ==========================================================
+   Audio Player
+   ========================================================== */
+
+.ping-audio-item {
+	width: 100%;
+	min-width: 0;
+
+	overflow: visible;
+	background: transparent;
+	border-radius: 12px;
+}
+
+.ping-audio-player {
+	position: relative;
+
+	display: grid;
+	gap: 0;
+
+	width: 100%;
+	min-width: 0;
+
+	overflow: hidden;
+
+	border: 1px solid #dde3e6;
+	border-radius: 14px;
+
+	background:
+		linear-gradient(
+			135deg,
+			rgba(66, 185, 146, .08),
+			rgba(255, 255, 255, .98) 42%,
+			#fff
+		);
+
+	box-shadow:
+		0 8px 24px rgba(20, 32, 38, .06);
+}
+
+.ping-audio-engine {
+	position: absolute;
+
+	width: 1px;
+	height: 1px;
+
+	opacity: 0;
+	pointer-events: none;
+}
+
+
+/* Header */
+
+.ping-audio-top {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 12px;
+
+	padding: 14px 15px 11px;
+}
+
+.ping-audio-play {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 46px;
+	width: 46px;
+	height: 46px;
+
+	padding: 0;
+
+	border: 0;
+	border-radius: 50%;
+
+	background: var(--mv-primary);
+
+	color: #fff;
+	font-size: 16px;
+	line-height: 1;
+
+	cursor: pointer;
+
+	box-shadow:
+		0 5px 14px rgba(66, 185, 146, .28);
+
+	transition:
+		transform .15s ease,
+		box-shadow .15s ease,
+		background .15s ease;
+}
+
+.ping-audio-play:hover {
+	transform: translateY(-1px);
+
+	box-shadow:
+		0 7px 18px rgba(66, 185, 146, .34);
+}
+
+.ping-audio-play:active {
+	transform: scale(.96);
+}
+
+.ping-audio-play i {
+	margin-left: 2px;
+}
+
+.ping-audio-play.is-playing i {
+	margin-left: 0;
+}
+
+
+/* Info */
+
+.ping-audio-info {
+	min-width: 0;
+}
+
+.ping-audio-title {
+	min-width: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: #22272b;
+
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+.ping-audio-meta {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	margin-top: 4px;
+
+	color: #7c858c;
+
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: .035em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.ping-audio-meta span + span::before {
+	content: "•";
+	margin-right: 8px;
+
+	color: #b2b8bd;
+}
+
+
+/* Tempo */
+
+.ping-audio-time {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	flex: 0 0 auto;
+
+	color: #687178;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 10px;
+	font-weight: 650;
+	line-height: 1;
+}
+
+
+/* Waveform */
+
+.ping-audio-waveform {
+	position: relative;
+
+	height: 84px;
+	margin: 0 15px;
+
+	overflow: hidden;
+
+	border-radius: 9px;
+	background:
+		linear-gradient(
+			180deg,
+			#f6f8f9,
+			#edf1f2
+		);
+
+	cursor: pointer;
+}
+
+.ping-audio-waveform-fallback {
+	position: absolute;
+	inset: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+
+	color: #899298;
+
+	font-size: 11px;
+	font-weight: 600;
+
+	pointer-events: none;
+
+	z-index: 1;
+}
+
+.ping-audio-waveform-fallback i {
+	color: var(--mv-primary);
+	font-size: 15px;
+	opacity: .65;
+}
+
+.ping-audio-waveform::before {
+	content: "";
+
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+
+	height: 1px;
+
+	background: rgba(60, 72, 79, .08);
+}
+
+.ping-audio-waveform-image {
+	position: absolute;
+	inset: 0;
+
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: fill;
+	object-position: center;
+
+	filter:
+		brightness(0)
+		opacity(.48);
+
+	transform: none !important;
+	transition: none;
+
+	pointer-events: none;
+
+	z-index: 1;
+}
+
+.ping-audio-waveform-image-progress {
+	filter:
+		brightness(0)
+		saturate(100%)
+		invert(63%)
+		sepia(22%)
+		saturate(1038%)
+		hue-rotate(111deg)
+		brightness(93%)
+		contrast(88%);
+
+	opacity: 1;
+}
+
+.ping-audio-item:hover .ping-audio-waveform-image {
+	transform: none !important;
+}
+
+.ping-audio-waveform-progress {
+	position: absolute;
+	inset: 0 auto 0 0;
+
+	width: 0%;
+
+	overflow: hidden;
+
+	background: transparent;
+
+	border-right: 2px solid var(--mv-primary);
+
+	pointer-events: none;
+
+	z-index: 2;
+}
+
+
+/* Bottom */
+
+.ping-audio-bottom {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	padding: 10px 15px 13px;
+}
+
+.ping-audio-volume {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 28px;
+	width: 28px;
+	height: 28px;
+
+	padding: 0;
+
+	border: 0;
+	border-radius: 6px;
+
+	background: transparent;
+
+	color: #667078;
+	font-size: 12px;
+
+	cursor: pointer;
+
+	transition:
+		background .15s ease,
+		color .15s ease;
+}
+
+.ping-audio-volume:hover {
+	background: #f0f3f4;
+	color: var(--mv-primary);
+}
+
+.ping-audio-volume-range {
+	width: 100px;
+	height: 3px;
+
+	margin: 0;
+
+	accent-color: var(--mv-primary);
+
+	cursor: pointer;
+}
+
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+	.ping-audio-top {
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: 10px;
+
+		padding: 12px 12px 9px;
+	}
+
+	.ping-audio-play {
+		width: 42px;
+		height: 42px;
+
+		flex-basis: 42px;
+
+		font-size: 14px;
+	}
+
+	.ping-audio-time {
+		grid-column: 2;
+		margin-top: -3px;
+
+		justify-self: start;
+	}
+
+	.ping-audio-waveform {
+		height: 72px;
+		margin-left: 12px;
+		margin-right: 12px;
+	}
+
+	.ping-audio-bottom {
+		padding:
+			9px
+			12px
+			12px;
+	}
+
+	.ping-audio-volume-range {
+		width: 86px;
+	}
+
+}
+
+/* ==========================================================
+   Audio tracklist
+   ========================================================== */
+
+.ping-audio-tracklist {
+	border-top: 1px solid #edf0f2;
+	background: #fbfcfd;
+}
+
+.ping-audio-tracklist-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	padding: 11px 14px;
+
+	color: #3f464c;
+
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1;
+
+	cursor: pointer;
+	list-style: none;
+}
+
+.ping-audio-tracklist-toggle::-webkit-details-marker {
+	display: none;
+}
+
+.ping-audio-tracklist-toggle::marker {
+	display: none;
+	content: "";
+}
+
+.ping-audio-tracklist-toggle > span {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+}
+
+.ping-audio-tracklist-toggle > span i {
+	color: var(--mv-primary);
+	font-size: 11px;
+}
+
+.ping-audio-tracklist-chevron {
+	flex: 0 0 auto;
+
+	color: #8a9298;
+	font-size: 10px;
+
+	transition: transform .18s ease;
+}
+
+.ping-audio-tracklist[open]
+.ping-audio-tracklist-chevron {
+	transform: rotate(180deg);
+}
+
+.ping-audio-tracklist-content {
+	padding: 0 14px 13px;
+
+	color: #596168;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 11px;
+	line-height: 1.7;
+
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+.ping-audio-tracklist[open]
+.ping-audio-tracklist-content {
+	border-top: 1px solid #edf0f2;
+	padding-top: 11px;
+}
+
+@media (max-width: 640px) {
+
+	.ping-audio-tracklist-toggle {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+
+	.ping-audio-tracklist-content {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+	.ping-card,
+	.ping-composer {
+		padding: 14px;
+	}
+
+	.ping-avatar {
+		flex-basis: 42px;
+		width: 42px;
+		height: 42px;
+	}
+
+	.ping-composer .ping-avatar {
+		flex-basis: 42px;
+	}
+
+	.ping-composer-header {
+		gap: 12px;
+	}
+
+	.ping-composer-submit {
+		min-width: 100px;
+	}
+
+	.ping-actions {
+		gap: 8px;
+	}
+
+	.pong-card {
+		margin-left: 0;
+		padding: 14px;
+	}
+
+	.pong-avatar {
+		flex-basis: 34px;
+		width: 34px;
+		height: 34px;
+	}
+
+	.ping-link-preview {
+		display: block;
+	}
+
+	.ping-link-image-wrapper {
+		width: 100%;
+		min-height: 0;
+		height: 180px;
+
+		border-right: 0;
+		border-bottom: 1px solid #e4e8ea;
+	}
+
+	.ping-link-image {
+		min-height: 0;
+		height: 180px;
+	}
+
+	.ping-link-body {
+		padding: 13px 14px 14px;
+	}
+
+	.ping-link-title {
+		white-space: normal;
+
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+	}
+
+	.ping-more-dropdown {
+		left: 0;
+		width: min(220px, calc(100vw - 48px));
+	}
+}
+
+/* ==========================================================
+   Ping Layout
+   ========================================================== */
+
+.ping-page-layout {
+	   display: grid;
+	   grid-template-columns: minmax(0, 880px) 310px;
+	   gap: 28px;
+
+	   align-items: start;
+	   justify-content: center;
+
+	   max-width: 1280px;
+	   margin: 0 auto;
+}
+
+.ping-feed {
+	min-width: 0;
+}
+
+.ping-sidebar {
+	position: sticky;
+	top: 128px;
+	align-self: start;
+
+	max-height: calc(100vh - 140px);
+
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	overscroll-behavior: contain;
+
+	/* Firefox */
+	scrollbar-width: none;
+
+	/* Edge Legacy / IE */
+	-ms-overflow-style: none;
+}
+
+/* Safari / Chrome / Edge Chromium / altri WebKit */
+.ping-sidebar::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+	display: none;
+	background: transparent;
+}
+
+.ping-sidebar .card {
+	margin-bottom: 16px;
+}
+
+.ping-widget-area-sidebar {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 14px;
+	width: 100%;
+	min-width: 0;
+}
+
+.ping-widget-area-sidebar .mv-widget,
+.ping-widget-area-sidebar .mv-block-width-12,
+.ping-widget-area-sidebar .mv-block-width-9,
+.ping-widget-area-sidebar .mv-block-width-8,
+.ping-widget-area-sidebar .mv-block-width-6,
+.ping-widget-area-sidebar .mv-block-width-4,
+.ping-widget-area-sidebar .mv-block-width-3 {
+	grid-column: 1 / -1;
+	width: 100%;
+}
+
+@media (max-width: 1200px) {
+
+	.ping-page-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.ping-feed {
+		grid-column: 1;
+		grid-row: 2;
+	}
+
+	.ping-sidebar-right {
+		display: block;
+
+		position: static;
+		top: auto;
+
+		grid-column: 1;
+		grid-row: 1;
+
+		width: 100%;
+		margin-bottom: 18px;
+	}
+
+	.ping-sidebar-left {
+		display: none;
+	}
+
+	.ping-sidebar-desktop {
+		display: none;
+	}
+
+	.ping-sidebar-mobile {
+		display: block;
+
+		width: 100%;
+
+		border: 1px solid #dfe3e6;
+		border-radius: 10px;
+
+		background: #fff;
+
+		overflow: hidden;
+	}
+
+	.ping-sidebar-mobile > summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+
+		min-height: 46px;
+		padding: 0 14px;
+
+		color: #3f454a;
+
+		font-size: 13px;
+		font-weight: 700;
+		line-height: 1;
+
+		cursor: pointer;
+		list-style: none;
+		user-select: none;
+	}
+
+	.ping-sidebar-mobile > summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.ping-sidebar-mobile > summary::marker {
+		display: none;
+		content: "";
+	}
+
+	.ping-sidebar-mobile > summary > span {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.ping-sidebar-mobile > summary i {
+		color: #737b82;
+		font-size: 12px;
+	}
+
+	.ping-sidebar-mobile-chevron {
+		transition: transform .16s ease;
+	}
+
+	.ping-sidebar-mobile[open]
+	.ping-sidebar-mobile-chevron {
+		transform: rotate(180deg);
+	}
+
+	.ping-sidebar-mobile-content {
+		padding: 14px;
+
+		border-top: 1px solid #edf0f2;
+
+		background: #fafbfb;
+	}
+
+	.ping-sidebar-mobile
+	.ping-widget-area-sidebar {
+		gap: 14px;
+	}
+
+}
+
+@media (min-width: 1201px) {
+
+	.ping-sidebar-mobile {
+		display: none;
+	}
+
+	.ping-sidebar-desktop {
+		display: block;
+	}
+
+}
+
+/* ===========================
+   Chanzine Ping Avatar
+=========================== */
+
+.ping-avatar.ping-avatar-chanzine {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 44px;
+	width: 44px;
+	height: 44px;
+	border: 1px solid rgba(66, 185, 146, 0.25);
+	border-radius: 10px;
+	background: rgba(66, 185, 146, 0.12);
+	color: var(--brand-primary);
+	text-decoration: none;
+}
+
+.ping-avatar.ping-avatar-chanzine i {
+	display: block;
+	color: inherit;
+	font-size: 20px;
+	line-height: 1;
+}
+
+.ping-avatar.ping-avatar-chanzine:hover {
+	background: rgba(66, 185, 146, 0.18);
+	color: var(--brand-primary);
+}
+
+.ping-username-chanzine {
+	color: var(--brand-primary);
+	font-weight: 700;
+}
+
+/* ==========================================================
+   Report Modal
+   ========================================================== */
+
+.mv-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 10000;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	padding: 24px;
+}
+
+.mv-modal[hidden] {
+	display: none;
+}
+
+.mv-modal-backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(0,0,0,.55);
+	backdrop-filter: blur(2px);
+}
+
+.mv-modal-dialog {
+	position: relative;
+	z-index: 1;
+
+	width: 100%;
+	max-width: 560px;
+
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0 18px 60px rgba(0,0,0,.25);
+
+	overflow: hidden;
+}
+
+.mv-modal-header,
+.mv-modal-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 18px 22px;
+}
+
+.mv-modal-header {
+	border-bottom: 1px solid #edf0f2;
+}
+
+.mv-modal-header h3 {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	margin: 0;
+
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.mv-modal-body {
+	padding: 22px;
+}
+
+.mv-modal-footer {
+	gap: 10px;
+	justify-content: flex-end;
+
+	border-top: 1px solid #edf0f2;
+}
+
+.mv-modal-close {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 34px;
+	height: 34px;
+
+	margin: 0;
+	padding: 0;
+
+	border: 0;
+	border-radius: 6px;
+
+	background: transparent;
+
+	font-size: 24px;
+	line-height: 1;
+
+	color: #666;
+	cursor: pointer;
+}
+
+.mv-modal-close:hover {
+	background: #f3f5f6;
+	color: #222;
+}
+
+.report-help {
+	margin: 0 0 18px;
+	color: #666;
+	font-size: 14px;
+}
+
+.report-reasons {
+	display: grid;
+	gap: 10px;
+}
+
+.report-option {
+	display: block;
+	cursor: pointer;
+}
+
+.report-option input {
+	display: none;
+}
+
+.report-option span {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+
+	padding: 13px 15px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 8px;
+
+	background: #fff;
+
+	font-weight: 500;
+
+	transition:
+		border-color .15s ease,
+		background .15s ease,
+		color .15s ease;
+}
+
+.report-option:hover span {
+	border-color: var(--mv-primary);
+	background: rgba(66,185,146,.05);
+}
+
+.report-option input:checked + span {
+	border-color: var(--mv-primary);
+	background: rgba(66,185,146,.10);
+	color: var(--mv-primary);
+	font-weight: 600;
+}
+
+#report-description-group {
+	margin-top: 18px;
+}
+
+#report-description {
+	width: 100%;
+	min-height: 110px;
+
+	padding: 12px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 8px;
+
+	font: inherit;
+
+	resize: vertical;
+
+	box-sizing: border-box;
+}
+
+#report-description:focus {
+	outline: none;
+	border-color: var(--mv-primary);
+	box-shadow: 0 0 0 3px rgba(66,185,146,.12);
+}
+
+@media (max-width: 640px) {
+
+	.mv-modal {
+		padding: 14px;
+	}
+
+	.mv-modal-header,
+	.mv-modal-body,
+	.mv-modal-footer {
+		padding: 16px;
+	}
+
+}
+
+/* ==========================================================
+   Ricerca Ping
+   ========================================================== */
+
+.ping-search {
+	display: grid;
+	gap: 10px;
+
+	margin: 0 0 16px;
+	padding: 14px;
+
+	border: 1px solid #e2e5e8;
+	border-radius: 8px;
+
+	background: #fff;
+}
+
+.ping-search-field {
+	position: relative;
+}
+
+.ping-search-field > i {
+	position: absolute;
+	top: 50%;
+	left: 14px;
+	z-index: 1;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 14px;
+	height: 14px;
+
+	color: #8a9299;
+	font-size: 12px;
+	line-height: 1;
+
+	pointer-events: none;
+
+	transform: translateY(-50%);
+}
+
+.ping-search-field input {
+	display: block;
+
+	width: 100%;
+	height: 40px;
+
+	margin: 0;
+	padding: 0 12px 0 42px;
+
+	box-sizing: border-box;
+
+	border: 1px solid #d8dde1;
+	border-radius: 7px;
+	outline: 0;
+
+	background: #fff;
+	color: #25292d;
+
+	font: inherit;
+	font-size: 13px;
+	line-height: 40px;
+}
+
+.ping-search-field input[type="search"] {
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.ping-search-field input[type="search"]::-webkit-search-decoration,
+.ping-search-field input[type="search"]::-webkit-search-cancel-button,
+.ping-search-field input[type="search"]::-webkit-search-results-button,
+.ping-search-field input[type="search"]::-webkit-search-results-decoration {
+	display: none;
+	-webkit-appearance: none;
+}
+
+.ping-search-field input::placeholder {
+	color: #92999f;
+}
+
+.ping-search-field input:focus {
+	border-color: var(--mv-primary);
+
+	box-shadow:
+		0 0 0 3px rgba(66, 185, 146, .10);
+}
+
+.ping-search > button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 7px;
+
+	width: 100%;
+	min-height: 36px;
+
+	margin: 0;
+	padding: 0 12px;
+
+	border: 1px solid #d8dde1;
+	border-radius: 7px;
+
+	background: #f6f7f8;
+	box-shadow: none;
+
+	color: #626970;
+
+	font: inherit;
+	font-size: 13px;
+	font-weight: 600;
+
+	cursor: pointer;
+
+	transition:
+		background-color .15s ease,
+		border-color .15s ease,
+		color .15s ease;
+}
+
+.ping-search > button:hover {
+	border-color: #bfc6cb;
+	background: #eef1f2;
+	color: var(--mv-primary);
+}
+
+.ping-search > button:focus-visible {
+	outline: 2px solid var(--mv-primary);
+	outline-offset: 2px;
+}

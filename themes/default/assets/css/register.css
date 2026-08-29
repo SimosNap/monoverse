@@ -1,0 +1,472 @@
+.mv-register-page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 48px 24px 72px;
+}
+
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.mv-register-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 470px);
+    align-items: center;
+    gap: 42px;
+
+    margin-bottom: 28px;
+    padding: 38px 40px;
+
+    border: 1px solid var(--mv-border);
+    border-radius: 20px;
+
+    background: var(--mv-surface);
+
+    box-shadow:
+        0 14px 36px rgba(15, 23, 42, 0.06),
+        0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.mv-register-hero-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 0;
+}
+
+.mv-register-hero-copy {
+    min-width: 0;
+}
+
+.mv-register-hero-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    width: 56px;
+    height: 56px;
+
+    border: 1px solid var(--mv-border);
+    border-radius: 15px;
+
+    background: var(--mv-surface-soft);
+    color: var(--mv-text);
+
+    font-size: 23px;
+}
+
+.mv-register-hero h1 {
+    margin: 0;
+
+    color: var(--mv-text);
+
+    font-size: clamp(30px, 3.4vw, 42px);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+}
+
+.mv-register-hero p {
+    margin: 10px 0 0;
+    max-width: 520px;
+
+    color: var(--mv-text-muted);
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.mv-register-hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+}
+
+.mv-register-hero-visual img {
+    display: block;
+
+    width: 100%;
+    max-width: 470px;
+    height: auto;
+
+    object-fit: contain;
+}
+
+
+/* ==========================================================================
+   Information cards
+   ========================================================================== */
+
+.mv-register-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+
+    margin-bottom: 24px;
+}
+
+.mv-register-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+
+    min-width: 0;
+    padding: 26px;
+
+    border: 1px solid var(--mv-border);
+    border-radius: 18px;
+
+    background: var(--mv-surface);
+
+    box-shadow:
+        0 8px 24px rgba(15, 23, 42, 0.045),
+        0 1px 4px rgba(15, 23, 42, 0.025);
+}
+
+.mv-register-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 12px;
+
+    background: var(--mv-surface-soft);
+    color: var(--mv-text);
+
+    font-size: 18px;
+}
+
+.mv-register-card h2,
+.mv-register-features h2,
+.mv-register-actions h2 {
+    margin: 0;
+
+    color: var(--mv-text);
+
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.mv-register-card p {
+    margin: 10px 0 0;
+
+    color: var(--mv-text-muted);
+
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.mv-register-card p + p {
+    margin-top: 9px;
+}
+
+
+/* ==========================================================================
+   Features
+   ========================================================================== */
+
+.mv-register-features {
+    margin-bottom: 24px;
+    padding: 28px;
+
+    border: 1px solid var(--mv-border);
+    border-radius: 18px;
+
+    background: var(--mv-surface);
+
+    box-shadow:
+        0 8px 24px rgba(15, 23, 42, 0.045),
+        0 1px 4px rgba(15, 23, 42, 0.025);
+}
+
+.mv-register-features ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 24px;
+
+    margin: 22px 0 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.mv-register-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
+
+    color: var(--mv-text);
+
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1.4;
+}
+
+.mv-register-features li i {
+    flex: 0 0 auto;
+
+    font-size: 14px;
+
+    opacity: 0.75;
+}
+
+
+/* ==========================================================================
+   Actions
+   ========================================================================== */
+
+.mv-register-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+
+    padding: 28px;
+
+    border: 1px solid var(--mv-border);
+    border-radius: 18px;
+
+    background: var(--mv-surface);
+
+    box-shadow:
+        0 8px 24px rgba(15, 23, 42, 0.045),
+        0 1px 4px rgba(15, 23, 42, 0.025);
+}
+
+.mv-register-actions > div:first-child {
+    min-width: 0;
+}
+
+.mv-register-actions p {
+    margin: 9px 0 0;
+    max-width: 620px;
+
+    color: var(--mv-text-muted);
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.mv-register-action-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    flex: 0 0 auto;
+}
+
+.mv-register-login,
+.mv-register-create {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 42px;
+    padding: 0 15px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1;
+
+    text-decoration: none;
+
+    transition:
+        background-color 0.16s ease,
+        border-color 0.16s ease,
+        color 0.16s ease,
+        opacity 0.16s ease,
+        transform 0.16s ease;
+}
+
+.mv-register-login {
+    border: 1px solid var(--mv-border);
+
+    background: var(--mv-surface-soft);
+    color: var(--mv-text);
+}
+
+.mv-register-login:hover {
+    border-color: var(--mv-border-strong, var(--mv-border));
+
+    background: var(--mv-surface);
+
+    transform: translateY(-1px);
+}
+
+.mv-register-create {
+    border: 1px solid var(--mv-text);
+
+    background: var(--mv-text);
+    color: var(--mv-surface);
+}
+
+.mv-register-create:hover {
+    opacity: 0.92;
+
+    transform: translateY(-1px);
+}
+
+.mv-register-login:focus-visible,
+.mv-register-create:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+
+/* ==========================================================================
+   Tablet
+   ========================================================================== */
+
+@media (max-width: 860px) {
+
+    .mv-register-page {
+        padding: 34px 18px 54px;
+    }
+
+    .mv-register-hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 26px;
+
+        padding: 32px;
+    }
+
+    .mv-register-hero-visual img {
+        width: min(100%, 560px);
+        max-width: 560px;
+    }
+
+    .mv-register-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .mv-register-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .mv-register-action-links {
+        width: 100%;
+    }
+
+    .mv-register-login,
+    .mv-register-create {
+        flex: 1 1 220px;
+    }
+}
+
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+
+@media (max-width: 620px) {
+
+    .mv-register-page {
+        padding: 24px 14px 44px;
+    }
+
+    .mv-register-hero {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: stretch;
+        gap: 22px;
+
+        margin-bottom: 20px;
+        padding: 22px;
+
+        border-radius: 16px;
+    }
+
+    .mv-register-hero-content {
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .mv-register-hero-icon {
+        width: 48px;
+        height: 48px;
+
+        border-radius: 13px;
+
+        font-size: 20px;
+    }
+
+    .mv-register-hero h1 {
+        font-size: 28px;
+        line-height: 1.08;
+    }
+
+    .mv-register-hero p {
+        margin-top: 8px;
+
+        font-size: 14px;
+    }
+
+    .mv-register-hero-visual {
+        width: 100%;
+    }
+
+    .mv-register-hero-visual img {
+        width: 100%;
+        max-width: 440px;
+        margin: 0 auto;
+    }
+
+    .mv-register-grid {
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .mv-register-card,
+    .mv-register-features,
+    .mv-register-actions {
+        padding: 22px;
+
+        border-radius: 16px;
+    }
+
+    .mv-register-card {
+        gap: 14px;
+    }
+
+    .mv-register-features {
+        margin-bottom: 16px;
+    }
+
+    .mv-register-features ul {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 11px;
+    }
+
+    .mv-register-actions {
+        gap: 20px;
+    }
+
+    .mv-register-action-links {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .mv-register-login,
+    .mv-register-create {
+        width: 100%;
+
+        flex: none;
+    }
+}

@@ -1,0 +1,25 @@
+# Runtime cache
+storage/cache/*
+!storage/cache/.gitkeep
+
+# Runtime uploaded media
+storage/media/audio/*
+!storage/media/audio/.gitkeep
+
+storage/media/images/*
+!storage/media/images/.gitkeep
+
+storage/media/videos/*
+!storage/media/videos/.gitkeep
+
+# Runtime Chanzine uploads
+storage/chanzine/*
+
+# Runtime logs
+storage/*.log
+
+# Local runtime configuration
+config/database.php
+config/oauth.php
+storage/installed.lock
+

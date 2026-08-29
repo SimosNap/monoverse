@@ -1,0 +1,10 @@
+{
+  "id": "community",
+  "name": "Community",
+  "description": "Edition per creare un sito IRC orientato alla community.",
+  "version": "0.1.0",
+  "author": "SimosNap",
+  "website": "https://monoverse.org",
+  "icon": "comments",
+  "modules": []
+}

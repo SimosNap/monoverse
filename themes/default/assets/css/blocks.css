@@ -1,0 +1,89 @@
+/* ==========================================================
+   Blocks — struttura comune
+   ========================================================== */
+
+.mv-widget {
+    grid-column: span 12;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 22px;
+    border: 1px solid var(--mv-border);
+    border-radius: 16px;
+    background: var(--mv-surface);
+    box-shadow:
+        0 8px 24px rgba(17, 24, 39, .035);
+}
+
+.mv-widget-title {
+    margin: 0 0 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--mv-border);
+    color: var(--mv-text);
+    font-size: 18px;
+    font-weight: 750;
+    line-height: 1.3;
+}
+
+.mv-widget-content {
+    min-width: 0;
+    color: var(--mv-muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.mv-widget-content > :first-child {
+    margin-top: 0;
+}
+
+.mv-widget-content > :last-child {
+    margin-bottom: 0;
+}
+
+.mv-block-width-12 {
+    grid-column: span 12;
+}
+
+.mv-block-width-9 {
+    grid-column: span 9;
+}
+
+.mv-block-width-8 {
+    grid-column: span 8;
+}
+
+.mv-block-width-6 {
+    grid-column: span 6;
+}
+
+.mv-block-width-4 {
+    grid-column: span 4;
+}
+
+.mv-block-width-3 {
+    grid-column: span 3;
+}
+
+@media (max-width: 900px) {
+
+    .mv-block-width-9,
+    .mv-block-width-8,
+    .mv-block-width-6,
+    .mv-block-width-4,
+    .mv-block-width-3 {
+        grid-column: span 12;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .mv-widget {
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .mv-widget-title {
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+        font-size: 17px;
+    }
+}

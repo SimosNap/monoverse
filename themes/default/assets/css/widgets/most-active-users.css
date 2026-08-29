@@ -1,0 +1,298 @@
+/* ==========================================================
+   Block — Utenti più attivi
+   ========================================================== */
+
+.mv-most-active-users-widget {
+	display: grid;
+	width: 100%;
+	max-width: none;
+	box-sizing: border-box;
+	gap: 12px;
+}
+
+/* ==========================================================
+   Header
+   ========================================================== */
+
+.mv-most-active-users-header {
+	padding-bottom: 10px;
+	border-bottom: 1px solid var(--mv-border);
+}
+
+.mv-most-active-users-header h3 {
+	margin: 0;
+	color: var(--mv-text);
+	font-size: 16px;
+	font-weight: 850;
+	line-height: 1.25;
+	letter-spacing: -.02em;
+}
+
+/* ==========================================================
+   Lista
+   ========================================================== */
+
+.mv-most-active-users-list {
+	display: grid;
+	width: 100%;
+	gap: 7px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.mv-most-active-users-item {
+	display: block;
+	width: 100%;
+	min-width: 0;
+}
+
+/* ==========================================================
+   Riga utente
+   ========================================================== */
+
+.mv-most-active-users-user {
+	position: relative;
+
+	display: flex;
+	align-items: center;
+
+	width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+
+	gap: 8px;
+	padding: 7px 24px 7px 2px;
+
+	border-radius: 9px;
+
+	color: var(--mv-text);
+	text-decoration: none;
+
+	transition:
+		background-color .16s ease,
+		color .16s ease;
+}
+
+.mv-most-active-users-user:hover {
+	background: rgba(66, 185, 146, .08);
+	color: #176747;
+}
+
+/* ==========================================================
+   Avatar
+   ========================================================== */
+
+.mv-most-active-users-avatar {
+	display: grid;
+	flex: 0 0 36px;
+	place-items: center;
+
+	width: 36px;
+	height: 36px;
+
+	overflow: hidden;
+
+	border-radius: 50%;
+	background: var(--mv-surface);
+
+	box-shadow:
+		0 0 0 1px rgba(23, 33, 43, .06);
+}
+
+.mv-most-active-users-avatar img,
+.mv-most-active-users-avatar > span {
+	display: grid;
+	place-items: center;
+
+	width: 100%;
+	height: 100%;
+
+	border-radius: inherit;
+}
+
+.mv-most-active-users-avatar img {
+	object-fit: cover;
+}
+
+.mv-most-active-users-avatar > span {
+	color: #fff;
+	font-size: 14px;
+	font-weight: 850;
+	line-height: 1;
+}
+
+/* ==========================================================
+   Corpo
+   ========================================================== */
+
+.mv-most-active-users-body {
+	display: grid;
+	flex: 1 1 auto;
+	align-content: center;
+
+	width: auto;
+	min-width: 0;
+	gap: 4px;
+}
+
+.mv-most-active-users-name {
+	display: block;
+
+	width: 100%;
+	min-width: 0;
+
+	overflow: hidden;
+
+	color: inherit;
+
+	font-size: 12px;
+	font-weight: 800;
+	line-height: 1.2;
+
+	text-align: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* ==========================================================
+   Statistiche
+   ========================================================== */
+
+.mv-most-active-users-stats {
+	display: grid;
+
+	width: 100%;
+	min-width: 0;
+	gap: 2px;
+
+	font-size: 9px;
+	line-height: 1.2;
+	text-align: left;
+}
+
+.mv-most-active-users-site-stats,
+.mv-most-active-users-irc-stats {
+	display: block;
+
+	width: 100%;
+	min-width: 0;
+
+	overflow: hidden;
+
+	text-align: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.mv-most-active-users-site-stats {
+	color: var(--mv-text);
+	font-weight: 750;
+}
+
+.mv-most-active-users-irc-stats {
+	color: var(--mv-muted);
+	font-weight: 650;
+}
+
+/* ==========================================================
+   Freccia
+   ========================================================== */
+
+.mv-most-active-users-user > i:last-child {
+	position: absolute;
+	top: 50%;
+	right: 6px;
+
+	color: var(--mv-muted);
+
+	font-size: 9px;
+
+	opacity: .45;
+
+	transform: translateY(-50%);
+
+	transition:
+		color .16s ease,
+		opacity .16s ease,
+		transform .16s ease;
+}
+
+.mv-most-active-users-user:hover > i:last-child {
+	color: var(--mv-primary);
+	opacity: 1;
+
+	transform:
+		translateY(-50%)
+		translateX(2px);
+}
+
+/* ==========================================================
+   Stato vuoto
+   ========================================================== */
+
+.mv-most-active-users-empty {
+	margin: 0;
+	padding: 14px;
+
+	border: 1px dashed var(--mv-border);
+	border-radius: 10px;
+
+	background: var(--mv-bg);
+	color: var(--mv-muted);
+
+	font-size: 12px;
+	line-height: 1.5;
+	text-align: center;
+}
+
+/* ==========================================================
+   Layout compatti
+   ========================================================== */
+
+.mv-most-active-users-widget.mv-block-width-3
+.mv-most-active-users-user,
+.mv-most-active-users-widget.mv-block-width-4
+.mv-most-active-users-user {
+	gap: 7px;
+	padding: 6px 22px 6px 2px;
+}
+
+.mv-most-active-users-widget.mv-block-width-3
+.mv-most-active-users-avatar,
+.mv-most-active-users-widget.mv-block-width-4
+.mv-most-active-users-avatar {
+	flex-basis: 32px;
+
+	width: 32px;
+	height: 32px;
+}
+
+.mv-most-active-users-widget.mv-block-width-3
+.mv-most-active-users-stats,
+.mv-most-active-users-widget.mv-block-width-4
+.mv-most-active-users-stats {
+	font-size: 8px;
+}
+
+/* ==========================================================
+   Mobile
+   ========================================================== */
+
+@media (max-width: 640px) {
+	.mv-most-active-users-user {
+		gap: 8px;
+		padding: 7px 24px 7px 2px;
+	}
+
+	.mv-most-active-users-avatar {
+		flex-basis: 34px;
+
+		width: 34px;
+		height: 34px;
+	}
+
+	.mv-most-active-users-stats {
+		font-size: 8px;
+	}
+}

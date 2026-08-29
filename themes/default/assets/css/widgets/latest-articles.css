@@ -1,0 +1,167 @@
+/* ==========================================================
+   Block — Ultimi articoli
+   ========================================================== */
+
+.mv-latest-articles-widget {
+    display: grid;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    gap: 12px;
+}
+
+/* ==========================================================
+   Header
+   ========================================================== */
+
+.mv-latest-articles-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--mv-border);
+}
+
+.mv-latest-articles-header h3 {
+    margin: 0;
+    color: var(--mv-text);
+    font-size: 16px;
+    font-weight: 850;
+    line-height: 1.25;
+    letter-spacing: -.02em;
+}
+
+/* ==========================================================
+   Lista
+   ========================================================== */
+
+.mv-latest-articles-list {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.mv-latest-articles-list li {
+    min-width: 0;
+}
+
+/* ==========================================================
+   Articolo
+   ========================================================== */
+
+.mv-latest-articles-item {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr) 12px;
+    align-items: start;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    color: var(--mv-text);
+    text-decoration: none;
+    transition:
+        background-color .16s ease,
+        color .16s ease;
+}
+
+.mv-latest-articles-item:hover {
+    background: rgba(66, 185, 146, .08);
+    color: #176747;
+}
+
+/* ==========================================================
+   Icona
+   ========================================================== */
+
+.mv-latest-articles-thumb {
+       display: grid;
+       place-items: center;
+       width: 32px;
+       height: 32px;
+       overflow: hidden;
+       border-radius: 2px;
+       background: #f4f6f8;
+       flex-shrink: 0;
+   }
+
+   .mv-latest-articles-thumb img {
+       display: block;
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
+       border-radius: inherit;
+   }
+
+   .mv-latest-articles-icon {
+       display: grid;
+       place-items: center;
+       width: 100%;
+       height: 100%;
+       color: var(--mv-primary);
+       font-size: 15px;
+   }
+
+/* ==========================================================
+   Testo
+   ========================================================== */
+
+.mv-latest-articles-body {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+    padding-top: 1px;
+}
+
+.mv-latest-articles-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    color: inherit;
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.3;
+    word-break: break-word;
+}
+
+.mv-latest-articles-date {
+    color: var(--mv-muted);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+/* ==========================================================
+   Freccia
+   ========================================================== */
+
+.mv-latest-articles-item > i:last-child {
+    justify-self: end;
+    color: var(--mv-muted);
+    font-size: 9px;
+    opacity: .45;
+    transition:
+        color .16s ease,
+        opacity .16s ease,
+        transform .16s ease;
+}
+
+.mv-latest-articles-item:hover > i:last-child {
+    color: var(--mv-primary);
+    opacity: 1;
+    transform: translateX(2px);
+}
+
+/* ==========================================================
+   Stato vuoto
+   ========================================================== */
+
+.mv-latest-articles-empty {
+    margin: 0;
+    padding: 14px;
+    border: 1px dashed var(--mv-border);
+    border-radius: 10px;
+    background: var(--mv-bg);
+    color: var(--mv-muted);
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+}

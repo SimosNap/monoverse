@@ -1,0 +1,402 @@
+/*
+ * Monoverse Installer
+ */
+
+main {
+	width: min(100% - 32px, 820px);
+	margin: 0 auto;
+	padding: 48px 0 72px;
+}
+
+main > section {
+	background: var(--mv-surface, #ffffff);
+	border: 1px solid var(--mv-border, #dfe3e8);
+	border-radius: 14px;
+	padding: 32px;
+	box-shadow:
+		0 1px 2px rgba(0, 0, 0, 0.03),
+		0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+main > section > h2 {
+	margin: 0 0 8px;
+	font-size: 1.65rem;
+	line-height: 1.25;
+}
+
+main > section > h2 + p {
+	margin-top: 0;
+	margin-bottom: 28px;
+	color: var(--mv-text-muted, #667085);
+}
+
+main > section h3 {
+	margin-top: 30px;
+	margin-bottom: 12px;
+	font-size: 1.05rem;
+}
+
+main > section p {
+	line-height: 1.6;
+}
+
+main > section a {
+	color: inherit;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+}
+
+main > section a:hover {
+	text-decoration-thickness: 2px;
+}
+
+
+/*
+ * Installer steps
+ */
+
+.installer-steps {
+	width: min(100% - 32px, 820px);
+	margin: 36px auto 0;
+	overflow-x: auto;
+	scrollbar-width: thin;
+}
+
+.installer-steps ol {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	min-width: 680px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.installer-steps li {
+	position: relative;
+	flex: 1 1 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 7px;
+	min-width: 80px;
+	color: var(--mv-text-muted, #7a818b);
+	font-size: 0.76rem;
+	text-align: center;
+}
+
+.installer-steps li::before {
+	content: "";
+	position: absolute;
+	top: 7px;
+	right: 50%;
+	width: 100%;
+	height: 2px;
+	background: var(--mv-border, #dfe3e8);
+	z-index: 0;
+}
+
+.installer-steps li:first-child::before {
+	display: none;
+}
+
+.installer-steps .step-circle {
+	position: relative;
+	z-index: 1;
+	width: 16px;
+	height: 16px;
+	border: 2px solid var(--mv-border, #cfd5dc);
+	border-radius: 50%;
+	background: var(--mv-surface, #ffffff);
+}
+
+.installer-steps li.done .step-circle {
+	border-color: var(--mv-text-muted, #737b85);
+	background: var(--mv-text-muted, #737b85);
+}
+
+.installer-steps li.current {
+	color: var(--mv-text, #20242a);
+	font-weight: 600;
+}
+
+.installer-steps li.current .step-circle {
+	border-color: var(--mv-text, #20242a);
+	background: var(--mv-text, #20242a);
+	box-shadow:
+		0 0 0 4px rgba(32, 36, 42, 0.08);
+}
+
+.installer-steps li.done::before {
+	background: var(--mv-text-muted, #737b85);
+}
+
+.step-label {
+	white-space: nowrap;
+}
+
+
+/*
+ * Forms
+ */
+
+main form {
+	margin: 24px 0;
+}
+
+main form p {
+	margin: 0 0 20px;
+}
+
+main label {
+	display: block;
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
+main input[type="text"],
+main input[type="password"],
+main select {
+	width: 100%;
+	margin-top: 8px;
+	padding: 10px 12px;
+	box-sizing: border-box;
+	border: 1px solid var(--mv-border, #cfd5dc);
+	border-radius: 8px;
+	background: var(--mv-surface, #ffffff);
+	color: var(--mv-text, #20242a);
+	font: inherit;
+	line-height: 1.4;
+	transition:
+		border-color 0.15s ease,
+		box-shadow 0.15s ease;
+}
+
+main input[type="text"]:focus,
+main input[type="password"]:focus,
+main select:focus {
+	outline: none;
+	border-color: var(--mv-text-muted, #737b85);
+	box-shadow:
+		0 0 0 3px rgba(32, 36, 42, 0.08);
+}
+
+main select {
+	cursor: pointer;
+}
+
+main button {
+	appearance: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 40px;
+	padding: 9px 16px;
+	border: 1px solid var(--mv-text, #30353b);
+	border-radius: 8px;
+	background: var(--mv-text, #30353b);
+	color: #ffffff;
+	font: inherit;
+	font-size: 0.9rem;
+	font-weight: 600;
+	line-height: 1.2;
+	cursor: pointer;
+	transition:
+		background 0.15s ease,
+		border-color 0.15s ease,
+		transform 0.15s ease;
+}
+
+main button:hover {
+	background: #1f2328;
+	border-color: #1f2328;
+}
+
+main button:active {
+	transform: translateY(1px);
+}
+
+
+/*
+ * Language selector
+ */
+
+main > section > form[action="/locale"] {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin: 24px 0 30px;
+	padding: 14px 16px;
+	border: 1px solid var(--mv-border, #dfe3e8);
+	border-radius: 9px;
+	background: var(--mv-surface-subtle, #f7f8fa);
+}
+
+main > section > form[action="/locale"] label {
+	flex: 0 0 auto;
+	margin: 0;
+}
+
+main > section > form[action="/locale"] select {
+	width: auto;
+	min-width: 150px;
+	margin: 0 0 0 auto;
+}
+
+
+/*
+ * Requirements
+ */
+
+main > section > ul {
+	margin: 16px 0 28px;
+	padding: 0;
+	list-style: none;
+	border: 1px solid var(--mv-border, #dfe3e8);
+	border-radius: 9px;
+	overflow: hidden;
+}
+
+main > section > ul li {
+	padding: 11px 14px;
+	border-bottom: 1px solid var(--mv-border, #e5e8ec);
+	font-size: 0.9rem;
+	line-height: 1.45;
+}
+
+main > section > ul li:last-child {
+	border-bottom: 0;
+}
+
+
+/*
+ * Edition cards
+ */
+
+.edition-card {
+	margin: 18px 0;
+	padding: 20px;
+	border: 1px solid var(--mv-border, #dfe3e8);
+	border-radius: 10px;
+	background: var(--mv-surface-subtle, #fafbfc);
+}
+
+.edition-card h3 {
+	margin: 0 0 8px;
+}
+
+.edition-card h3 small {
+	color: var(--mv-text-muted, #7a818b);
+	font-size: 0.72em;
+	font-weight: 500;
+}
+
+.edition-card p {
+	margin: 8px 0;
+}
+
+.edition-card > small {
+	color: var(--mv-text-muted, #737b85);
+}
+
+.edition-card form {
+	margin: 18px 0 0;
+}
+
+main > section > .edition-card + hr,
+.edition-card + hr {
+	display: none;
+}
+
+
+/*
+ * Alerts
+ */
+
+.alert,
+.mv-alert {
+	margin: 20px 0;
+	padding: 12px 14px;
+	border: 1px solid #e1b9b9;
+	border-radius: 8px;
+	background: #fff5f5;
+}
+
+.alert-danger,
+.mv-alert-danger {
+	color: #7a2626;
+}
+
+.alert p,
+.mv-alert p {
+	margin: 0;
+}
+
+.alert p + p,
+.mv-alert p + p {
+	margin-top: 6px;
+}
+
+
+/*
+ * Summary
+ */
+
+main > section > h3 + ul {
+	margin-top: 8px;
+}
+
+main > section > h3 + p {
+	margin-top: 6px;
+}
+
+
+/*
+ * Responsive
+ */
+
+@media (max-width: 720px) {
+	main {
+		width: min(100% - 24px, 820px);
+		padding: 28px 0 48px;
+	}
+
+	main > section {
+		padding: 24px 20px;
+		border-radius: 11px;
+	}
+
+	.installer-steps {
+		width: calc(100% - 24px);
+		margin-top: 24px;
+	}
+
+	main > section > form[action="/locale"] {
+		align-items: stretch;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	main > section > form[action="/locale"] select {
+		width: 100%;
+		margin-left: 0;
+	}
+}
+
+@media (max-width: 480px) {
+	main {
+		width: calc(100% - 16px);
+	}
+
+	main > section {
+		padding: 20px 16px;
+	}
+
+	main > section > h2 {
+		font-size: 1.4rem;
+	}
+
+	main button {
+		width: 100%;
+	}
+}

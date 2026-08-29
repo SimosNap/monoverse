@@ -1,0 +1,413 @@
+/* =========================================================
+   Crypto Tips — Dogecoin
+   ========================================================= */
+
+.mv-doge-tip-status {
+	min-height: 18px;
+	margin-top: 10px;
+
+	color: var(--mv-muted);
+
+	font-size: 12px;
+	line-height: 1.45;
+}
+
+.mv-doge-tip-status:empty {
+	display: none;
+}
+
+.mv-doge-tip-status a {
+	color: var(--mv-primary);
+
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.mv-doge-tip-status a:hover {
+	text-decoration: underline;
+}
+
+/* =========================================================
+   Importo
+   ========================================================= */
+
+#mv-doge-tip-amount {
+	width: 100%;
+	height: 44px;
+	box-sizing: border-box;
+
+	padding: 0 13px;
+
+	border: 1px solid var(--mv-border);
+	border-radius: 9px;
+
+	background: #fff;
+	color: var(--mv-text);
+
+	font: inherit;
+	font-size: 14px;
+}
+
+#mv-doge-tip-amount:focus {
+	outline: none;
+
+	border-color: var(--mv-primary);
+
+	box-shadow:
+		0 0 0 3px rgba(66, 185, 146, .13);
+}
+
+/* =========================================================
+   Condivisione / Pong
+   ========================================================= */
+
+.mv-doge-tip-share-context[hidden] {
+	display: none !important;
+}
+
+.mv-doge-tip-share {
+	display: flex;
+	align-items: flex-start;
+	gap: 11px;
+
+	margin: 4px 0 18px;
+	padding: 13px 14px;
+
+	border: 1px solid var(--mv-border);
+	border-radius: 10px;
+
+	background: #f8f9fa;
+
+	cursor: pointer;
+
+	transition:
+		border-color .18s ease,
+		background-color .18s ease;
+}
+
+.mv-doge-tip-share:hover {
+	border-color: #c9d1d9;
+
+	background: #f5f7f8;
+}
+
+.mv-doge-tip-share:has(input:checked) {
+	border-color: rgba(66, 185, 146, .42);
+
+	background: rgba(66, 185, 146, .065);
+}
+
+.mv-doge-tip-share input {
+	flex: 0 0 auto;
+
+	width: 16px;
+	height: 16px;
+
+	margin: 2px 0 0;
+
+	accent-color: var(--mv-primary);
+}
+
+.mv-doge-tip-share > span {
+	display: grid;
+	gap: 4px;
+
+	min-width: 0;
+}
+
+.mv-doge-tip-share strong {
+	color: var(--mv-text);
+
+	font-size: 13px;
+	font-weight: 750;
+	line-height: 1.35;
+}
+
+.mv-doge-tip-share small {
+	color: var(--mv-muted);
+
+	font-size: 11px;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+/* =========================================================
+   Messaggio Pong
+   ========================================================= */
+
+#mv-doge-tip-pong-message-wrap {
+	margin: -6px 0 18px;
+	padding: 14px;
+
+	border: 1px solid var(--mv-border);
+	border-radius: 10px;
+
+	background: #fbfcfc;
+}
+
+#mv-doge-tip-pong-message-wrap[hidden] {
+	display: none !important;
+}
+
+#mv-doge-tip-pong-message-wrap label {
+	margin: 0 0 8px;
+
+	color: var(--mv-text);
+
+	font-size: 12px;
+	font-weight: 750;
+}
+
+#mv-doge-tip-pong-message {
+	display: block;
+
+	width: 100%;
+	min-height: 88px;
+	box-sizing: border-box;
+
+	padding: 11px 12px;
+
+	border: 1px solid #d7dde3;
+	border-radius: 9px;
+
+	background: #fff;
+	color: var(--mv-text);
+
+	font: inherit;
+	font-size: 13px;
+	line-height: 1.5;
+
+	resize: vertical;
+
+	transition:
+		border-color .18s ease,
+		box-shadow .18s ease;
+}
+
+#mv-doge-tip-pong-message::placeholder {
+	color: #9aa4af;
+}
+
+#mv-doge-tip-pong-message:focus {
+	outline: none;
+
+	border-color: var(--mv-primary);
+
+	box-shadow:
+		0 0 0 3px rgba(66, 185, 146, .11);
+}
+
+/* =========================================================
+   Fallback senza MyDogeMask
+   ========================================================= */
+
+.mv-doge-tip-fallback {
+	display: grid;
+	gap: 10px;
+
+	margin-top: 16px;
+	padding: 14px;
+
+	border: 1px solid var(--mv-border);
+	border-radius: 10px;
+
+	background: var(--mv-bg);
+}
+
+.mv-doge-tip-fallback[hidden] {
+	display: none;
+}
+
+.mv-doge-tip-fallback-label {
+	color: var(--mv-muted);
+
+	font-size: 11px;
+	font-weight: 750;
+	line-height: 1.2;
+
+	text-transform: uppercase;
+	letter-spacing: .04em;
+}
+
+.mv-doge-tip-qr-wrap {
+	display: flex;
+	justify-content: center;
+
+	padding: 8px 0 4px;
+}
+
+.mv-doge-tip-qr {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	padding: 10px;
+
+	border: 1px solid var(--mv-border);
+	border-radius: 10px;
+
+	background: #fff;
+}
+
+.mv-doge-tip-qr img,
+.mv-doge-tip-qr canvas {
+	display: block;
+
+	width: 180px;
+	height: 180px;
+}
+
+.mv-doge-tip-fallback-address {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	min-width: 0;
+}
+
+.mv-doge-tip-fallback-address code {
+	min-width: 0;
+	flex: 1;
+
+	overflow: hidden;
+
+	padding: 8px 10px;
+
+	border: 1px solid var(--mv-border);
+	border-radius: 8px;
+
+	background: #fff;
+	color: var(--mv-text);
+
+	font-size: 11px;
+	line-height: 1.4;
+
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.mv-doge-tip-copy {
+	flex: 0 0 auto;
+
+	width: auto;
+	min-height: 34px;
+	padding: 0 10px;
+
+	border: 1px solid var(--mv-border);
+	border-radius: 8px;
+
+	background: #fff;
+	color: var(--mv-text);
+
+	font-size: 11px;
+	font-weight: 750;
+}
+
+.mv-doge-tip-copy:hover {
+	border-color: rgba(66, 185, 146, .35);
+
+	background: rgba(66, 185, 146, .07);
+	color: var(--mv-primary);
+}
+
+.mv-doge-tip-fallback-help {
+	margin: 0;
+
+	color: var(--mv-muted);
+
+	font-size: 11px;
+	line-height: 1.5;
+}
+
+/* =========================================================
+   Azioni
+   ========================================================= */
+
+#mv-doge-tip-send[hidden] {
+	display: none !important;
+}
+
+#mv-doge-tip-modal .mv-modal-footer .mv-button {
+	width: auto;
+	min-height: 38px;
+	margin: 0;
+	padding: 0 13px;
+
+	border: 1px solid #d4dae0;
+	border-radius: 8px;
+
+	background: #fff;
+	color: var(--mv-text);
+
+	font-size: 12px;
+	font-weight: 700;
+
+	box-shadow: none;
+
+	transition:
+		border-color .18s ease,
+		background-color .18s ease;
+}
+
+#mv-doge-tip-modal .mv-modal-footer .mv-button:hover {
+	border-color: #bcc6cf;
+
+	background: #f5f7f8;
+	color: var(--mv-text);
+
+	box-shadow: none;
+	transform: none;
+}
+
+#mv-doge-tip-send {
+	border-color: #c6ced6;
+
+	background: #f3f5f6;
+	color: var(--mv-text);
+}
+
+#mv-doge-tip-send:hover {
+	border-color: #aeb9c3;
+
+	background: #e9edef;
+	color: var(--mv-text);
+}
+
+/* =========================================================
+   Pulsante DOGE profilo
+   ========================================================= */
+
+.mv-button-doge {
+	border-color: rgba(201, 166, 51, .34);
+
+	background: #fffaf0;
+	color: #7b6322;
+}
+
+.mv-button-doge:hover {
+	border-color: rgba(201, 166, 51, .5);
+
+	background: #fff7df;
+	color: #6d571c;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+	#mv-doge-tip-modal .mv-modal-footer .mv-button {
+		width: 100%;
+	}
+
+	.mv-doge-tip-fallback-address {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.mv-doge-tip-copy {
+		width: 100%;
+	}
+
+}

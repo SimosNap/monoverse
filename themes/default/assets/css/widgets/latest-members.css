@@ -1,0 +1,178 @@
+/* ==========================================================
+   Block — Nuovi membri
+   ========================================================== */
+
+.mv-latest-members-widget {
+    display: grid;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    gap: 12px;
+}
+
+/* ==========================================================
+   Header
+   ========================================================== */
+
+.mv-latest-members-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--mv-border);
+}
+
+.mv-latest-members-header h3 {
+    margin: 0;
+    color: var(--mv-text);
+    font-size: 16px;
+    font-weight: 850;
+    line-height: 1.25;
+    letter-spacing: -.02em;
+}
+
+/* ==========================================================
+   Lista
+   ========================================================== */
+
+.mv-latest-members-list {
+    display: grid;
+    width: 100%;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.mv-latest-members-list li {
+    width: 100%;
+    min-width: 0;
+}
+
+/* ==========================================================
+   Riga membro
+   ========================================================== */
+
+.mv-latest-members-user {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr) 12px;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    gap: 10px;
+    padding: 7px 8px;
+    border-radius: 9px;
+    color: var(--mv-text);
+    text-decoration: none;
+    transition:
+        background-color .16s ease,
+        color .16s ease;
+}
+
+.mv-latest-members-user:hover {
+    background: rgba(66, 185, 146, .08);
+    color: #176747;
+}
+
+/* ==========================================================
+   Avatar
+   ========================================================== */
+
+.mv-latest-members-avatar {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--mv-surface);
+    box-shadow:
+        0 0 0 1px rgba(23, 33, 43, .06);
+}
+
+.mv-latest-members-avatar img,
+.mv-latest-members-avatar > span {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.mv-latest-members-avatar img {
+    object-fit: cover;
+}
+
+.mv-latest-members-avatar > span {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 850;
+    line-height: 1;
+}
+
+/* ==========================================================
+   Testo
+   ========================================================== */
+
+.mv-latest-members-body {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+}
+
+.mv-latest-members-name {
+    min-width: 0;
+    overflow: hidden;
+    color: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mv-latest-members-date {
+    min-width: 0;
+    overflow: hidden;
+    color: var(--mv-muted);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ==========================================================
+   Freccia
+   ========================================================== */
+
+.mv-latest-members-user > i:last-child {
+    justify-self: end;
+    color: var(--mv-muted);
+    font-size: 9px;
+    opacity: .45;
+    transition:
+        color .16s ease,
+        opacity .16s ease,
+        transform .16s ease;
+}
+
+.mv-latest-members-user:hover > i:last-child {
+    color: var(--mv-primary);
+    opacity: 1;
+    transform: translateX(2px);
+}
+
+/* ==========================================================
+   Stato vuoto
+   ========================================================== */
+
+.mv-latest-members-empty {
+    margin: 0;
+    padding: 14px;
+    border: 1px dashed var(--mv-border);
+    border-radius: 10px;
+    background: var(--mv-bg);
+    color: var(--mv-muted);
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+}

@@ -94,7 +94,7 @@ PHP requests must also be passed to your PHP-FPM installation according to your 
 Clone the repository into the directory served by your web server:
 
 ```bash
-git clone https://github.com/YOUR-ACCOUNT/monoverse.git
+git clone https://github.com/SimosNap/monoverse.git
 cd monoverse
 ```
 

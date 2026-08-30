@@ -73,13 +73,28 @@ return [
 			'view_all' => 'View all Pull Requests',
 		],
 		'github_release' => [
+			'default_title' => 'Latest releases',
+
 			'state' => [
-				'draft' => 'Draft',
-				'prerelease' => 'Prerelease',
-				'stable' => 'Stable',
+				'stable' => 'Release',
+				'beta' => 'Beta',
+				'nightly' => 'Nightly',
 			],
+
 			'view' => 'View release',
-			'empty' => 'No release available.',
+			'empty' => 'No releases available.',
+
+			'admin' => [
+				'label' => 'GitHub Release',
+				'description' => 'Shows the stable release, beta and nightly build of a GitHub repository.',
+				'repository' => 'GitHub repository',
+				'repository_help' => 'Format: owner/repository',
+				'title' => 'Title',
+				'title_placeholder' => 'Latest releases',
+				'show_repository' => 'Show repository',
+				'show_date' => 'Show publication date',
+				'repository_error' => 'Enter a valid GitHub repository.',
+			],
 		],
 		'github_repository' => [
 			'default_title' => 'GitHub Repository',

@@ -73,13 +73,28 @@ return [
 			'view_all' => 'Vedi tutte le Pull Request',
 		],
 		'github_release' => [
+			'default_title' => 'Ultime release',
+
 			'state' => [
-				'draft' => 'Bozza',
-				'prerelease' => 'Pre-release',
-				'stable' => 'Stabile',
+				'stable' => 'Release',
+				'beta' => 'Beta',
+				'nightly' => 'Nightly',
 			],
+
 			'view' => 'Vedi release',
 			'empty' => 'Nessuna release disponibile.',
+
+			'admin' => [
+				'label' => 'GitHub Release',
+				'description' => 'Mostra release stabile, beta e nightly build di un repository GitHub.',
+				'repository' => 'Repository GitHub',
+				'repository_help' => 'Formato: proprietario/repository',
+				'title' => 'Titolo',
+				'title_placeholder' => 'Ultime release',
+				'show_repository' => 'Mostra repository',
+				'show_date' => 'Mostra data di pubblicazione',
+				'repository_error' => 'Inserisci un repository GitHub valido.',
+			],
 		],
 		'github_repository' => [
 			'default_title' => 'Repository GitHub',

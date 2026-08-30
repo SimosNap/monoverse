@@ -315,6 +315,9 @@ class App
                 return new \Monoverse\Core\Blocks\Developer\GitHubReleaseBlock(
                     $container->get(
                         \Monoverse\Services\GitHubService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\Translator::class
                     )
                 );
             }

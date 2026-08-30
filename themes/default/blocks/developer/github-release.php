@@ -9,67 +9,47 @@ $repository = trim(
 	(string) ($repository_name ?? '')
 );
 
-$release = is_array($release ?? null)
-	? $release
+$releases = is_array($releases ?? null)
+	? $releases
 	: [];
 
 $repositoryUrl = $repository !== ''
 	? 'https://github.com/' . $repository
 	: '';
 
-$releaseName = trim(
-	(string) (
-		$release['name']
-		?? $release['tag_name']
-		?? ''
-	)
-);
+$releaseTypes = [
+	'stable' => [
+		'label' => $t(
+			'blocks.developer.github_release.state.stable'
+		),
+		'icon' => 'fa-solid fa-tag',
+	],
+	'beta' => [
+		'label' => $t(
+			'blocks.developer.github_release.state.beta'
+		),
+		'icon' => 'fa-solid fa-flask',
+	],
+	'nightly' => [
+		'label' => $t(
+			'blocks.developer.github_release.state.nightly'
+		),
+		'icon' => 'fa-solid fa-moon',
+	],
+];
 
-$tagName = trim(
-	(string) ($release['tag_name'] ?? '')
-);
+$hasReleases = false;
 
-$releaseUrl = trim(
-	(string) ($release['html_url'] ?? '')
-);
-
-$publishedAt = trim(
-	(string) (
-		$release['published_at']
-		?? $release['created_at']
-		?? ''
-	)
-);
-
-$formattedDate = '';
-
-if ($publishedAt !== '') {
-	$timestamp = strtotime($publishedAt);
-
-	if ($timestamp !== false) {
-		$formattedDate = date(
-			'd/m/Y',
-			$timestamp
-		);
+foreach (array_keys($releaseTypes) as $type) {
+	if (
+		isset($releases[$type])
+		&& is_array($releases[$type])
+		&& $releases[$type] !== []
+	) {
+		$hasReleases = true;
+		break;
 	}
 }
-
-$isDraft = !empty($release['draft']);
-$isPrerelease = !empty($release['prerelease']);
-
-$stateLabel = $isDraft
-	? $t(
-		'blocks.developer.github_release.state.draft'
-	)
-	: (
-		$isPrerelease
-			? $t(
-				'blocks.developer.github_release.state.prerelease'
-			)
-			: $t(
-				'blocks.developer.github_release.state.stable'
-			)
-	);
 ?>
 
 <div class="mv-widget mv-github-release-widget">
@@ -90,121 +70,206 @@ $stateLabel = $isDraft
 
 	<?php endif; ?>
 
-	<?php if ($release !== []): ?>
+	<?php if ($hasReleases): ?>
 
-		<div class="mv-github-release-card">
+		<div class="mv-github-release-list">
 
-			<div class="mv-github-release-icon">
+			<?php foreach ($releaseTypes as $type => $config): ?>
 
-				<i
-					class="fa-solid fa-tag"
-					aria-hidden="true"
-				></i>
+				<?php
+				$release = isset($releases[$type])
+					&& is_array($releases[$type])
+					? $releases[$type]
+					: [];
 
-			</div>
+				if ($release === []) {
+					continue;
+				}
 
-			<div class="mv-github-release-content">
+				$releaseName = trim(
+					(string) (
+						$release['name']
+						?? $release['tag_name']
+						?? ''
+					)
+				);
 
-				<div class="mv-github-release-topline">
+				$tagName = trim(
+					(string) (
+						$release['tag_name']
+						?? ''
+					)
+				);
 
-					<?php if ($releaseName !== ''): ?>
+				$releaseUrl = trim(
+					(string) (
+						$release['html_url']
+						?? ''
+					)
+				);
 
-						<strong>
-							<?= htmlspecialchars(
-								$releaseName,
+				$publishedAt = trim(
+					(string) (
+						$release['published_at']
+						?? ''
+					)
+				);
+
+				$formattedDate = '';
+
+				if ($publishedAt !== '') {
+					$timestamp = strtotime(
+						$publishedAt
+					);
+
+					if ($timestamp !== false) {
+						$formattedDate = date(
+							'd/m/Y',
+							$timestamp
+						);
+					}
+				}
+				?>
+
+				<div
+					class="mv-github-release-card mv-github-release-card-<?= htmlspecialchars(
+						$type,
+						ENT_QUOTES,
+						'UTF-8'
+					) ?>"
+				>
+
+					<div class="mv-github-release-icon">
+
+						<i
+							class="<?= htmlspecialchars(
+								$config['icon'],
 								ENT_QUOTES,
 								'UTF-8'
-							) ?>
-						</strong>
+							) ?>"
+							aria-hidden="true"
+						></i>
 
-					<?php endif; ?>
+					</div>
 
-					<span class="mv-github-release-state">
-						<?= htmlspecialchars(
-							$stateLabel,
-							ENT_QUOTES,
-							'UTF-8'
-						) ?>
-					</span>
+					<div class="mv-github-release-content">
 
-				</div>
+						<div class="mv-github-release-topline">
 
-				<?php if (
-					$tagName !== ''
-					|| $formattedDate !== ''
-				): ?>
+							<?php if ($releaseName !== ''): ?>
 
-					<div class="mv-github-release-meta">
+								<strong>
+									<?= htmlspecialchars(
+										$releaseName,
+										ENT_QUOTES,
+										'UTF-8'
+									) ?>
+								</strong>
 
-						<?php if ($tagName !== ''): ?>
+							<?php endif; ?>
 
-							<span>
-								<i
-									class="fa-solid fa-code-branch"
-									aria-hidden="true"
-								></i>
-
+							<span
+								class="mv-github-release-state mv-github-release-state-<?= htmlspecialchars(
+									$type,
+									ENT_QUOTES,
+									'UTF-8'
+								) ?>"
+							>
 								<?= htmlspecialchars(
-									$tagName,
+									$config['label'],
 									ENT_QUOTES,
 									'UTF-8'
 								) ?>
 							</span>
 
-						<?php endif; ?>
+						</div>
 
-						<?php if ($formattedDate !== ''): ?>
+						<?php if (
+							$tagName !== ''
+							|| $formattedDate !== ''
+						): ?>
 
-							<span>
-								<i
-									class="fa-regular fa-calendar"
-									aria-hidden="true"
-								></i>
+							<div class="mv-github-release-meta">
 
-								<?= htmlspecialchars(
-									$formattedDate,
-									ENT_QUOTES,
-									'UTF-8'
-								) ?>
-							</span>
+								<?php if ($tagName !== ''): ?>
+
+									<span>
+
+										<i
+											class="fa-solid fa-code-branch"
+											aria-hidden="true"
+										></i>
+
+										<?= htmlspecialchars(
+											$tagName,
+											ENT_QUOTES,
+											'UTF-8'
+										) ?>
+
+									</span>
+
+								<?php endif; ?>
+
+								<?php if ($formattedDate !== ''): ?>
+
+									<span>
+
+										<i
+											class="fa-regular fa-calendar"
+											aria-hidden="true"
+										></i>
+
+										<?= htmlspecialchars(
+											$formattedDate,
+											ENT_QUOTES,
+											'UTF-8'
+										) ?>
+
+									</span>
+
+								<?php endif; ?>
+
+								<?php if ($releaseUrl !== ''): ?>
+
+									<a
+										class="mv-github-release-link"
+										href="<?= htmlspecialchars(
+											$releaseUrl,
+											ENT_QUOTES,
+											'UTF-8'
+										) ?>"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+
+										<span>
+											<?= htmlspecialchars(
+												$t(
+													'blocks.developer.github_release.view'
+												),
+												ENT_QUOTES,
+												'UTF-8'
+											) ?>
+										</span>
+
+										<i
+											class="fa-solid fa-arrow-up-right-from-square"
+											aria-hidden="true"
+										></i>
+
+									</a>
+
+								<?php endif; ?>
+
+							</div>
 
 						<?php endif; ?>
 
 					</div>
 
-				<?php endif; ?>
+				</div>
 
-				<?php if ($releaseUrl !== ''): ?>
-
-					<a
-						class="mv-github-release-link"
-						href="<?= htmlspecialchars(
-							$releaseUrl,
-							ENT_QUOTES,
-							'UTF-8'
-						) ?>"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<span>
-							<?= htmlspecialchars(
-								$t(
-									'blocks.developer.github_release.view'
-								),
-								ENT_QUOTES,
-								'UTF-8'
-							) ?>
-						</span>
-
-						<i
-							class="fa-solid fa-arrow-up-right-from-square"
-							aria-hidden="true"
-						></i>
-					</a>
-
-				<?php endif; ?>
-
-			</div>
+			<?php endforeach; ?>
 
 		</div>
 

@@ -6,7 +6,7 @@ namespace Monoverse\Services;
 final class GitHubService
 {
 	private const CACHE_TTL = 600;
-	
+
 	public function __construct(
 		private SettingsService $settings
 	) {
@@ -81,32 +81,32 @@ final class GitHubService
 			'https://api.github.com/repos/'
 			. $repository
 		);
-		
+
 		if ($repositoryData === []) {
 			return [];
 		}
-		
+
 		$defaultBranch = trim(
 			(string) (
 				$repositoryData['default_branch']
 				?? 'main'
 			)
 		);
-		
+
 		$branch = trim(
 			(string) (
 				$branch
 					?? $defaultBranch
 			)
 		);
-		
+
 		if ($branch === '') {
 			$branch = $defaultBranch;
 		}
-		
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-		
+
 		$cacheFile = $cacheDirectory
 			. '/github-repository-'
 			. hash(
@@ -116,7 +116,7 @@ final class GitHubService
 				)
 			)
 			. '.json';
-		
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -127,7 +127,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-		
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -136,19 +136,19 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-		
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-		
+
 		$branches = $this->request(
 			'https://api.github.com/repos/'
 			. $repository
 			. '/branches?per_page=100'
 		);
-		
+
 		$commitsUrl =
 			'https://api.github.com/repos/'
 			. $repository
@@ -163,7 +163,7 @@ final class GitHubService
 		$releases = $this->request(
 			'https://api.github.com/repos/'
 			. $repository
-			. '/releases?per_page=1'
+			. '/releases?per_page=20'
 		);
 
 		$languages = $this->request(
@@ -196,7 +196,7 @@ final class GitHubService
 			'commits' => $this->normalizeCommits(
 				$commits
 			),
-			'release' => $this->normalizeRelease(
+			'releases' => $this->normalizeReleases(
 				$releases
 			),
 			'languages' => $this->normalizeLanguages(
@@ -217,21 +217,21 @@ final class GitHubService
 
 		return $result;
 	}
-	
+
 	public function getRepositoryPreview(
 		string $repository
 	): array {
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		if ($repository === '') {
 			return [];
 		}
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-repository-preview-'
 			. hash(
@@ -239,7 +239,7 @@ final class GitHubService
 				strtolower($repository)
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -250,7 +250,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -259,30 +259,30 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$repositoryData = $this->request(
 			'https://api.github.com/repos/'
 			. $repository
 		);
-	
+
 		if ($repositoryData === []) {
 			return [];
 		}
-	
+
 		$readmeData = $this->request(
 			'https://api.github.com/repos/'
 			. $repository
 			. '/readme'
 		);
-	
+
 		$readme = '';
-	
+
 		if (
 			($readmeData['encoding'] ?? '') === 'base64'
 			&& !empty($readmeData['content'])
@@ -295,7 +295,7 @@ final class GitHubService
 				) ?? '',
 				true
 			);
-	
+
 			if (
 				$decodedReadme !== false
 				&& !str_contains(
@@ -308,7 +308,7 @@ final class GitHubService
 				);
 			}
 		}
-	
+
 		if (strlen($readme) > 20000) {
 			$readme = substr(
 				$readme,
@@ -316,7 +316,7 @@ final class GitHubService
 				20000
 			);
 		}
-	
+
 		$result = [
 			'repository' =>
 				$this->normalizeRepositoryData(
@@ -324,15 +324,15 @@ final class GitHubService
 				),
 			'readme' => $readme,
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getDiscussion(
 		string $repository,
 		int $number
@@ -340,23 +340,23 @@ final class GitHubService
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		if (
 			$repository === ''
 			|| $number <= 0
 		) {
 			return [];
 		}
-	
+
 		[$owner, $name] = explode(
 			'/',
 			$repository,
 			2
 		);
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-discussion-'
 			. hash(
@@ -368,7 +368,7 @@ final class GitHubService
 				)
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -379,7 +379,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -388,13 +388,13 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$query = <<<'GRAPHQL'
 	query(
 		$owner: String!,
@@ -415,38 +415,38 @@ final class GitHubService
 				closed
 				locked
 				upvoteCount
-	
+
 				author {
 					login
 					avatarUrl
 					url
 				}
-	
+
 				category {
 					name
 					emoji
 					description
 				}
-	
+
 				comments {
 					totalCount
 				}
-	
+
 				answer {
 					url
 					createdAt
-	
+
 					author {
 						login
 					}
-	
+
 					body
 				}
 			}
 		}
 	}
 	GRAPHQL;
-	
+
 		$response = $this->graphqlRequest(
 			$query,
 			[
@@ -455,42 +455,42 @@ final class GitHubService
 				'number' => $number,
 			]
 		);
-	
+
 		$discussion = $response['data']['repository']['discussion']
 			?? null;
-	
+
 		if (!is_array($discussion)) {
 			return [];
 		}
-	
+
 		$author = is_array(
 			$discussion['author']
 				?? null
 		)
 			? $discussion['author']
 			: [];
-	
+
 		$category = is_array(
 			$discussion['category']
 				?? null
 		)
 			? $discussion['category']
 			: [];
-	
+
 		$answer = is_array(
 			$discussion['answer']
 				?? null
 		)
 			? $discussion['answer']
 			: [];
-	
+
 		$answerAuthor = is_array(
 			$answer['author']
 				?? null
 		)
 			? $answer['author']
 			: [];
-	
+
 		$result = [
 			'number' => (int) (
 				$discussion['number']
@@ -609,15 +609,15 @@ final class GitHubService
 				),
 			],
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getPullRequests(
 		string $repository,
 		string $state = 'open',
@@ -626,11 +626,11 @@ final class GitHubService
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		if ($repository === '') {
 			return [];
 		}
-	
+
 		if (!in_array(
 			$state,
 			[
@@ -642,7 +642,7 @@ final class GitHubService
 		)) {
 			$state = 'open';
 		}
-	
+
 		$limit = in_array(
 			$limit,
 			[
@@ -654,10 +654,10 @@ final class GitHubService
 		)
 			? $limit
 			: 5;
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-pull-requests-'
 			. hash(
@@ -671,7 +671,7 @@ final class GitHubService
 				)
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -682,7 +682,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -691,13 +691,13 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$pullRequests = $this->request(
 			'https://api.github.com/repos/'
 			. $repository
@@ -706,19 +706,19 @@ final class GitHubService
 			. '&per_page='
 			. $limit
 		);
-	
+
 		$result = $this->normalizePullRequests(
 			$pullRequests
 		);
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getPullRequest(
 		string $repository,
 		int $number
@@ -726,17 +726,17 @@ final class GitHubService
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		if (
 			$repository === ''
 			|| $number <= 0
 		) {
 			return [];
 		}
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-pull-request-'
 			. hash(
@@ -748,7 +748,7 @@ final class GitHubService
 				)
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -759,7 +759,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -768,24 +768,24 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$response = $this->request(
 			'https://api.github.com/repos/'
 			. $repository
 			. '/pulls/'
 			. $number
 		);
-	
+
 		if ($response === []) {
 			return [];
 		}
-	
+
 		$filesResponse = $this->request(
 			'https://api.github.com/repos/'
 			. $repository
@@ -793,30 +793,30 @@ final class GitHubService
 			. $number
 			. '/files?per_page=100'
 		);
-	
+
 		$user = is_array(
 			$response['user']
 				?? null
 		)
 			? $response['user']
 			: [];
-	
+
 		$head = is_array(
 			$response['head']
 				?? null
 		)
 			? $response['head']
 			: [];
-	
+
 		$base = is_array(
 			$response['base']
 				?? null
 		)
 			? $response['base']
 			: [];
-	
+
 		$labels = [];
-	
+
 		foreach (
 			(array) (
 				$response['labels']
@@ -827,18 +827,18 @@ final class GitHubService
 			if (!is_array($label)) {
 				continue;
 			}
-	
+
 			$name = trim(
 				(string) (
 					$label['name']
 						?? ''
 				)
 			);
-	
+
 			if ($name === '') {
 				continue;
 			}
-	
+
 			$labels[] = [
 				'name' => $name,
 				'color' => trim(
@@ -849,26 +849,26 @@ final class GitHubService
 				),
 			];
 		}
-	
+
 		$files = [];
-	
+
 		if (array_is_list($filesResponse)) {
 			foreach ($filesResponse as $file) {
 				if (!is_array($file)) {
 					continue;
 				}
-	
+
 				$filename = trim(
 					(string) (
 						$file['filename']
 							?? ''
 					)
 				);
-	
+
 				if ($filename === '') {
 					continue;
 				}
-	
+
 				$files[] = [
 					'filename' => $filename,
 					'status' => trim(
@@ -908,19 +908,19 @@ final class GitHubService
 				];
 			}
 		}
-	
+
 		$state = trim(
 			(string) (
 				$response['state']
 					?? ''
 			)
 		);
-	
+
 		$merged = (bool) (
 			$response['merged']
 				?? false
 		);
-	
+
 		if ($merged) {
 			$displayState = 'merged';
 		} elseif ($state === 'closed') {
@@ -928,7 +928,7 @@ final class GitHubService
 		} else {
 			$displayState = 'open';
 		}
-	
+
 		$result = [
 			'number' => (int) (
 				$response['number']
@@ -1063,15 +1063,15 @@ final class GitHubService
 			'labels' => $labels,
 			'files' => $files,
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getIssue(
 		string $repository,
 		int $number
@@ -1079,17 +1079,17 @@ final class GitHubService
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		if (
 			$repository === ''
 			|| $number <= 0
 		) {
 			return [];
 		}
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-issue-'
 			. hash(
@@ -1101,7 +1101,7 @@ final class GitHubService
 				)
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -1112,7 +1112,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -1121,50 +1121,50 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$response = $this->request(
 			'https://api.github.com/repos/'
 			. $repository
 			. '/issues/'
 			. $number
 		);
-	
+
 		if (
 			$response === []
 			|| isset($response['pull_request'])
 		) {
 			return [];
 		}
-	
+
 		$user = is_array(
 			$response['user']
 				?? null
 		)
 			? $response['user']
 			: [];
-	
+
 		$assignee = is_array(
 			$response['assignee']
 				?? null
 		)
 			? $response['assignee']
 			: [];
-	
+
 		$milestone = is_array(
 			$response['milestone']
 				?? null
 		)
 			? $response['milestone']
 			: [];
-	
+
 		$labels = [];
-	
+
 		foreach (
 			(array) (
 				$response['labels']
@@ -1175,18 +1175,18 @@ final class GitHubService
 			if (!is_array($label)) {
 				continue;
 			}
-	
+
 			$name = trim(
 				(string) (
 					$label['name']
 						?? ''
 				)
 			);
-	
+
 			if ($name === '') {
 				continue;
 			}
-	
+
 			$labels[] = [
 				'name' => $name,
 				'color' => trim(
@@ -1197,14 +1197,14 @@ final class GitHubService
 				),
 			];
 		}
-	
+
 		$state = trim(
 			(string) (
 				$response['state']
 					?? 'open'
 			)
 		);
-	
+
 		$result = [
 			'number' => (int) (
 				$response['number']
@@ -1319,15 +1319,15 @@ final class GitHubService
 			],
 			'labels' => $labels,
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getRelease(
 		string $repository,
 		string $tag
@@ -1335,9 +1335,9 @@ final class GitHubService
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		$tag = trim($tag);
-	
+
 		if (
 			$repository === ''
 			|| $tag === ''
@@ -1345,10 +1345,10 @@ final class GitHubService
 		) {
 			return [];
 		}
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-release-'
 			. hash(
@@ -1360,7 +1360,7 @@ final class GitHubService
 				)
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -1371,7 +1371,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -1380,33 +1380,33 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$response = $this->request(
 			'https://api.github.com/repos/'
 			. $repository
 			. '/releases/tags/'
 			. rawurlencode($tag)
 		);
-	
+
 		if ($response === []) {
 			return [];
 		}
-	
+
 		$author = is_array(
 			$response['author']
 				?? null
 		)
 			? $response['author']
 			: [];
-	
+
 		$assets = [];
-	
+
 		foreach (
 			(array) (
 				$response['assets']
@@ -1417,18 +1417,18 @@ final class GitHubService
 			if (!is_array($asset)) {
 				continue;
 			}
-	
+
 			$name = trim(
 				(string) (
 					$asset['name']
 						?? ''
 				)
 			);
-	
+
 			if ($name === '') {
 				continue;
 			}
-	
+
 			$assets[] = [
 				'name' => $name,
 				'url' => trim(
@@ -1465,7 +1465,7 @@ final class GitHubService
 				),
 			];
 		}
-	
+
 		$result = [
 			'id' => (int) (
 				$response['id']
@@ -1555,20 +1555,20 @@ final class GitHubService
 				)
 			),
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getGist(
 		string $gistId
 	): array {
 		$gistId = trim($gistId);
-	
+
 		if (
 			$gistId === ''
 			|| strlen($gistId) > 128
@@ -1579,10 +1579,10 @@ final class GitHubService
 		) {
 			return [];
 		}
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-gist-'
 			. hash(
@@ -1590,7 +1590,7 @@ final class GitHubService
 				strtolower($gistId)
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -1601,7 +1601,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -1610,31 +1610,31 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$response = $this->request(
 			'https://api.github.com/gists/'
 			. rawurlencode($gistId)
 		);
-	
+
 		if ($response === []) {
 			return [];
 		}
-	
+
 		$owner = is_array(
 			$response['owner']
 				?? null
 		)
 			? $response['owner']
 			: [];
-	
+
 		$files = [];
-	
+
 		foreach (
 			(array) (
 				$response['files']
@@ -1645,23 +1645,23 @@ final class GitHubService
 			if (!is_array($file)) {
 				continue;
 			}
-	
+
 			$name = trim(
 				(string) (
 					$file['filename']
 						?? $filename
 				)
 			);
-	
+
 			if ($name === '') {
 				continue;
 			}
-	
+
 			$content = (string) (
 				$file['content']
 					?? ''
 			);
-	
+
 			if (
 				str_contains(
 					$content,
@@ -1670,7 +1670,7 @@ final class GitHubService
 			) {
 				continue;
 			}
-	
+
 			if (strlen($content) > 524288) {
 				$content = substr(
 					$content,
@@ -1678,7 +1678,7 @@ final class GitHubService
 					524288
 				);
 			}
-	
+
 			$files[] = [
 				'filename' => $name,
 				'type' => trim(
@@ -1710,7 +1710,7 @@ final class GitHubService
 				'content' => $content,
 			];
 		}
-	
+
 		$result = [
 			'id' => trim(
 				(string) (
@@ -1772,15 +1772,15 @@ final class GitHubService
 			],
 			'files' => $files,
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getTree(
 		string $repository,
 		string $ref,
@@ -1789,14 +1789,14 @@ final class GitHubService
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		$ref = trim($ref);
-	
+
 		$path = trim(
 			$path,
 			"/ \t\n\r\0\x0B"
 		);
-	
+
 		if (
 			$repository === ''
 			|| $ref === ''
@@ -1806,10 +1806,10 @@ final class GitHubService
 		) {
 			return [];
 		}
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-tree-'
 			. hash(
@@ -1821,7 +1821,7 @@ final class GitHubService
 					. $path
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -1832,7 +1832,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -1841,18 +1841,18 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$url =
 			'https://api.github.com/repos/'
 			. $repository
 			. '/contents';
-	
+
 		if ($path !== '') {
 			$url .= '/'
 				. implode(
@@ -1866,35 +1866,35 @@ final class GitHubService
 					)
 				);
 		}
-	
+
 		$url .= '?ref='
 			. rawurlencode($ref);
-	
+
 		$response = $this->request(
 			$url
 		);
-	
+
 		if (
 			$response === []
 			|| !array_is_list($response)
 		) {
 			return [];
 		}
-	
+
 		$items = [];
-	
+
 		foreach ($response as $item) {
 			if (!is_array($item)) {
 				continue;
 			}
-	
+
 			$type = trim(
 				(string) (
 					$item['type']
 						?? ''
 				)
 			);
-	
+
 			if (
 				$type !== 'dir'
 				&& $type !== 'file'
@@ -1903,18 +1903,18 @@ final class GitHubService
 			) {
 				continue;
 			}
-	
+
 			$name = trim(
 				(string) (
 					$item['name']
 						?? ''
 				)
 			);
-	
+
 			if ($name === '') {
 				continue;
 			}
-	
+
 			$items[] = [
 				'name' => $name,
 				'path' => trim(
@@ -1948,7 +1948,7 @@ final class GitHubService
 				),
 			];
 		}
-	
+
 		usort(
 			$items,
 			static function (
@@ -1957,34 +1957,34 @@ final class GitHubService
 			): int {
 				$aDirectory = $a['type'] === 'dir';
 				$bDirectory = $b['type'] === 'dir';
-	
+
 				if ($aDirectory !== $bDirectory) {
 					return $aDirectory
 						? -1
 						: 1;
 				}
-	
+
 				return strcasecmp(
 					(string) $a['name'],
 					(string) $b['name']
 				);
 			}
 		);
-	
+
 		$result = [
 			'ref' => $ref,
 			'path' => $path,
 			'items' => $items,
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getCompare(
 		string $repository,
 		string $base,
@@ -1993,10 +1993,10 @@ final class GitHubService
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		$base = trim($base);
 		$head = trim($head);
-	
+
 		if (
 			$repository === ''
 			|| $base === ''
@@ -2006,10 +2006,10 @@ final class GitHubService
 		) {
 			return [];
 		}
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-compare-'
 			. hash(
@@ -2023,7 +2023,7 @@ final class GitHubService
 				)
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -2034,7 +2034,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -2043,13 +2043,13 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$response = $this->request(
 			'https://api.github.com/repos/'
 				. $repository
@@ -2058,13 +2058,13 @@ final class GitHubService
 				. '...'
 				. rawurlencode($head)
 		);
-	
+
 		if ($response === []) {
 			return [];
 		}
-	
+
 		$files = [];
-	
+
 		foreach (
 			(array) (
 				$response['files']
@@ -2075,18 +2075,18 @@ final class GitHubService
 			if (!is_array($file)) {
 				continue;
 			}
-	
+
 			$filename = trim(
 				(string) (
 					$file['filename']
 						?? ''
 				)
 			);
-	
+
 			if ($filename === '') {
 				continue;
 			}
-	
+
 			$files[] = [
 				'filename' => $filename,
 				'status' => trim(
@@ -2125,9 +2125,9 @@ final class GitHubService
 				),
 			];
 		}
-	
+
 		$commits = [];
-	
+
 		foreach (
 			(array) (
 				$response['commits']
@@ -2138,48 +2138,48 @@ final class GitHubService
 			if (!is_array($commitItem)) {
 				continue;
 			}
-	
+
 			$commitData = is_array(
 				$commitItem['commit']
 					?? null
 			)
 				? $commitItem['commit']
 				: [];
-	
+
 			$authorData = is_array(
 				$commitData['author']
 					?? null
 			)
 				? $commitData['author']
 				: [];
-	
+
 			$githubAuthor = is_array(
 				$commitItem['author']
 					?? null
 			)
 				? $commitItem['author']
 				: [];
-	
+
 			$sha = trim(
 				(string) (
 					$commitItem['sha']
 						?? ''
 				)
 			);
-	
+
 			$message = trim(
 				(string) (
 					$commitData['message']
 						?? ''
 				)
 			);
-	
+
 			$messageParts = preg_split(
 				'/\R/',
 				$message,
 				2
 			);
-	
+
 			if (
 				is_array($messageParts)
 				&& isset($messageParts[0])
@@ -2188,7 +2188,7 @@ final class GitHubService
 					(string) $messageParts[0]
 				);
 			}
-	
+
 			$commits[] = [
 				'sha' => $sha,
 				'short_sha' => substr(
@@ -2229,7 +2229,7 @@ final class GitHubService
 				),
 			];
 		}
-	
+
 		$result = [
 			'status' => trim(
 				(string) (
@@ -2282,15 +2282,15 @@ final class GitHubService
 			'commits' => $commits,
 			'files' => $files,
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getIssueComment(
 		string $repository,
 		int $commentId
@@ -2298,17 +2298,17 @@ final class GitHubService
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		if (
 			$repository === ''
 			|| $commentId <= 0
 		) {
 			return [];
 		}
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-issue-comment-'
 			. hash(
@@ -2320,7 +2320,7 @@ final class GitHubService
 				)
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -2331,7 +2331,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -2340,31 +2340,31 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$response = $this->request(
 			'https://api.github.com/repos/'
 				. $repository
 				. '/issues/comments/'
 				. $commentId
 		);
-	
+
 		if ($response === []) {
 			return [];
 		}
-	
+
 		$user = is_array(
 			$response['user']
 				?? null
 		)
 			? $response['user']
 			: [];
-	
+
 		$result = [
 			'id' => (int) (
 				$response['id']
@@ -2421,15 +2421,15 @@ final class GitHubService
 				),
 			],
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getDiscussionComment(
 		string $repository,
 		int $commentId
@@ -2437,17 +2437,17 @@ final class GitHubService
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		if (
 			$repository === ''
 			|| $commentId <= 0
 		) {
 			return [];
 		}
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-discussion-comment-'
 			. hash(
@@ -2459,7 +2459,7 @@ final class GitHubService
 				)
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -2470,7 +2470,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -2479,13 +2479,13 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$query = <<<'GRAPHQL'
 		query(
 			$id: ID!
@@ -2498,7 +2498,7 @@ final class GitHubService
 					createdAt
 					updatedAt
 					isAnswer
-	
+
 					author {
 						login
 						avatarUrl
@@ -2508,7 +2508,7 @@ final class GitHubService
 			}
 		}
 		GRAPHQL;
-	
+
 		// REST espone l'ID numerico, GraphQL richiede il node ID.
 		$response = $this->request(
 			'https://api.github.com/repos/'
@@ -2516,18 +2516,18 @@ final class GitHubService
 				. '/discussions/comments/'
 				. $commentId
 		);
-	
+
 		if ($response === []) {
 			return [];
 		}
-	
+
 		$user = is_array(
 			$response['user']
 				?? null
 		)
 			? $response['user']
 			: [];
-	
+
 		$result = [
 			'id' => (int) (
 				$response['id']
@@ -2584,15 +2584,15 @@ final class GitHubService
 				),
 			],
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getWorkflowRun(
 		string $repository,
 		int $runId
@@ -2600,17 +2600,17 @@ final class GitHubService
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		if (
 			$repository === ''
 			|| $runId <= 0
 		) {
 			return [];
 		}
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-workflow-run-'
 			. hash(
@@ -2622,7 +2622,7 @@ final class GitHubService
 				)
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -2633,7 +2633,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -2642,38 +2642,38 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$response = $this->request(
 			'https://api.github.com/repos/'
 				. $repository
 				. '/actions/runs/'
 				. $runId
 		);
-	
+
 		if ($response === []) {
 			return [];
 		}
-	
+
 		$actor = is_array(
 			$response['actor']
 				?? null
 		)
 			? $response['actor']
 			: [];
-	
+
 		$headCommit = is_array(
 			$response['head_commit']
 				?? null
 		)
 			? $response['head_commit']
 			: [];
-	
+
 		$result = [
 			'id' => (int) (
 				$response['id']
@@ -2804,15 +2804,15 @@ final class GitHubService
 				),
 			],
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getFileContent(
 		string $repository,
 		string $ref,
@@ -2821,13 +2821,13 @@ final class GitHubService
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		$ref = trim($ref);
 		$path = trim(
 			$path,
 			"/ \t\n\r\0\x0B"
 		);
-	
+
 		if (
 			$repository === ''
 			|| $ref === ''
@@ -2835,7 +2835,7 @@ final class GitHubService
 		) {
 			return [];
 		}
-	
+
 		// Limiti sui parametri usati nelle richieste GitHub.
 		if (
 			str_contains($path, "\0")
@@ -2844,10 +2844,10 @@ final class GitHubService
 		) {
 			return [];
 		}
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-file-'
 			. hash(
@@ -2859,7 +2859,7 @@ final class GitHubService
 					. $path
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -2870,7 +2870,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -2879,13 +2879,13 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$response = $this->request(
 			'https://api.github.com/repos/'
 			. $repository
@@ -2903,14 +2903,14 @@ final class GitHubService
 			. '?ref='
 			. rawurlencode($ref)
 		);
-	
+
 		if (
 			$response === []
 			|| ($response['type'] ?? '') !== 'file'
 		) {
 			return [];
 		}
-	
+
 		$encoding = strtolower(
 			trim(
 				(string) (
@@ -2919,12 +2919,12 @@ final class GitHubService
 				)
 			)
 		);
-	
+
 		$encodedContent = (string) (
 			$response['content']
 				?? ''
 		);
-	
+
 		if (
 			$encoding !== 'base64'
 			|| $encodedContent === ''
@@ -2940,21 +2940,21 @@ final class GitHubService
 			) ?? '',
 			true
 		);
-	
+
 		if ($decodedContent === false) {
 			return [];
 		}
-	
+
 		// Limite massimo per la preview: 512 KiB.
 		if (strlen($decodedContent) > 524288) {
 			return [];
 		}
-	
+
 		// Esclude contenuti binari.
 		if (str_contains($decodedContent, "\0")) {
 			return [];
 		}
-	
+
 		$result = [
 			'name' => trim(
 				(string) (
@@ -2986,15 +2986,15 @@ final class GitHubService
 			),
 			'content' => $decodedContent,
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
-	
+
 	public function getCommit(
 		string $repository,
 		string $sha
@@ -3002,9 +3002,9 @@ final class GitHubService
 		$repository = $this->normalizeRepository(
 			$repository
 		);
-	
+
 		$sha = trim($sha);
-	
+
 		if (
 			$repository === ''
 			|| $sha === ''
@@ -3016,10 +3016,10 @@ final class GitHubService
 		) {
 			return [];
 		}
-	
+
 		$cacheDirectory = __DIR__
 			. '/../../storage/cache';
-	
+
 		$cacheFile = $cacheDirectory
 			. '/github-commit-'
 			. hash(
@@ -3031,7 +3031,7 @@ final class GitHubService
 				)
 			)
 			. '.json';
-	
+
 		if (
 			is_file($cacheFile)
 			&& (
@@ -3042,7 +3042,7 @@ final class GitHubService
 			$cachedJson = file_get_contents(
 				$cacheFile
 			);
-	
+
 			if (
 				$cachedJson !== false
 				&& $cachedJson !== ''
@@ -3051,54 +3051,54 @@ final class GitHubService
 					$cachedJson,
 					true
 				);
-	
+
 				if (is_array($cachedData)) {
 					return $cachedData;
 				}
 			}
 		}
-	
+
 		$response = $this->request(
 			'https://api.github.com/repos/'
 			. $repository
 			. '/commits/'
 			. rawurlencode($sha)
 		);
-	
+
 		if ($response === []) {
 			return [];
 		}
-	
+
 		$commit = is_array(
 			$response['commit']
 				?? null
 		)
 			? $response['commit']
 			: [];
-	
+
 		$author = is_array(
 			$commit['author']
 				?? null
 		)
 			? $commit['author']
 			: [];
-	
+
 		$githubAuthor = is_array(
 			$response['author']
 				?? null
 		)
 			? $response['author']
 			: [];
-	
+
 		$stats = is_array(
 			$response['stats']
 				?? null
 		)
 			? $response['stats']
 			: [];
-	
+
 		$files = [];
-	
+
 		foreach (
 			(array) (
 				$response['files']
@@ -3109,18 +3109,18 @@ final class GitHubService
 			if (!is_array($file)) {
 				continue;
 			}
-	
+
 			$filename = trim(
 				(string) (
 					$file['filename']
 						?? ''
 				)
 			);
-	
+
 			if ($filename === '') {
 				continue;
 			}
-	
+
 			$files[] = [
 				'filename' => $filename,
 				'status' => trim(
@@ -3159,7 +3159,7 @@ final class GitHubService
 				),
 			];
 		}
-	
+
 		$result = [
 			'sha' => trim(
 				(string) (
@@ -3229,12 +3229,12 @@ final class GitHubService
 			],
 			'files' => $files,
 		];
-	
+
 		$this->writeCache(
 			$cacheFile,
 			$result
 		);
-	
+
 		return $result;
 	}
 
@@ -3400,7 +3400,7 @@ final class GitHubService
 			],
 		];
 	}
-	
+
 	private function normalizeBranches(
 		array $branches,
 		string $currentBranch
@@ -3408,26 +3408,26 @@ final class GitHubService
 		if (!array_is_list($branches)) {
 			return [];
 		}
-	
+
 		$result = [];
-	
+
 		foreach ($branches as $branch) {
-	
+
 			if (!is_array($branch)) {
 				continue;
 			}
-	
+
 			$name = trim(
 				(string) (
 					$branch['name']
 					?? ''
 				)
 			);
-	
+
 			if ($name === '') {
 				continue;
 			}
-	
+
 			$result[] = [
 				'name' => $name,
 				'protected' => (bool) (
@@ -3439,29 +3439,29 @@ final class GitHubService
 				),
 			];
 		}
-	
+
 		usort(
 			$result,
 			static function (
 				array $a,
 				array $b
 			): int {
-	
+
 				if ($a['current']) {
 					return -1;
 				}
-	
+
 				if ($b['current']) {
 					return 1;
 				}
-	
+
 				return strcasecmp(
 					$a['name'],
 					$b['name']
 				);
 			}
 		);
-	
+
 		return $result;
 	}
 
@@ -3570,53 +3570,111 @@ final class GitHubService
 		return $result;
 	}
 
-	private function normalizeRelease(
+	private function normalizeReleases(
 		array $releases
 	): array {
-		if (
-			!array_is_list($releases)
-			|| !isset($releases[0])
-			|| !is_array($releases[0])
-		) {
-			return [];
+		$result = [
+			'stable' => [],
+			'beta' => [],
+			'nightly' => [],
+		];
+
+		if (!array_is_list($releases)) {
+			return $result;
 		}
 
-		$release = $releases[0];
+		foreach ($releases as $release) {
+			if (!is_array($release)) {
+				continue;
+			}
 
-		return [
-			'name' => trim(
-				(string) (
-					$release['name']
-					?? ''
+			if (
+				(bool) (
+					$release['draft']
+						?? false
 				)
-			),
-			'tag_name' => trim(
+			) {
+				continue;
+			}
+
+			$tagName = trim(
 				(string) (
 					$release['tag_name']
-					?? ''
+						?? ''
 				)
-			),
-			'html_url' => trim(
-				(string) (
-					$release['html_url']
-					?? ''
+			);
+
+			if ($tagName === '') {
+				continue;
+			}
+
+			$normalizedRelease = [
+				'name' => trim(
+					(string) (
+						$release['name']
+							?? ''
+					)
+				),
+				'tag_name' => $tagName,
+				'html_url' => trim(
+					(string) (
+						$release['html_url']
+							?? ''
+					)
+				),
+				'published_at' => trim(
+					(string) (
+						$release['published_at']
+							?? ''
+					)
+				),
+				'prerelease' => (bool) (
+					$release['prerelease']
+						?? false
+				),
+				'draft' => false,
+			];
+
+			if (
+				strtolower($tagName) === 'nightly'
+			) {
+				if ($result['nightly'] === []) {
+					$result['nightly'] =
+						$normalizedRelease;
+				}
+
+				continue;
+			}
+
+			if (
+				(bool) (
+					$release['prerelease']
+						?? false
 				)
-			),
-			'published_at' => trim(
-				(string) (
-					$release['published_at']
-					?? ''
-				)
-			),
-			'prerelease' => (bool) (
-				$release['prerelease']
-				?? false
-			),
-			'draft' => (bool) (
-				$release['draft']
-				?? false
-			),
-		];
+			) {
+				if ($result['beta'] === []) {
+					$result['beta'] =
+						$normalizedRelease;
+				}
+
+				continue;
+			}
+
+			if ($result['stable'] === []) {
+				$result['stable'] =
+					$normalizedRelease;
+			}
+
+			if (
+				$result['stable'] !== []
+				&& $result['beta'] !== []
+				&& $result['nightly'] !== []
+			) {
+				break;
+			}
+		}
+
+		return $result;
 	}
 
 	private function normalizeLanguages(
@@ -3853,7 +3911,7 @@ final class GitHubService
 			$cacheFile
 		);
 	}
-	
+
 	private function graphqlRequest(
 		string $query,
 		array $variables = []
@@ -3864,11 +3922,11 @@ final class GitHubService
 				''
 			)
 		);
-	
+
 		if ($token === '') {
 			return [];
 		}
-	
+
 		$payload = json_encode(
 			[
 				'query' => $query,
@@ -3877,18 +3935,18 @@ final class GitHubService
 			JSON_UNESCAPED_UNICODE
 				| JSON_UNESCAPED_SLASHES
 		);
-	
+
 		if ($payload === false) {
 			return [];
 		}
-	
+
 		$headers = [
 			'Accept: application/vnd.github+json',
 			'Content-Type: application/json',
 			'Authorization: Bearer ' . $token,
 			'User-Agent: Monoverse/1.0',
 		];
-	
+
 		$context = stream_context_create([
 			'http' => [
 				'method' => 'POST',
@@ -3898,25 +3956,25 @@ final class GitHubService
 				'content' => $payload,
 			],
 		]);
-	
+
 		$responseBody = @file_get_contents(
 			'https://api.github.com/graphql',
 			false,
 			$context
 		);
-	
+
 		if (
 			$responseBody === false
 			|| $responseBody === ''
 		) {
 			return [];
 		}
-	
+
 		$decoded = json_decode(
 			$responseBody,
 			true
 		);
-	
+
 		return is_array($decoded)
 			? $decoded
 			: [];
@@ -3930,19 +3988,19 @@ final class GitHubService
 			'X-GitHub-Api-Version: 2022-11-28',
 			'User-Agent: Monoverse/1.0',
 		];
-	
+
 		$token = trim(
 			(string) $this->settings->get(
 				'github_api_token',
 				''
 			)
 		);
-	
+
 		if ($token !== '') {
 			$headers[] = 'Authorization: Bearer '
 				. $token;
 		}
-	
+
 		$context = stream_context_create([
 			'http' => [
 				'method' => 'GET',
@@ -3951,25 +4009,25 @@ final class GitHubService
 				'header' => $headers,
 			],
 		]);
-	
+
 		$responseBody = @file_get_contents(
 			$url,
 			false,
 			$context
 		);
-	
+
 		if (
 			$responseBody === false
 			|| $responseBody === ''
 		) {
 			return [];
 		}
-	
+
 		$decoded = json_decode(
 			$responseBody,
 			true
 		);
-	
+
 		return is_array($decoded)
 			? $decoded
 			: [];

@@ -1,0 +1,59 @@
+name: Nightly Build
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  nightly:
+    name: Build nightly release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create nightly archive
+        run: |
+          git archive \
+            --format=zip \
+            --prefix=monoverse/ \
+            --output=monoverse-nightly.zip \
+            "$GITHUB_SHA"
+
+      - name: Update nightly tag
+        run: |
+          git tag -f nightly "$GITHUB_SHA"
+          git push origin refs/tags/nightly --force
+
+      - name: Create or update nightly release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view nightly >/dev/null 2>&1; then
+            gh release upload nightly monoverse-nightly.zip --clobber
+            gh release edit nightly \
+              --title "Monoverse Community Edition - Nightly Build" \
+              --notes "Build automatica dell'ultimo commit del branch main.
+
+          Questa versione viene aggiornata a ogni push ed è destinata esclusivamente a test e sviluppo.
+
+          Commit: $GITHUB_SHA" \
+              --prerelease
+          else
+            gh release create nightly \
+              monoverse-nightly.zip \
+              --title "Monoverse Community Edition - Nightly Build" \
+              --notes "Build automatica dell'ultimo commit del branch main.
+
+          Questa versione viene aggiornata a ogni push ed è destinata esclusivamente a test e sviluppo.
+
+          Commit: $GITHUB_SHA" \
+              --prerelease
+          fi

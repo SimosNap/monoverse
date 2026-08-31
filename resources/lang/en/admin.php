@@ -791,6 +791,11 @@ return [
 			'description' => 'Displays the latest members registered in the community.',
 		],
 	
+		'most_active_users' => [
+			'label' => 'Most active users',
+			'description' => 'Displays the most active community members by combining web and IRC activity.',
+		],
+
 		'latest_audio' => [
 			'label' => 'Latest shared audio',
 			'description' => 'Displays the latest audio shared in Pings.',
@@ -859,6 +864,22 @@ return [
 			],
 		],
 	
+		'most_active_users' => [
+			'title' => [
+				'label' => 'Title',
+				'default' => 'Most active users',
+			],
+			'limit' => [
+				'label' => 'Number of users',
+			],
+			'show_avatar' => [
+				'label' => 'Show avatars',
+			],
+			'show_stats' => [
+				'label' => 'Show activity statistics',
+			],
+		],
+
 		'categories' => [
 			'title' => [
 				'label' => 'Title',

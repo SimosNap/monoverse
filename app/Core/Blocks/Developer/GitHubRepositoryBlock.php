@@ -6,14 +6,15 @@ namespace Monoverse\Core\Blocks\Developer;
 use Monoverse\Core\Blocks\BlockInterface;
 use Monoverse\Core\Blocks\ValidatesSettingsInterface;
 use Monoverse\Services\GitHubService;
-
+use Monoverse\Services\Translator;
 
 class GitHubRepositoryBlock implements
 BlockInterface,
 ValidatesSettingsInterface
 {
 	public function __construct(
-		private GitHubService $github
+		private GitHubService $github,
+		private Translator $translator
 	) {
 	}
 
@@ -24,7 +25,9 @@ ValidatesSettingsInterface
 
 	public function label(): string
 	{
-		return 'GitHub Repository';
+		return $this->translator->translate(
+			'blocks.developer.github_repository.admin.label'
+		);
 	}
 
 	public function category(): string
@@ -39,7 +42,9 @@ ValidatesSettingsInterface
 
 	public function description(): string
 	{
-		return 'Dashboard completa di un repository GitHub con attività, commit, release, issue e pull request.';
+		return $this->translator->translate(
+			'blocks.developer.github_repository.admin.description'
+		);
 	}
 
 	public function configurable(): bool
@@ -185,7 +190,9 @@ ValidatesSettingsInterface
 		if ($repository === '') {
 			return [
 				'repository' =>
-					'Inserisci owner/repository oppure l\'URL completo GitHub.',
+					$this->translator->translate(
+						'blocks.developer.github_repository.admin.repository_error'
+					),
 			];
 		}
 	
@@ -208,7 +215,7 @@ ValidatesSettingsInterface
 		$defaultBranch = trim(
 			(string) (
 				$settings['branch']
-				?? ''
+					?? ''
 			)
 		);
 		

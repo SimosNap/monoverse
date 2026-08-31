@@ -5,11 +5,13 @@ namespace Monoverse\Core\Blocks\Community;
 
 use Monoverse\Core\Blocks\BlockInterface;
 use Monoverse\Services\CommunityService;
+use Monoverse\Services\Translator;
 
 final class MostActiveUsersBlock implements BlockInterface
 {
 	public function __construct(
-		private CommunityService $community
+		private CommunityService $community,
+		private Translator $translator
 	) {
 	}
 
@@ -20,7 +22,9 @@ final class MostActiveUsersBlock implements BlockInterface
 
 	public function label(): string
 	{
-		return 'Utenti più attivi';
+		return $this->translator->translate(
+			'admin.block_types.most_active_users.label'
+		);
 	}
 
 	public function category(): string
@@ -35,7 +39,9 @@ final class MostActiveUsersBlock implements BlockInterface
 
 	public function description(): string
 	{
-		return 'Mostra gli utenti più attivi combinando attività nella community e nella chat IRC.';
+		return $this->translator->translate(
+			'admin.block_types.most_active_users.description'
+		);
 	}
 
 	public function configurable(): bool
@@ -125,7 +131,7 @@ final class MostActiveUsersBlock implements BlockInterface
 		return [
 			'title' => (string) (
 				$settings['title']
-				?? 'Utenti più attivi'
+					?? 'Utenti più attivi'
 			),
 			'limit' => $limit,
 			'show_avatar' => $this->booleanSetting(

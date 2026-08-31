@@ -279,6 +279,9 @@ class App
                 return new \Monoverse\Core\Blocks\Community\MostActiveUsersBlock(
                     $container->get(
                         \Monoverse\Services\CommunityService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\Translator::class
                     )
                 );
             }
@@ -304,6 +307,9 @@ class App
                 return new \Monoverse\Core\Blocks\Developer\GitHubRepositoryBlock(
                     $container->get(
                         \Monoverse\Services\GitHubService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\Translator::class
                     )
                 );
             }
@@ -329,6 +335,9 @@ class App
                 return new \Monoverse\Core\Blocks\Developer\GitHubPullRequestsBlock(
                     $container->get(
                         \Monoverse\Services\GitHubService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\Translator::class
                     )
                 );
             }

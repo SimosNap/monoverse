@@ -71,6 +71,11 @@ return [
 			],
 			'empty' => 'Nessuna pull request disponibile.',
 			'view_all' => 'Vedi tutte le Pull Request',
+			'admin' => [
+				'label' => 'GitHub Pull Requests',
+				'description' => 'Mostra le pull request più recenti di un repository GitHub.',
+				'repository_error' => 'Inserisci un repository GitHub valido.',
+			],
 		],
 		'github_release' => [
 			'default_title' => 'Ultime release',
@@ -119,6 +124,12 @@ return [
 			'files' => [
 				'one' => ':count file',
 				'many' => ':count file',
+			],
+
+			'admin' => [
+				'label' => 'GitHub Repository',
+				'description' => 'Dashboard completa di un repository GitHub con attività, commit, release, issue e pull request.',
+				'repository_error' => 'Inserisci un repository GitHub valido.',
 			],
 		],
 	],

@@ -791,6 +791,11 @@ return [
 			'description' => 'Mostra gli ultimi membri registrati nella community.',
 		],
 	
+		'most_active_users' => [
+			'label' => 'Utenti più attivi',
+			'description' => 'Mostra gli utenti più attivi combinando attività nella community e nella chat IRC.',
+		],
+
 		'latest_audio' => [
 			'label' => 'Ultimi audio condivisi',
 			'description' => 'Mostra gli ultimi audio condivisi nei Ping.',
@@ -859,6 +864,22 @@ return [
 			],
 		],
 	
+		'most_active_users' => [
+			'title' => [
+				'label' => 'Titolo',
+				'default' => 'Utenti più attivi',
+			],
+			'limit' => [
+				'label' => 'Numero di utenti',
+			],
+			'show_avatar' => [
+				'label' => 'Mostra avatar',
+			],
+			'show_stats' => [
+				'label' => 'Mostra statistiche attività',
+			],
+		],
+
 		'categories' => [
 			'title' => [
 				'label' => 'Titolo',

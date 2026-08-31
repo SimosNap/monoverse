@@ -4,15 +4,20 @@ declare(strict_types=1);
 namespace Monoverse\Core\Blocks\Webradio;
 
 use Monoverse\Core\Blocks\BlockInterface;
+use Monoverse\Core\Blocks\ValidatesSettingsInterface;
 use Monoverse\Services\AzuraCastService;
+use Monoverse\Services\Translator;
 
-final class AzuraCastBlock implements BlockInterface
+final class AzuraCastBlock implements
+	BlockInterface,
+	ValidatesSettingsInterface
 {
 	public function __construct(
-		private AzuraCastService $azuraCast
+		private AzuraCastService $azuraCast,
+		private Translator $translator
 	) {
 	}
-	
+
 	public function type(): string
 	{
 		return 'azuracast';
@@ -96,6 +101,7 @@ final class AzuraCastBlock implements BlockInterface
 					$settings['station_url']
 					?? ''
 				),
+				'placeholder' => 'https://radio.example.org/api/nowplaying/1',
 			],
 			[
 				'type' => 'number',
@@ -126,12 +132,55 @@ final class AzuraCastBlock implements BlockInterface
 			'widgets/azuracast',
 		];
 	}
-	
+
 	public function scripts(): array
 	{
 		return [
 			'widgets/azuracast',
 		];
+	}
+
+	public function validateSettings(
+		array &$settings
+	): array {
+		$stationUrl = rtrim(
+			trim(
+				(string) (
+					$settings['station_url']
+					?? ''
+				)
+			),
+			'/'
+		);
+
+		if ($stationUrl === '') {
+			return [];
+		}
+
+		if (
+			filter_var(
+				$stationUrl,
+				FILTER_VALIDATE_URL
+			) === false
+			|| preg_match(
+				'#/api/nowplaying/[^/]+$#',
+				(string) parse_url(
+					$stationUrl,
+					PHP_URL_PATH
+				)
+			) !== 1
+		) {
+			return [
+				'station_url' =>
+					$this->translator->translate(
+						'blocks.webradio.azuracast.admin.station_url_error'
+					),
+			];
+		}
+
+		$settings['station_url'] = $stationUrl;
+
+		return [];
 	}
 
 	public function data(
@@ -142,7 +191,7 @@ final class AzuraCastBlock implements BlockInterface
 			$settings['history_limit']
 			?? 5
 		);
-		
+
 		$stationUrl = rtrim(
 			trim(
 				(string) (
@@ -152,7 +201,7 @@ final class AzuraCastBlock implements BlockInterface
 			),
 			'/'
 		);
-		
+
 		$nowPlaying = $stationUrl !== ''
 			? $this->azuraCast->getNowPlaying($stationUrl)
 			: [];

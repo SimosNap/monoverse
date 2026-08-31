@@ -7,6 +7,7 @@ final class IcecastService
 {
 	private const STATUS_PATH = '/status-json.xsl';
 	private const CACHE_TTL = 15;
+	private const MAX_RESPONSE_BYTES = 1048576;
 
 	/**
 	 * @return array<string, mixed>|null
@@ -108,14 +109,40 @@ final class IcecastService
 	{
 		$baseUrl = trim($baseUrl);
 
-		if ($baseUrl === '') {
+		if (
+			$baseUrl === ''
+			|| filter_var(
+				$baseUrl,
+				FILTER_VALIDATE_URL
+			) === false
+		) {
 			return '';
 		}
 
-		if (
-			!str_starts_with($baseUrl, 'http://')
-			&& !str_starts_with($baseUrl, 'https://')
-		) {
+		$scheme = strtolower(
+			(string) parse_url(
+				$baseUrl,
+				PHP_URL_SCHEME
+			)
+		);
+
+		if (!in_array(
+			$scheme,
+			['http', 'https'],
+			true
+		)) {
+			return '';
+		}
+
+		$path = trim(
+			(string) parse_url(
+				$baseUrl,
+				PHP_URL_PATH
+			),
+			'/'
+		);
+
+		if ($path !== '') {
 			return '';
 		}
 
@@ -139,7 +166,13 @@ final class IcecastService
 			],
 		]);
 
-		$json = @file_get_contents($url, false, $context);
+		$json = @file_get_contents(
+			$url,
+			false,
+			$context,
+			0,
+			self::MAX_RESPONSE_BYTES
+		);
 
 		if ($json === false || trim($json) === '') {
 			return null;

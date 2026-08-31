@@ -4,12 +4,17 @@ declare(strict_types=1);
 namespace Monoverse\Core\Blocks\Webradio;
 
 use Monoverse\Core\Blocks\BlockInterface;
+use Monoverse\Core\Blocks\ValidatesSettingsInterface;
 use Monoverse\Services\IcecastService;
+use Monoverse\Services\Translator;
 
-final class IcecastStatsBlock implements BlockInterface
+final class IcecastStatsBlock implements
+	BlockInterface,
+	ValidatesSettingsInterface
 {
 	public function __construct(
-		private IcecastService $icecast
+		private IcecastService $icecast,
+		private Translator $translator
 	) {
 	}
 
@@ -78,12 +83,13 @@ final class IcecastStatsBlock implements BlockInterface
 			[
 				'type' => 'url',
 				'name' => 'status_url',
-				'label' => 'URL status JSON Icecast',
+				'label' => 'URL server Icecast',
 				'value' => (string) (
 					$settings['status_url']
 					?? ''
 				),
-				'help' => 'Esempio: https://radio.example.org/status-json.xsl',
+				'placeholder' => 'https://radio.example.org:8000',
+				'help' => 'URL base del server Icecast, ad esempio https://radio.example.org:8000.',
 			],
 			[
 				'type' => 'text',
@@ -143,6 +149,75 @@ final class IcecastStatsBlock implements BlockInterface
 		];
 	}
 
+	public function validateSettings(
+		array &$settings
+	): array {
+		$errors = [];
+
+		$baseUrl = rtrim(
+			trim(
+				(string) (
+					$settings['status_url']
+					?? ''
+				)
+			),
+			'/'
+		);
+
+		if ($baseUrl !== '') {
+			$scheme = strtolower(
+				(string) parse_url(
+					$baseUrl,
+					PHP_URL_SCHEME
+				)
+			);
+
+			$path = trim(
+				(string) parse_url(
+					$baseUrl,
+					PHP_URL_PATH
+				),
+				'/'
+			);
+
+			if (
+				filter_var(
+					$baseUrl,
+					FILTER_VALIDATE_URL
+				) === false
+				|| !in_array(
+					$scheme,
+					['http', 'https'],
+					true
+				)
+				|| $path !== ''
+			) {
+				$errors[] = $this->translator->translate(
+					'blocks.webradio.icecast_stats.admin.status_url_error'
+				);
+			}
+		}
+
+		$mount = trim(
+			(string) (
+				$settings['mount']
+				?? ''
+			)
+		);
+
+		if (
+			$mount !== ''
+			&& !str_starts_with($mount, '/')
+		) {
+			$mount = '/' . $mount;
+		}
+
+		$settings['status_url'] = $baseUrl;
+		$settings['mount'] = $mount;
+
+		return $errors;
+	}
+
 	public function stylesheets(): array
 	{
 		return [
@@ -154,19 +229,29 @@ final class IcecastStatsBlock implements BlockInterface
 		array $settings = [],
 		array $context = []
 	): array {
-		$baseUrl = trim(
-			(string) (
-				$settings['status_url']
-				?? ''
-			)
+		$baseUrl = rtrim(
+			trim(
+				(string) (
+					$settings['status_url']
+					?? ''
+				)
+			),
+			'/'
 		);
 
 		$mount = trim(
 			(string) (
 				$settings['mount']
-				?? ''
+					?? ''
 			)
 		);
+
+		if (
+			$mount !== ''
+			&& !str_starts_with($mount, '/')
+		) {
+			$mount = '/' . $mount;
+		}
 
 		$status = $baseUrl !== ''
 			? $this->icecast->getStatus($baseUrl)

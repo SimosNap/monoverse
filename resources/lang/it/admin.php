@@ -1052,6 +1052,7 @@ return [
 			],
 			'station_url' => [
 				'label' => 'URL stazione AzuraCast',
+				'placeholder' => 'https://radio.example.org/api/nowplaying/1',
 			],
 			'history_limit' => [
 				'label' => 'Numero brani nello storico',
@@ -1060,7 +1061,7 @@ return [
 				'label' => 'Mostra storico brani',
 			],
 		],
-	
+
 		'azuracast_mini_player' => [
 			'title' => [
 				'label' => 'Titolo',
@@ -1068,15 +1069,13 @@ return [
 			],
 			'now_playing_url' => [
 				'label' => 'URL API Now Playing',
-			],
-			'stream_url' => [
-				'label' => 'URL stream audio',
+				'placeholder' => 'https://radio.example.org/api/nowplaying/1',
 			],
 			'show_cover' => [
 				'label' => 'Mostra copertina',
 			],
 		],
-	
+
 		'azuracast_requests' => [
 			'title' => [
 				'label' => 'Titolo',
@@ -1085,6 +1084,7 @@ return [
 			'requests_url' => [
 				'label' => 'URL richieste AzuraCast',
 				'help' => 'Esempio: https://radio.example.org/api/station/1/requests',
+				'placeholder' => 'https://radio.example.org/api/station/1/requests',
 			],
 			'unavailable_behavior' => [
 				'label' => 'Quando le richieste non sono disponibili',
@@ -1098,7 +1098,7 @@ return [
 				'default' => 'Le richieste musicali non sono disponibili in questo momento.',
 			],
 		],
-	
+
 		'azuracast_stats' => [
 			'title' => [
 				'label' => 'Titolo',
@@ -1107,6 +1107,7 @@ return [
 			'station_url' => [
 				'label' => 'URL Now Playing AzuraCast',
 				'help' => 'Esempio: https://radio.example.org/api/nowplaying/1',
+				'placeholder' => 'https://radio.example.org/api/nowplaying/1',
 			],
 			'show_listeners' => [
 				'label' => 'Mostra ascoltatori attuali',
@@ -1119,6 +1120,63 @@ return [
 			],
 			'show_codec' => [
 				'label' => 'Mostra codec',
+			],
+			'show_mounts' => [
+				'label' => 'Mostra mount attivi',
+			],
+		],
+
+		'icecast' => [
+			'title' => [
+				'label' => 'Titolo',
+				'default' => 'Ascolta la radio',
+			],
+			'player_style' => [
+				'label' => 'Stile player',
+				'help' => 'Scegli l’aspetto del player mostrato nel sito.',
+				'options' => [
+					'modern' => 'Modern',
+					'led' => 'LED',
+					'analog' => 'Analog',
+					'minimal' => 'Minimal',
+				],
+			],
+			'station_url' => [
+				'label' => 'URL server Icecast',
+				'help' => 'URL base del server Icecast, ad esempio https://radio.example.org:8000.',
+				'placeholder' => 'https://radio.example.org:8000',
+			],
+			'mount' => [
+				'label' => 'Mountpoint',
+				'help' => 'Mountpoint dello stream, ad esempio /radio.',
+			],
+		],
+
+		'icecast_stats' => [
+			'title' => [
+				'label' => 'Titolo',
+				'default' => 'Statistiche radio',
+			],
+			'status_url' => [
+				'label' => 'URL server Icecast',
+				'help' => 'URL base del server Icecast, ad esempio https://radio.example.org:8000.',
+				'placeholder' => 'https://radio.example.org:8000',
+			],
+			'mount' => [
+				'label' => 'Mount',
+				'help' => 'Opzionale. Esempio: /radio.mp3',
+			],
+			'show_listeners' => [
+				'label' => 'Mostra ascoltatori attuali',
+			],
+			'show_peak' => [
+				'label' => 'Mostra picco ascoltatori',
+			],
+			'show_bitrate' => [
+				'label' => 'Mostra bitrate',
+			],
+			'show_codec' => [
+				'label' => 'Mostra formato audio',
 			],
 			'show_mounts' => [
 				'label' => 'Mostra mount attivi',

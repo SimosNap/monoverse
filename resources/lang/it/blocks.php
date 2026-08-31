@@ -148,6 +148,9 @@ return [
 				'error' => 'Errore durante la riproduzione',
 				'ready' => 'Pronto',
 			],
+			'admin' => [
+				'now_playing_url_error' => 'Inserisci un URL API Now Playing AzuraCast valido.',
+			],
 		],
 		'azuracast' => [
 			'default_title' => 'Ascolta la radio',
@@ -171,6 +174,9 @@ return [
 			'start_failed' => 'Impossibile avviare la radio',
 			'slow_connection' => 'Connessione lenta…',
 			'player_unavailable' => 'Radio non disponibile',
+			'admin' => [
+				'station_url_error' => 'Inserisci un URL API Now Playing AzuraCast valido.',
+			],
 		],
 		'azuracast_requests' => [
 			'default_title' => 'Richiedi un brano',
@@ -209,6 +215,10 @@ return [
 				'sending' => 'Invio...',
 				'sending_status' => 'Invio della richiesta in corso...',
 			],
+
+			'admin' => [
+				'requests_url_error' => 'Inserisci un endpoint richieste AzuraCast valido.',
+			],
 		],
 		'azuracast_stats' => [
 			'default_title' => 'Statistiche radio',
@@ -240,6 +250,15 @@ return [
 					'many' => ':count ascoltatori',
 				],
 			],
+
+			'admin' => [
+				'station_url_error' => 'Inserisci un URL API Now Playing AzuraCast valido.',
+			],
+		],
+		'icecast' => [
+			'admin' => [
+				'station_url_error' => 'Inserisci un URL base Icecast valido.',
+			],
 		],
 		'icecast_stats' => [
 			'default_title' => 'Statistiche radio',
@@ -270,6 +289,10 @@ return [
 					'one' => ':count ascoltatore',
 					'many' => ':count ascoltatori',
 				],
+			],
+
+			'admin' => [
+				'status_url_error' => 'Inserisci un URL base Icecast valido.',
 			],
 		],
 	],

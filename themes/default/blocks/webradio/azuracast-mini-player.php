@@ -33,7 +33,7 @@ $stationName = trim(
 );
 
 $streamUrl = trim(
-	(string) ($stream_url ?? '')
+	(string) ($station['listen_url'] ?? '')
 );
 
 $currentTitle = trim(

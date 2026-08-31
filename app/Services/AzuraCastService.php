@@ -8,6 +8,7 @@ final class AzuraCastService
 	private const CACHE_TTL = 15;
 
 	private const REQUESTS_CACHE_TTL = 60;
+	private const MAX_RESPONSE_BYTES = 1048576;
 
 	public function getNowPlaying(
 		string $stationUrl
@@ -18,6 +19,10 @@ final class AzuraCastService
 		);
 
 		if ($stationUrl === '') {
+			return [];
+		}
+
+		if (!$this->isValidNowPlayingUrl($stationUrl)) {
 			return [];
 		}
 
@@ -93,6 +98,14 @@ final class AzuraCastService
 				'available' => false,
 				'items' => [],
 				'message' => 'Endpoint delle richieste non configurato.',
+			];
+		}
+
+		if (!$this->isValidRequestsUrl($requestsUrl)) {
+			return [
+				'available' => false,
+				'items' => [],
+				'message' => 'Endpoint delle richieste AzuraCast non valido.',
 			];
 		}
 
@@ -434,7 +447,9 @@ final class AzuraCastService
 		$responseBody = @file_get_contents(
 			$url,
 			false,
-			$context
+			$context,
+			0,
+			self::MAX_RESPONSE_BYTES
 		);
 	
 		$status = 0;
@@ -531,6 +546,100 @@ final class AzuraCastService
 			$temporaryFile,
 			$cacheFile
 		);
+	}
+
+	private function isValidRequestsUrl(
+		string $url
+	): bool {
+		if (
+			$url === ''
+			|| filter_var(
+				$url,
+				FILTER_VALIDATE_URL
+			) === false
+		) {
+			return false;
+		}
+
+		$parts = parse_url($url);
+
+		if (
+			!is_array($parts)
+			|| !isset(
+				$parts['scheme'],
+				$parts['host'],
+				$parts['path']
+			)
+		) {
+			return false;
+		}
+
+		if (
+			!in_array(
+				strtolower((string) $parts['scheme']),
+				['http', 'https'],
+				true
+			)
+		) {
+			return false;
+		}
+
+		$path = rtrim(
+			(string) $parts['path'],
+			'/'
+		);
+
+		return preg_match(
+			'#/api/station/[^/]+/requests$#',
+			$path
+		) === 1;
+	}
+
+	private function isValidNowPlayingUrl(
+		string $url
+	): bool {
+		if (
+			$url === ''
+			|| filter_var(
+				$url,
+				FILTER_VALIDATE_URL
+			) === false
+		) {
+			return false;
+		}
+
+		$parts = parse_url($url);
+
+		if (
+			!is_array($parts)
+			|| !isset(
+				$parts['scheme'],
+				$parts['host'],
+				$parts['path']
+			)
+		) {
+			return false;
+		}
+
+		if (
+			!in_array(
+				strtolower((string) $parts['scheme']),
+				['http', 'https'],
+				true
+			)
+		) {
+			return false;
+		}
+
+		$path = rtrim(
+			(string) $parts['path'],
+			'/'
+		);
+
+		return preg_match(
+			'#/api/nowplaying/[^/]+$#',
+			$path
+		) === 1;
 	}
 
 	private function requestBody(

@@ -4,12 +4,17 @@ declare(strict_types=1);
 namespace Monoverse\Core\Blocks\Webradio;
 
 use Monoverse\Core\Blocks\BlockInterface;
+use Monoverse\Core\Blocks\ValidatesSettingsInterface;
 use Monoverse\Services\AzuraCastService;
+use Monoverse\Services\Translator;
 
-final class AzuraCastRequestsBlock implements BlockInterface
+final class AzuraCastRequestsBlock implements
+	BlockInterface,
+	ValidatesSettingsInterface
 {
 	public function __construct(
-		private AzuraCastService $azuraCast
+		private AzuraCastService $azuraCast,
+		private Translator $translator
 	) {
 	}
 
@@ -79,7 +84,10 @@ final class AzuraCastRequestsBlock implements BlockInterface
 					$settings['requests_url']
 					?? ''
 				),
-				'help' => 'Esempio: https://radio.example.org/api/station/1/requests',
+				'placeholder' =>
+					'https://radio.example.org/api/station/1/requests',
+				'help' =>
+					'Esempio: https://radio.example.org/api/station/1/requests',
 			],
 			[
 				'type' => 'select',
@@ -120,6 +128,48 @@ final class AzuraCastRequestsBlock implements BlockInterface
 		];
 	}
 
+	public function validateSettings(
+		array &$settings
+	): array {
+		$requestsUrl = rtrim(
+			trim(
+				(string) (
+					$settings['requests_url']
+						?? ''
+				)
+			),
+			'/'
+		);
+
+		if (
+			$requestsUrl !== ''
+			&& (
+				filter_var(
+					$requestsUrl,
+					FILTER_VALIDATE_URL
+				) === false
+				|| preg_match(
+					'#/api/station/[^/]+/requests$#',
+					(string) parse_url(
+						$requestsUrl,
+						PHP_URL_PATH
+					)
+				) !== 1
+			)
+		) {
+			return [
+				'requests_url' =>
+					$this->translator->translate(
+						'blocks.webradio.azuracast_requests.admin.requests_url_error'
+					),
+			];
+		}
+
+		$settings['requests_url'] = $requestsUrl;
+
+		return [];
+	}
+
 	public function data(
 		array $settings = [],
 		array $context = []
@@ -128,18 +178,21 @@ final class AzuraCastRequestsBlock implements BlockInterface
 			trim(
 				(string) (
 					$settings['requests_url']
-					?? ''
+						?? ''
 				)
 			),
 			'/'
 		);
 
 		$catalog = $requestsUrl !== ''
-			? $this->azuraCast->getRequestCatalog($requestsUrl)
+			? $this->azuraCast->getRequestCatalog(
+				$requestsUrl
+			)
 			: [
 				'available' => false,
 				'items' => [],
-				'message' => 'Endpoint delle richieste non configurato.',
+				'message' =>
+					'Endpoint delle richieste non configurato.',
 			];
 
 		$unavailableBehavior = (string) (
@@ -169,7 +222,7 @@ final class AzuraCastRequestsBlock implements BlockInterface
 			),
 			'request_items' => is_array(
 				$catalog['items']
-				?? null
+					?? null
 			)
 				? $catalog['items']
 				: [],

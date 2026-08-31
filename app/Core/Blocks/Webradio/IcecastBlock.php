@@ -4,12 +4,17 @@ declare(strict_types=1);
 namespace Monoverse\Core\Blocks\Webradio;
 
 use Monoverse\Core\Blocks\BlockInterface;
+use Monoverse\Core\Blocks\ValidatesSettingsInterface;
 use Monoverse\Services\IcecastService;
+use Monoverse\Services\Translator;
 
-final class IcecastBlock implements BlockInterface
+final class IcecastBlock implements
+	BlockInterface,
+	ValidatesSettingsInterface
 {
 	public function __construct(
-		private IcecastService $icecast
+		private IcecastService $icecast,
+		private Translator $translator
 	) {
 	}
 
@@ -95,6 +100,7 @@ final class IcecastBlock implements BlockInterface
 					$settings['station_url']
 					?? ''
 				),
+				'placeholder' => 'https://radio.example.org:8000',
 				'help' => 'URL base del server Icecast, ad esempio https://radio.example.org:8000.',
 			],
 			[
@@ -108,6 +114,72 @@ final class IcecastBlock implements BlockInterface
 				'help' => 'Mountpoint dello stream, ad esempio /radio.',
 			],
 		];
+	}
+
+	public function validateSettings(
+		array &$settings
+	): array {
+		$errors = [];
+
+		$stationUrl = rtrim(
+			trim(
+				(string) (
+					$settings['station_url']
+					?? ''
+				)
+			),
+			'/'
+		);
+
+		if ($stationUrl !== '') {
+			$scheme = strtolower(
+				(string) parse_url(
+					$stationUrl,
+					PHP_URL_SCHEME
+				)
+			);
+
+			$path = trim(
+				(string) parse_url(
+					$stationUrl,
+					PHP_URL_PATH
+				),
+				'/'
+			);
+
+			if (
+				filter_var(
+					$stationUrl,
+					FILTER_VALIDATE_URL
+				) === false
+				|| !in_array(
+					$scheme,
+					['http', 'https'],
+					true
+				)
+				|| $path !== ''
+			) {
+				$errors[] = $this->translator->translate(
+					'blocks.webradio.icecast.admin.station_url_error'
+				);
+			}
+		}
+
+		$mount = trim(
+			(string) (
+				$settings['mount']
+				?? ''
+			)
+		);
+
+		if ($mount !== '' && !str_starts_with($mount, '/')) {
+			$mount = '/' . $mount;
+		}
+
+		$settings['station_url'] = $stationUrl;
+		$settings['mount'] = $mount;
+
+		return $errors;
 	}
 
 	public function stylesheets(): array

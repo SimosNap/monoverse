@@ -4,12 +4,17 @@ declare(strict_types=1);
 namespace Monoverse\Core\Blocks\Webradio;
 
 use Monoverse\Core\Blocks\BlockInterface;
+use Monoverse\Core\Blocks\ValidatesSettingsInterface;
 use Monoverse\Services\AzuraCastService;
+use Monoverse\Services\Translator;
 
-final class AzuraCastMiniPlayerBlock implements BlockInterface
+final class AzuraCastMiniPlayerBlock implements
+	BlockInterface,
+	ValidatesSettingsInterface
 {
 	public function __construct(
-		private AzuraCastService $azuraCast
+		private AzuraCastService $azuraCast,
+		private Translator $translator
 	) {
 	}
 
@@ -53,7 +58,6 @@ final class AzuraCastMiniPlayerBlock implements BlockInterface
 		return [
 			'title' => 'Ascolta la radio',
 			'now_playing_url' => '',
-			'stream_url' => '',
 			'show_cover' => true,
 		];
 	}
@@ -79,15 +83,8 @@ final class AzuraCastMiniPlayerBlock implements BlockInterface
 					$settings['now_playing_url']
 					?? ''
 				),
-			],
-			[
-				'type' => 'url',
-				'name' => 'stream_url',
-				'label' => 'URL stream audio',
-				'value' => (string) (
-					$settings['stream_url']
-					?? ''
-				),
+				'placeholder' =>
+					'https://radio.example.org/api/nowplaying/1',
 			],
 			[
 				'type' => 'checkbox',
@@ -115,6 +112,49 @@ final class AzuraCastMiniPlayerBlock implements BlockInterface
 		];
 	}
 
+	public function validateSettings(
+		array &$settings
+	): array {
+		$nowPlayingUrl = rtrim(
+			trim(
+				(string) (
+					$settings['now_playing_url']
+						?? ''
+				)
+			),
+			'/'
+		);
+
+		if (
+			$nowPlayingUrl !== ''
+			&& (
+				filter_var(
+					$nowPlayingUrl,
+					FILTER_VALIDATE_URL
+				) === false
+				|| preg_match(
+					'#/api/nowplaying/[^/]+$#',
+					(string) parse_url(
+						$nowPlayingUrl,
+						PHP_URL_PATH
+					)
+				) !== 1
+			)
+		) {
+			return [
+				'now_playing_url' =>
+					$this->translator->translate(
+						'blocks.webradio.azuracast_mini_player.admin.now_playing_url_error'
+					),
+			];
+		}
+
+		$settings['now_playing_url'] =
+			$nowPlayingUrl;
+
+		return [];
+	}
+
 	public function data(
 		array $settings = [],
 		array $context = []
@@ -122,19 +162,14 @@ final class AzuraCastMiniPlayerBlock implements BlockInterface
 		$nowPlayingUrl = trim(
 			(string) (
 				$settings['now_playing_url']
-				?? ''
-			)
-		);
-
-		$streamUrl = trim(
-			(string) (
-				$settings['stream_url']
-				?? ''
+					?? ''
 			)
 		);
 
 		$nowPlaying = $nowPlayingUrl !== ''
-			? $this->azuraCast->getNowPlaying($nowPlayingUrl)
+			? $this->azuraCast->getNowPlaying(
+				$nowPlayingUrl
+			)
 			: [];
 
 		return [
@@ -145,10 +180,10 @@ final class AzuraCastMiniPlayerBlock implements BlockInterface
 				)
 			),
 			'now_playing_url' => $nowPlayingUrl,
-			'stream_url' => $streamUrl,
 			'now_playing' => $nowPlaying,
 			'show_cover' => filter_var(
-				$settings['show_cover'] ?? true,
+				$settings['show_cover']
+					?? true,
 				FILTER_VALIDATE_BOOL
 			),
 		];

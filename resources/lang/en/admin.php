@@ -1052,6 +1052,7 @@ return [
 			],
 			'station_url' => [
 				'label' => 'AzuraCast station URL',
+				'placeholder' => 'https://radio.example.org/api/nowplaying/1',
 			],
 			'history_limit' => [
 				'label' => 'Number of tracks in history',
@@ -1060,7 +1061,7 @@ return [
 				'label' => 'Show track history',
 			],
 		],
-	
+
 		'azuracast_mini_player' => [
 			'title' => [
 				'label' => 'Title',
@@ -1068,15 +1069,13 @@ return [
 			],
 			'now_playing_url' => [
 				'label' => 'Now Playing API URL',
-			],
-			'stream_url' => [
-				'label' => 'Audio stream URL',
+				'placeholder' => 'https://radio.example.org/api/nowplaying/1',
 			],
 			'show_cover' => [
 				'label' => 'Show cover',
 			],
 		],
-	
+
 		'azuracast_requests' => [
 			'title' => [
 				'label' => 'Title',
@@ -1085,6 +1084,7 @@ return [
 			'requests_url' => [
 				'label' => 'AzuraCast requests URL',
 				'help' => 'Example: https://radio.example.org/api/station/1/requests',
+				'placeholder' => 'https://radio.example.org/api/station/1/requests',
 			],
 			'unavailable_behavior' => [
 				'label' => 'When requests are unavailable',
@@ -1098,7 +1098,7 @@ return [
 				'default' => 'Music requests are not available at the moment.',
 			],
 		],
-	
+
 		'azuracast_stats' => [
 			'title' => [
 				'label' => 'Title',
@@ -1107,6 +1107,7 @@ return [
 			'station_url' => [
 				'label' => 'AzuraCast Now Playing URL',
 				'help' => 'Example: https://radio.example.org/api/nowplaying/1',
+				'placeholder' => 'https://radio.example.org/api/nowplaying/1',
 			],
 			'show_listeners' => [
 				'label' => 'Show current listeners',
@@ -1119,6 +1120,63 @@ return [
 			],
 			'show_codec' => [
 				'label' => 'Show codec',
+			],
+			'show_mounts' => [
+				'label' => 'Show active mounts',
+			],
+		],
+
+		'icecast' => [
+			'title' => [
+				'label' => 'Title',
+				'default' => 'Listen to the radio',
+			],
+			'player_style' => [
+				'label' => 'Player style',
+				'help' => 'Choose the appearance of the player displayed on the site.',
+				'options' => [
+					'modern' => 'Modern',
+					'led' => 'LED',
+					'analog' => 'Analog',
+					'minimal' => 'Minimal',
+				],
+			],
+			'station_url' => [
+				'label' => 'Icecast server URL',
+				'help' => 'Base URL of the Icecast server, for example https://radio.example.org:8000.',
+				'placeholder' => 'https://radio.example.org:8000',
+			],
+			'mount' => [
+				'label' => 'Mountpoint',
+				'help' => 'Stream mountpoint, for example /radio.',
+			],
+		],
+
+		'icecast_stats' => [
+			'title' => [
+				'label' => 'Title',
+				'default' => 'Radio statistics',
+			],
+			'status_url' => [
+				'label' => 'Icecast server URL',
+				'help' => 'Base URL of the Icecast server, for example https://radio.example.org:8000.',
+				'placeholder' => 'https://radio.example.org:8000',
+			],
+			'mount' => [
+				'label' => 'Mount',
+				'help' => 'Optional. Example: /radio.mp3',
+			],
+			'show_listeners' => [
+				'label' => 'Show current listeners',
+			],
+			'show_peak' => [
+				'label' => 'Show listener peak',
+			],
+			'show_bitrate' => [
+				'label' => 'Show bitrate',
+			],
+			'show_codec' => [
+				'label' => 'Show audio format',
 			],
 			'show_mounts' => [
 				'label' => 'Show active mounts',

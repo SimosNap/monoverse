@@ -4,12 +4,17 @@ declare(strict_types=1);
 namespace Monoverse\Core\Blocks\Webradio;
 
 use Monoverse\Core\Blocks\BlockInterface;
+use Monoverse\Core\Blocks\ValidatesSettingsInterface;
 use Monoverse\Services\AzuraCastService;
+use Monoverse\Services\Translator;
 
-final class AzuraCastStatsBlock implements BlockInterface
+final class AzuraCastStatsBlock implements
+    BlockInterface,
+    ValidatesSettingsInterface
 {
     public function __construct(
-        private AzuraCastService $azuraCast
+        private AzuraCastService $azuraCast,
+        private Translator $translator
     ) {
     }
 
@@ -82,6 +87,7 @@ final class AzuraCastStatsBlock implements BlockInterface
                     $settings['station_url']
                     ?? ''
                 ),
+                'placeholder' => 'https://radio.example.org/api/nowplaying/1',
                 'help' => 'Esempio: https://radio.example.org/api/nowplaying/1',
             ],
             [
@@ -137,6 +143,48 @@ final class AzuraCastStatsBlock implements BlockInterface
         return [
             'widgets/azuracast-stats',
         ];
+    }
+
+    public function validateSettings(
+        array &$settings
+    ): array {
+        $stationUrl = rtrim(
+            trim(
+                (string) (
+                    $settings['station_url']
+                    ?? ''
+                )
+            ),
+            '/'
+        );
+
+        if (
+            $stationUrl !== ''
+            && (
+                filter_var(
+                    $stationUrl,
+                    FILTER_VALIDATE_URL
+                ) === false
+                || preg_match(
+                    '#/api/nowplaying/[^/]+$#',
+                    (string) parse_url(
+                        $stationUrl,
+                        PHP_URL_PATH
+                    )
+                ) !== 1
+            )
+        ) {
+            return [
+                'station_url' =>
+                    $this->translator->translate(
+                        'blocks.webradio.azuracast_stats.admin.station_url_error'
+                    ),
+            ];
+        }
+
+        $settings['station_url'] = $stationUrl;
+
+        return [];
     }
 
     public function data(

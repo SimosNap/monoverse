@@ -202,6 +202,9 @@ class App
                 return new \Monoverse\Core\Blocks\Webradio\AzuraCastBlock(
                     $container->get(
                         \Monoverse\Services\AzuraCastService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\Translator::class
                     )
                 );
             }
@@ -213,6 +216,9 @@ class App
                 return new \Monoverse\Core\Blocks\Webradio\IcecastBlock(
                     $container->get(
                         \Monoverse\Services\IcecastService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\Translator::class
                     )
                 );
             }
@@ -224,6 +230,9 @@ class App
                 return new \Monoverse\Core\Blocks\Webradio\IcecastStatsBlock(
                     $container->get(
                         \Monoverse\Services\IcecastService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\Translator::class
                     )
                 );
             }
@@ -235,21 +244,27 @@ class App
                 return new \Monoverse\Core\Blocks\Webradio\AzuraCastMiniPlayerBlock(
                     $container->get(
                         \Monoverse\Services\AzuraCastService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\Translator::class
                     )
                 );
             }
         );
 
-        $this->container->set(
-            \Monoverse\Core\Blocks\Webradio\AzuraCastRequestsBlock::class,
-            function (Container $container) {
-                return new \Monoverse\Core\Blocks\Webradio\AzuraCastRequestsBlock(
-                    $container->get(
-                        \Monoverse\Services\AzuraCastService::class
-                    )
-                );
-            }
-        );
+       $this->container->set(
+           \Monoverse\Core\Blocks\Webradio\AzuraCastRequestsBlock::class,
+           function (Container $container) {
+               return new \Monoverse\Core\Blocks\Webradio\AzuraCastRequestsBlock(
+                   $container->get(
+                       \Monoverse\Services\AzuraCastService::class
+                   ),
+                   $container->get(
+                       \Monoverse\Services\Translator::class
+                   )
+               );
+           }
+       );
 
         $this->container->set(
             \Monoverse\Core\Blocks\Webradio\AzuraCastStatsBlock::class,
@@ -257,6 +272,9 @@ class App
                 return new \Monoverse\Core\Blocks\Webradio\AzuraCastStatsBlock(
                     $container->get(
                         \Monoverse\Services\AzuraCastService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\Translator::class
                     )
                 );
             }

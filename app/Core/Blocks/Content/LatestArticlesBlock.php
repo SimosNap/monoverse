@@ -115,8 +115,8 @@ final class LatestArticlesBlock implements BlockInterface
         return [
             'title' => trim(
                 (string) (
-                    $settings['title']
-                    ?? 'Ultimi articoli'
+                    $context['block']['title']
+                    ?? ''
                 )
             ),
             'show_date' => filter_var(

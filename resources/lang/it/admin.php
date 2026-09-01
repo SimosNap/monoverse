@@ -834,7 +834,7 @@ return [
 	'block_settings' => [
 		'latest_members' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Nuovi membri',
 			],
 			'limit' => [
@@ -847,7 +847,7 @@ return [
 	
 		'users_in_chat' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Adesso in chat',
 			],
 			'limit' => [
@@ -866,7 +866,7 @@ return [
 	
 		'most_active_users' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Utenti più attivi',
 			],
 			'limit' => [
@@ -882,7 +882,7 @@ return [
 
 		'categories' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Categorie',
 			],
 			'show_count' => [
@@ -898,7 +898,7 @@ return [
 	
 		'latest_articles' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Ultimi articoli',
 			],
 			'limit' => [
@@ -911,7 +911,7 @@ return [
 	
 		'latest_audio' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Ultimi audio condivisi',
 			],
 			'limit' => [
@@ -924,7 +924,7 @@ return [
 	
 		'latest_video' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Ultimi video condivisi',
 			],
 			'limit' => [
@@ -937,7 +937,7 @@ return [
 	
 		'pages_navigation' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Pagine',
 			],
 			'navigation_group' => [
@@ -948,7 +948,7 @@ return [
 	
 		'submit_article' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Proponi un articolo',
 			],
 			'description' => [
@@ -1037,7 +1037,7 @@ return [
 	
 		'azuracast' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Ascolta la radio',
 			],
 			'player_style' => [
@@ -1064,7 +1064,7 @@ return [
 
 		'azuracast_mini_player' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Ascolta la radio',
 			],
 			'now_playing_url' => [
@@ -1078,7 +1078,7 @@ return [
 
 		'azuracast_requests' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Richiedi un brano',
 			],
 			'requests_url' => [
@@ -1101,7 +1101,7 @@ return [
 
 		'azuracast_stats' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Statistiche radio',
 			],
 			'station_url' => [
@@ -1128,7 +1128,7 @@ return [
 
 		'icecast' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Ascolta la radio',
 			],
 			'player_style' => [
@@ -1154,7 +1154,7 @@ return [
 
 		'icecast_stats' => [
 			'title' => [
-				'label' => 'Titolo',
+				'label' => 'Nome widget',
 				'default' => 'Statistiche radio',
 			],
 			'status_url' => [

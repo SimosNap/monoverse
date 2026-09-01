@@ -115,8 +115,8 @@ final class LatestVideoBlock implements BlockInterface
 		return [
 			'title' => trim(
 				(string) (
-					$settings['title']
-					?? 'Ultimi Video Condivisi'
+					$context['block']['title']
+					?? ''
 				)
 			),
 			'show_author' => filter_var(

@@ -61,7 +61,6 @@ class GitHubPullRequestsBlock implements
 	{
 		return [
 			'repository' => '',
-			'custom_title' => '',
 			'state' => 'open',
 			'limit' => '5',
 		];
@@ -81,16 +80,6 @@ class GitHubPullRequestsBlock implements
 				),
 				'placeholder' => 'owner/repository',
 				'help' => 'Puoi inserire sia owner/repository sia l\'URL completo del repository GitHub.',
-			],
-			[
-				'type' => 'text',
-				'name' => 'custom_title',
-				'label' => 'Titolo personalizzato',
-				'value' => (string) (
-					$settings['custom_title']
-					?? ''
-				),
-				'placeholder' => 'Pull Requests',
 			],
 			[
 				'type' => 'select',
@@ -185,7 +174,7 @@ class GitHubPullRequestsBlock implements
 		return [
 			'title' => trim(
 				(string) (
-					$settings['custom_title']
+					$context['block']['title']
 						?? ''
 				)
 			),

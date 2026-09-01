@@ -138,8 +138,8 @@ final class UsersInChatBlock implements BlockInterface
 
         return [
             'title' => (string) (
-                $settings['title']
-                ?? 'Adesso in chat'
+                $context['block']['title']
+                ?? ''
             ),
             'limit' => $limit,
             'show_total' => $this->booleanSetting(

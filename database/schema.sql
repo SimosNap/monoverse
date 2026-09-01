@@ -301,6 +301,24 @@ CREATE TABLE `mv_categories` (
   KEY `idx_type_sort` (`type`,`sort_order`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `mv_content_translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mv_content_translations` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `entity_type` varchar(32) NOT NULL,
+  `entity_id` bigint(20) unsigned NOT NULL,
+  `locale` varchar(16) NOT NULL,
+  `field` varchar(64) NOT NULL,
+  `value` mediumtext DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_entity_locale_field` (`entity_type`,`entity_id`,`locale`,`field`),
+  KEY `idx_entity` (`entity_type`,`entity_id`),
+  KEY `idx_locale` (`locale`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `mv_modules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;

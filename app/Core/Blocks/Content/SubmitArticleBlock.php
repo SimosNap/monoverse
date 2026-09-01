@@ -110,8 +110,8 @@ class SubmitArticleBlock implements BlockInterface
 			) === '1',
 			'title' => trim(
 				(string) (
-					$settings['title']
-					?? 'Proponi un articolo'
+					$context['block']['title']
+					?? ''
 				)
 			),
 			'description' => trim(

@@ -130,8 +130,8 @@ final class MostActiveUsersBlock implements BlockInterface
 
 		return [
 			'title' => (string) (
-				$settings['title']
-					?? 'Utenti più attivi'
+				$context['block']['title']
+					?? ''
 			),
 			'limit' => $limit,
 			'show_avatar' => $this->booleanSetting(

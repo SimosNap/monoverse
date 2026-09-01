@@ -211,8 +211,8 @@ final class AzuraCastRequestsBlock implements
 		return [
 			'title' => trim(
 				(string) (
-					$settings['title']
-					?? 'Richiedi un brano'
+					$context['block']['title']
+					?? ''
 				)
 			),
 			'requests_url' => $requestsUrl,

@@ -277,8 +277,8 @@ final class IcecastStatsBlock implements
 		return [
 			'title' => trim(
 				(string) (
-					$settings['title']
-					?? 'Statistiche radio'
+					$context['block']['title']
+					?? ''
 				)
 			),
 			'status_url' => $baseUrl,

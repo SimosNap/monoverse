@@ -834,7 +834,7 @@ return [
 	'block_settings' => [
 		'latest_members' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'New members',
 			],
 			'limit' => [
@@ -847,7 +847,7 @@ return [
 	
 		'users_in_chat' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Now in chat',
 			],
 			'limit' => [
@@ -866,7 +866,7 @@ return [
 	
 		'most_active_users' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Most active users',
 			],
 			'limit' => [
@@ -882,7 +882,7 @@ return [
 
 		'categories' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Categories',
 			],
 			'show_count' => [
@@ -898,7 +898,7 @@ return [
 	
 		'latest_articles' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Latest articles',
 			],
 			'limit' => [
@@ -911,7 +911,7 @@ return [
 	
 		'latest_audio' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Latest shared audio',
 			],
 			'limit' => [
@@ -924,7 +924,7 @@ return [
 	
 		'latest_video' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Latest shared videos',
 			],
 			'limit' => [
@@ -937,7 +937,7 @@ return [
 	
 		'pages_navigation' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Pages',
 			],
 			'navigation_group' => [
@@ -948,7 +948,7 @@ return [
 	
 		'submit_article' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Submit an article',
 			],
 			'description' => [
@@ -1037,7 +1037,7 @@ return [
 	
 		'azuracast' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Listen to the radio',
 			],
 			'player_style' => [
@@ -1064,7 +1064,7 @@ return [
 
 		'azuracast_mini_player' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Listen to the radio',
 			],
 			'now_playing_url' => [
@@ -1078,7 +1078,7 @@ return [
 
 		'azuracast_requests' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Request a track',
 			],
 			'requests_url' => [
@@ -1101,7 +1101,7 @@ return [
 
 		'azuracast_stats' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Radio statistics',
 			],
 			'station_url' => [
@@ -1128,7 +1128,7 @@ return [
 
 		'icecast' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Listen to the radio',
 			],
 			'player_style' => [
@@ -1154,7 +1154,7 @@ return [
 
 		'icecast_stats' => [
 			'title' => [
-				'label' => 'Title',
+				'label' => 'Widget name',
 				'default' => 'Radio statistics',
 			],
 			'status_url' => [

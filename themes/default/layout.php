@@ -1076,9 +1076,7 @@ $ogPublishedTime = trim(
                                 ) ?>
                             </a>
 
-                            <?php
-                            /*
-                            if (
+                            <?php if (
                                 $isMultilingual
                                 && count($availableLocales) > 1
                             ):
@@ -1139,9 +1137,7 @@ $ogPublishedTime = trim(
 
                                 </div>
 
-                            <?php endif;
-                            */
-                            ?>
+                            <?php endif; ?>
 
                             <a
                                 href="/account/logout"
@@ -1160,9 +1156,7 @@ $ogPublishedTime = trim(
 
                 <?php else: ?>
 
-                    <?php
-                    /*
-                    if (
+                    <?php if (
                         $isMultilingual
                         && count($availableLocales) > 1
                     ):
@@ -1253,9 +1247,7 @@ $ogPublishedTime = trim(
 
                         </div>
 
-                    <?php endif;
-                    */
-                    ?>
+                    <?php endif; ?>
 
                     <a
                         href="/register"

@@ -115,8 +115,8 @@ final class LatestAudioBlock implements BlockInterface
 		return [
 			'title' => trim(
 				(string) (
-					$settings['title']
-					?? 'Ultimi Audio Condivisi'
+					$context['block']['title']
+					?? ''
 				)
 			),
 			'show_author' => filter_var(

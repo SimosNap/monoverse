@@ -115,8 +115,8 @@ final class PagesNavigationBlock implements BlockInterface
 		return [
 			'title' => trim(
 				(string) (
-					$settings['title']
-						?? 'Pagine'
+					$context['block']['title']
+						?? ''
 				)
 			),
 			'currentPageSlug' => $currentPageSlug,

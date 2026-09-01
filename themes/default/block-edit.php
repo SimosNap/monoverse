@@ -206,48 +206,20 @@ $widthOptions = [
 
 				<div class="mv-admin-field">
 
-					<label for="block-name">
-						<?= htmlspecialchars(
-							$t('admin.block_edit.name.label'),
-							ENT_QUOTES,
-							'UTF-8'
-						) ?>
-					</label>
-
-					<input
-						id="block-name"
-						type="text"
-						name="name"
-						value="<?= htmlspecialchars(
-							(string) ($block['name'] ?? ''),
-							ENT_QUOTES,
-							'UTF-8'
-						) ?>"
-						placeholder="<?= htmlspecialchars(
-							$t('admin.block_edit.name.placeholder'),
-							ENT_QUOTES,
-							'UTF-8'
-						) ?>"
-					>
-
-					<span class="mv-admin-field-help">
-						<?= htmlspecialchars(
-							$t('admin.block_edit.name.help'),
-							ENT_QUOTES,
-							'UTF-8'
-						) ?>
-					</span>
-
-				</div>
-
-				<div class="mv-admin-field">
-
 					<label for="block-title">
 						<?= htmlspecialchars(
 							$t('admin.block_edit.public_title.label'),
 							ENT_QUOTES,
 							'UTF-8'
 						) ?>
+
+						<?php if ($defaultLocale !== ''): ?>
+							(<?= htmlspecialchars(
+								strtoupper($defaultLocale),
+								ENT_QUOTES,
+								'UTF-8'
+							) ?>)
+						<?php endif; ?>
 					</label>
 
 					<input
@@ -267,6 +239,70 @@ $widthOptions = [
 					>
 
 				</div>
+
+				<?php foreach ($availableLocales as $locale): ?>
+
+					<?php
+					$locale = (string) $locale;
+
+					if ($locale === '' || $locale === $defaultLocale) {
+						continue;
+					}
+
+					$translatedTitle = (string) (
+						$titleTranslations[$locale]['title']
+						?? ''
+					);
+					?>
+
+					<div class="mv-admin-field">
+
+						<label
+							for="block-title-<?= htmlspecialchars(
+								$locale,
+								ENT_QUOTES,
+								'UTF-8'
+							) ?>"
+						>
+							<?= htmlspecialchars(
+								$t('admin.block_edit.public_title.label'),
+								ENT_QUOTES,
+								'UTF-8'
+							) ?>
+							(<?= htmlspecialchars(
+								strtoupper($locale),
+								ENT_QUOTES,
+								'UTF-8'
+							) ?>)
+						</label>
+
+						<input
+							id="block-title-<?= htmlspecialchars(
+								$locale,
+								ENT_QUOTES,
+								'UTF-8'
+							) ?>"
+							type="text"
+							name="translations[<?= htmlspecialchars(
+								$locale,
+								ENT_QUOTES,
+								'UTF-8'
+							) ?>][title]"
+							value="<?= htmlspecialchars(
+								$translatedTitle,
+								ENT_QUOTES,
+								'UTF-8'
+							) ?>"
+							placeholder="<?= htmlspecialchars(
+								$t('admin.block_edit.public_title.placeholder'),
+								ENT_QUOTES,
+								'UTF-8'
+							) ?>"
+						>
+
+					</div>
+
+				<?php endforeach; ?>
 
 				<div class="mv-admin-field">
 

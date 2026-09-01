@@ -52,6 +52,15 @@ class App
         );
 
         $this->container->set(
+            \Monoverse\Services\ContentTranslationService::class,
+            function (Container $container) {
+                return new \Monoverse\Services\ContentTranslationService(
+                    $container->get(Database::class)
+                );
+            }
+        );
+
+        $this->container->set(
             \Monoverse\Services\LocaleService::class,
             function (Container $container) {
                 $settings = null;
@@ -396,6 +405,12 @@ class App
                     ),
                     $container->get(
                         \Monoverse\Core\Blocks\BlockRenderer::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\LocaleService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\ContentTranslationService::class
                     )
                 );
             }
@@ -434,6 +449,12 @@ class App
                     ),
                     $container->get(
                         \Monoverse\Services\Translator::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\LocaleService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\ContentTranslationService::class
                     )
                 );
             }

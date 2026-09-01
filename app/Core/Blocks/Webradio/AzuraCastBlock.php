@@ -213,8 +213,8 @@ final class AzuraCastBlock implements
 		return [
 			'title' => trim(
 				(string) (
-					$settings['title']
-					?? 'Ascolta la radio'
+					$context['block']['title']
+					?? ''
 				)
 			),
 			'player_style' => in_array(

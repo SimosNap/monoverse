@@ -9,6 +9,8 @@ use Monoverse\Core\Blocks\FormRenderer;
 use Monoverse\Core\Response;
 use Monoverse\Core\Session;
 use Monoverse\Core\View;
+use Monoverse\Services\ContentTranslationService;
+use Monoverse\Services\LocaleService;
 use Monoverse\Services\Translator;
 use Monoverse\Repositories\BlockRepository;
 use Monoverse\Services\AdminAuthService;
@@ -30,7 +32,9 @@ final class BlockController extends BaseController
 		private AreaRegistry $areas,
 		private BlockRepository $repository,
 		private FormRenderer $formRenderer,
-		private Translator $translator
+		private Translator $translator,
+		private LocaleService $localeService,
+		private ContentTranslationService $contentTranslations
 	) {
 		parent::__construct(
 			$view,
@@ -348,6 +352,9 @@ final class BlockController extends BaseController
 				),
 
 				'isNew' => true,
+				'availableLocales' => $this->localeService->getAvailableLocales(),
+				'defaultLocale' => $this->localeService->getDefaultLocale(),
+				'titleTranslations' => [],
 			],
 			'admin-layout'
 		);
@@ -401,18 +408,18 @@ final class BlockController extends BaseController
 				$_POST[$fieldName] ?? ''
 			);
 		}
-		
+
 		if (
 			$block instanceof \Monoverse\Core\Blocks\ValidatesSettingsInterface
 		) {
 			$errors = $block->validateSettings($settings);
-		
+
 			if ($errors !== []) {
 				$this->session->flash(
 					'error',
 					implode("\n", $errors)
 				);
-		
+
 				$this->response->redirect(
 					'/admin/blocks/create?'
 					. http_build_query([
@@ -421,7 +428,7 @@ final class BlockController extends BaseController
 						'type' => $type,
 					])
 				);
-		
+
 				return;
 			}
 		}
@@ -448,7 +455,7 @@ final class BlockController extends BaseController
 			| JSON_UNESCAPED_SLASHES
 		);
 
-		$this->repository->create([
+		$blockId = $this->repository->create([
 			'page' => $page,
 			'area' => $area,
 			'type' => $type,
@@ -470,6 +477,45 @@ final class BlockController extends BaseController
 				? 1
 				: 0,
 		]);
+
+		$translations = $_POST['translations'] ?? [];
+
+		if (!is_array($translations)) {
+			$translations = [];
+		}
+
+		$defaultLocale = $this->localeService->getDefaultLocale();
+		$availableLocales = $this->localeService->getAvailableLocales();
+
+		foreach ($availableLocales as $locale) {
+			$locale = (string) $locale;
+
+			if ($locale === '' || $locale === $defaultLocale) {
+				continue;
+			}
+
+			$translatedTitle = '';
+
+			if (
+				isset($translations[$locale])
+				&& is_array($translations[$locale])
+			) {
+				$translatedTitle = trim(
+					(string) (
+						$translations[$locale]['title']
+						?? ''
+					)
+				);
+			}
+
+			$this->contentTranslations->set(
+				'block',
+				$blockId,
+				$locale,
+				'title',
+				$translatedTitle
+			);
+		}
 
 		$this->session->flash(
 			'success',
@@ -515,20 +561,31 @@ final class BlockController extends BaseController
 			$settings = [];
 		}
 
+		$titleTranslations = $this->contentTranslations->getAllForEntity(
+			'block',
+			$id
+		);
+
 		$this->render(
 			'block-edit',
 			[
 				'navigation' => $this->navigation->items(),
 				'block' => $record,
+
 				'blockDefinition' => [
 					'label' => $block->label(),
 					'description' => $block->description(),
 					'icon' => $block->icon(),
 				],
+
 				'editor' => $this->formRenderer->render(
 					$block,
 					$settings
 				),
+
+				'availableLocales' => $this->localeService->getAvailableLocales(),
+				'defaultLocale' => $this->localeService->getDefaultLocale(),
+				'titleTranslations' => $titleTranslations,
 			],
 			'admin-layout'
 		);
@@ -572,23 +629,23 @@ final class BlockController extends BaseController
 				$_POST[$fieldName] ?? ''
 			);
 		}
-		
+
 		if (
 			$block instanceof \Monoverse\Core\Blocks\ValidatesSettingsInterface
 		) {
 			$errors = $block->validateSettings($settings);
-		
+
 			if ($errors !== []) {
-		
+
 				$this->session->flash(
 					'error',
 					implode("\n", $errors)
 				);
-		
+
 				$this->response->redirect(
 					'/admin/blocks/' . $id . '/edit'
 				);
-		
+
 				return;
 			}
 		}
@@ -633,6 +690,45 @@ final class BlockController extends BaseController
 					: 0,
 			]
 		);
+
+		$translations = $_POST['translations'] ?? [];
+
+		if (!is_array($translations)) {
+			$translations = [];
+		}
+
+		$defaultLocale = $this->localeService->getDefaultLocale();
+		$availableLocales = $this->localeService->getAvailableLocales();
+
+		foreach ($availableLocales as $locale) {
+			$locale = (string) $locale;
+
+			if ($locale === '' || $locale === $defaultLocale) {
+				continue;
+			}
+
+			$translatedTitle = '';
+
+			if (
+				isset($translations[$locale])
+				&& is_array($translations[$locale])
+			) {
+				$translatedTitle = trim(
+					(string) (
+						$translations[$locale]['title']
+						?? ''
+					)
+				);
+			}
+
+			$this->contentTranslations->set(
+				'block',
+				$id,
+				$locale,
+				'title',
+				$translatedTitle
+			);
+		}
 
 		$this->session->flash(
 			'success',
@@ -926,41 +1022,41 @@ final class BlockController extends BaseController
 				'admin.blocks.dynamic_areas.' . $area
 			);
 		}
-	
+
 		$pageKey = str_replace('-', '_', $page);
 		$areaKey = str_replace('-', '_', $area);
-	
+
 		$key = 'admin.areas.'
 			. $pageKey
 			. '.'
 			. $areaKey;
-	
+
 		$translated = $this->translator->translate($key);
-	
+
 		return $translated !== $key
 			? $translated
 			: $fallback;
 	}
-	
+
 	private function pageLabel(string $page): string
 	{
 		if (str_starts_with($page, 'page:')) {
 			$slug = trim(
 				substr($page, strlen('page:'))
 			);
-	
+
 			$dynamicPage = $this->pages->findBySlug($slug);
-	
+
 			if ($dynamicPage !== null) {
 				$title = trim(
 					(string) ($dynamicPage['title'] ?? '')
 				);
-	
+
 				if ($title !== '') {
 					return $title;
 				}
 			}
-	
+
 			return ucfirst(
 				str_replace(
 					['-', '_'],
@@ -969,13 +1065,13 @@ final class BlockController extends BaseController
 				)
 			);
 		}
-	
+
 		$pageKey = str_replace('-', '_', $page);
-	
+
 		$key = 'admin.blocks.pages.' . $pageKey;
-	
+
 		$translated = $this->translator->translate($key);
-	
+
 		return $translated !== $key
 			? $translated
 			: ucfirst(

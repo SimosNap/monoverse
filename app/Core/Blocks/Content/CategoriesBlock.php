@@ -103,8 +103,8 @@ final class CategoriesBlock implements BlockInterface
 		return [
 			'title' => trim(
 				(string) (
-					$settings['title']
-					?? 'Categorie'
+					$context['block']['title']
+					?? ''
 				)
 			),
 			'show_count' => filter_var(

@@ -234,8 +234,8 @@ final class IcecastBlock implements
 		return [
 			'title' => trim(
 				(string) (
-					$settings['title']
-					?? 'Ascolta la radio'
+					$context['block']['title']
+					?? ''
 				)
 			),
 			'player_style' => in_array(

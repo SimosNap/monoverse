@@ -117,8 +117,8 @@ final class LatestMembersBlock implements BlockInterface
         return [
             'title' => trim(
                 (string) (
-                    $settings['title']
-                    ?? 'Nuovi membri'
+                    $context['block']['title']
+                    ?? ''
                 )
             ),
             'show_avatar' => $this->booleanSetting(

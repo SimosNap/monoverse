@@ -175,8 +175,8 @@ final class AzuraCastMiniPlayerBlock implements
 		return [
 			'title' => trim(
 				(string) (
-					$settings['title']
-						?? 'Ascolta la radio'
+					$context['block']['title']
+						?? ''
 				)
 			),
 			'now_playing_url' => $nowPlayingUrl,

@@ -208,8 +208,8 @@ final class AzuraCastStatsBlock implements
         return [
             'title' => trim(
                 (string) (
-                    $settings['title']
-                    ?? 'Statistiche radio'
+                    $context['block']['title']
+                    ?? ''
                 )
             ),
             'station_url' => $stationUrl,

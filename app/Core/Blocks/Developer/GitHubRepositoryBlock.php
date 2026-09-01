@@ -62,7 +62,6 @@ ValidatesSettingsInterface
 		return [
 			'repository' => '',
 			'branch' => '',
-			'title' => '',
 			'show_release' => true,
 			'show_languages' => true,
 			'show_commits' => true,
@@ -96,15 +95,6 @@ ValidatesSettingsInterface
 					?? ''
 				),
 				'placeholder' => 'Lascia vuoto per usare il branch predefinito',
-			],
-			[
-				'type' => 'text',
-				'name' => 'title',
-				'label' => 'Titolo personalizzato',
-				'value' => (string) (
-					$settings['title']
-					?? ''
-				),
 			],
 			[
 				'type' => 'checkbox',
@@ -271,7 +261,7 @@ ValidatesSettingsInterface
 		return [
 			'title' => trim(
 				(string) (
-					$settings['title']
+					$context['block']['title']
 						?? ''
 				)
 			),

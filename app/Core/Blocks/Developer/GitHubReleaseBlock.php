@@ -61,7 +61,6 @@ class GitHubReleaseBlock implements
 	{
 		return [
 			'repository' => '',
-			'custom_title' => '',
 			'show_repository' => true,
 			'show_date' => true,
 		];
@@ -84,20 +83,6 @@ class GitHubReleaseBlock implements
 				'placeholder' => 'owner/repository',
 				'help' => $this->translator->translate(
 					'blocks.developer.github_release.admin.repository_help'
-				),
-			],
-			[
-				'type' => 'text',
-				'name' => 'custom_title',
-				'label' => $this->translator->translate(
-					'blocks.developer.github_release.admin.title'
-				),
-				'value' => (string) (
-					$settings['custom_title']
-						?? ''
-				),
-				'placeholder' => $this->translator->translate(
-					'blocks.developer.github_release.admin.title_placeholder'
 				),
 			],
 			[
@@ -181,7 +166,7 @@ class GitHubReleaseBlock implements
 		return [
 			'title' => trim(
 				(string) (
-					$settings['custom_title']
+					$context['block']['title']
 						?? ''
 				)
 			),

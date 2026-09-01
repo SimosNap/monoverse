@@ -19,7 +19,9 @@ final class BlockManager
 
     public function __construct(
         private BlockRepository $repository,
-        private BlockRenderer $renderer
+        private BlockRenderer $renderer,
+        private \Monoverse\Services\LocaleService $localeService,
+        private \Monoverse\Services\ContentTranslationService $contentTranslations
     ) {
     }
 
@@ -61,6 +63,29 @@ final class BlockManager
             $settings = $this->decodeSettings(
                 $block['settings'] ?? null
             );
+
+            $currentLocale = $this->localeService->getCurrentLocale();
+            $defaultLocale = $this->localeService->getDefaultLocale();
+
+            if (
+                $currentLocale !== ''
+                && $currentLocale !== $defaultLocale
+                && isset($block['id'])
+            ) {
+                $translatedTitle = $this->contentTranslations->get(
+                    'block',
+                    (int) $block['id'],
+                    $currentLocale,
+                    'title'
+                );
+
+                if (
+                    $translatedTitle !== null
+                    && trim($translatedTitle) !== ''
+                ) {
+                    $block['title'] = $translatedTitle;
+                }
+            }
 
             $blockContext = array_merge(
                 $context,

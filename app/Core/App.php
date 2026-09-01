@@ -714,7 +714,13 @@ class App
             \Monoverse\Services\PageService::class,
             function (Container $container) {
                 return new \Monoverse\Services\PageService(
-                    $container->get(Database::class)
+                    $container->get(Database::class),
+                    $container->get(
+                        \Monoverse\Services\LocaleService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\ContentTranslationService::class
+                    )
                 );
             }
         );
@@ -1031,6 +1037,12 @@ class App
                     ),
                     $container->get(
                         \Monoverse\Repositories\BlockRepository::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\LocaleService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\ContentTranslationService::class
                     )
                 );
             }

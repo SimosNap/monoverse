@@ -9,6 +9,8 @@ use Monoverse\Core\View;
 use Monoverse\Services\AdminAuthService;
 use Monoverse\Services\NotificationService;
 use Monoverse\Services\PageService;
+use Monoverse\Services\LocaleService;
+use Monoverse\Services\ContentTranslationService;
 use Monoverse\Services\SettingsService;
 use Monoverse\Services\NavigationService;
 use Monoverse\Repositories\BlockRepository;
@@ -25,7 +27,9 @@ final class PageAdminController extends BaseController
         private AdminAuthService $auth,
         private PageService $pages,
         private NavigationService $navigation,
-        private BlockRepository $blocks
+        private BlockRepository $blocks,
+        private LocaleService $locales,
+        private ContentTranslationService $translations
     ) {
         parent::__construct(
             $view,
@@ -103,7 +107,55 @@ final class PageAdminController extends BaseController
         }
 
         try {
-            $this->pages->create($data);
+            $pageId = $this->pages->create($data);
+
+            $translations = $data['translations'] ?? [];
+
+            if (!is_array($translations)) {
+                $translations = [];
+            }
+
+            $defaultLocale = $this->locales->getDefaultLocale();
+            $availableLocales = $this->locales->getAvailableLocales();
+
+            foreach ($availableLocales as $locale) {
+                $locale = (string) $locale;
+
+                if ($locale === '' || $locale === $defaultLocale) {
+                    continue;
+                }
+
+                $fields = [];
+
+                if (
+                    isset($translations[$locale])
+                    && is_array($translations[$locale])
+                ) {
+                    $fields = $translations[$locale];
+                }
+
+                foreach (
+                    [
+                        'title',
+                        'menu_label',
+                        'meta_title',
+                        'meta_description',
+                    ] as $field
+                ) {
+                    $this->translations->set(
+                        'page',
+                        $pageId,
+                        $locale,
+                        $field,
+                        trim(
+                            (string) (
+                                $fields[$field]
+                                ?? ''
+                            )
+                        )
+                    );
+                }
+            }
         } catch (Throwable) {
             $this->renderForm(
                 $data,
@@ -213,6 +265,55 @@ final class PageAdminController extends BaseController
                 $pageId,
                 $data
             );
+
+            $translations = $data['translations'] ?? [];
+
+            if (!is_array($translations)) {
+                $translations = [];
+            }
+
+            $defaultLocale = $this->locales->getDefaultLocale();
+            $availableLocales = $this->locales->getAvailableLocales();
+
+            foreach ($availableLocales as $locale) {
+                $locale = (string) $locale;
+
+                if ($locale === '' || $locale === $defaultLocale) {
+                    continue;
+                }
+
+                $fields = [];
+
+                if (
+                    isset($translations[$locale])
+                    && is_array($translations[$locale])
+                ) {
+                    $fields = $translations[$locale];
+                }
+
+                foreach (
+                    [
+                        'title',
+                        'menu_label',
+                        'meta_title',
+                        'meta_description',
+                    ] as $field
+                ) {
+                    $this->translations->set(
+                        'page',
+                        $pageId,
+                        $locale,
+                        $field,
+                        trim(
+                            (string) (
+                                $fields[$field]
+                                ?? ''
+                            )
+                        )
+                    );
+                }
+            }
+
         } catch (Throwable) {
             $this->renderForm(
                 array_merge($page, $data),
@@ -257,6 +358,11 @@ final class PageAdminController extends BaseController
                 )
             );
 
+            $this->translations->deleteEntity(
+                'page',
+                $pageId
+            );
+
             $this->pages->delete($pageId);
         } catch (Throwable) {
             $this->response->redirect(
@@ -289,6 +395,63 @@ final class PageAdminController extends BaseController
             }
         }
 
+        $availableLocales = $this->locales->getAvailableLocales();
+        $defaultLocale = $this->locales->getDefaultLocale();
+
+        $titleTranslations = [];
+        $menuLabelTranslations = [];
+        $metaTitleTranslations = [];
+        $metaDescriptionTranslations = [];
+
+        if (
+            $page !== null
+            && !empty($page['id'])
+        ) {
+            $pageTranslations =
+                $this->translations->getAllForEntity(
+                    'page',
+                    (int) $page['id']
+                );
+
+            foreach ($pageTranslations as $locale => $fields) {
+                $titleTranslations[$locale] =
+                    (string) ($fields['title'] ?? '');
+
+                $menuLabelTranslations[$locale] =
+                    (string) ($fields['menu_label'] ?? '');
+
+                $metaTitleTranslations[$locale] =
+                    (string) ($fields['meta_title'] ?? '');
+
+                $metaDescriptionTranslations[$locale] =
+                    (string) ($fields['meta_description'] ?? '');
+            }
+        }
+
+        if (
+            $page !== null
+            && isset($page['translations'])
+            && is_array($page['translations'])
+        ) {
+            foreach ($page['translations'] as $locale => $fields) {
+                if (!is_array($fields)) {
+                    continue;
+                }
+
+                $titleTranslations[$locale] =
+                    trim((string) ($fields['title'] ?? ''));
+
+                $menuLabelTranslations[$locale] =
+                    trim((string) ($fields['menu_label'] ?? ''));
+
+                $metaTitleTranslations[$locale] =
+                    trim((string) ($fields['meta_title'] ?? ''));
+
+                $metaDescriptionTranslations[$locale] =
+                    trim((string) ($fields['meta_description'] ?? ''));
+            }
+        }
+
         $html = $this->view->render(
             'page-form',
             [
@@ -299,6 +462,12 @@ final class PageAdminController extends BaseController
                 'formAction' => $formAction,
                 'blockPageKey' => $blockPageKey,
                 'navigation' => $this->navigation->items(),
+                'availableLocales' => $availableLocales,
+                'defaultLocale' => $defaultLocale,
+                'titleTranslations' => $titleTranslations,
+                'menuLabelTranslations' => $menuLabelTranslations,
+                'metaTitleTranslations' => $metaTitleTranslations,
+                'metaDescriptionTranslations' => $metaDescriptionTranslations,
             ],
             'admin-layout'
         );
@@ -311,48 +480,54 @@ final class PageAdminController extends BaseController
 
     private function formData(): array
     {
+        $translations = isset($_POST['translations'])
+            && is_array($_POST['translations'])
+                ? $_POST['translations']
+                : [];
+
         return [
             'title' => trim(
                 (string) ($_POST['title'] ?? '')
             ),
-    
+
             'slug' => $this->normalizeSlug(
                 (string) ($_POST['slug'] ?? '')
             ),
-    
+
             'status' => $this->normalizeStatus(
                 (string) ($_POST['status'] ?? 'draft')
             ),
-    
+
             'show_in_navigation' => isset(
                 $_POST['show_in_navigation']
             )
                 ? 1
                 : 0,
-    
+
             'menu_label' => trim(
                 (string) ($_POST['menu_label'] ?? '')
             ),
-    
+
             'navigation_group' => trim(
                 (string) (
                     $_POST['navigation_group']
                     ?? 'default'
                 )
             ),
-    
+
             'sort_order' => max(
                 0,
                 (int) ($_POST['sort_order'] ?? 0)
             ),
-    
+
             'meta_title' => trim(
                 (string) ($_POST['meta_title'] ?? '')
             ),
-    
+
             'meta_description' => trim(
                 (string) ($_POST['meta_description'] ?? '')
             ),
+            'translations' => $translations,
         ];
     }
 

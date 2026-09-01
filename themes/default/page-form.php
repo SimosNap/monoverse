@@ -76,6 +76,40 @@ $metaTitle = trim(
 $metaDescription = trim(
     (string) ($page['meta_description'] ?? '')
 );
+
+$availableLocales = is_array(
+    $availableLocales ?? null
+)
+    ? $availableLocales
+    : [];
+
+$defaultLocale = trim(
+    (string) ($defaultLocale ?? 'it')
+);
+
+$titleTranslations = is_array(
+    $titleTranslations ?? null
+)
+    ? $titleTranslations
+    : [];
+
+$menuLabelTranslations = is_array(
+    $menuLabelTranslations ?? null
+)
+    ? $menuLabelTranslations
+    : [];
+
+$metaTitleTranslations = is_array(
+    $metaTitleTranslations ?? null
+)
+    ? $metaTitleTranslations
+    : [];
+
+$metaDescriptionTranslations = is_array(
+    $metaDescriptionTranslations ?? null
+)
+    ? $metaDescriptionTranslations
+    : [];
 ?>
 
 <div class="admin-page admin-page-editor">
@@ -163,6 +197,11 @@ $metaDescription = trim(
                         ENT_QUOTES,
                         'UTF-8'
                     ) ?>
+                    (<?= htmlspecialchars(
+                        strtoupper($defaultLocale),
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>)
                 </label>
 
                 <input
@@ -192,6 +231,69 @@ $metaDescription = trim(
                 <?php endif; ?>
 
             </div>
+
+            <?php foreach ($availableLocales as $locale): ?>
+
+                <?php
+                $locale = trim((string) $locale);
+
+                if (
+                    $locale === ''
+                    || $locale === $defaultLocale
+                ) {
+                    continue;
+                }
+
+                $translatedTitle = trim(
+                    (string) (
+                        $titleTranslations[$locale]
+                        ?? ''
+                    )
+                );
+                ?>
+
+                <div class="form-group">
+
+                    <label for="page-title-<?= htmlspecialchars(
+                        $locale,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>">
+                        <?= htmlspecialchars(
+                            $t('admin.page_form.fields.title'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                        (<?= htmlspecialchars(
+                            strtoupper($locale),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>)
+                    </label>
+
+                    <input
+                        id="page-title-<?= htmlspecialchars(
+                            $locale,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
+                        name="translations[<?= htmlspecialchars(
+                            $locale,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>][title]"
+                        type="text"
+                        value="<?= htmlspecialchars(
+                            $translatedTitle,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
+                        maxlength="190"
+                    >
+
+                </div>
+
+            <?php endforeach; ?>
 
             <div class="form-group">
 
@@ -391,6 +493,11 @@ $metaDescription = trim(
                             ENT_QUOTES,
                             'UTF-8'
                         ) ?>
+                        (<?= htmlspecialchars(
+                            strtoupper($defaultLocale),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>)
                     </label>
 
                     <input
@@ -423,6 +530,78 @@ $metaDescription = trim(
                     </p>
 
                 </div>
+
+                <?php foreach ($availableLocales as $locale): ?>
+
+                    <?php
+                    $locale = trim((string) $locale);
+
+                    if (
+                        $locale === ''
+                        || $locale === $defaultLocale
+                    ) {
+                        continue;
+                    }
+
+                    $translatedMenuLabel = trim(
+                        (string) (
+                            $menuLabelTranslations[$locale]
+                            ?? ''
+                        )
+                    );
+                    ?>
+
+                    <div class="form-group">
+
+                        <label for="page-menu-label-<?= htmlspecialchars(
+                            $locale,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>">
+                            <?= htmlspecialchars(
+                                $t(
+                                    'admin.page_form.fields.menu_label.label'
+                                ),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                            (<?= htmlspecialchars(
+                                strtoupper($locale),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>)
+                        </label>
+
+                        <input
+                            id="page-menu-label-<?= htmlspecialchars(
+                                $locale,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>"
+                            name="translations[<?= htmlspecialchars(
+                                $locale,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>][menu_label]"
+                            type="text"
+                            value="<?= htmlspecialchars(
+                                $translatedMenuLabel,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>"
+                            maxlength="100"
+                            placeholder="<?= htmlspecialchars(
+                                $t(
+                                    'admin.page_form.fields.menu_label.placeholder'
+                                ),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>"
+                        >
+
+                    </div>
+
+                <?php endforeach; ?>
 
                 <div class="form-group">
 
@@ -504,6 +683,11 @@ $metaDescription = trim(
                         ENT_QUOTES,
                         'UTF-8'
                     ) ?>
+                    (<?= htmlspecialchars(
+                        strtoupper($defaultLocale),
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>)
                 </label>
 
                 <input
@@ -540,6 +724,71 @@ $metaDescription = trim(
 
             </div>
 
+            <?php foreach ($availableLocales as $locale): ?>
+
+                <?php
+                $locale = trim((string) $locale);
+
+                if (
+                    $locale === ''
+                    || $locale === $defaultLocale
+                ) {
+                    continue;
+                }
+
+                $translatedMetaTitle = trim(
+                    (string) (
+                        $metaTitleTranslations[$locale]
+                        ?? ''
+                    )
+                );
+                ?>
+
+                <div class="form-group">
+
+                    <label for="page-meta-title-<?= htmlspecialchars(
+                        $locale,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>">
+                        <?= htmlspecialchars(
+                            $t(
+                                'admin.page_form.fields.meta_title.label'
+                            ),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                        (<?= htmlspecialchars(
+                            strtoupper($locale),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>)
+                    </label>
+
+                    <input
+                        id="page-meta-title-<?= htmlspecialchars(
+                            $locale,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
+                        name="translations[<?= htmlspecialchars(
+                            $locale,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>][meta_title]"
+                        type="text"
+                        value="<?= htmlspecialchars(
+                            $translatedMetaTitle,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
+                        maxlength="190"
+                    >
+
+                </div>
+
+            <?php endforeach; ?>
+
             <div class="form-group">
 
                 <label for="page-meta-description">
@@ -550,6 +799,11 @@ $metaDescription = trim(
                         ENT_QUOTES,
                         'UTF-8'
                     ) ?>
+                    (<?= htmlspecialchars(
+                        strtoupper($defaultLocale),
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>)
                 </label>
 
                 <textarea
@@ -573,6 +827,69 @@ $metaDescription = trim(
                 </p>
 
             </div>
+
+            <?php foreach ($availableLocales as $locale): ?>
+
+                <?php
+                $locale = trim((string) $locale);
+
+                if (
+                    $locale === ''
+                    || $locale === $defaultLocale
+                ) {
+                    continue;
+                }
+
+                $translatedMetaDescription = trim(
+                    (string) (
+                        $metaDescriptionTranslations[$locale]
+                        ?? ''
+                    )
+                );
+                ?>
+
+                <div class="form-group">
+
+                    <label for="page-meta-description-<?= htmlspecialchars(
+                        $locale,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>">
+                        <?= htmlspecialchars(
+                            $t(
+                                'admin.page_form.fields.meta_description.label'
+                            ),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                        (<?= htmlspecialchars(
+                            strtoupper($locale),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>)
+                    </label>
+
+                    <textarea
+                        id="page-meta-description-<?= htmlspecialchars(
+                            $locale,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
+                        name="translations[<?= htmlspecialchars(
+                            $locale,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>][meta_description]"
+                        rows="4"
+                    ><?= htmlspecialchars(
+                        $translatedMetaDescription,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?></textarea>
+
+                </div>
+
+            <?php endforeach; ?>
 
             <div class="admin-form-actions">
 

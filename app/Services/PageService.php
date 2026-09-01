@@ -9,7 +9,9 @@ use RuntimeException;
 class PageService
 {
     public function __construct(
-        private Database $database
+        private Database $database,
+        private LocaleService $locales,
+        private ContentTranslationService $translations
     ) {
     }
 
@@ -91,7 +93,11 @@ class PageService
             ]
         );
 
-        return $page ?: null;
+        if (!is_array($page)) {
+            return null;
+        }
+
+        return $this->localizePage($page);
     }
 
     public function blockPageKey(
@@ -102,7 +108,7 @@ class PageService
 
     public function create(
         array $data
-    ): void {
+    ): int {
         $this->database->insert(
             'mv_pages',
             [
@@ -153,6 +159,8 @@ class PageService
                 'updated_at' => null,
             ]
         );
+
+        return (int) $this->database->lastInsertId();
     }
 
     public function update(
@@ -261,12 +269,13 @@ class PageService
             $params
         ) !== false;
     }
-    
+
     public function navigationItems(
         string $group = 'default'
     ): array {
-        return $this->database->fetchAll(
+        $pages = $this->database->fetchAll(
             'SELECT
+                id,
                 title,
                 slug,
                 menu_label
@@ -283,6 +292,92 @@ class PageService
                 'navigation_group' => $group,
             ]
         );
+
+        $currentLocale = $this->locales->getCurrentLocale();
+        $defaultLocale = $this->locales->getDefaultLocale();
+
+        if ($currentLocale === $defaultLocale) {
+            return $pages;
+        }
+
+        foreach ($pages as &$page) {
+            $pageId = (int) ($page['id'] ?? 0);
+
+            if ($pageId <= 0) {
+                continue;
+            }
+
+            foreach (
+                [
+                    'title',
+                    'menu_label',
+                ] as $field
+            ) {
+                $translatedValue = trim(
+                    (string) (
+                        $this->translations->get(
+                            'page',
+                            $pageId,
+                            $currentLocale,
+                            $field
+                        )
+                        ?? ''
+                    )
+                );
+
+                if ($translatedValue !== '') {
+                    $page[$field] = $translatedValue;
+                }
+            }
+        }
+
+        unset($page);
+
+        return $pages;
+    }
+
+    private function localizePage(
+        array $page
+    ): array {
+        $pageId = (int) ($page['id'] ?? 0);
+
+        if ($pageId <= 0) {
+            return $page;
+        }
+
+        $currentLocale = $this->locales->getCurrentLocale();
+        $defaultLocale = $this->locales->getDefaultLocale();
+
+        if ($currentLocale === $defaultLocale) {
+            return $page;
+        }
+
+        foreach (
+            [
+                'title',
+                'menu_label',
+                'meta_title',
+                'meta_description',
+            ] as $field
+        ) {
+            $translatedValue = trim(
+                (string) (
+                    $this->translations->get(
+                        'page',
+                        $pageId,
+                        $currentLocale,
+                        $field
+                    )
+                    ?? ''
+                )
+            );
+
+            if ($translatedValue !== '') {
+                $page[$field] = $translatedValue;
+            }
+        }
+
+        return $page;
     }
 
     private function normalizeStatus(

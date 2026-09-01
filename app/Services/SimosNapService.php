@@ -13,7 +13,8 @@ class SimosNapService
     private const USER_ACTIVITY_CACHE_TTL = 300;
 
     public function __construct(
-        private SettingsService $settings
+        private SettingsService $settings,
+        private Translator $translator
     ) {
     }
 
@@ -385,64 +386,96 @@ class SimosNapService
         if (str_contains($modes, 'm')) {
             $features[] = [
                 'icon' => 'fa-comments',
-                'title' => 'Canale moderato',
-                'description' => 'Solo gli utenti autorizzati possono parlare.',
+                'title' => $this->translator->translate(
+                    'landing_chat.channel_features.moderated.title'
+                ),
+                'description' => $this->translator->translate(
+                    'landing_chat.channel_features.moderated.description'
+                ),
             ];
         }
 
         if (str_contains($modes, 'M')) {
             $features[] = [
                 'icon' => 'fa-user-check',
-                'title' => 'Solo utenti registrati possono parlare',
-                'description' => 'Per partecipare alla conversazione è necessario utilizzare un nickname registrato.',
+                'title' => $this->translator->translate(
+                    'landing_chat.channel_features.registered_speak.title'
+                ),
+                'description' => $this->translator->translate(
+                    'landing_chat.channel_features.registered_speak.description'
+                ),
             ];
         }
 
         if (str_contains($modes, 'R')) {
             $features[] = [
                 'icon' => 'fa-right-to-bracket',
-                'title' => 'Accesso riservato agli utenti registrati',
-                'description' => 'Solo i nickname registrati possono entrare nel canale.',
+                'title' => $this->translator->translate(
+                    'landing_chat.channel_features.registered_access.title'
+                ),
+                'description' => $this->translator->translate(
+                    'landing_chat.channel_features.registered_access.description'
+                ),
             ];
         }
 
         if (str_contains($modes, 'i')) {
             $features[] = [
                 'icon' => 'fa-envelope-open',
-                'title' => 'Accesso solo su invito',
-                'description' => 'Per entrare è necessario ricevere un invito.',
+                'title' => $this->translator->translate(
+                    'landing_chat.channel_features.invite_only.title'
+                ),
+                'description' => $this->translator->translate(
+                    'landing_chat.channel_features.invite_only.description'
+                ),
             ];
         }
 
         if (str_contains($modes, 'u')) {
             $features[] = [
                 'icon' => 'fa-user-group',
-                'title' => 'Auditorium',
-                'description' => 'Gli utenti vedono solo i moderatori e i propri messaggi.',
+                'title' => $this->translator->translate(
+                    'landing_chat.channel_features.auditorium.title'
+                ),
+                'description' => $this->translator->translate(
+                    'landing_chat.channel_features.auditorium.description'
+                ),
             ];
         }
 
         if (str_contains($modes, 'z')) {
             $features[] = [
                 'icon' => 'fa-lock',
-                'title' => 'Connessione sicura',
-                'description' => 'È richiesta una connessione SSL/TLS.',
+                'title' => $this->translator->translate(
+                    'landing_chat.channel_features.secure.title'
+                ),
+                'description' => $this->translator->translate(
+                    'landing_chat.channel_features.secure.description'
+                ),
             ];
         }
 
         if (str_contains($modes, 'H')) {
             $features[] = [
                 'icon' => 'fa-clock-rotate-left',
-                'title' => 'Cronologia disponibile',
-                'description' => 'I nuovi utenti ricevono gli ultimi messaggi del canale.',
+                'title' => $this->translator->translate(
+                    'landing_chat.channel_features.history.title'
+                ),
+                'description' => $this->translator->translate(
+                    'landing_chat.channel_features.history.description'
+                ),
             ];
         }
 
         if (preg_match('/W\s+([^ ]+)/', $modes)) {
             $features[] = [
                 'icon' => 'fa-hourglass-half',
-                'title' => 'Slow mode attivo',
-                'description' => 'La frequenza dei messaggi è limitata per favorire conversazioni ordinate.',
+                'title' => $this->translator->translate(
+                    'landing_chat.channel_features.slow_mode.title'
+                ),
+                'description' => $this->translator->translate(
+                    'landing_chat.channel_features.slow_mode.description'
+                ),
             ];
         }
 

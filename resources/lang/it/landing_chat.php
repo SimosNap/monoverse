@@ -83,11 +83,46 @@ return [
 		'how_it_works' => 'Scopri come funziona',
 	],
 
+	'channel_features' => [
+		'moderated' => [
+			'title' => 'Canale moderato',
+			'description' => 'Possono parlare solo gli utenti autorizzati dagli operatori.',
+		],
+		'registered_speak' => [
+			'title' => 'Conversazione riservata agli utenti registrati',
+			'description' => 'Solo i nickname registrati possono parlare nel canale.',
+		],
+		'registered_access' => [
+			'title' => 'Accesso riservato agli utenti registrati',
+			'description' => 'Solo i nickname registrati possono entrare nel canale.',
+		],
+		'invite_only' => [
+			'title' => 'Accesso su invito',
+			'description' => 'È possibile entrare nel canale solo su invito.',
+		],
+		'auditorium' => [
+			'title' => 'Modalità auditorium',
+			'description' => 'La conversazione è gestita dagli operatori del canale.',
+		],
+		'secure' => [
+			'title' => 'Connessione sicura',
+			'description' => 'Il canale richiede una connessione IRC sicura.',
+		],
+		'history' => [
+			'title' => 'Cronologia disponibile',
+			'description' => 'Il canale rende disponibile la cronologia recente della conversazione.',
+		],
+		'slow_mode' => [
+			'title' => 'Modalità lenta',
+			'description' => 'Il canale limita la frequenza con cui possono essere inviati i messaggi.',
+		],
+	],
+
 	'hero' => [
 		'community' => 'La community',
 		'identity' => 'Persone, conversazioni e contenuti in un unico posto.',
 	],
-	
+
 	'registered_only' => [
 		'title' => 'Accedi per entrare in chat',
 		'description' => 'Questo canale è riservato agli utenti registrati su SimosNap.',

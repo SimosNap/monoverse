@@ -642,7 +642,12 @@ class App
             \Monoverse\Services\SimosNapService::class,
             function (Container $container) {
                 return new \Monoverse\Services\SimosNapService(
-                    $container->get(\Monoverse\Services\SettingsService::class)
+                    $container->get(
+                        \Monoverse\Services\SettingsService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\Translator::class
+                    )
                 );
             }
         );

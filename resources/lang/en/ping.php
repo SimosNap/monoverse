@@ -218,6 +218,10 @@ return [
 		],
 	],
 
+	'doge_tip' => [
+		'shared' => 'A %s DOGE tip for @%s 🐕',
+	],
+
 	'flash' => [
 		'text_required' => 'Write some text before publishing the Ping.',
 	],

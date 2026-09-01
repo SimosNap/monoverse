@@ -1387,7 +1387,9 @@ class PingController extends BaseController
 		);
 
 		$content = sprintf(
-			'Ho inviato una mancia di %s DOGE a @%s.',
+			$this->translator->translate(
+				'ping.doge_tip.shared'
+			),
 			$displayAmount,
 			(string) $recipient['username']
 		);

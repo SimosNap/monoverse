@@ -466,7 +466,9 @@ if (
 						?? '';
 
 				const amount = dogeAmount
-					? dogeAmount.value.trim()
+					? dogeAmount.value
+						.trim()
+						.replace(',', '.')
 					: '';
 
 				const shareTip =

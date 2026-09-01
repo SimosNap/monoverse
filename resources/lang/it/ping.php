@@ -219,6 +219,10 @@ return [
 
 	],
 
+	'doge_tip' => [
+		'shared' => 'Un tip di %s DOGE per @%s 🐕',
+	],
+
 	'flash' => [
 		'text_required' => 'Scrivi un testo prima di pubblicare il Ping.',
 	],

@@ -24,6 +24,24 @@ $sortOrder = max(
 	(int) ($category['sort_order'] ?? 0)
 );
 
+$availableLocales = is_array($availableLocales ?? null)
+	? $availableLocales
+	: [];
+
+$defaultLocale = trim(
+	(string) ($defaultLocale ?? 'it')
+);
+
+$nameTranslations = is_array($nameTranslations ?? null)
+	? $nameTranslations
+	: [];
+
+$descriptionTranslations = is_array(
+	$descriptionTranslations ?? null
+)
+	? $descriptionTranslations
+	: [];
+
 $formAction = $isEdit
 	? '/admin/categories/' . rawurlencode(
 		(string) $category['uuid']
@@ -111,6 +129,11 @@ $formAction = $isEdit
 						ENT_QUOTES,
 						'UTF-8'
 					) ?>
+					(<?= htmlspecialchars(
+						strtoupper($defaultLocale),
+						ENT_QUOTES,
+						'UTF-8'
+					) ?>)
 				</label>
 
 				<input
@@ -146,6 +169,81 @@ $formAction = $isEdit
 
 			</div>
 
+			<?php foreach ($availableLocales as $locale): ?>
+
+				<?php
+				$locale = trim((string) $locale);
+
+				if (
+					$locale === ''
+					|| $locale === $defaultLocale
+				) {
+					continue;
+				}
+
+				$translatedName = trim(
+					(string) (
+						$nameTranslations[$locale]
+						?? ''
+					)
+				);
+				?>
+
+				<div class="form-group">
+
+					<label
+						for="category-name-<?= htmlspecialchars(
+							$locale,
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>"
+					>
+						<?= htmlspecialchars(
+							$t(
+								'admin.category_form.fields.name.label'
+							),
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>
+						(<?= htmlspecialchars(
+							strtoupper($locale),
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>)
+					</label>
+
+					<input
+						id="category-name-<?= htmlspecialchars(
+							$locale,
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>"
+						type="text"
+						name="translations[<?= htmlspecialchars(
+							$locale,
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>][name]"
+						value="<?= htmlspecialchars(
+							$translatedName,
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>"
+						maxlength="120"
+						autocomplete="off"
+						placeholder="<?= htmlspecialchars(
+							$t(
+								'admin.category_form.fields.name.placeholder'
+							),
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>"
+					>
+
+				</div>
+
+			<?php endforeach; ?>
+
 			<div class="form-group">
 
 				<label for="category-description">
@@ -156,6 +254,11 @@ $formAction = $isEdit
 						ENT_QUOTES,
 						'UTF-8'
 					) ?>
+					(<?= htmlspecialchars(
+						strtoupper($defaultLocale),
+						ENT_QUOTES,
+						'UTF-8'
+					) ?>)
 				</label>
 
 				<textarea
@@ -187,6 +290,79 @@ $formAction = $isEdit
 				</p>
 
 			</div>
+
+			<?php foreach ($availableLocales as $locale): ?>
+
+				<?php
+				$locale = trim((string) $locale);
+
+				if (
+					$locale === ''
+					|| $locale === $defaultLocale
+				) {
+					continue;
+				}
+
+				$translatedDescription = trim(
+					(string) (
+						$descriptionTranslations[$locale]
+							?? ''
+					)
+				);
+				?>
+
+				<div class="form-group">
+
+					<label
+						for="category-description-<?= htmlspecialchars(
+							$locale,
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>"
+					>
+						<?= htmlspecialchars(
+							$t(
+								'admin.category_form.fields.description.label'
+							),
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>
+						(<?= htmlspecialchars(
+							strtoupper($locale),
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>)
+					</label>
+
+					<textarea
+						id="category-description-<?= htmlspecialchars(
+							$locale,
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>"
+						name="translations[<?= htmlspecialchars(
+							$locale,
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>][description]"
+						rows="4"
+						maxlength="1000"
+						placeholder="<?= htmlspecialchars(
+							$t(
+								'admin.category_form.fields.description.placeholder'
+							),
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>"
+					><?= htmlspecialchars(
+						$translatedDescription,
+						ENT_QUOTES,
+						'UTF-8'
+					) ?></textarea>
+
+				</div>
+
+			<?php endforeach; ?>
 
 			<div class="form-group">
 

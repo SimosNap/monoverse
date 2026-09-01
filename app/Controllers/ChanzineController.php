@@ -561,7 +561,7 @@ class ChanzineController extends BaseController
 			return;
 		}
 
-		$category = $this->categories->findBySlug(
+		$category = $this->categories->findLocalizedBySlug(
 			'chanzine',
 			$slug
 		);

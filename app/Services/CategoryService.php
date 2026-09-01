@@ -9,7 +9,9 @@ use RuntimeException;
 class CategoryService
 {
 	public function __construct(
-		private Database $database
+		private Database $database,
+		private LocaleService $locales,
+		private ContentTranslationService $translations
 	) {
 	}
 
@@ -25,11 +27,27 @@ class CategoryService
 			]
 		);
 	}
-	
+
+	public function listAllLocalized(
+		string $type
+	): array {
+		$categories = $this->listAll($type);
+
+		foreach ($categories as &$category) {
+			$category = $this->localizeCategory(
+				$category
+			);
+		}
+
+		unset($category);
+
+		return $categories;
+	}
+
 	public function listWithPublishedArticleCount(
 		string $type
 	): array {
-		return $this->database->fetchAll(
+		$categories = $this->database->fetchAll(
 			'SELECT
 				c.*,
 				COUNT(a.id) AS article_count
@@ -46,6 +64,16 @@ class CategoryService
 				'type' => $type,
 			]
 		);
+
+		foreach ($categories as &$category) {
+			$category = $this->localizeCategory(
+				$category
+			);
+		}
+
+		unset($category);
+
+		return $categories;
 	}
 
 	public function findByUuid(string $uuid): ?array
@@ -62,7 +90,7 @@ class CategoryService
 
 		return $category ?: null;
 	}
-	
+
 	public function findBySlug(
 		string $type,
 		string $slug
@@ -78,14 +106,32 @@ class CategoryService
 				'slug' => $slug,
 			]
 		);
-	
+
 		return $category ?: null;
+	}
+
+	public function findLocalizedBySlug(
+		string $type,
+		string $slug
+	): ?array {
+		$category = $this->findBySlug(
+			$type,
+			$slug
+		);
+
+		if ($category === null) {
+			return null;
+		}
+
+		return $this->localizeCategory(
+			$category
+		);
 	}
 
 	public function create(
 		string $type,
 		array $data
-	): void {
+	): int {
 		$this->database->insert(
 			'mv_categories',
 			[
@@ -105,6 +151,8 @@ class CategoryService
 				),
 			]
 		);
+
+		return (int) $this->database->lastInsertId();
 	}
 
 	public function update(
@@ -158,7 +206,7 @@ class CategoryService
 		?string $excludeUuid = null
 	): bool {
 		$sql =
-			'SELECT COUNT(*)
+			'SELECT id
 			 FROM mv_categories
 			 WHERE type = :type
 			 AND slug = :slug';
@@ -173,10 +221,54 @@ class CategoryService
 			$params['uuid'] = $excludeUuid;
 		}
 
-		return (int) $this->database->fetchColumn(
+		$sql .= ' LIMIT 1';
+
+		return $this->database->fetchOne(
 			$sql,
 			$params
-		) > 0;
+		) !== false;
+	}
+
+	private function localizeCategory(
+		array $category
+	): array {
+		$categoryId = (int) ($category['id'] ?? 0);
+
+		if ($categoryId <= 0) {
+			return $category;
+		}
+
+		$currentLocale = $this->locales->getCurrentLocale();
+		$defaultLocale = $this->locales->getDefaultLocale();
+
+		if ($currentLocale === $defaultLocale) {
+			return $category;
+		}
+
+		foreach (
+			[
+				'name',
+				'description',
+			] as $field
+		) {
+			$translatedValue = trim(
+				(string) (
+					$this->translations->get(
+						'category',
+						$categoryId,
+						$currentLocale,
+						$field
+					)
+					?? ''
+				)
+			);
+
+			if ($translatedValue !== '') {
+				$category[$field] = $translatedValue;
+			}
+		}
+
+		return $category;
 	}
 
 	private function uuid(): string

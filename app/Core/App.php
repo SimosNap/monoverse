@@ -705,7 +705,13 @@ class App
             \Monoverse\Services\CategoryService::class,
             function (Container $container) {
                 return new \Monoverse\Services\CategoryService(
-                    $container->get(Database::class)
+                    $container->get(Database::class),
+                    $container->get(
+                        \Monoverse\Services\LocaleService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\ContentTranslationService::class
+                    )
                 );
             }
         );
@@ -1008,6 +1014,12 @@ class App
                     ),
                     $container->get(
                         \Monoverse\Services\NavigationService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\LocaleService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\ContentTranslationService::class
                     )
                 );
             }

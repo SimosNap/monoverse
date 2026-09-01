@@ -9,6 +9,8 @@ use Monoverse\Core\Session;
 use Monoverse\Core\View;
 use Monoverse\Services\AdminAuthService;
 use Monoverse\Services\CategoryService;
+use Monoverse\Services\ContentTranslationService;
+use Monoverse\Services\LocaleService;
 use Monoverse\Services\NavigationService;
 
 final class CategoryController
@@ -22,7 +24,9 @@ final class CategoryController
 		private Session $session,
 		private AdminAuthService $auth,
 		private CategoryService $categories,
-		private NavigationService $navigation
+		private NavigationService $navigation,
+		private LocaleService $locales,
+		private ContentTranslationService $translations
 	) {
 	}
 
@@ -61,6 +65,10 @@ final class CategoryController
 			'title' => 'Nuova categoria',
 			'admin' => $this->auth->user(),
 			'category' => null,
+			'availableLocales' => $this->locales->getAvailableLocales(),
+			'defaultLocale' => $this->locales->getDefaultLocale(),
+			'nameTranslations' => [],
+			'descriptionTranslations' => [],
 			'error' => $this->session->getFlash('error'),
 			'navigation' => $this->navigation->items(),
 		], 'admin-layout');
@@ -81,7 +89,7 @@ final class CategoryController
 		$name = trim(
 			(string) $this->request->post('name', '')
 		);
-		
+
 		$description = trim(
 			(string) $this->request->post('description', '')
 		);
@@ -138,7 +146,7 @@ final class CategoryController
 			return;
 		}
 
-		$this->categories->create(
+		$categoryId = $this->categories->create(
 			self::TYPE,
 			[
 				'name' => $name,
@@ -147,6 +155,38 @@ final class CategoryController
 				'sort_order' => $sortOrder,
 			]
 		);
+
+		$translations = $this->request->post(
+			'translations',
+			[]
+		);
+
+		if (!is_array($translations)) {
+			$translations = [];
+		}
+
+		$defaultLocale = $this->locales->getDefaultLocale();
+
+		foreach ($this->locales->getAvailableLocales() as $locale) {
+			if ($locale === $defaultLocale) {
+				continue;
+			}
+
+			$fields = isset($translations[$locale])
+				&& is_array($translations[$locale])
+					? $translations[$locale]
+					: [];
+
+			foreach (['name', 'description'] as $field) {
+				$this->translations->set(
+					'category',
+					$categoryId,
+					$locale,
+					$field,
+					trim((string) ($fields[$field] ?? ''))
+				);
+			}
+		}
 
 		$this->session->flash(
 			'success',
@@ -178,10 +218,35 @@ final class CategoryController
 			return;
 		}
 
+		$availableLocales = $this->locales->getAvailableLocales();
+		$defaultLocale = $this->locales->getDefaultLocale();
+
+		$nameTranslations = [];
+		$descriptionTranslations = [];
+
+		$categoryTranslations = $this->translations->getAllForEntity(
+			'category',
+			(int) $category['id']
+		);
+
+		foreach ($categoryTranslations as $locale => $fields) {
+			$nameTranslations[$locale] = (string) (
+				$fields['name'] ?? ''
+			);
+
+			$descriptionTranslations[$locale] = (string) (
+				$fields['description'] ?? ''
+			);
+		}
+
 		$html = $this->view->render('category-form', [
 			'title' => 'Modifica categoria',
 			'admin' => $this->auth->user(),
 			'category' => $category,
+			'availableLocales' => $availableLocales,
+			'defaultLocale' => $defaultLocale,
+			'nameTranslations' => $nameTranslations,
+			'descriptionTranslations' => $descriptionTranslations,
 			'error' => $this->session->getFlash('error'),
 			'navigation' => $this->navigation->items(),
 		], 'admin-layout');
@@ -217,7 +282,7 @@ final class CategoryController
 		$name = trim(
 			(string) $this->request->post('name', '')
 		);
-		
+
 		$description = trim(
 			(string) $this->request->post('description', '')
 		);
@@ -285,6 +350,38 @@ final class CategoryController
 			]
 		);
 
+		$translations = $this->request->post(
+			'translations',
+			[]
+		);
+
+		if (!is_array($translations)) {
+			$translations = [];
+		}
+
+		$defaultLocale = $this->locales->getDefaultLocale();
+
+		foreach ($this->locales->getAvailableLocales() as $locale) {
+			if ($locale === $defaultLocale) {
+				continue;
+			}
+
+			$fields = isset($translations[$locale])
+				&& is_array($translations[$locale])
+					? $translations[$locale]
+					: [];
+
+			foreach (['name', 'description'] as $field) {
+				$this->translations->set(
+					'category',
+					(int) $category['id'],
+					$locale,
+					$field,
+					trim((string) ($fields[$field] ?? ''))
+				);
+			}
+		}
+
 		$this->session->flash(
 			'success',
 			'Categoria aggiornata.'
@@ -314,6 +411,11 @@ final class CategoryController
 			$this->response->redirect('/admin/categories');
 			return;
 		}
+
+		$this->translations->deleteEntity(
+			'category',
+			(int) $category['id']
+		);
 
 		$this->categories->delete($uuid);
 

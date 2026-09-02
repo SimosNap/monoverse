@@ -8,6 +8,11 @@ $blockedUsers = is_array($blockedUsers ?? null)
 
 <div class="container page-container">
 
+	<?= $component('account-navigation', [
+		'user' => $user ?? [],
+		'settings' => $settings ?? [],
+	]) ?>
+
 	<div class="page-header">
 
 		<h1>

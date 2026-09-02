@@ -17,7 +17,7 @@ class CommentService
 	) {
 	}
 
-	public function create(array $data): bool
+	public function create(array $data): string|false
 	{
 		$postId = (int) $data['post_id'];
 		$authorSub = (string) $data['author_sub'];
@@ -147,7 +147,7 @@ class CommentService
 			$uuid
 		);
 
-		return true;
+		return $uuid;
 	}
 
 	public function findByUuid(string $uuid): ?array

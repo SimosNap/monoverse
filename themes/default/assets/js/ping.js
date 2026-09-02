@@ -188,6 +188,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	/*
 	|--------------------------------------------------------------------------
+	| Permalink Ping / Pong
+	|--------------------------------------------------------------------------
+	*/
+
+	document.addEventListener(
+		'click',
+		async (event) => {
+
+			const button =
+				event.target.closest(
+					'.js-copy-permalink'
+				);
+
+			if (!button) {
+				return;
+			}
+
+			const permalink =
+				button.dataset.permalink
+					?? '';
+
+			if (permalink === '') {
+				return;
+			}
+
+			const url =
+				new URL(
+					permalink,
+					window.location.origin
+				).href;
+
+			try {
+
+				await navigator.clipboard.writeText(
+					url
+				);
+
+			} catch (error) {
+
+				console.error(
+					'Unable to copy permalink:',
+					error
+				);
+
+			}
+
+		}
+	);
+
+	/*
+	|--------------------------------------------------------------------------
 	| Upload progress audio / video
 	|--------------------------------------------------------------------------
 	*/

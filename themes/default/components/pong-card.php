@@ -65,7 +65,14 @@ $dogeTipRecipient = trim(
 );
 ?>
 
-<div class="pong-card">
+<div
+	class="pong-card"
+	id="pong-<?= htmlspecialchars(
+		(string) ($comment['uuid'] ?? ''),
+		ENT_QUOTES,
+		'UTF-8'
+	) ?>"
+>
 
 	<div class="pong-header">
 
@@ -346,6 +353,35 @@ $dogeTipRecipient = trim(
 			?>
 
 		<?php endif; ?>
+
+		<button
+			type="button"
+			class="ping-action js-copy-permalink"
+			data-permalink="<?= htmlspecialchars(
+				'/ping/'
+				. rawurlencode(
+					(string) ($comment['post_uuid'] ?? '')
+				)
+				. '#pong-'
+				. rawurlencode(
+					(string) ($comment['uuid'] ?? '')
+				),
+				ENT_QUOTES,
+				'UTF-8'
+			) ?>"
+		>
+			<i
+				class="fa-solid fa-link"
+				aria-hidden="true"
+			></i>
+
+			<?= htmlspecialchars(
+				$t('ping.permalink.copy'),
+				ENT_QUOTES,
+				'UTF-8'
+			) ?>
+		</button>
+
 	</div>
 
 	<?php if (!empty($comment['can_edit'])): ?>

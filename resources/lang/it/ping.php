@@ -86,6 +86,12 @@ return [
 			],
 		],
 	],
+
+	'permalink' => [
+		'copy' => 'Permalink',
+		'copied' => 'Copiato',
+	],
+
 	'card' => [
 		'user' => 'Utente',
 

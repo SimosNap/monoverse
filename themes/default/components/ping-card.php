@@ -70,6 +70,11 @@ $canDogeTipAuthor =
 
 <div
 	class="ping-card<?= $isDogeTip ? ' ping-card-doge-tip' : '' ?>"
+	id="ping-<?= htmlspecialchars(
+		(string) ($post['uuid'] ?? ''),
+		ENT_QUOTES,
+		'UTF-8'
+	) ?>"
 	data-post-id="<?= (int) ($post['id'] ?? 0) ?>"
 >
 
@@ -698,6 +703,30 @@ $canDogeTipAuthor =
 					'UTF-8'
 				) ?>
 			</a>
+
+			<button
+				type="button"
+				class="ping-action js-copy-permalink"
+				data-permalink="<?= htmlspecialchars(
+					'/ping#ping-'
+					. rawurlencode(
+						(string) ($post['uuid'] ?? '')
+					),
+					ENT_QUOTES,
+					'UTF-8'
+				) ?>"
+			>
+				<i
+					class="fa-solid fa-link"
+					aria-hidden="true"
+				></i>
+
+				<?= htmlspecialchars(
+					$t('ping.permalink.copy'),
+					ENT_QUOTES,
+					'UTF-8'
+				) ?>
+			</button>
 
 			<?php if ($canDogeTipAuthor): ?>
 

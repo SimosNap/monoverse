@@ -1087,7 +1087,7 @@ class PingController extends BaseController
 			return;
 		}
 
-		$this->comments->create([
+		$createdUuid = $this->comments->create([
 			'post_id' => $post['id'],
 			'author_sub' => $user['sub'],
 			'content' => $content,
@@ -1095,7 +1095,19 @@ class PingController extends BaseController
 			'code_language' => $codeLanguage,
 		]);
 
-		$this->response->redirect('/ping/' . $uuid);
+		if ($createdUuid !== false) {
+			$this->response->redirect(
+				'/ping/'
+				. rawurlencode($uuid)
+				. '#pong-'
+				. rawurlencode($createdUuid)
+			);
+			return;
+		}
+
+		$this->response->redirect(
+			'/ping/' . rawurlencode($uuid)
+		);
 	}
 
 	public function upvote(string $uuid): void
@@ -1617,7 +1629,7 @@ class PingController extends BaseController
 
 		try {
 
-			$this->posts->create(
+			$createdUuid = $this->posts->create(
 				[
 					'author_sub' => $user['sub'],
 					'content' => $content,
@@ -1631,6 +1643,13 @@ class PingController extends BaseController
 				],
 				$_FILES['media'] ?? []
 			);
+
+			if ($createdUuid !== false) {
+				$this->response->redirect(
+					'/ping#ping-' . rawurlencode($createdUuid)
+				);
+				return;
+			}
 
 		} catch (\RuntimeException $e) {
 

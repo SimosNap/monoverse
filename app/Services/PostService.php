@@ -1226,7 +1226,7 @@ class PostService
 	public function create(
 		array $data,
 		array $files = []
-	): bool
+	): string|false
 	{
 		$uuid = Uuid::v4();
 
@@ -1328,7 +1328,9 @@ class PostService
 			);
 		}
 
-		return $created;
+		return $created
+		? $uuid
+		: false;
 	}
 
 	public function createChanzinePing(

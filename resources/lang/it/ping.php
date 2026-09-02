@@ -52,10 +52,13 @@ return [
 	'composer' => [
 		'placeholder' => 'A cosa stai pensando?',
 		'publish' => 'Pubblica',
+		'code' => 'Codice',
+		'code_language' => 'Linguaggio',
+		'code_placeholder' => 'Incolla qui il tuo codice...',
 		'media' => [
-			'attachments' => 'Allegati',
-			'attach_files' => 'Allega file',
-			'close' => 'Chiudi allegati',
+			'attachments' => 'Uploads',
+			'attach_files' => 'Carica file',
+			'close' => 'Chiudi uploads',
 
 			'allowed' => 'Consentiti:',
 			'images' => 'immagini',
@@ -205,9 +208,9 @@ return [
 		],
 
 		'attachments' => [
-			'label' => 'Allegati',
-			'one' => '1 allegato',
-			'count' => ':count allegati',
+			'label' => 'Uploads',
+			'one' => '1 upload',
+			'count' => ':count uploads',
 			'remove' => 'Rimuovi :file',
 
 			'audio_not_allowed' => 'Il caricamento di allegati audio non è consentito.',

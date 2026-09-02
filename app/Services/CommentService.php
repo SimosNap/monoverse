@@ -12,7 +12,8 @@ class CommentService
 		private Database $database,
 		private NotificationService $notifications,
 		private MentionService $mentions,
-		private BlockService $blocks
+		private BlockService $blocks,
+		private CodeBlockService $codeBlocks
 	) {
 	}
 
@@ -20,7 +21,7 @@ class CommentService
 	{
 		$postId = (int) $data['post_id'];
 		$authorSub = (string) $data['author_sub'];
-	
+
 		$post = $this->database->fetchOne(
 			'
 			SELECT
@@ -37,25 +38,25 @@ class CommentService
 				'published'
 			]
 		);
-	
+
 		if (!$post) {
 			return false;
 		}
-	
+
 		$postAuthorSub = (string) $post['author_sub'];
-	
+
 		if ($this->blocks->isEitherBlocked(
 			$authorSub,
 			$postAuthorSub
 		)) {
 			return false;
 		}
-	
+
 		$uuid = Uuid::v4();
 		$now = date('Y-m-d H:i:s');
-	
+
 		$metadata = null;
-	
+
 		if (
 			isset($data['metadata'])
 			&& is_array($data['metadata'])
@@ -66,7 +67,7 @@ class CommentService
 				| JSON_UNESCAPED_SLASHES
 			);
 		}
-	
+
 		$created = $this->database->execute(
 			'
 			INSERT INTO community_post_comments
@@ -93,24 +94,59 @@ class CommentService
 				$metadata,
 			]
 		);
-	
+
 		if (!$created) {
 			return false;
 		}
-	
+
+		$comment = $this->database->fetchOne(
+			'
+			SELECT id
+			FROM community_post_comments
+			WHERE uuid = ?
+			LIMIT 1
+			',
+			[
+				$uuid
+			]
+		);
+
+		if (is_array($comment)) {
+
+			$code = (string) (
+				$data['code']
+				?? ''
+			);
+
+			$codeLanguage = (string) (
+				$data['code_language']
+				?? 'text'
+			);
+
+			if ($code !== '') {
+				$this->codeBlocks->save(
+					'pong',
+					(int) $comment['id'],
+					$code,
+					$codeLanguage
+				);
+			}
+
+		}
+
 		$this->notifications->createReplyNotification(
 			$postAuthorSub,
 			$authorSub,
 			(string) $post['uuid']
 		);
-	
+
 		$this->mentions->notifyMentions(
 			$data['content'],
 			$authorSub,
 			'comment',
 			$uuid
 		);
-	
+
 		return true;
 	}
 
@@ -133,12 +169,32 @@ class CommentService
 			]
 		);
 
-		return $comment ?: null;
+		if (!is_array($comment)) {
+			return null;
+		}
+
+		$comment['code_block'] = $this->codeBlocks->find(
+			'pong',
+			(int) $comment['id']
+		);
+
+		return $comment;
 	}
 
-	public function update(string $uuid, string $content): bool
+	public function update(
+		string $uuid,
+		string $content,
+		string $code = '',
+		string $codeLanguage = 'text'
+	): bool
 	{
-		return $this->database->execute(
+		$comment = $this->findByUuid($uuid);
+
+		if (!$comment) {
+			return false;
+		}
+
+		$updated = $this->database->execute(
 			'
 			UPDATE community_post_comments
 			SET content = ?,
@@ -152,13 +208,37 @@ class CommentService
 				$uuid,
 			]
 		);
+
+		if (!$updated) {
+			return false;
+		}
+
+		$this->codeBlocks->save(
+			'pong',
+			(int) $comment['id'],
+			$code,
+			$codeLanguage
+		);
+
+		return true;
 	}
 
 	public function delete(string $uuid): bool
 	{
+		$comment = $this->findByUuid($uuid);
+
+		if (!$comment) {
+			return false;
+		}
+
 		$this->notifications->deleteByObject(
 			'comment',
 			$uuid
+		);
+
+		$this->codeBlocks->deleteByContent(
+			'pong',
+			(int) $comment['id']
 		);
 
 		return $this->database->execute(
@@ -180,9 +260,10 @@ class CommentService
 	): array {
 		$limit = max(1, $limit);
 		$offset = max(0, $offset);
-	
+
 		if ($viewerSub === null || $viewerSub === '') {
-			return $this->database->fetchAll(
+
+			$comments = $this->database->fetchAll(
 				'
 				SELECT
 					c.*,
@@ -207,9 +288,19 @@ class CommentService
 					'published'
 				]
 			);
+
+			foreach ($comments as &$comment) {
+				$comment['code_block'] = $this->codeBlocks->find(
+					'pong',
+					(int) $comment['id']
+				);
+			}
+			unset($comment);
+
+			return $comments;
 		}
-	
-		return $this->database->fetchAll(
+
+		$comments = $this->database->fetchAll(
 			'
 			SELECT
 				c.*,
@@ -248,5 +339,15 @@ class CommentService
 				$viewerSub,
 			]
 		);
+
+		foreach ($comments as &$comment) {
+			$comment['code_block'] = $this->codeBlocks->find(
+				'pong',
+				(int) $comment['id']
+			);
+		}
+		unset($comment);
+
+		return $comments;
 	}
 }

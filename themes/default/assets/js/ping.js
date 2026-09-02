@@ -50,6 +50,142 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	}
 
+	const codeToggle =
+		document.querySelector(
+			'[data-ping-code-toggle]'
+		);
+
+	const codeComposer =
+		document.querySelector(
+			'[data-ping-code-composer]'
+		);
+
+	const codeTextarea =
+		codeComposer?.querySelector(
+			'textarea[name="code"]'
+		);
+
+	const codeCounter =
+		codeComposer?.querySelector(
+			'.ping-code-counter'
+		);
+
+	if (
+		codeToggle &&
+		codeComposer &&
+		codeTextarea
+	) {
+
+		function updateCodeCounter() {
+
+			if (codeCounter) {
+				codeCounter.textContent =
+					`${codeTextarea.value.length} / ${codeTextarea.maxLength}`;
+			}
+
+		}
+
+		codeToggle.addEventListener(
+			'click',
+			() => {
+
+				const opening =
+					codeComposer.hidden;
+
+				codeComposer.hidden =
+					!opening;
+
+				codeToggle.setAttribute(
+					'aria-expanded',
+					opening
+						? 'true'
+						: 'false'
+				);
+
+				if (opening) {
+					codeTextarea.focus();
+				}
+
+			}
+		);
+
+		codeTextarea.addEventListener(
+			'input',
+			updateCodeCounter
+		);
+
+		updateCodeCounter();
+
+	}
+
+	const pongCodeToggle =
+		document.querySelector(
+			'[data-pong-code-toggle]'
+		);
+
+	const pongCodeComposer =
+		document.querySelector(
+			'[data-pong-code-composer]'
+		);
+
+	const pongCodeTextarea =
+		pongCodeComposer?.querySelector(
+			'textarea[name="code"]'
+		);
+
+	const pongCodeCounter =
+		pongCodeComposer?.querySelector(
+			'.ping-code-counter'
+		);
+
+	if (
+		pongCodeToggle &&
+		pongCodeComposer &&
+		pongCodeTextarea
+	) {
+
+		function updatePongCodeCounter() {
+
+			if (pongCodeCounter) {
+				pongCodeCounter.textContent =
+					`${pongCodeTextarea.value.length} / ${pongCodeTextarea.maxLength}`;
+			}
+
+		}
+
+		pongCodeToggle.addEventListener(
+			'click',
+			() => {
+
+				const opening =
+					pongCodeComposer.hidden;
+
+				pongCodeComposer.hidden =
+					!opening;
+
+				pongCodeToggle.setAttribute(
+					'aria-expanded',
+					opening
+						? 'true'
+						: 'false'
+				);
+
+				if (opening) {
+					pongCodeTextarea.focus();
+				}
+
+			}
+		);
+
+		pongCodeTextarea.addEventListener(
+			'input',
+			updatePongCodeCounter
+		);
+
+		updatePongCodeCounter();
+
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Upload progress audio / video

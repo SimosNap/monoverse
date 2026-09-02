@@ -91,6 +91,23 @@ CREATE TABLE `community_post_comments` (
   CONSTRAINT `fk_community_post_comments_post` FOREIGN KEY (`post_id`) REFERENCES `community_posts` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `community_code_blocks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `community_code_blocks` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `content_type` enum('ping','pong') NOT NULL,
+  `content_id` bigint(20) unsigned NOT NULL,
+  `language` varchar(32) NOT NULL DEFAULT 'text',
+  `code` mediumtext NOT NULL,
+  `position` smallint(5) unsigned NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_community_code_block_position` (`content_type`,`content_id`,`position`),
+  KEY `idx_community_code_blocks_content` (`content_type`,`content_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `community_post_media`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;

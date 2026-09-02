@@ -137,10 +137,91 @@ $hasSidebar = $widgetsSidebar !== '';
 										ENT_QUOTES,
 										'UTF-8'
 									) ?>"
-									required
 								></textarea>
 
+								<div
+									class="ping-code-composer"
+									data-pong-code-composer
+									hidden
+								>
+
+									<div class="ping-code-composer-header">
+
+										<label for="pong-code-language">
+											<?= htmlspecialchars(
+												$t('ping.composer.code_language'),
+												ENT_QUOTES,
+												'UTF-8'
+											) ?>
+										</label>
+
+										<select
+											id="pong-code-language"
+											name="code_language"
+											class="ping-code-language"
+										>
+											<option value="text">Text</option>
+											<option value="php">PHP</option>
+											<option value="javascript">JavaScript</option>
+											<option value="html">HTML</option>
+											<option value="css">CSS</option>
+											<option value="sql">SQL</option>
+											<option value="bash">Bash</option>
+											<option value="python">Python</option>
+											<option value="c">C</option>
+											<option value="cpp">C++</option>
+											<option value="java">Java</option>
+											<option value="json">JSON</option>
+										</select>
+
+									</div>
+
+									<textarea
+										name="code"
+										class="ping-code-textarea"
+										rows="10"
+										maxlength="10000"
+										spellcheck="false"
+										placeholder="<?= htmlspecialchars(
+											$t('ping.composer.code_placeholder'),
+											ENT_QUOTES,
+											'UTF-8'
+										) ?>"
+									></textarea>
+
+									<div class="ping-code-counter">
+										0 / 10000
+									</div>
+
+								</div>
+
 								<div class="ping-composer-actions">
+
+									<div class="ping-composer-tools">
+
+										<button
+											type="button"
+											class="ping-code-toggle"
+											data-pong-code-toggle
+											aria-expanded="false"
+											title="<?= htmlspecialchars(
+												$t('ping.composer.code'),
+												ENT_QUOTES,
+												'UTF-8'
+											) ?>"
+											aria-label="<?= htmlspecialchars(
+												$t('ping.composer.code'),
+												ENT_QUOTES,
+												'UTF-8'
+											) ?>"
+										>
+											<i
+												class="fa-solid fa-code"
+												aria-hidden="true"
+											></i>
+										</button>
+
+									</div>
 
 									<button
 										type="submit"

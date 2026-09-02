@@ -267,9 +267,18 @@ document.addEventListener('DOMContentLoaded', () => {
 			);
 		}
 
+		mediaToggle.setAttribute(
+			'title',
+			label
+		);
+
+		mediaToggle.setAttribute(
+			'aria-label',
+			label
+		);
+
 		mediaToggle.innerHTML =
-			'<span aria-hidden="true">📎</span> '
-			+ label;
+			'<i class="fa-solid fa-upload" aria-hidden="true"></i>';
 
 	}
 

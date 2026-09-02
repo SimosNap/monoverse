@@ -340,6 +340,14 @@ $canDogeTipAuthor =
 		) ?>
 	</div>
 
+	<?php if (!empty($post['code_block'])): ?>
+		<?php
+		$codeBlock = $post['code_block'];
+
+		require __DIR__ . '/code-block.php';
+		?>
+	<?php endif; ?>
+
 	<?php if (!empty($post['can_edit'])): ?>
 
 		<div
@@ -362,6 +370,96 @@ $canDogeTipAuthor =
 					ENT_QUOTES,
 					'UTF-8'
 				) ?></textarea>
+
+				<?php
+				$editCodeBlock = is_array($post['code_block'] ?? null)
+					? $post['code_block']
+					: [];
+
+				$editCode = (string) (
+					$editCodeBlock['code']
+					?? ''
+				);
+
+				$editCodeLanguage = (string) (
+					$editCodeBlock['language']
+					?? 'text'
+				);
+				?>
+
+				<div class="ping-code-composer">
+
+					<div class="ping-code-composer-header">
+
+						<label>
+							<?= htmlspecialchars(
+								$t('ping.composer.code_language'),
+								ENT_QUOTES,
+								'UTF-8'
+							) ?>
+						</label>
+
+						<select
+							name="code_language"
+							class="ping-code-language"
+						>
+							<?php
+							$codeLanguages = [
+								'text' => 'Text',
+								'php' => 'PHP',
+								'javascript' => 'JavaScript',
+								'html' => 'HTML',
+								'css' => 'CSS',
+								'sql' => 'SQL',
+								'bash' => 'Bash',
+								'python' => 'Python',
+								'c' => 'C',
+								'cpp' => 'C++',
+								'java' => 'Java',
+								'json' => 'JSON',
+							];
+
+							foreach ($codeLanguages as $value => $label):
+							?>
+								<option
+									value="<?= htmlspecialchars(
+										$value,
+										ENT_QUOTES,
+										'UTF-8'
+									) ?>"
+									<?= $editCodeLanguage === $value
+										? 'selected'
+										: '' ?>
+								>
+									<?= htmlspecialchars(
+										$label,
+										ENT_QUOTES,
+										'UTF-8'
+									) ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+
+					</div>
+
+					<textarea
+						name="code"
+						class="ping-code-textarea"
+						rows="10"
+						maxlength="10000"
+						spellcheck="false"
+						placeholder="<?= htmlspecialchars(
+							$t('ping.composer.code_placeholder'),
+							ENT_QUOTES,
+							'UTF-8'
+						) ?>"
+					><?= htmlspecialchars(
+						$editCode,
+						ENT_QUOTES,
+						'UTF-8'
+					) ?></textarea>
+
+				</div>
 
 				<div class="ping-editor-actions">
 

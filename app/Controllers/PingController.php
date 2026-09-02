@@ -1057,7 +1057,32 @@ class PingController extends BaseController
 
 		$content = trim((string) ($_POST['content'] ?? ''));
 
-		if ($content === '') {
+		$code = (string) (
+			$_POST['code']
+			?? ''
+		);
+
+		$codeLanguage = trim(
+			(string) (
+				$_POST['code_language']
+				?? 'text'
+			)
+		);
+
+		if (mb_strlen($code) > 10000) {
+			$this->session->flash(
+				'error',
+				'Il blocco di codice può contenere al massimo 10000 caratteri.'
+			);
+
+			$this->response->redirect('/ping/' . $uuid);
+			return;
+		}
+
+		if (
+			$content === ''
+			&& $code === ''
+		) {
 			$this->response->redirect('/ping/' . $uuid);
 			return;
 		}
@@ -1066,6 +1091,8 @@ class PingController extends BaseController
 			'post_id' => $post['id'],
 			'author_sub' => $user['sub'],
 			'content' => $content,
+			'code' => $code,
+			'code_language' => $codeLanguage,
 		]);
 
 		$this->response->redirect('/ping/' . $uuid);
@@ -1189,12 +1216,42 @@ class PingController extends BaseController
 
 		$content = trim((string) ($_POST['content'] ?? ''));
 
-		if ($content === '') {
+		$code = (string) (
+			$_POST['code']
+			?? ''
+		);
+
+		$codeLanguage = trim(
+			(string) (
+				$_POST['code_language']
+				?? 'text'
+			)
+		);
+
+		if (mb_strlen($code) > 10000) {
+			$this->session->flash(
+				'error',
+				'Il blocco di codice può contenere al massimo 10000 caratteri.'
+			);
+
 			$this->response->redirect('/ping/' . urlencode($uuid));
 			return;
 		}
 
-		$this->posts->update($uuid, $content);
+		if (
+			$content === ''
+			&& $code === ''
+		) {
+			$this->response->redirect('/ping/' . urlencode($uuid));
+			return;
+		}
+
+		$this->posts->update(
+			$uuid,
+			$content,
+			$code,
+			$codeLanguage
+		);
 
 		$this->response->redirect('/ping/' . urlencode($uuid));
 		return;
@@ -1253,14 +1310,46 @@ class PingController extends BaseController
 
 		$content = trim((string) ($_POST['content'] ?? ''));
 
-		if ($content === '') {
+		$code = (string) (
+			$_POST['code']
+			?? ''
+		);
+
+		$codeLanguage = trim(
+			(string) (
+				$_POST['code_language']
+				?? 'text'
+			)
+		);
+
+		if (mb_strlen($code) > 10000) {
+			$this->session->flash(
+				'error',
+				'Il blocco di codice può contenere al massimo 10000 caratteri.'
+			);
+
 			$this->response->redirect(
 				'/ping/' . urlencode((string) $comment['post_uuid'])
 			);
 			return;
 		}
 
-		$this->comments->update($uuid, $content);
+		if (
+			$content === ''
+			&& $code === ''
+		) {
+			$this->response->redirect(
+				'/ping/' . urlencode((string) $comment['post_uuid'])
+			);
+			return;
+		}
+
+		$this->comments->update(
+			$uuid,
+			$content,
+			$code,
+			$codeLanguage
+		);
 
 		$this->response->redirect(
 			'/ping/' . urlencode((string) $comment['post_uuid'])
@@ -1445,6 +1534,18 @@ class PingController extends BaseController
 
 		$content = trim((string) ($_POST['content'] ?? ''));
 
+		$code = (string) (
+			$_POST['code']
+			?? ''
+		);
+
+		$codeLanguage = trim(
+			(string) (
+				$_POST['code_language']
+				?? 'text'
+			)
+		);
+
 		$audioTitle = trim(
 			(string) ($_POST['audio_title'] ?? '')
 		);
@@ -1485,8 +1586,19 @@ class PingController extends BaseController
 			}
 		}
 
+		if (mb_strlen($code) > 10000) {
+			$this->session->flash(
+				'error',
+				'Il blocco di codice può contenere al massimo 10000 caratteri.'
+			);
+
+			$this->response->redirect('/ping');
+			return;
+		}
+
 		if (
 			$content === ''
+			&& $code === ''
 			&& (
 				$mediaRequireText
 				|| !$hasAudioVideo
@@ -1509,6 +1621,8 @@ class PingController extends BaseController
 				[
 					'author_sub' => $user['sub'],
 					'content' => $content,
+					'code' => $code,
+					'code_language' => $codeLanguage,
 					'visibility' => 'public',
 					'comments_enabled' => 1,
 					'audio_title' => $audioTitle,

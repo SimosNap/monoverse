@@ -14,7 +14,8 @@ class PostService
 		private LinkService $linkService,
 		private MediaService $mediaService,
 		private BlockService $blocks,
-		private DogeTipService $dogeTips
+		private DogeTipService $dogeTips,
+		private CodeBlockService $codeBlocks
 	) {
 	}
 
@@ -129,6 +130,11 @@ class PostService
 				(int) $post['id']
 			);
 
+			$post['code_block'] = $this->codeBlocks->find(
+				'ping',
+				(int) $post['id']
+			);
+
 			$this->enrichDogeTip($post);
 
 			$post['is_blocked_for_viewer'] = false;
@@ -159,6 +165,10 @@ class PostService
 		$this->mediaService->deleteByPostId(
 			(int) $post['id']
 		);
+		$this->codeBlocks->deleteByContent(
+			'ping',
+			(int) $post['id']
+		);
 		return $this->database->execute(
 			'
 			DELETE FROM community_posts
@@ -171,9 +181,20 @@ class PostService
 
 	}
 
-	public function update(string $uuid, string $content): bool
+	public function update(
+		string $uuid,
+		string $content,
+		string $code = '',
+		string $codeLanguage = 'text'
+	): bool
 	{
-		return $this->database->execute(
+		$post = $this->findByUuid($uuid);
+
+		if (!$post) {
+			return false;
+		}
+
+		$updated = $this->database->execute(
 			'
 			UPDATE community_posts
 			SET content = ?,
@@ -186,6 +207,19 @@ class PostService
 				$uuid,
 			]
 		);
+
+		if (!$updated) {
+			return false;
+		}
+
+		$this->codeBlocks->save(
+			'ping',
+			(int) $post['id'],
+			$code,
+			$codeLanguage
+		);
+
+		return true;
 	}
 
 	public function listPublished(
@@ -275,6 +309,11 @@ class PostService
 
 		foreach ($posts as &$post) {
 			$post['media'] = $this->mediaService->findByPostId(
+				(int) $post['id']
+			);
+
+			$post['code_block'] = $this->codeBlocks->find(
+				'ping',
 				(int) $post['id']
 			);
 
@@ -385,6 +424,11 @@ class PostService
 
 		foreach ($posts as &$post) {
 			$post['media'] = $this->mediaService->findByPostId(
+				(int) $post['id']
+			);
+
+			$post['code_block'] = $this->codeBlocks->find(
+				'ping',
 				(int) $post['id']
 			);
 
@@ -518,6 +562,11 @@ class PostService
 				(int) $post['id']
 			);
 
+			$post['code_block'] = $this->codeBlocks->find(
+				'ping',
+				(int) $post['id']
+			);
+
 			$this->enrichDogeTip($post);
 		}
 
@@ -618,6 +667,11 @@ class PostService
 
 		foreach ($posts as &$post) {
 			$post['media'] = $this->mediaService->findByPostId(
+				(int) $post['id']
+			);
+
+			$post['code_block'] = $this->codeBlocks->find(
+				'ping',
 				(int) $post['id']
 			);
 
@@ -750,6 +804,11 @@ class PostService
 
 		foreach ($posts as &$post) {
 			$post['media'] = $this->mediaService->findByPostId(
+				(int) $post['id']
+			);
+
+			$post['code_block'] = $this->codeBlocks->find(
+				'ping',
 				(int) $post['id']
 			);
 
@@ -940,6 +999,11 @@ class PostService
 
 		foreach ($posts as &$post) {
 			$post['media'] = $this->mediaService->findByPostId(
+				(int) $post['id']
+			);
+
+			$post['code_block'] = $this->codeBlocks->find(
+				'ping',
 				(int) $post['id']
 			);
 
@@ -1219,6 +1283,25 @@ class PostService
 		}
 
 		if ($created) {
+
+			$code = (string) (
+				$data['code']
+				?? ''
+			);
+
+			$codeLanguage = (string) (
+				$data['code_language']
+				?? 'text'
+			);
+
+			if ($code !== '') {
+				$this->codeBlocks->save(
+					'ping',
+					$postId,
+					$code,
+					$codeLanguage
+				);
+			}
 
 			if (!empty($files)) {
 				$this->mediaService->store(

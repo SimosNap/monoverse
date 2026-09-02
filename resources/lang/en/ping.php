@@ -52,10 +52,13 @@ return [
 	'composer' => [
 		'placeholder' => 'What are you thinking about?',
 		'publish' => 'Publish',
+		'code' => 'Code',
+		'code_language' => 'Language',
+		'code_placeholder' => 'Paste your code here...',
 		'media' => [
-			'attachments' => 'Attachments',
-			'attach_files' => 'Attach files',
-			'close' => 'Close attachments',
+			'attachments' => 'Uploads',
+			'attach_files' => 'Upload files',
+			'close' => 'Close uploads',
 
 			'allowed' => 'Allowed:',
 			'images' => 'images',
@@ -205,9 +208,9 @@ return [
 		],
 
 		'attachments' => [
-			'label' => 'Attachments',
-			'one' => '1 attachment',
-			'count' => ':count attachments',
+			'label' => 'Uploads',
+			'one' => '1 upload',
+			'count' => ':count uploads',
 			'remove' => 'Remove :file',
 
 			'audio_not_allowed' => 'Audio attachments are not allowed.',

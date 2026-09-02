@@ -579,7 +579,8 @@ class App
                 $container->get(\Monoverse\Services\LinkService::class),
                 $container->get(\Monoverse\Services\MediaService::class),
                 $container->get(\Monoverse\Services\BlockService::class),
-                $container->get(\Monoverse\Services\DogeTipService::class)
+                $container->get(\Monoverse\Services\DogeTipService::class),
+                $container->get(\Monoverse\Services\CodeBlockService::class)
             );
         });
 
@@ -588,7 +589,8 @@ class App
                 $container->get(Database::class),
                 $container->get(\Monoverse\Services\NotificationService::class),
                 $container->get(\Monoverse\Services\MentionService::class),
-                $container->get(\Monoverse\Services\BlockService::class)
+                $container->get(\Monoverse\Services\BlockService::class),
+                $container->get(\Monoverse\Services\CodeBlockService::class)
             );
         });
 
@@ -637,6 +639,15 @@ class App
                 $container->get(\Monoverse\Services\SettingsService::class)
             );
         });
+
+        $this->container->set(
+            \Monoverse\Services\CodeBlockService::class,
+            function (Container $container) {
+                return new \Monoverse\Services\CodeBlockService(
+                    $container->get(Database::class)
+                );
+            }
+        );
 
         $this->container->set(
             \Monoverse\Services\SimosNapService::class,

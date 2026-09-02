@@ -487,11 +487,18 @@ a.ping-username:hover {
 .ping-composer-actions {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: space-between;
+	gap: 8px;
 
 	margin-top: 14px;
 	padding-top: 12px;
 	border-top: 1px solid #edf0f2;
+}
+
+.ping-composer-tools {
+	display: flex;
+	align-items: center;
+	gap: 4px;
 }
 
 .ping-composer-submit {
@@ -500,30 +507,37 @@ a.ping-username:hover {
 	justify-content: center;
 
 	width: auto !important;
-	min-width: 120px;
-	height: 40px;
+	min-width: 0;
+	height: auto;
 
 	margin: 0;
-	padding: 0 18px;
+	padding: 6px 10px;
 
-	border: 0;
-	border-radius: 7px;
-	background: var(--mv-primary) !important;
+	border: 1px solid #cfd5d9;
+	border-radius: 6px;
+	background: #fff !important;
 	box-shadow: none;
 
-	color: #fff !important;
+	color: #353b40 !important;
 	font: inherit;
-	font-weight: 600;
+	font-size: 12px;
+	font-weight: 650;
 	line-height: 1;
-	text-decoration: none;
 
 	opacity: 1 !important;
 	visibility: visible !important;
 	cursor: pointer;
+
+	transition:
+		background-color .15s ease,
+		border-color .15s ease,
+		color .15s ease;
 }
 
 .ping-composer-submit:hover {
-	background: var(--mv-primary-hover, #36a982) !important;
+	background: #f3f5f6 !important;
+	border-color: #bfc6cb;
+	color: var(--mv-primary) !important;
 	filter: none;
 }
 
@@ -535,17 +549,17 @@ a.ping-username:hover {
 .ping-feed-tabs {
 	display: flex;
 	align-items: stretch;
-	
+
 	width: 100%;
 	margin: 0 0 28px;
 	padding: 0;
-	
+
 	border: 0;
 	border-radius: 0;
-	
+
 	background: transparent;
 }
-   
+
 .ping-feed-tabs::-webkit-scrollbar {
 	display: none;
 }
@@ -1040,7 +1054,7 @@ a.ping-username:hover {
 .ping-composer-actions {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: space-between;
 
 	margin-top: 12px;
 	padding-top: 12px;
@@ -1051,40 +1065,277 @@ a.ping-username:hover {
 .ping-composer-attachments-toggle {
 	display: inline-flex;
 	align-items: center;
-	gap: 6px;
+	justify-content: center;
 
-	width: auto;
+	width: 30px;
+	height: 30px;
 	margin: 0;
-	padding: 5px 9px;
+	padding: 0;
 
-	border: 1px solid #d8dde1;
+	border: 0;
 	border-radius: 6px;
 
-	background: #fff;
-	color: #626970;
+	background: transparent;
+	color: #7b8389;
 
 	font: inherit;
-	font-size: 12px;
-	font-weight: 600;
+	font-size: 13px;
 	line-height: 1;
 
 	cursor: pointer;
 
 	transition:
 		background-color .15s ease,
-		border-color .15s ease,
 		color .15s ease;
 }
 
 .ping-composer-attachments-toggle:hover,
 .ping-composer-attachments-toggle[aria-expanded="true"] {
-	background: #f3f5f6;
-	border-color: #bfc6cb;
-	color: #25292d;
+	background: #f1f3f4;
+	color: #353b40;
 }
 
 .ping-composer-attachments-toggle i {
+	font-size: 13px;
+}
+
+.ping-code-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 30px;
+	height: 30px;
+	margin: 0;
+	padding: 0;
+
+	border: 0;
+	border-radius: 6px;
+
+	background: transparent;
+	color: #7b8389;
+
+	font-size: 13px;
+	line-height: 1;
+
+	cursor: pointer;
+
+	transition:
+		background-color .15s ease,
+		color .15s ease;
+}
+
+.ping-code-toggle:hover,
+.ping-code-toggle[aria-expanded="true"] {
+	background: #f1f3f4;
+	color: #353b40;
+}
+
+/* ==========================================================
+   Composer code
+   ========================================================== */
+
+.ping-code-composer {
+	margin-top: 12px;
+	padding: 14px;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 8px;
+
+	background: #fafbfb;
+}
+
+.ping-code-composer[hidden] {
+	display: none;
+}
+
+.ping-code-composer-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+
+	margin-bottom: 10px;
+}
+
+.ping-code-composer-header label {
+	color: #5f676d;
+
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.ping-code-language {
+	width: auto;
+	max-width: 180px;
+	margin: 0;
+	padding: 6px 28px 6px 9px;
+
+	border: 1px solid #d8dde1;
+	border-radius: 6px;
+
+	background: #fff;
+	color: #353b40;
+
+	font: inherit;
+	font-size: 11px;
+	font-weight: 600;
+
+	cursor: pointer;
+}
+
+.ping-code-language:focus {
+	outline: none;
+	border-color: var(--mv-primary);
+
+	box-shadow:
+		0 0 0 3px rgba(66, 185, 146, .10);
+}
+
+.ping-code-textarea {
+	display: block;
+
+	width: 100%;
+	min-height: 220px;
+	margin: 0;
+	padding: 12px 13px;
+
+	resize: vertical;
+
+	border: 1px solid #d8dde1;
+	border-radius: 7px;
+	outline: none;
+
+	background: #fff;
+	color: #24292f;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
 	font-size: 12px;
+	line-height: 1.55;
+
+	tab-size: 4;
+	box-sizing: border-box;
+}
+
+.ping-code-textarea:focus {
+	border-color: var(--mv-primary);
+
+	box-shadow:
+		0 0 0 3px rgba(66, 185, 146, .10);
+}
+
+.ping-code-textarea::placeholder {
+	color: #9aa1a6;
+}
+
+.ping-code-counter {
+	margin-top: 7px;
+
+	color: #888;
+
+	font-size: 10px;
+	font-weight: 500;
+	line-height: 1;
+	text-align: right;
+
+	user-select: none;
+}
+
+/* ==========================================================
+   Content code block
+   ========================================================== */
+
+.content-code-block {
+	margin-top: 14px;
+
+	overflow: hidden;
+
+	border: 1px solid #dfe3e6;
+	border-radius: 8px;
+
+	background: #fff;
+}
+
+.content-code-header {
+	display: flex;
+	align-items: center;
+
+	min-height: 34px;
+	padding: 0 12px;
+
+	border-bottom: 1px solid #e7eaed;
+	background: #f6f8fa;
+}
+
+.content-code-language {
+	color: #656d76;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 10px;
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: .04em;
+}
+
+.content-code-pre {
+	width: 100%;
+	max-height: 480px;
+
+	margin: 0;
+	padding: 13px 14px;
+
+	overflow: auto;
+
+	background: #fff;
+	color: #24292f;
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: 12px;
+	line-height: 1.55;
+
+	tab-size: 4;
+	box-sizing: border-box;
+}
+
+.content-code-pre code {
+	display: block;
+
+	min-width: max-content;
+	margin: 0;
+	padding: 0;
+
+	border: 0;
+	background: transparent;
+
+	color: inherit;
+	font: inherit;
+
+	white-space: pre;
 }
 
 .ping-composer-media {

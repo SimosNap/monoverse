@@ -1,23 +1,3 @@
-<div class="ping-composer-actions">
-
-	<button
-		type="button"
-		class="ping-composer-attachments-toggle"
-		aria-expanded="false"
-	>
-		<i class="fa-solid fa-paperclip" aria-hidden="true"></i>
-
-		<span class="ping-composer-attachments-label">
-			<?= htmlspecialchars(
-				$t('ping.composer.media.attachments'),
-				ENT_QUOTES,
-				'UTF-8'
-			) ?>
-		</span>
-	</button>
-
-</div>
-
 <div
 	class="ping-composer-media"
 	data-audio-upload-enabled="<?= (($settings['media_audio_upload_enabled'] ?? '1') === '1') ? '1' : '0' ?>"
@@ -136,7 +116,10 @@
 			class="ping-composer-dropzone-icon"
 			aria-hidden="true"
 		>
-			📎
+			<i
+				class="fa-solid fa-upload"
+				aria-hidden="true"
+			></i>
 		</span>
 
 		<span class="ping-composer-dropzone-title">

@@ -495,6 +495,7 @@ final class BlockController extends BaseController
 			}
 
 			$translatedTitle = '';
+			$translatedHtml = '';
 
 			if (
 				isset($translations[$locale])
@@ -506,6 +507,13 @@ final class BlockController extends BaseController
 						?? ''
 					)
 				);
+
+				if ($type === 'html') {
+					$translatedHtml = (string) (
+						$translations[$locale]['html']
+						?? ''
+					);
+				}
 			}
 
 			$this->contentTranslations->set(
@@ -515,6 +523,16 @@ final class BlockController extends BaseController
 				'title',
 				$translatedTitle
 			);
+
+			if ($type === 'html') {
+				$this->contentTranslations->set(
+					'block',
+					$blockId,
+					$locale,
+					'html',
+					$translatedHtml
+				);
+			}
 		}
 
 		$this->session->flash(
@@ -708,6 +726,7 @@ final class BlockController extends BaseController
 			}
 
 			$translatedTitle = '';
+			$translatedHtml = '';
 
 			if (
 				isset($translations[$locale])
@@ -719,6 +738,13 @@ final class BlockController extends BaseController
 						?? ''
 					)
 				);
+
+				if ((string) ($record['type'] ?? '') === 'html') {
+					$translatedHtml = (string) (
+						$translations[$locale]['html']
+						?? ''
+					);
+				}
 			}
 
 			$this->contentTranslations->set(
@@ -728,6 +754,16 @@ final class BlockController extends BaseController
 				'title',
 				$translatedTitle
 			);
+
+			if ((string) ($record['type'] ?? '') === 'html') {
+				$this->contentTranslations->set(
+					'block',
+					$id,
+					$locale,
+					'html',
+					$translatedHtml
+				);
+			}
 		}
 
 		$this->session->flash(

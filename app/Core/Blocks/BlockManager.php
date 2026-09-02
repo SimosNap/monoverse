@@ -85,6 +85,22 @@ final class BlockManager
                 ) {
                     $block['title'] = $translatedTitle;
                 }
+
+                if ($type === 'html') {
+                    $translatedHtml = $this->contentTranslations->get(
+                        'block',
+                        (int) $block['id'],
+                        $currentLocale,
+                        'html'
+                    );
+
+                    if (
+                        $translatedHtml !== null
+                        && trim($translatedHtml) !== ''
+                    ) {
+                        $settings['html'] = $translatedHtml;
+                    }
+                }
             }
 
             $blockContext = array_merge(

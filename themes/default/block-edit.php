@@ -172,6 +172,67 @@ $widthOptions = [
 
 				<?= $editor ?>
 
+				<?php if ($blockType === 'html'): ?>
+
+					<?php foreach ($availableLocales as $locale): ?>
+
+						<?php
+						$locale = (string) $locale;
+
+						if (
+							$locale === ''
+							|| $locale === $defaultLocale
+						) {
+							continue;
+						}
+
+						$translatedHtml = (string) (
+							$titleTranslations[$locale]['html']
+							?? ''
+						);
+						?>
+
+						<div class="mv-admin-field">
+
+							<label
+								for="block-html-<?= htmlspecialchars(
+									$locale,
+									ENT_QUOTES,
+									'UTF-8'
+								) ?>"
+							>
+								HTML
+								(<?= htmlspecialchars(
+									strtoupper($locale),
+									ENT_QUOTES,
+									'UTF-8'
+								) ?>)
+							</label>
+
+							<textarea
+								id="block-html-<?= htmlspecialchars(
+									$locale,
+									ENT_QUOTES,
+									'UTF-8'
+								) ?>"
+								name="translations[<?= htmlspecialchars(
+									$locale,
+									ENT_QUOTES,
+									'UTF-8'
+								) ?>][html]"
+								rows="12"
+							><?= htmlspecialchars(
+								$translatedHtml,
+								ENT_QUOTES,
+								'UTF-8'
+							) ?></textarea>
+
+						</div>
+
+					<?php endforeach; ?>
+
+				<?php endif; ?>
+
 			</section>
 
 		</div>

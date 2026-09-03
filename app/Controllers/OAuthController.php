@@ -7,6 +7,7 @@ use Monoverse\Core\Response;
 use Monoverse\Services\OAuthService;
 use Monoverse\Services\ProfileService;
 use Monoverse\Services\AuthorizationService;
+use Monoverse\Core\Session;
 
 class OAuthController
 {
@@ -14,12 +15,64 @@ class OAuthController
         private Response $response,
         private OAuthService $authService,
         private ProfileService $profiles,
-        private AuthorizationService $authorization
+        private AuthorizationService $authorization,
+        private Session $session
     ) {
     }
 
     public function login(): void
     {
+        $returnTo = $_GET['return_to'] ?? null;
+
+        if (
+            is_string($returnTo)
+            && $returnTo !== ''
+            && str_starts_with($returnTo, '/')
+            && !str_starts_with($returnTo, '//')
+        ) {
+            $this->session->set(
+                'oauth.return_to',
+                $returnTo
+            );
+        } else {
+            $referer = $_SERVER['HTTP_REFERER'] ?? '';
+
+            if (is_string($referer) && $referer !== '') {
+                $parts = parse_url($referer);
+
+                $refererHost = strtolower(
+                    (string) ($parts['host'] ?? '')
+                );
+
+                $currentHost = strtolower(
+                    preg_replace(
+                        '/:\d+$/',
+                        '',
+                        (string) ($_SERVER['HTTP_HOST'] ?? '')
+                    )
+                );
+
+                if (
+                    $refererHost !== ''
+                    && $currentHost !== ''
+                    && $refererHost === $currentHost
+                ) {
+                    $returnTo =
+                        (string) ($parts['path'] ?? '/')
+                        . (
+                            isset($parts['query'])
+                                ? '?' . $parts['query']
+                                : ''
+                        );
+
+                    $this->session->set(
+                        'oauth.return_to',
+                        $returnTo
+                    );
+                }
+            }
+        }
+
         $this->response->redirect(
             $this->authService->loginUrl()
         );
@@ -103,7 +156,23 @@ class OAuthController
                 : []
         );
 
-        $this->response->redirect('/');
+        $returnTo = $this->session->get(
+            'oauth.return_to',
+            '/'
+        );
+
+        $this->session->remove('oauth.return_to');
+
+        if (
+            !is_string($returnTo)
+            || $returnTo === ''
+            || !str_starts_with($returnTo, '/')
+            || str_starts_with($returnTo, '//')
+        ) {
+            $returnTo = '/';
+        }
+
+        $this->response->redirect($returnTo);
     }
 
     public function logout(): void

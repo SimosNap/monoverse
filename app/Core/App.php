@@ -707,7 +707,8 @@ class App
                 $container->get(Response::class),
                 $container->get(\Monoverse\Services\OAuthService::class),
                 $container->get(\Monoverse\Services\ProfileService::class),
-                $container->get(\Monoverse\Services\AuthorizationService::class)
+                $container->get(\Monoverse\Services\AuthorizationService::class),
+                $container->get(Session::class)
             );
         });
 

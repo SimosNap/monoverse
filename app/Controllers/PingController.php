@@ -1041,7 +1041,14 @@ class PingController extends BaseController
 		$user = $this->session->get('auth.user');
 
 		if (!$user) {
-			$this->response->redirect('/oauth/login');
+			$returnTo =
+				'/ping/'
+				. rawurlencode($uuid);
+
+			$this->response->redirect(
+				'/oauth/login?return_to='
+				. rawurlencode($returnTo)
+			);
 			return;
 		}
 
@@ -1122,7 +1129,14 @@ class PingController extends BaseController
 		$user = $this->session->get('auth.user');
 
 		if (!$user) {
-			$this->response->redirect('/oauth/login');
+			$returnTo =
+				'/ping#ping-'
+				. rawurlencode($uuid);
+
+			$this->response->redirect(
+				'/oauth/login?return_to='
+				. rawurlencode($returnTo)
+			);
 			return;
 		}
 
@@ -1147,7 +1161,14 @@ class PingController extends BaseController
 		$user = $this->session->get('auth.user');
 
 		if (!$user) {
-			$this->response->redirect('/oauth/login');
+			$returnTo =
+				'/ping#ping-'
+				. rawurlencode($uuid);
+
+			$this->response->redirect(
+				'/oauth/login?return_to='
+				. rawurlencode($returnTo)
+			);
 			return;
 		}
 
@@ -1172,7 +1193,14 @@ class PingController extends BaseController
 		$user = $this->session->get('auth.user');
 
 		if (!$user) {
-			$this->response->redirect('/oauth/login');
+			$returnTo =
+				'/ping#ping-'
+				. rawurlencode($uuid);
+
+			$this->response->redirect(
+				'/oauth/login?return_to='
+				. rawurlencode($returnTo)
+			);
 			return;
 		}
 

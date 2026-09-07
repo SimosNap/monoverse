@@ -10,7 +10,7 @@ return [
 
     'identity' => [
         'title' => 'Perché un account SimosNap?',
-        'text' => 'SimosNap è il provider di identità ufficiale di Monoverse. Un unico account ti permette di accedere ai servizi compatibili senza dover creare credenziali diverse per ogni community.',
+        'text' => 'SimosNap è il network IRC che ospita il canale della community. Il tuo account IRC viene utilizzato anche per identificarti sul sito, permettendoti di partecipare alla community senza creare credenziali separate.',
     ],
 
     'security' => [

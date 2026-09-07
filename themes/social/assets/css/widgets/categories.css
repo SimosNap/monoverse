@@ -1,0 +1,165 @@
+/* ==========================================================
+   Block — Categorie articoli
+   ========================================================== */
+
+.mv-categories-widget {
+	display: grid;
+	gap: 16px;
+
+	width: 100%;
+	max-width: none;
+
+	box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   Header
+   ========================================================== */
+
+.mv-categories-header {
+	padding-bottom: 0;
+}
+
+.mv-categories-header h3 {
+	margin: 0;
+
+	color: var(--mv-text);
+
+	font-size: 16px;
+	font-weight: 850;
+	line-height: 1.25;
+	letter-spacing: -.02em;
+}
+
+
+/* ==========================================================
+   Lista
+   ========================================================== */
+
+.mv-categories-list {
+	display: grid;
+	gap: 0;
+
+	margin: 0;
+	padding: 0;
+
+	list-style: none;
+}
+
+.mv-categories-item {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto auto;
+	align-items: center;
+	gap: 10px;
+
+	padding: 8px 0;
+
+	color: var(--mv-text);
+
+	text-decoration: none;
+
+	transition: color .15s ease;
+}
+
+.mv-categories-item:hover {
+	color: var(--mv-primary);
+}
+
+
+/* ==========================================================
+   Nome categoria
+   ========================================================== */
+
+.mv-categories-body {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	min-width: 0;
+}
+
+.mv-categories-body .fa-folder {
+	flex: 0 0 auto;
+
+	color: var(--mv-muted);
+
+	font-size: 13px;
+
+	transition: color .15s ease;
+}
+
+.mv-categories-name {
+	min-width: 0;
+
+	overflow: hidden;
+
+	color: inherit;
+
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.4;
+
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+/* ==========================================================
+   Conteggio
+   ========================================================== */
+
+.mv-categories-count {
+	color: var(--mv-muted);
+
+	font-size: 10px;
+	font-weight: 700;
+	line-height: 1;
+
+	white-space: nowrap;
+}
+
+
+/* ==========================================================
+   Freccia
+   ========================================================== */
+
+.mv-categories-item .fa-chevron-right {
+	color: var(--mv-muted);
+
+	font-size: 11px;
+
+	opacity: .6;
+
+	transition:
+		color .15s ease,
+		transform .15s ease;
+}
+
+.mv-categories-item:hover .fa-folder,
+.mv-categories-item:hover .fa-chevron-right {
+	color: var(--mv-primary);
+}
+
+.mv-categories-item:hover .fa-chevron-right {
+	transform: translateX(3px);
+}
+
+
+/* ==========================================================
+   Categoria attiva
+   ========================================================== */
+
+.mv-categories-item.is-active {
+	color: var(--mv-primary);
+}
+
+.mv-categories-item.is-active .mv-categories-name {
+	font-weight: 700;
+}
+
+.mv-categories-item.is-active .fa-folder,
+.mv-categories-item.is-active .fa-chevron-right,
+.mv-categories-item.is-active .mv-categories-count {
+	color: var(--mv-primary);
+}

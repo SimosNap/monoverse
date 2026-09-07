@@ -1,0 +1,368 @@
+.mv-github-release-widget {
+	display: grid;
+	gap: 16px;
+
+	width: 100%;
+	min-width: 0;
+	padding: 18px;
+
+	background: var(--mv-surface);
+	border: 1px solid var(--mv-border);
+	border-radius: 0;
+}
+
+
+/* ==========================================================
+   Header
+   ========================================================== */
+
+.mv-github-release-header {
+	min-width: 0;
+	padding-bottom: 13px;
+
+	border-bottom: 1px solid var(--mv-border);
+}
+
+.mv-github-release-header h3 {
+	margin: 0;
+
+	overflow-wrap: anywhere;
+
+	color: var(--mv-text);
+
+	font-size: 14px;
+	font-weight: 750;
+	line-height: 1.3;
+}
+
+
+/* ==========================================================
+   Release list
+   ========================================================== */
+
+.mv-github-release-list {
+	display: grid;
+	gap: 0;
+
+	min-width: 0;
+}
+
+.mv-github-release-card {
+	display: grid;
+	grid-template-columns: 40px minmax(0, 1fr);
+	align-items: start;
+	gap: 11px;
+
+	min-width: 0;
+	padding: 14px 0;
+
+	border-bottom: 1px solid var(--mv-border);
+}
+
+.mv-github-release-card:first-child {
+	padding-top: 0;
+}
+
+.mv-github-release-card:last-child {
+	padding-bottom: 0;
+
+	border-bottom: 0;
+}
+
+
+/* ==========================================================
+   Icon
+   ========================================================== */
+
+.mv-github-release-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 40px;
+	height: 40px;
+
+	color: var(--mv-primary);
+	background: #fffaf7;
+
+	border: 0;
+	border-radius: 50%;
+
+	font-size: 16px;
+}
+
+.mv-github-release-card-stable .mv-github-release-icon {
+	color: #198754;
+	background: rgba(25, 135, 84, .07);
+}
+
+.mv-github-release-card-beta .mv-github-release-icon {
+	color: #9a6814;
+	background: rgba(154, 104, 20, .07);
+}
+
+.mv-github-release-card-nightly .mv-github-release-icon {
+	color: #7257b5;
+	background: rgba(114, 87, 181, .07);
+}
+
+
+/* ==========================================================
+   Content
+   ========================================================== */
+
+.mv-github-release-content {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+
+	min-width: 0;
+}
+
+.mv-github-release-topline {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 8px;
+
+	min-width: 0;
+}
+
+.mv-github-release-topline strong {
+	display: block;
+	min-width: 0;
+
+	overflow-wrap: anywhere;
+
+	color: var(--mv-text);
+
+	font-size: 13px;
+	font-weight: 780;
+	line-height: 1.35;
+}
+
+
+/* ==========================================================
+   State
+   ========================================================== */
+
+.mv-github-release-state {
+	flex: 0 0 auto;
+
+	padding: 2px 0;
+
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+
+	font-size: 8px;
+	font-weight: 850;
+	line-height: 1;
+	letter-spacing: .05em;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.mv-github-release-state-stable {
+	color: #198754;
+}
+
+.mv-github-release-state-beta {
+	color: #9a6814;
+}
+
+.mv-github-release-state-nightly {
+	color: #7257b5;
+}
+
+
+/* ==========================================================
+   Metadata
+   ========================================================== */
+
+.mv-github-release-meta {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	gap: 6px 10px;
+
+	margin-top: 10px;
+	min-width: 0;
+}
+
+.mv-github-release-meta span {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+
+	min-width: 0;
+
+	color: var(--mv-muted);
+
+	font-size: 9px;
+	font-weight: 700;
+	line-height: 1.25;
+}
+
+.mv-github-release-meta i {
+	flex: 0 0 auto;
+
+	color: var(--mv-primary);
+
+	font-size: 9px;
+}
+
+.mv-github-release-card-stable .mv-github-release-meta i {
+	color: #198754;
+}
+
+.mv-github-release-card-beta .mv-github-release-meta i {
+	color: #9a6814;
+}
+
+.mv-github-release-card-nightly .mv-github-release-meta i {
+	color: #7257b5;
+}
+
+
+/* ==========================================================
+   Link
+   ========================================================== */
+
+.mv-github-release-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+
+	margin: 0 0 0 auto;
+	padding: 0;
+
+	color: var(--mv-muted);
+	background: transparent;
+
+	border: 0;
+	border-radius: 0;
+
+	font-size: 9px;
+	font-weight: 700;
+	line-height: 1.25;
+	text-decoration: none;
+
+	white-space: nowrap;
+
+	transition: color .15s ease;
+}
+
+.mv-github-release-link:hover {
+	color: var(--mv-primary);
+}
+
+.mv-github-release-link i {
+	flex: 0 0 auto;
+
+	color: var(--mv-muted);
+
+	font-size: 9px;
+
+	transition: color .15s ease;
+}
+
+.mv-github-release-link:hover i {
+	color: var(--mv-primary);
+}
+
+
+/* ==========================================================
+   Empty
+   ========================================================== */
+
+.mv-github-release-empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 9px;
+
+	min-height: 110px;
+	padding: 18px 0;
+
+	color: var(--mv-muted);
+	background: transparent;
+
+	border-top: 1px solid var(--mv-border);
+	border-bottom: 1px solid var(--mv-border);
+	border-radius: 0;
+
+	text-align: center;
+}
+
+.mv-github-release-empty i {
+	color: var(--mv-primary);
+
+	font-size: 20px;
+}
+
+.mv-github-release-empty p {
+	margin: 0;
+
+	font-size: 11px;
+	line-height: 1.5;
+}
+
+.mv-github-release-empty a {
+	color: var(--mv-text);
+
+	font-size: 10px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.mv-github-release-empty a:hover {
+	color: var(--mv-primary);
+}
+
+
+/* ==========================================================
+   Compact / sidebar
+   ========================================================== */
+
+@media (max-width: 520px) {
+
+	.mv-github-release-widget {
+		gap: 14px;
+		padding: 16px;
+
+		border-radius: 0;
+	}
+
+	.mv-github-release-card {
+		grid-template-columns: 36px minmax(0, 1fr);
+		gap: 10px;
+
+		padding: 13px 0;
+	}
+
+	.mv-github-release-icon {
+		width: 36px;
+		height: 36px;
+
+		border-radius: 50%;
+
+		font-size: 14px;
+	}
+
+	.mv-github-release-topline {
+		gap: 6px;
+	}
+
+	.mv-github-release-topline strong {
+		font-size: 12px;
+	}
+
+	.mv-github-release-state {
+		padding: 2px 0;
+
+		font-size: 7px;
+	}
+
+}

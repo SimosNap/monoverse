@@ -33,11 +33,17 @@ class View
         array $data = [],
         string $layout = 'layout'
     ): string {
-        $themePath = $this->themePath();
+        $pageFile = $this->resolveThemeFile(
+            'pages/' . $view . '.php'
+        );
 
-        $pageFile = $themePath . '/pages/' . $view . '.php';
-        $legacyFile = $themePath . '/' . $view . '.php';
-        $layoutFile = $themePath . '/' . $layout . '.php';
+        $legacyFile = $this->resolveThemeFile(
+            $view . '.php'
+        );
+
+        $layoutFile = $this->resolveThemeFile(
+            $layout . '.php'
+        );
 
         $viewFile = is_file($pageFile)
             ? $pageFile
@@ -192,6 +198,11 @@ class View
             array_unique($jsFiles)
         );
 
+        $data['theme'] = (string) $this->config->get(
+            'theme',
+            'default'
+        );
+
         extract($data, EXTR_SKIP);
 
         $component = function (
@@ -241,10 +252,9 @@ class View
         string $name,
         array $data = []
     ): string {
-        $componentFile = $this->themePath()
-            . '/components/'
-            . $name
-            . '.php';
+        $componentFile = $this->resolveThemeFile(
+            'components/' . $name . '.php'
+        );
 
         extract($data, EXTR_SKIP);
 
@@ -283,10 +293,9 @@ class View
         string $view,
         array $data = []
     ): string {
-        $viewFile = $this->themePath()
-            . '/blocks/'
-            . $view
-            . '.php';
+        $viewFile = $this->resolveThemeFile(
+            'blocks/' . $view . '.php'
+        );
 
         extract($data, EXTR_SKIP);
 
@@ -309,6 +318,21 @@ class View
         }
 
         return (string) ob_get_clean();
+    }
+
+    private function resolveThemeFile(
+        string $relativePath
+    ): string {
+        $themePath = $this->themePath();
+        $themeFile = $themePath . '/' . $relativePath;
+
+        if (is_file($themeFile)) {
+            return $themeFile;
+        }
+
+        return __DIR__
+            . '/../../themes/default/'
+            . $relativePath;
     }
 
     private function themePath(): string

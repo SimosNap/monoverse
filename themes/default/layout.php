@@ -415,11 +415,32 @@ $ogPublishedTime = trim(
         if ($css === '') {
             continue;
         }
+
+        $theme = trim((string) ($theme ?? 'default'));
+
+        if ($theme === '') {
+            $theme = 'default';
+        }
+
+        $themeCssFile = __DIR__
+            . '/../'
+            . $theme
+            . '/assets/css/'
+            . $css
+            . '.css';
+
+        $cssTheme = is_file($themeCssFile)
+            ? $theme
+            : 'default';
         ?>
 
         <link
             rel="stylesheet"
-            href="/themes/default/assets/css/<?= htmlspecialchars(
+            href="/themes/<?= htmlspecialchars(
+                $cssTheme,
+                ENT_QUOTES,
+                'UTF-8'
+            ) ?>/assets/css/<?= htmlspecialchars(
                 $css,
                 ENT_QUOTES,
                 'UTF-8'
@@ -1555,10 +1576,26 @@ if ($cryptoTipsEnabled) {
     if ($js === '') {
         continue;
     }
+
+    $themeJsFile = __DIR__
+        . '/../'
+        . $theme
+        . '/assets/js/'
+        . $js
+        . '.js';
+
+    $jsTheme = is_file($themeJsFile)
+        ? $theme
+        : 'default';
+
     ?>
 
     <script
-        src="/themes/default/assets/js/<?= htmlspecialchars(
+        src="/themes/<?= htmlspecialchars(
+            $jsTheme,
+            ENT_QUOTES,
+            'UTF-8'
+        ) ?>/assets/js/<?= htmlspecialchars(
             $js,
             ENT_QUOTES,
             'UTF-8'

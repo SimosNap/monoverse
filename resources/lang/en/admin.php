@@ -58,7 +58,19 @@ return [
 
 		'brand' => [
 			'title' => 'Brand',
-			'description' => 'Configure the images used to identify the site in browsers, mobile devices, and social sharing.',
+			'description' => 'Configure the theme and visual elements used to identify the site.',
+
+			'theme' => [
+				'label' => 'Site theme',
+				'default' => 'Default',
+				'social' => 'Social',
+				'help' => 'Choose the visual theme used on the public pages of the site.',
+			],
+
+			'header_text' => [
+				'label' => 'Show site name and tagline next to the logo',
+				'help' => 'When disabled, only the logo is shown in the header. This is useful when the logo already includes the site name.',
+			],
 
 			'logo' => [
 				'label' => 'Site logo',

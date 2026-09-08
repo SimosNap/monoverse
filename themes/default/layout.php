@@ -58,7 +58,12 @@ $siteTagline = (string) (
 
 $siteLogo = trim((string) ($settings['site_logo'] ?? ''));
 
+$headerShowBrandText = (
+    ($settings['header_show_brand_text'] ?? '1') === '1'
+);
+
 $siteFavicon = trim((string) ($settings['site_favicon'] ?? ''));
+
 $siteAppleTouchIcon = trim((string) ($settings['site_apple_touch_icon'] ?? ''));
 $siteOgImage = trim((string) ($settings['site_og_image'] ?? ''));
 
@@ -468,11 +473,19 @@ $ogPublishedTime = trim(
 
     <div class="mv-site-header-inner">
 
-        <a class="mv-site-brand" href="/" aria-label="<?= htmlspecialchars(
-            $siteName,
-            ENT_QUOTES,
-            'UTF-8'
-        ) ?>">
+        <a
+            class="mv-site-brand<?= (
+                $siteLogo !== ''
+                && !$headerShowBrandText
+            )
+                ? ' mv-site-brand--logo-only'
+                : '' ?>"
+            href="/"
+            aria-label="<?= htmlspecialchars(
+                $siteName,
+                ENT_QUOTES,
+                'UTF-8'
+            ) ?>">
 
             <?php if ($siteLogo !== ''): ?>
 
@@ -504,25 +517,32 @@ $ogPublishedTime = trim(
 
             <?php endif; ?>
 
-            <span class="mv-site-brand-copy">
+            <?php if (
+                $headerShowBrandText
+                || $siteLogo === ''
+            ): ?>
 
-                <strong>
-                    <?= htmlspecialchars(
-                        $siteName,
-                        ENT_QUOTES,
-                        'UTF-8'
-                    ) ?>
-                </strong>
+                <span class="mv-site-brand-copy">
 
-                <small>
-                    <?= htmlspecialchars(
-                        $siteTagline,
-                        ENT_QUOTES,
-                        'UTF-8'
-                    ) ?>
-                </small>
+                    <strong>
+                        <?= htmlspecialchars(
+                            $siteName,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </strong>
 
-            </span>
+                    <small>
+                        <?= htmlspecialchars(
+                            $siteTagline,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </small>
+
+                </span>
+
+            <?php endif; ?>
 
         </a>
 

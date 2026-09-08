@@ -552,6 +552,22 @@ textarea:disabled {
 	line-height: 1;
 }
 
+.mv-site-brand--logo-only .mv-site-brand-mark {
+	width: auto;
+	height: 44px;
+
+	background: transparent;
+	border-radius: 0;
+	overflow: visible;
+}
+
+.mv-site-brand--logo-only .mv-site-brand-mark img {
+	width: auto;
+	height: 100%;
+	max-width: 200px;
+	object-fit: contain;
+}
+
 .mv-site-nav {
 	display: flex;
 	align-items: center;

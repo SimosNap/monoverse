@@ -58,7 +58,19 @@ return [
 
 		'brand' => [
 			'title' => 'Brand',
-			'description' => 'Configura le immagini utilizzate per identificare il sito nei browser, nei dispositivi mobili e nelle condivisioni social.',
+			'description' => 'Configura il tema e gli elementi visivi utilizzati per identificare il sito.',
+
+			'theme' => [
+				'label' => 'Tema del sito',
+				'default' => 'Default',
+				'social' => 'Social',
+				'help' => 'Scegli il tema grafico utilizzato nelle pagine pubbliche del sito.',
+			],
+
+			'header_text' => [
+				'label' => 'Mostra nome e slogan accanto al logo',
+				'help' => 'Se disabilitata, nell’intestazione verrà mostrato soltanto il logo. È utile quando il logo contiene già il nome del sito.',
+			],
 
 			'logo' => [
 				'label' => 'Logo del sito',

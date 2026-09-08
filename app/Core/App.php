@@ -51,6 +51,36 @@ class App
             }
         );
 
+        if (
+            file_exists(
+                dirname(__DIR__, 2)
+                . '/storage/installed.lock'
+            )
+        ) {
+            $settingsService = $this->container->get(
+                \Monoverse\Services\SettingsService::class
+            );
+
+            $siteTheme = $settingsService->get(
+                'site_theme',
+                $this->config->get('theme', 'default')
+            );
+
+            if (
+                is_string($siteTheme)
+                && in_array(
+                    $siteTheme,
+                    ['default', 'social'],
+                    true
+                )
+            ) {
+                $this->config->set(
+                    'theme',
+                    $siteTheme
+                );
+            }
+        }
+
         $this->container->set(
             \Monoverse\Services\ContentTranslationService::class,
             function (Container $container) {

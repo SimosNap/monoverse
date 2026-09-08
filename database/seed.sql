@@ -2,7 +2,8 @@ INSERT INTO mv_settings (setting_key, setting_value, setting_type, updated_at) V
 ('site_name', 'Monoverse', 'string', NOW()),
 ('site_tagline', 'IRC community websites by SimosNap', 'string', NOW()),
 ('site_mode', 'community', 'string', NOW()),
-('theme', 'default', 'string', NOW()),
+('site_theme', 'default', 'string', NOW()),
+('header_show_brand_text', '1', 'boolean', NOW()),
 ('chat_enabled', '1', 'boolean', NOW()),
 ('chat_default_channel', '#monoverse', 'string', NOW()),
 ('oauth_provider', 'simosnap', 'string', NOW())

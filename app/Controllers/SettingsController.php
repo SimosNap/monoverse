@@ -51,8 +51,44 @@ class SettingsController
             $this->response->redirect('/admin/login');
         }
 
-        $this->settings->set('site_name', (string) $this->request->post('site_name', ''));
-        $this->settings->set('site_tagline', (string) $this->request->post('site_tagline', ''));
+        $this->settings->set(
+            'site_name',
+            (string) $this->request->post('site_name', '')
+        );
+
+        $this->settings->set(
+            'site_tagline',
+            (string) $this->request->post('site_tagline', '')
+        );
+
+        $siteTheme = trim(
+            (string) $this->request->post(
+                'site_theme',
+                'default'
+            )
+        );
+
+        if (
+            !in_array(
+                $siteTheme,
+                ['default', 'social'],
+                true
+            )
+        ) {
+            $siteTheme = 'default';
+        }
+
+        $this->settings->set(
+            'site_theme',
+            $siteTheme
+        );
+
+        $this->settings->set(
+            'header_show_brand_text',
+            $this->request->post('header_show_brand_text')
+                ? '1'
+                : '0'
+        );
 
         $siteUrl = rtrim(
             trim((string) $this->request->post('site_url', '')),

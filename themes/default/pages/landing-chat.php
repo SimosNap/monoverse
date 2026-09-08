@@ -152,6 +152,14 @@ $communityUpdates = [
 
 			<article class="mv-town-form-card">
 
+			<?php if (!empty($blocksEntryRightBefore)): ?>
+
+				<section class="mv-block-area mv-block-area-entry-right-before">
+					<?= $blocksEntryRightBefore ?>
+				</section>
+
+			<?php endif; ?>
+
 			<?php if (
 				!empty($registeredOnly)
 				&& !$isLogged
@@ -1018,6 +1026,14 @@ $communityUpdates = [
 					<input type="hidden" name="radioweb" value="">
 
 				</form>
+
+			<?php endif; ?>
+
+			<?php if (!empty($blocksEntryRightAfter)): ?>
+
+				<section class="mv-block-area mv-block-area-entry-right-after">
+					<?= $blocksEntryRightAfter ?>
+				</section>
 
 			<?php endif; ?>
 

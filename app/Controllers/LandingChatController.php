@@ -66,12 +66,12 @@ class LandingChatController extends BaseController
         $channelFeatures = $this->simosnap->getChannelFeatures(
             $channelInfo
         );
-        
+
         $channelModes = (string) (
             $channelInfo['modes']
                 ?? ''
         );
-        
+
         $registeredOnly = str_contains(
             $channelModes,
             'R'
@@ -81,15 +81,25 @@ class LandingChatController extends BaseController
             'landing-chat',
             'before-entry'
         );
-        
+
         $blocksEntryLeftBefore = $this->blockManager->renderArea(
             'landing-chat',
             'entry-left-before'
         );
-        
+
         $blocksEntryLeftAfter = $this->blockManager->renderArea(
             'landing-chat',
             'entry-left-after'
+        );
+
+        $blocksEntryRightBefore = $this->blockManager->renderArea(
+            'landing-chat',
+            'entry-right-before'
+        );
+
+        $blocksEntryRightAfter = $this->blockManager->renderArea(
+            'landing-chat',
+            'entry-right-after'
         );
 
         $blocksAfterEntry = $this->blockManager->renderArea(
@@ -118,6 +128,8 @@ class LandingChatController extends BaseController
             'blocksBeforeEntry' => $blocksBeforeEntry,
             'blocksEntryLeftBefore' => $blocksEntryLeftBefore,
             'blocksEntryLeftAfter' => $blocksEntryLeftAfter,
+            'blocksEntryRightBefore' => $blocksEntryRightBefore,
+            'blocksEntryRightAfter' => $blocksEntryRightAfter,
             'blocksAfterEntry' => $blocksAfterEntry,
             'blocksBeforeFooter' => $blocksBeforeFooter,
             'blockCssFiles' => $this->blockManager->stylesheets(),

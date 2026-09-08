@@ -4,11 +4,13 @@ declare(strict_types=1);
 return [
 
 	'landing-chat' => [
-		'before-entry'      => 'Prima della sezione di accesso',
-		'entry-left-before' => 'Colonna sinistra — prima del contenuto',
-		'entry-left-after'  => 'Colonna sinistra — dopo il contenuto',
-		'after-entry'       => 'Dopo la sezione di accesso',
-		'before-footer'     => 'Prima del footer',
+		'before-entry'       => 'Prima della sezione di accesso',
+		'entry-left-before'  => 'Colonna sinistra — prima del contenuto',
+		'entry-left-after'   => 'Colonna sinistra — dopo il contenuto',
+		'entry-right-before' => 'Colonna destra — prima del contenuto',
+		'entry-right-after'  => 'Colonna destra — dopo il contenuto',
+		'after-entry'        => 'Dopo la sezione di accesso',
+		'before-footer'      => 'Prima del footer',
 	],
 
 	'members' => [
@@ -22,13 +24,13 @@ return [
 		'sidebar'        => 'Sidebar',
 		'after-content'  => 'Dopo i Ping',
 	],
-	
+
 	'ping-show' => [
 		'before-content' => 'Prima del Ping',
 		'sidebar'        => 'Sidebar',
 		'after-content'  => 'Dopo il Ping',
 	],
-	
+
 	'profile' => [
 		'before-content' => 'Prima del profilo',
 		'sidebar'        => 'Sidebar',

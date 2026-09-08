@@ -1890,22 +1890,44 @@
 }
 
 /* ==========================================================
-   LandingChat — left column block areas
+   LandingChat — column block areas
    ========================================================== */
 
+.mv-town-entry-form {
+	width: 100%;
+	min-width: 0;
+
+	box-sizing: border-box;
+}
+
 .mv-town .mv-block-area-entry-left-before,
-.mv-town .mv-block-area-entry-left-after {
-   width: 100%;
-   margin-right: 0;
-   margin-left: 0;
+.mv-town .mv-block-area-entry-left-after,
+.mv-town .mv-block-area-entry-right-before,
+.mv-town .mv-block-area-entry-right-after {
+	width: 100%;
+	margin-right: 0;
+	margin-left: 0;
 }
 
-.mv-block-area-entry-left-before {
-   margin-bottom: 30px;
+.mv-block-area-entry-left-before,
+.mv-block-area-entry-right-before {
+	margin-bottom: 30px;
 }
 
-.mv-block-area-entry-left-after {
-   margin-top: 30px;
+.mv-block-area-entry-left-after,
+.mv-block-area-entry-right-after {
+	margin-top: 30px;
+}
+
+@media (max-width: 600px) {
+
+	.mv-town-entry-form {
+		order: 1;
+	}
+
+	.mv-town-entry-copy {
+		order: 2;
+	}
 }
 
 /* ==========================================================

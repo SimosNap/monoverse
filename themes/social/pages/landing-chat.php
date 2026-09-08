@@ -139,6 +139,16 @@ $communityUpdates = [
 				<?php endif; ?>
 			</div>
 
+			<div class="mv-town-entry-form">
+
+			<?php if (!empty($blocksEntryRightBefore)): ?>
+
+				<section class="mv-block-area mv-block-area-entry-right-before">
+					<?= $blocksEntryRightBefore ?>
+				</section>
+
+			<?php endif; ?>
+
 			<article class="mv-town-form-card">
 
 			<?php if (
@@ -1012,7 +1022,18 @@ $communityUpdates = [
 
 			</article>
 
-		</section>
+					<?php if (!empty($blocksEntryRightAfter)): ?>
+
+						<section class="mv-block-area mv-block-area-entry-right-after">
+							<?= $blocksEntryRightAfter ?>
+						</section>
+
+					<?php endif; ?>
+
+				</div>
+
+			</section>
+
 	<?php if (!empty($blocksAfterEntry)): ?>
 
 		<section class="mv-block-area mv-block-area-after-entry">

@@ -749,6 +749,15 @@ class App
         );
 
         $this->container->set(
+            \Monoverse\Services\FaqService::class,
+            function (Container $container) {
+                return new \Monoverse\Services\FaqService(
+                    $container->get(Database::class)
+                );
+            }
+        );
+
+        $this->container->set(
             \Monoverse\Services\ExternalAccountService::class,
             function (Container $container) {
                 return new \Monoverse\Services\ExternalAccountService(
@@ -1078,6 +1087,64 @@ class App
         );
 
         $this->container->set(
+            \Monoverse\Controllers\FaqAdminController::class,
+            function (Container $container) {
+                return new \Monoverse\Controllers\FaqAdminController(
+                    $container->get(View::class),
+                    $container->get(Response::class),
+                    $container->get(Session::class),
+                    $container->get(
+                        \Monoverse\Services\NotificationService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\SettingsService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\AdminAuthService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\FaqService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\NavigationService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\LocaleService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\ContentTranslationService::class
+                    )
+                );
+            }
+        );
+
+        $this->container->set(
+            \Monoverse\Controllers\FaqController::class,
+            function (Container $container) {
+                return new \Monoverse\Controllers\FaqController(
+                    $container->get(View::class),
+                    $container->get(Response::class),
+                    $container->get(Session::class),
+                    $container->get(
+                        \Monoverse\Services\NotificationService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\SettingsService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\FaqService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\LocaleService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\ContentTranslationService::class
+                    )
+                );
+            }
+        );
+
+        $this->container->set(
             \Monoverse\Controllers\ChanzineController::class,
             function (Container $container) {
                 return new \Monoverse\Controllers\ChanzineController(
@@ -1391,6 +1458,12 @@ class App
         );
         $pageAdminController = $this->container->get(
             \Monoverse\Controllers\PageAdminController::class
+        );
+        $faqAdminController = $this->container->get(
+            \Monoverse\Controllers\FaqAdminController::class
+        );
+        $faqController = $this->container->get(
+            \Monoverse\Controllers\FaqController::class
         );
         $chanzineController = $this->container->get(
             \Monoverse\Controllers\ChanzineController::class
@@ -1781,6 +1854,36 @@ class App
             [$pageAdminController, 'delete']
         );
 
+        $this->router->get(
+            '/admin/faq',
+            [$faqAdminController, 'index']
+        );
+
+        $this->router->get(
+            '/admin/faq/create',
+            [$faqAdminController, 'create']
+        );
+
+        $this->router->post(
+            '/admin/faq',
+            [$faqAdminController, 'store']
+        );
+
+        $this->router->get(
+            '/admin/faq/{id}/edit',
+            [$faqAdminController, 'edit']
+        );
+
+        $this->router->post(
+            '/admin/faq/{id}',
+            [$faqAdminController, 'update']
+        );
+
+        $this->router->post(
+            '/admin/faq/{id}/delete',
+            [$faqAdminController, 'delete']
+        );
+
         $this->router->get('/admin/login', [$adminAuthController, 'login']);
         $this->router->post('/admin/login', [$adminAuthController, 'authenticate']);
         $this->router->get('/admin/logout', [$adminAuthController, 'logout']);
@@ -1894,6 +1997,11 @@ class App
         $this->router->post(
             '/api/azuracast/request',
             [$apiController, 'azuraCastSongRequest']
+        );
+
+        $this->router->get(
+            '/faq',
+            [$faqController, 'index']
         );
 
         $this->router->get(

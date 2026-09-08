@@ -2820,6 +2820,260 @@
 	}
 }
 
+/* ==========================================================================
+   FAQ
+   ========================================================================== */
+
+.admin-faq-page {
+	width: 100%;
+}
+
+.admin-faq-card {
+	overflow: hidden;
+	padding: 0;
+}
+
+.admin-faq-table-wrapper {
+	overflow-x: auto;
+}
+
+.admin-faq-table {
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+.admin-faq-table th,
+.admin-faq-table td {
+	padding: 16px 22px;
+	border-bottom: 1px solid var(--mv-border);
+	text-align: left;
+	vertical-align: middle;
+}
+
+.admin-faq-table tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+.admin-faq-table th {
+	color: var(--mv-muted);
+	background: var(--mv-bg);
+	font-size: 11px;
+	font-weight: 750;
+	letter-spacing: .07em;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.admin-faq-table th:nth-child(1),
+.admin-faq-table td:nth-child(1) {
+	width: 46%;
+}
+
+.admin-faq-table th:nth-child(2),
+.admin-faq-table td:nth-child(2) {
+	width: 18%;
+}
+
+.admin-faq-table th:nth-child(3),
+.admin-faq-table td:nth-child(3) {
+	width: 12%;
+}
+
+.admin-faq-table th:nth-child(4),
+.admin-faq-table td:nth-child(4) {
+	width: 8%;
+}
+
+.admin-faq-table th:nth-child(5),
+.admin-faq-table td:nth-child(5) {
+	width: 16%;
+}
+
+.admin-faq-identity {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-width: 0;
+	white-space: nowrap;
+}
+
+.admin-faq-identity strong {
+	min-width: 0;
+	overflow: hidden;
+	color: var(--mv-text);
+	font-size: 14px;
+	font-weight: 750;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.admin-faq-permalink {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	border: 1px solid var(--mv-border);
+	border-radius: 7px;
+	background: var(--mv-surface);
+	color: var(--mv-muted);
+	font-size: 12px;
+	text-decoration: none;
+}
+
+.admin-faq-permalink:hover {
+	border-color: var(--mv-primary);
+	color: var(--mv-primary);
+}
+
+.admin-faq-status {
+	display: inline-flex;
+	align-items: center;
+	padding: 5px 9px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.admin-faq-status-published {
+	background: rgba(66, 185, 146, .12);
+	color: #20885f;
+}
+
+.admin-faq-status-draft {
+	background: rgba(217, 153, 41, .13);
+	color: #9a6814;
+}
+
+.admin-faq-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 14px;
+	white-space: nowrap;
+}
+
+.admin-faq-actions form {
+	display: inline-flex;
+	margin: 0;
+}
+
+.admin-faq-actions a,
+.admin-faq-actions button {
+	display: inline-flex;
+	align-items: center;
+	width: auto;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--mv-text);
+	font: inherit;
+	font-size: 13px;
+	font-weight: 650;
+	line-height: 1;
+	text-decoration: none;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.admin-faq-actions a:hover {
+	color: var(--mv-primary);
+}
+
+.admin-faq-actions button {
+	color: #c43d38;
+}
+
+.admin-faq-actions button:hover {
+	color: #a92f2b;
+}
+
+.admin-faq-page .admin-page-header > .mv-admin-button {
+	border-color: var(--mv-border);
+	background: var(--mv-surface);
+	color: var(--mv-text);
+}
+
+.admin-faq-page .admin-page-header > .mv-admin-button:hover {
+	border-color: var(--mv-primary);
+	color: var(--mv-primary);
+}
+
+.admin-faq-empty {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.admin-faq-empty > i {
+	color: var(--mv-primary);
+	font-size: 24px;
+}
+
+.admin-faq-empty strong {
+	display: block;
+	margin-bottom: 4px;
+}
+
+.admin-faq-empty p {
+	margin: 0;
+	color: var(--mv-muted);
+}
+
+@media (max-width: 760px) {
+
+	.admin-faq-table {
+		table-layout: auto;
+	}
+
+	.admin-faq-table thead {
+		display: none;
+	}
+
+	.admin-faq-table,
+	.admin-faq-table tbody,
+	.admin-faq-table tr,
+	.admin-faq-table td {
+		display: block;
+		width: 100%;
+	}
+
+	.admin-faq-table tr {
+		padding: 14px 16px;
+		border-bottom: 1px solid var(--mv-border);
+	}
+
+	.admin-faq-table tbody tr:last-child {
+		border-bottom: 0;
+	}
+
+	.admin-faq-table td {
+		padding: 6px 0;
+		border: 0;
+	}
+
+	.admin-faq-identity {
+		white-space: normal;
+	}
+
+	.admin-faq-identity strong {
+		overflow: visible;
+		text-overflow: clip;
+		white-space: normal;
+	}
+
+	.admin-faq-actions {
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		white-space: normal;
+	}
+}
+
 /* ==========================================================
    Admin login
    ========================================================== */

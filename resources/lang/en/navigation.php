@@ -10,6 +10,7 @@ return [
 	'home' => 'Home',
 	'members' => 'Members',
 	'pages' => 'Pages',
+	'faq' => 'FAQ',
 	'join_chat' => 'Join chat',
 
 	'account' => 'Account',

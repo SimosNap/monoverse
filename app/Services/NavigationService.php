@@ -48,6 +48,14 @@ class NavigationService
                 'icon' => 'pages',
             ],
 
+            [
+                'title' => $this->translator->translate(
+                    'admin.navigation.faq'
+                ),
+                'url' => '/admin/faq',
+                'icon' => 'faq',
+            ],
+
         ];
 
         $edition = new CommunityEdition();

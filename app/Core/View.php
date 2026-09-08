@@ -122,6 +122,10 @@ class View
                 $cssFiles[] = 'page';
                 break;
 
+            case 'faq':
+                $cssFiles[] = 'faq';
+                break;
+
             case 'members':
                 $cssFiles[] = 'members';
                 break;

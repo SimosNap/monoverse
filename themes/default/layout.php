@@ -603,6 +603,21 @@ $ogPublishedTime = trim(
                     Chanzine
                 </a>
 
+                <a
+                    href="/faq"
+                    class="<?= $currentPath === '/faq'
+                        ? 'is-active'
+                        : '' ?>"
+                    <?= $currentPath === '/faq'
+                        ? 'aria-current="page"'
+                        : '' ?>>
+                    <?= htmlspecialchars(
+                        $t('navigation.faq'),
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
+                </a>
+
                 <?php if (
                     $pagesNavigationMain
                     && $navigationPages !== []

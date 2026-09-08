@@ -725,6 +725,167 @@ $success = trim(
 
                     <h2>
                         <?= htmlspecialchars(
+                            $t('admin.settings.seo.title'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </h2>
+
+                    <p>
+                        <?= htmlspecialchars(
+                            $t('admin.settings.seo.description'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </p>
+
+                </div>
+
+                <div class="mv-admin-field">
+
+                    <label for="site_url">
+                        <?= htmlspecialchars(
+                            $t('admin.settings.seo.site_url.label'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </label>
+
+                    <input
+                        type="url"
+                        id="site_url"
+                        name="site_url"
+                        placeholder="https://community.example.org"
+                        value="<?= htmlspecialchars(
+                            (string) (
+                                $settings['site_url']
+                                ?? ''
+                            ),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>">
+
+                    <span class="mv-admin-field-help">
+                        <?= htmlspecialchars(
+                            $t('admin.settings.seo.site_url.help_before'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                        <strong>https://</strong>.
+                        <?= htmlspecialchars(
+                            $t('admin.settings.seo.site_url.help_after'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </span>
+
+                </div>
+
+                <div class="mv-admin-field">
+
+                    <label for="meta_description">
+                        <?= htmlspecialchars(
+                            $t('admin.settings.seo.meta_description.label'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </label>
+
+                    <textarea
+                        id="meta_description"
+                        name="meta_description"
+                        rows="4"
+                        maxlength="320"
+                        placeholder="<?= htmlspecialchars(
+                            $t('admin.settings.seo.meta_description.placeholder'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"><?= htmlspecialchars(
+                            (string) (
+                                $settings['meta_description']
+                                ?? ''
+                            ),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?></textarea>
+
+                    <span class="mv-admin-field-help">
+                        <?= htmlspecialchars(
+                            $t('admin.settings.seo.meta_description.help'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="mv-admin-settings-section">
+
+                <div class="mv-admin-settings-section-heading">
+
+                    <h2>
+                        <?= htmlspecialchars(
+                            $t('admin.settings.github.title'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </h2>
+
+                    <p>
+                        <?= htmlspecialchars(
+                            $t('admin.settings.github.description'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </p>
+
+                </div>
+
+                <div class="mv-admin-field">
+
+                    <label for="github_api_token">
+                        <?= htmlspecialchars(
+                            $t('admin.settings.github.token_label'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </label>
+
+                    <input
+                        type="password"
+                        id="github_api_token"
+                        name="github_api_token"
+                        value=""
+                        autocomplete="new-password"
+                        placeholder="<?= htmlspecialchars(
+                            !empty($settings['github_api_token'])
+                                ? $t('admin.settings.github.token_configured')
+                                : $t('admin.settings.github.token_placeholder'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
+                    >
+
+                    <span class="mv-admin-field-help">
+                        <?= htmlspecialchars(
+                            $t('admin.settings.github.token_help'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="mv-admin-settings-section">
+
+                <div class="mv-admin-settings-section-heading">
+
+                    <h2>
+                        <?= htmlspecialchars(
                             $t('admin.settings.pages_navigation.title'),
                             ENT_QUOTES,
                             'UTF-8'

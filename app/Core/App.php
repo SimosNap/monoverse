@@ -51,6 +51,15 @@ class App
             }
         );
 
+        $this->container->set(
+            \Monoverse\Services\ThemeService::class,
+            function () {
+                return new \Monoverse\Services\ThemeService(
+                    dirname(__DIR__, 2) . '/themes'
+                );
+            }
+        );
+
         if (
             file_exists(
                 dirname(__DIR__, 2)
@@ -61,24 +70,23 @@ class App
                 \Monoverse\Services\SettingsService::class
             );
 
+            $themeService = $this->container->get(
+                \Monoverse\Services\ThemeService::class
+            );
+
             $siteTheme = $settingsService->get(
                 'site_theme',
                 $this->config->get('theme', 'default')
             );
 
-            if (
-                is_string($siteTheme)
-                && in_array(
-                    $siteTheme,
-                    ['default', 'social'],
-                    true
+            $this->config->set(
+                'theme',
+                $themeService->resolve(
+                    is_string($siteTheme)
+                        ? $siteTheme
+                        : 'default'
                 )
-            ) {
-                $this->config->set(
-                    'theme',
-                    $siteTheme
-                );
-            }
+            );
         }
 
         $this->container->set(
@@ -897,7 +905,8 @@ class App
                 $container->get(Session::class),
                 $container->get(\Monoverse\Services\AdminAuthService::class),
                 $container->get(\Monoverse\Services\SettingsService::class),
-                $container->get(\Monoverse\Services\NavigationService::class)
+                $container->get(\Monoverse\Services\NavigationService::class),
+                $container->get(\Monoverse\Services\ThemeService::class)
             );
         });
 

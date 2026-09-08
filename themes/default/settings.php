@@ -367,31 +367,26 @@ $success = trim(
                         name="site_theme"
                     >
 
-                        <option
-                            value="default"
-                            <?= (($settings['site_theme'] ?? 'default') === 'default')
-                                ? 'selected'
-                                : '' ?>
-                        >
-                            <?= htmlspecialchars(
-                                $t('admin.settings.brand.theme.default'),
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
-                        </option>
+                        <?php foreach (($themes ?? []) as $theme): ?>
 
-                        <option
-                            value="social"
-                            <?= (($settings['site_theme'] ?? 'default') === 'social')
-                                ? 'selected'
-                                : '' ?>
-                        >
-                            <?= htmlspecialchars(
-                                $t('admin.settings.brand.theme.social'),
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
-                        </option>
+                            <option
+                                value="<?= htmlspecialchars(
+                                    $theme,
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>"
+                                <?= (($settings['site_theme'] ?? 'default') === $theme)
+                                    ? 'selected'
+                                    : '' ?>
+                            >
+                                <?= htmlspecialchars(
+                                    ucfirst($theme),
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </option>
+
+                        <?php endforeach; ?>
 
                     </select>
 

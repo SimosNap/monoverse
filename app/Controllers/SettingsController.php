@@ -20,7 +20,8 @@ class SettingsController
         private Session $session,
         private AdminAuthService $auth,
         private SettingsService $settings,
-        private \Monoverse\Services\NavigationService $navigation
+        private \Monoverse\Services\NavigationService $navigation,
+        private \Monoverse\Services\ThemeService $themes
     ) {
     }
 
@@ -34,6 +35,7 @@ class SettingsController
             'title' => 'Impostazioni',
             'admin' => $this->auth->user(),
             'settings' => $this->settings->all(),
+            'themes' => $this->themes->all(),
             'errors' => $this->session->getFlash('errors', []),
             'success' => $this->session->getFlash('success'),
             'navigation' => $this->navigation->items(),
@@ -68,19 +70,9 @@ class SettingsController
             )
         );
 
-        if (
-            !in_array(
-                $siteTheme,
-                ['default', 'social'],
-                true
-            )
-        ) {
-            $siteTheme = 'default';
-        }
-
         $this->settings->set(
             'site_theme',
-            $siteTheme
+            $this->themes->resolve($siteTheme)
         );
 
         $this->settings->set(

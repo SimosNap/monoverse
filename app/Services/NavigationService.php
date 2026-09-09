@@ -8,7 +8,8 @@ use Monoverse\Editions\Community\CommunityEdition;
 class NavigationService
 {
     public function __construct(
-        private Translator $translator
+        private Translator $translator,
+        private AdminAuthService $auth
     ) {
     }
 
@@ -80,9 +81,43 @@ class NavigationService
             $editionItems[] = $item;
         }
 
-        return array_merge(
+        $items = array_merge(
             $items,
             $editionItems
+        );
+
+        if ($this->auth->role() === 'administrator') {
+            $items[] = [
+                'title' => $this->translator->translate(
+                    'admin.navigation.administrators'
+                ),
+                'url' => '/admin/administrators',
+                'icon' => 'administrators',
+            ];
+        }
+
+        if ($this->auth->role() !== 'contentadmin') {
+            return $items;
+        }
+
+        $allowedUrls = [
+            '/admin',
+            '/admin/articles',
+            '/admin/categories',
+            '/admin/moderators',
+        ];
+
+        return array_values(
+            array_filter(
+                $items,
+                static function (array $item) use ($allowedUrls): bool {
+                    return in_array(
+                        (string) ($item['url'] ?? ''),
+                        $allowedUrls,
+                        true
+                    );
+                }
+            )
         );
     }
 }

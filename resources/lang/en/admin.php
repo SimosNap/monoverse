@@ -15,6 +15,82 @@ return [
 		'moderators' => 'Moderators',
 		'chanzine' => 'Chanzine',
 		'categories' => 'Categories',
+		'administrators' => 'Administrators',
+	],
+	'administrators' => [
+		'title' => 'Administrators',
+		'description' => 'Manage the additional administrators of the site.',
+
+		'actions' => [
+			'create' => 'New administrator',
+			'edit' => 'Edit',
+			'delete' => 'Delete',
+		],
+
+		'empty' => 'No administrators found.',
+
+		'columns' => [
+			'username' => 'Username',
+			'role' => 'Role',
+			'status' => 'Status',
+			'last_login' => 'Last login',
+			'last_login_ip' => 'Last login IP',
+		],
+
+		'roles' => [
+			'administrator' => 'Original admin',
+			'siteadmin' => 'Site admin',
+			'contentadmin' => 'Content admin',
+		],
+
+		'status' => [
+			'enabled' => 'Active',
+			'disabled' => 'Disabled',
+			'protected' => 'Protected',
+		],
+
+		'last_login' => [
+			'never' => 'Never',
+		],
+
+		'delete_confirm' => 'Delete this administrator?',
+
+		'errors' => [
+			'username_required' => 'Username is required.',
+			'password_required' => 'Password is required.',
+			'invalid_role' => 'The selected role is invalid.',
+			'username_exists' => 'An administrator with this username already exists.',
+			'not_found' => 'Administrator not found.',
+			'original_cannot_modify' => 'The original administrator cannot be modified.',
+			'original_cannot_delete' => 'The original administrator cannot be deleted.',
+			'generic' => 'An error occurred while managing the administrator.',
+		],
+
+		'form' => [
+			'create_title' => 'New administrator',
+			'edit_title' => 'Edit administrator',
+
+			'create_description' => 'Create a new site administrator.',
+			'edit_description' => 'Edit the administrator access, role and status.',
+
+			'fields' => [
+				'username' => 'Username',
+				'role' => 'Role',
+				'password' => 'Password',
+				'new_password' => 'New password',
+				'enabled' => 'Administrator active',
+			],
+
+			'role_help' => 'The Site admin can manage the whole site except other administrators. The Content admin can manage Chanzine, categories and moderators.',
+
+			'password_help' => 'Leave blank to keep the current password.',
+
+			'actions' => [
+				'cancel' => 'Cancel',
+				'create' => 'Create administrator',
+				'save' => 'Save changes',
+			],
+		],
 	],
 	'settings' => [
 		'page' => [

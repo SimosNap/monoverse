@@ -31,6 +31,11 @@ class ModeratorsController
             return;
         }
 
+        if (!$this->auth->can('content')) {
+            $this->response->redirect('/admin');
+            return;
+        }
+
         $moderators = $this->moderators->findAll();
         $users = $this->profiles->listRegisteredUsers();
 
@@ -59,7 +64,7 @@ class ModeratorsController
                 }
             )
         );
-        
+
         $settings = $this->settings->all();
 
         $html = $this->view->render(
@@ -85,6 +90,11 @@ class ModeratorsController
     {
         if (!$this->auth->check()) {
             $this->response->redirect('/admin/login');
+            return;
+        }
+
+        if (!$this->auth->can('content')) {
+            $this->response->redirect('/admin');
             return;
         }
 
@@ -114,6 +124,11 @@ class ModeratorsController
             return;
         }
 
+        if (!$this->auth->can('content')) {
+            $this->response->redirect('/admin');
+            return;
+        }
+
         $sub = trim((string) ($_POST['oauth_sub'] ?? ''));
 
         if ($sub !== '') {
@@ -130,6 +145,11 @@ class ModeratorsController
             return;
         }
 
+        if (!$this->auth->can('content')) {
+            $this->response->redirect('/admin');
+            return;
+        }
+
         $sub = trim((string) ($_POST['oauth_sub'] ?? ''));
 
         if ($sub !== '') {
@@ -143,6 +163,11 @@ class ModeratorsController
     {
         if (!$this->auth->check()) {
             $this->response->redirect('/admin/login');
+            return;
+        }
+
+        if (!$this->auth->can('content')) {
+            $this->response->redirect('/admin');
             return;
         }
 

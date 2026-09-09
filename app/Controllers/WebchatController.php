@@ -28,6 +28,12 @@ class WebchatController
     {
         if (!$this->auth->check()) {
             $this->response->redirect('/admin/login');
+            return;
+        }
+
+        if (!$this->auth->can('site')) {
+            $this->response->redirect('/admin');
+            return;
         }
 
         $html = $this->view->render('webchat', [
@@ -45,6 +51,12 @@ class WebchatController
     {
         if (!$this->auth->check()) {
             $this->response->redirect('/admin/login');
+            return;
+        }
+
+        if (!$this->auth->can('site')) {
+            $this->response->redirect('/admin');
+            return;
         }
 
         $this->settings->set('chat_default_channel', (string) $this->request->post('chat_default_channel', '#chat'));

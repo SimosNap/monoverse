@@ -47,6 +47,11 @@ final class PageAdminController extends BaseController
             return;
         }
 
+        if (!$this->auth->can('site')) {
+            $this->response->redirect('/admin');
+            return;
+        }
+
         $html = $this->view->render(
             'pages',
             [
@@ -71,6 +76,11 @@ final class PageAdminController extends BaseController
             return;
         }
 
+        if (!$this->auth->can('site')) {
+            $this->response->redirect('/admin');
+            return;
+        }
+
         $this->renderForm(
             null,
             '/admin/pages',
@@ -82,6 +92,11 @@ final class PageAdminController extends BaseController
     {
         if (!$this->auth->check()) {
             $this->response->redirect('/admin/login');
+            return;
+        }
+
+        if (!$this->auth->can('site')) {
+            $this->response->redirect('/admin');
             return;
         }
 
@@ -179,6 +194,11 @@ final class PageAdminController extends BaseController
             return;
         }
 
+        if (!$this->auth->can('site')) {
+            $this->response->redirect('/admin');
+            return;
+        }
+
         $pageId = $this->normalizeId($id);
 
         if ($pageId === null) {
@@ -204,6 +224,11 @@ final class PageAdminController extends BaseController
     {
         if (!$this->auth->check()) {
             $this->response->redirect('/admin/login');
+            return;
+        }
+
+        if (!$this->auth->can('site')) {
+            $this->response->redirect('/admin');
             return;
         }
 
@@ -334,6 +359,11 @@ final class PageAdminController extends BaseController
     {
         if (!$this->auth->check()) {
             $this->response->redirect('/admin/login');
+            return;
+        }
+
+        if (!$this->auth->can('site')) {
+            $this->response->redirect('/admin');
             return;
         }
 

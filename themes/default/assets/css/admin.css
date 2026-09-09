@@ -192,6 +192,70 @@
 }
 
 /* ==========================================================
+   Administrators
+   ========================================================== */
+
+.mv-admin-table-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 14px;
+	white-space: nowrap;
+}
+
+.mv-admin-table-actions form {
+	display: inline-flex;
+	margin: 0;
+}
+
+.mv-admin-table-actions a,
+.mv-admin-link-button {
+	display: inline-flex;
+	align-items: center;
+
+	width: auto;
+	min-width: 0;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+
+	border: 0;
+	border-radius: 0;
+
+	background: none;
+	box-shadow: none;
+
+	color: var(--mv-text);
+
+	font: inherit;
+	font-size: 13px;
+	font-weight: 650;
+	line-height: 1;
+
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.mv-admin-table-actions a:hover {
+	color: var(--mv-primary);
+}
+
+.mv-admin-link-button {
+	color: #c43d38;
+}
+
+.mv-admin-link-button:hover {
+	background: none;
+	color: #a92f2b;
+}
+
+.mv-admin-muted {
+	color: var(--mv-muted);
+	font-size: 13px;
+	font-weight: 650;
+}
+
+/* ==========================================================
    Entity Cards
    ========================================================== */
 

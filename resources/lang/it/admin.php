@@ -15,6 +15,82 @@ return [
 		'moderators' => 'Moderatori',
 		'chanzine' => 'Chanzine',
 		'categories' => 'Categorie',
+		'administrators' => 'Amministratori',
+	],
+	'administrators' => [
+		'title' => 'Amministratori',
+		'description' => 'Gestisci gli amministratori aggiuntivi del sito.',
+
+		'actions' => [
+			'create' => 'Nuovo amministratore',
+			'edit' => 'Modifica',
+			'delete' => 'Elimina',
+		],
+
+		'empty' => 'Nessun amministratore trovato.',
+
+		'columns' => [
+			'username' => 'Username',
+			'role' => 'Ruolo',
+			'status' => 'Stato',
+			'last_login' => 'Ultimo accesso',
+			'last_login_ip' => 'IP ultimo accesso',
+		],
+
+		'roles' => [
+			'administrator' => 'Admin originale',
+			'siteadmin' => 'Site admin',
+			'contentadmin' => 'Content admin',
+		],
+
+		'status' => [
+			'enabled' => 'Attivo',
+			'disabled' => 'Disattivato',
+			'protected' => 'Protetto',
+		],
+
+		'last_login' => [
+			'never' => 'Mai',
+		],
+
+		'delete_confirm' => 'Eliminare questo amministratore?',
+
+		'errors' => [
+			'username_required' => 'Lo username è obbligatorio.',
+			'password_required' => 'La password è obbligatoria.',
+			'invalid_role' => 'Il ruolo selezionato non è valido.',
+			'username_exists' => 'Esiste già un amministratore con questo username.',
+			'not_found' => 'Amministratore non trovato.',
+			'original_cannot_modify' => 'L’amministratore originale non può essere modificato.',
+			'original_cannot_delete' => 'L’amministratore originale non può essere eliminato.',
+			'generic' => 'Si è verificato un errore durante la gestione dell’amministratore.',
+		],
+
+		'form' => [
+			'create_title' => 'Nuovo amministratore',
+			'edit_title' => 'Modifica amministratore',
+
+			'create_description' => 'Crea un nuovo amministratore del sito.',
+			'edit_description' => 'Modifica accesso, ruolo e stato dell’amministratore.',
+
+			'fields' => [
+				'username' => 'Username',
+				'role' => 'Ruolo',
+				'password' => 'Password',
+				'new_password' => 'Nuova password',
+				'enabled' => 'Amministratore attivo',
+			],
+
+			'role_help' => 'Il Site admin può gestire tutto il sito tranne gli altri amministratori. Il Content admin può gestire Chanzine, categorie e moderatori.',
+
+			'password_help' => 'Lascia vuoto per mantenere la password attuale.',
+
+			'actions' => [
+				'cancel' => 'Annulla',
+				'create' => 'Crea amministratore',
+				'save' => 'Salva modifiche',
+			],
+		],
 	],
 	'settings' => [
 		'page' => [

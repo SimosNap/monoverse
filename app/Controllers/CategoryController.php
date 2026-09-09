@@ -37,6 +37,11 @@ final class CategoryController
 			return;
 		}
 
+		if (!$this->auth->can('content')) {
+			$this->response->redirect('/admin');
+			return;
+		}
+
 		$html = $this->view->render('categories', [
 			'title' => 'Categorie Chanzine',
 			'admin' => $this->auth->user(),
@@ -58,6 +63,11 @@ final class CategoryController
 	{
 		if (!$this->auth->check()) {
 			$this->response->redirect('/admin/login');
+			return;
+		}
+
+		if (!$this->auth->can('content')) {
+			$this->response->redirect('/admin');
 			return;
 		}
 
@@ -83,6 +93,11 @@ final class CategoryController
 	{
 		if (!$this->auth->check()) {
 			$this->response->redirect('/admin/login');
+			return;
+		}
+
+		if (!$this->auth->can('content')) {
+			$this->response->redirect('/admin');
 			return;
 		}
 
@@ -203,6 +218,11 @@ final class CategoryController
 			return;
 		}
 
+		if (!$this->auth->can('content')) {
+			$this->response->redirect('/admin');
+			return;
+		}
+
 		$category = $this->categories->findByUuid($uuid);
 
 		if (
@@ -261,6 +281,11 @@ final class CategoryController
 	{
 		if (!$this->auth->check()) {
 			$this->response->redirect('/admin/login');
+			return;
+		}
+
+		if (!$this->auth->can('content')) {
+			$this->response->redirect('/admin');
 			return;
 		}
 
@@ -394,6 +419,11 @@ final class CategoryController
 	{
 		if (!$this->auth->check()) {
 			$this->response->redirect('/admin/login');
+			return;
+		}
+
+		if (!$this->auth->can('content')) {
+			$this->response->redirect('/admin');
 			return;
 		}
 

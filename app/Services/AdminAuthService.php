@@ -49,6 +49,49 @@ class AdminAuthService
         return $this->session->get('admin');
     }
 
+    public function role(): ?string
+    {
+        $admin = $this->user();
+
+        if (!is_array($admin)) {
+            return null;
+        }
+
+        return isset($admin['role'])
+            ? (string) $admin['role']
+            : null;
+    }
+
+    public function can(string $area): bool
+    {
+        $role = $this->role();
+
+        return match ($area) {
+            'administrators' => $role === 'administrator',
+
+            'site' => in_array(
+                $role,
+                [
+                    'administrator',
+                    'siteadmin',
+                ],
+                true
+            ),
+
+            'content' => in_array(
+                $role,
+                [
+                    'administrator',
+                    'siteadmin',
+                    'contentadmin',
+                ],
+                true
+            ),
+
+            default => false,
+        };
+    }
+
     public function logout(): void
     {
         $this->session->remove('admin');

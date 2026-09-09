@@ -585,6 +585,15 @@ class App
             );
         });
 
+        $this->container->set(
+            \Monoverse\Services\AdministratorService::class,
+            function (Container $container) {
+                return new \Monoverse\Services\AdministratorService(
+                    $container->get(Database::class)
+                );
+            }
+        );
+
         $this->container->set(\Monoverse\Services\ProfileService::class, function (Container $container) {
             return new \Monoverse\Services\ProfileService(
                 $container->get(Database::class)
@@ -740,6 +749,29 @@ class App
             );
         });
 
+        $this->container->set(
+            \Monoverse\Controllers\AdministratorsController::class,
+            function (Container $container) {
+                return new \Monoverse\Controllers\AdministratorsController(
+                    $container->get(View::class),
+                    $container->get(Response::class),
+                    $container->get(Request::class),
+                    $container->get(
+                        \Monoverse\Services\AdminAuthService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\AdministratorService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\NavigationService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\Translator::class
+                    )
+                );
+            }
+        );
+
         $this->container->set(\Monoverse\Controllers\OAuthController::class, function (Container $container) {
             return new \Monoverse\Controllers\OAuthController(
                 $container->get(Response::class),
@@ -892,6 +924,9 @@ class App
                 return new \Monoverse\Services\NavigationService(
                     $container->get(
                         \Monoverse\Services\Translator::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\AdminAuthService::class
                     )
                 );
             }
@@ -1485,6 +1520,9 @@ class App
         $homeController = $this->container->get(\Monoverse\Controllers\HomeController::class);
         $dashboardController = $this->container->get(\Monoverse\Controllers\DashboardController::class);
         $adminAuthController = $this->container->get(\Monoverse\Controllers\AdminAuthController::class);
+        $administratorsController = $this->container->get(
+            \Monoverse\Controllers\AdministratorsController::class
+        );
         $settingsController = $this->container->get(\Monoverse\Controllers\SettingsController::class);
         $localeController = $this->container->get(
             \Monoverse\Controllers\LocaleController::class
@@ -1921,6 +1959,35 @@ class App
         $this->router->post(
             '/admin/faq/{id}/delete',
             [$faqAdminController, 'delete']
+        );
+        $this->router->get(
+            '/admin/administrators',
+            [$administratorsController, 'index']
+        );
+
+        $this->router->get(
+            '/admin/administrators/create',
+            [$administratorsController, 'create']
+        );
+
+        $this->router->post(
+            '/admin/administrators',
+            [$administratorsController, 'store']
+        );
+
+        $this->router->get(
+            '/admin/administrators/{id}/edit',
+            [$administratorsController, 'edit']
+        );
+
+        $this->router->post(
+            '/admin/administrators/{id}',
+            [$administratorsController, 'update']
+        );
+
+        $this->router->post(
+            '/admin/administrators/{id}/delete',
+            [$administratorsController, 'delete']
         );
 
         $this->router->get('/admin/login', [$adminAuthController, 'login']);

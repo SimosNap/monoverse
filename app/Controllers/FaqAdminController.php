@@ -45,6 +45,11 @@ final class FaqAdminController extends BaseController
 			return;
 		}
 
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
+			return;
+		}
+
 		$html = $this->view->render(
 			'faqs',
 			[
@@ -69,6 +74,11 @@ final class FaqAdminController extends BaseController
 			return;
 		}
 
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
+			return;
+		}
+
 		$this->renderForm(
 			null,
 			'/admin/faq',
@@ -80,6 +90,11 @@ final class FaqAdminController extends BaseController
 	{
 		if (!$this->auth->check()) {
 			$this->response->redirect('/admin/login');
+			return;
+		}
+
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
 			return;
 		}
 
@@ -136,6 +151,11 @@ final class FaqAdminController extends BaseController
 			return;
 		}
 
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
+			return;
+		}
+
 		$faqId = $this->normalizeId($id);
 
 		if ($faqId === null) {
@@ -161,6 +181,11 @@ final class FaqAdminController extends BaseController
 	{
 		if (!$this->auth->check()) {
 			$this->response->redirect('/admin/login');
+			return;
+		}
+
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
 			return;
 		}
 
@@ -234,6 +259,11 @@ final class FaqAdminController extends BaseController
 	{
 		if (!$this->auth->check()) {
 			$this->response->redirect('/admin/login');
+			return;
+		}
+
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
 			return;
 		}
 

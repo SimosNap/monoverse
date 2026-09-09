@@ -51,6 +51,11 @@ final class BlockController extends BaseController
 			return;
 		}
 
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
+			return;
+		}
+
 		$definitions = [];
 
 		foreach ($this->blocks->available() as $definition) {
@@ -170,6 +175,11 @@ final class BlockController extends BaseController
 			return;
 		}
 
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
+			return;
+		}
+
 		$page = trim(
 			(string) ($_GET['page'] ?? '')
 		);
@@ -233,6 +243,11 @@ final class BlockController extends BaseController
 			return;
 		}
 
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
+			return;
+		}
+
 		$page = trim(
 			(string) ($_GET['page'] ?? '')
 		);
@@ -292,6 +307,11 @@ final class BlockController extends BaseController
 	{
 		if (!$this->auth->check()) {
 			$this->response->redirect('/admin/login');
+			return;
+		}
+
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
 			return;
 		}
 
@@ -364,6 +384,11 @@ final class BlockController extends BaseController
 	{
 		if (!$this->auth->check()) {
 			$this->response->redirect('/admin/login');
+			return;
+		}
+
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
 			return;
 		}
 
@@ -554,6 +579,11 @@ final class BlockController extends BaseController
 			return;
 		}
 
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
+			return;
+		}
+
 		$record = $this->repository->findById($id);
 
 		if ($record === null) {
@@ -613,6 +643,11 @@ final class BlockController extends BaseController
 	{
 		if (!$this->auth->check()) {
 			$this->response->redirect('/admin/login');
+			return;
+		}
+
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
 			return;
 		}
 
@@ -788,6 +823,11 @@ final class BlockController extends BaseController
 			return;
 		}
 
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
+			return;
+		}
+
 		$record = $this->repository->findById($id);
 
 		if ($record === null) {
@@ -830,6 +870,17 @@ final class BlockController extends BaseController
 					),
 				],
 				401
+			);
+			return;
+		}
+
+		if (!$this->auth->can('site')) {
+			$this->jsonResponse(
+				[
+					'ok' => false,
+					'message' => 'Forbidden',
+				],
+				403
 			);
 			return;
 		}
@@ -931,6 +982,11 @@ final class BlockController extends BaseController
 	{
 		if (!$this->auth->check()) {
 			$this->response->redirect('/admin/login');
+			return;
+		}
+
+		if (!$this->auth->can('site')) {
+			$this->response->redirect('/admin');
 			return;
 		}
 

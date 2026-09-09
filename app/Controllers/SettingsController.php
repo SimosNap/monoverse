@@ -31,6 +31,11 @@ class SettingsController
             $this->response->redirect('/admin/login');
         }
 
+        if (!$this->auth->can('site')) {
+            $this->response->redirect('/admin');
+            return;
+        }
+
         $html = $this->view->render('settings', [
             'title' => 'Impostazioni',
             'admin' => $this->auth->user(),
@@ -51,6 +56,11 @@ class SettingsController
     {
         if (!$this->auth->check()) {
             $this->response->redirect('/admin/login');
+        }
+
+        if (!$this->auth->can('site')) {
+            $this->response->redirect('/admin');
+            return;
         }
 
         $this->settings->set(
@@ -539,6 +549,11 @@ class SettingsController
     {
         if (!$this->auth->check()) {
             $this->response->redirect('/admin/login');
+            return;
+        }
+
+        if (!$this->auth->can('site')) {
+            $this->response->redirect('/admin');
             return;
         }
 

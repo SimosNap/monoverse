@@ -5,6 +5,31 @@ return [
 	'layout' => [
 		'logout' => 'Esci',
 	],
+	'account' => [
+		'password' => [
+			'title' => 'Cambia password',
+			'description' => 'Aggiorna la password del tuo account amministratore.',
+
+			'fields' => [
+				'current' => 'Password attuale',
+				'new' => 'Nuova password',
+				'confirm' => 'Conferma nuova password',
+			],
+
+			'actions' => [
+				'cancel' => 'Annulla',
+				'save' => 'Salva password',
+			],
+
+			'errors' => [
+				'required' => 'Compila tutti i campi.',
+				'confirmation' => 'Le nuove password non coincidono.',
+				'current' => 'La password attuale non è corretta.',
+			],
+
+			'success' => 'Password aggiornata correttamente.',
+		],
+	],
 	'navigation' => [
 		'dashboard' => 'Dashboard',
 		'settings' => 'Impostazioni',

@@ -92,6 +92,70 @@ class AdminAuthService
         };
     }
 
+    public function changePassword(
+        string $currentPassword,
+        string $newPassword
+    ): bool {
+        $admin = $this->user();
+
+        if (!is_array($admin)) {
+            return false;
+        }
+
+        $adminId = (int) (
+            $admin['id']
+            ?? 0
+        );
+
+        if ($adminId <= 0) {
+            return false;
+        }
+
+        $currentPassword = trim($currentPassword);
+        $newPassword = trim($newPassword);
+
+        if (
+            $currentPassword === ''
+            || $newPassword === ''
+        ) {
+            return false;
+        }
+
+        $administrator = $this->database->fetchOne(
+            'SELECT password_hash
+             FROM administrators
+             WHERE id = ?
+             AND enabled = 1
+             LIMIT 1',
+            [$adminId]
+        );
+
+        if (
+            !$administrator
+            || !password_verify(
+                $currentPassword,
+                (string) $administrator['password_hash']
+            )
+        ) {
+            return false;
+        }
+
+        $this->database->execute(
+            'UPDATE administrators
+             SET password_hash = ?
+             WHERE id = ?',
+            [
+                password_hash(
+                    $newPassword,
+                    PASSWORD_DEFAULT
+                ),
+                $adminId,
+            ]
+        );
+
+        return true;
+    }
+
     public function logout(): void
     {
         $this->session->remove('admin');

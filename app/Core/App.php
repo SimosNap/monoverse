@@ -738,16 +738,29 @@ class App
             }
         );
 
-        $this->container->set(\Monoverse\Controllers\AdminAuthController::class, function (Container $container) {
-            return new \Monoverse\Controllers\AdminAuthController(
-                $container->get(View::class),
-                $container->get(Response::class),
-                $container->get(Request::class),
-                $container->get(Session::class),
-                $container->get(\Monoverse\Services\AdminAuthService::class),
-                $container->get(\Monoverse\Services\SettingsService::class)
-            );
-        });
+        $this->container->set(
+            \Monoverse\Controllers\AdminAuthController::class,
+            function (Container $container) {
+                return new \Monoverse\Controllers\AdminAuthController(
+                    $container->get(View::class),
+                    $container->get(Response::class),
+                    $container->get(Request::class),
+                    $container->get(Session::class),
+                    $container->get(
+                        \Monoverse\Services\AdminAuthService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\SettingsService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\NavigationService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\Translator::class
+                    )
+                );
+            }
+        );
 
         $this->container->set(
             \Monoverse\Controllers\AdministratorsController::class,
@@ -1992,6 +2005,15 @@ class App
 
         $this->router->get('/admin/login', [$adminAuthController, 'login']);
         $this->router->post('/admin/login', [$adminAuthController, 'authenticate']);
+        $this->router->get(
+            '/admin/change-password',
+            [$adminAuthController, 'changePassword']
+        );
+
+        $this->router->post(
+            '/admin/change-password',
+            [$adminAuthController, 'updatePassword']
+        );
         $this->router->get('/admin/logout', [$adminAuthController, 'logout']);
 
         $this->router->get('/admin/settings', [$settingsController, 'index']);

@@ -5,6 +5,31 @@ return [
 	'layout' => [
 		'logout' => 'Log out',
 	],
+	'account' => [
+		'password' => [
+			'title' => 'Change password',
+			'description' => 'Update the password for your administrator account.',
+
+			'fields' => [
+				'current' => 'Current password',
+				'new' => 'New password',
+				'confirm' => 'Confirm new password',
+			],
+
+			'actions' => [
+				'cancel' => 'Cancel',
+				'save' => 'Save password',
+			],
+
+			'errors' => [
+				'required' => 'Fill in all fields.',
+				'confirmation' => 'The new passwords do not match.',
+				'current' => 'The current password is incorrect.',
+			],
+
+			'success' => 'Password updated successfully.',
+		],
+	],
 	'navigation' => [
 		'dashboard' => 'Dashboard',
 		'settings' => 'Settings',

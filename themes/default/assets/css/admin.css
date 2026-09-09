@@ -48,6 +48,188 @@
 }
 
 /* ==========================================================
+   Admin account header + change password
+   ========================================================== */
+
+.mv-admin-header > div:last-child {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	color: var(--mv-muted);
+
+	font-size: 13px;
+}
+
+.mv-admin-header > div:last-child a {
+	display: inline-flex;
+	align-items: center;
+
+	padding: 5px 8px;
+
+	border-radius: 7px;
+
+	color: var(--mv-text);
+
+	font-size: 13px;
+	font-weight: 650;
+	line-height: 1;
+
+	text-decoration: none;
+
+	transition:
+		background-color .15s ease,
+		color .15s ease;
+}
+
+.mv-admin-header > div:last-child a:hover {
+	background: var(--mv-bg);
+	color: var(--mv-primary);
+}
+
+.mv-admin-header > div:last-child a[href="/admin/logout"] {
+	color: #c43d38;
+}
+
+.mv-admin-header > div:last-child a[href="/admin/logout"]:hover {
+	background: rgba(196, 61, 56, .07);
+	color: #a92f2b;
+}
+
+.mv-admin-page .mv-admin-form {
+	align-items: stretch;
+}
+
+.mv-admin-page .mv-admin-form > .mv-admin-card {
+	display: grid;
+	gap: 18px;
+
+	max-width: 620px;
+}
+
+.mv-admin-page .mv-admin-form .mv-admin-field {
+	gap: 8px;
+}
+
+.mv-admin-page .mv-admin-form .mv-admin-field > label {
+	margin: 0;
+
+	color: var(--mv-text);
+
+	font-size: 13px;
+	font-weight: 750;
+}
+
+.mv-admin-page .mv-admin-form input[type="password"] {
+	width: 100%;
+	min-height: 46px;
+	padding: 10px 13px;
+
+	border: 1px solid var(--mv-border);
+	border-radius: 10px;
+
+	background: var(--mv-surface);
+	color: var(--mv-text);
+
+	font: inherit;
+	font-size: 14px;
+
+	box-sizing: border-box;
+
+	transition:
+		border-color .15s ease,
+		box-shadow .15s ease;
+}
+
+.mv-admin-page .mv-admin-form input[type="password"]:focus {
+	outline: none;
+
+	border-color: var(--mv-primary);
+
+	box-shadow:
+		0 0 0 4px rgba(66, 185, 146, .10);
+}
+
+.mv-admin-page .mv-admin-form > .mv-admin-form-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 14px;
+
+	width: 100%;
+	max-width: 620px;
+	padding-top: 0;
+}
+
+.mv-admin-page .mv-admin-form > .mv-admin-form-actions a {
+	display: inline-flex;
+	align-items: center;
+
+	color: var(--mv-muted);
+
+	font-size: 13px;
+	font-weight: 650;
+
+	text-decoration: none;
+}
+
+.mv-admin-page .mv-admin-form > .mv-admin-form-actions a:hover {
+	color: var(--mv-text);
+}
+
+.mv-admin-page .mv-admin-form > .mv-admin-form-actions button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	width: auto;
+	min-height: 40px;
+	padding: 9px 14px;
+
+	border: 1px solid var(--mv-border);
+	border-radius: 9px;
+
+	background: var(--mv-surface);
+	color: var(--mv-text);
+
+	font: inherit;
+	font-size: 13px;
+	font-weight: 750;
+	line-height: 1;
+
+	cursor: pointer;
+
+	transition:
+		border-color .15s ease,
+		background-color .15s ease,
+		color .15s ease;
+}
+
+.mv-admin-page .mv-admin-form > .mv-admin-form-actions button:hover {
+	border-color: var(--mv-primary);
+	background: rgba(66, 185, 146, .06);
+	color: var(--mv-primary);
+}
+
+@media (max-width: 680px) {
+
+	.mv-admin-header > div:last-child {
+		flex-wrap: wrap;
+		justify-content: flex-end;
+	}
+
+	.mv-admin-page .mv-admin-form > .mv-admin-form-actions {
+		align-items: stretch;
+		flex-direction: column-reverse;
+	}
+
+	.mv-admin-page .mv-admin-form > .mv-admin-form-actions button {
+		width: 100%;
+	}
+
+}
+
+/* ==========================================================
    Forms
    ========================================================== */
 

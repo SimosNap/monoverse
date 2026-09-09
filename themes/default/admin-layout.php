@@ -8,6 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= htmlspecialchars((string) ($title ?? 'Monoverse'), ENT_QUOTES, 'UTF-8') ?></title>
+
     <?php foreach (($cssFiles ?? ['base']) as $css): ?>
 
         <link
@@ -19,6 +20,7 @@
             ) ?>.css">
 
     <?php endforeach; ?>
+
     <link
         rel="stylesheet"
         href="/assets/vendor/fontawesome/css/all.min.css">
@@ -26,14 +28,33 @@
 <body class="mv-admin">
 
 <header class="mv-admin-header">
+
     <div>
         <strong>Monoverse</strong>
     </div>
 
     <div>
+
         <?php if (!empty($admin['username'])): ?>
-            <?= htmlspecialchars((string) $admin['username'], ENT_QUOTES, 'UTF-8') ?>
+
+            <?= htmlspecialchars(
+                (string) $admin['username'],
+                ENT_QUOTES,
+                'UTF-8'
+            ) ?>
+
             ·
+
+            <a href="/admin/change-password">
+                <?= htmlspecialchars(
+                    $t('admin.account.password.title'),
+                    ENT_QUOTES,
+                    'UTF-8'
+                ) ?>
+            </a>
+
+            ·
+
         <?php endif; ?>
 
         <a href="/admin/logout">
@@ -43,17 +64,29 @@
                 'UTF-8'
             ) ?>
         </a>
+
     </div>
+
 </header>
 
 <nav class="mv-admin-nav">
+
     <?php foreach (($navigation ?? []) as $item): ?>
 
-        <a href="<?= htmlspecialchars((string) $item['url'], ENT_QUOTES, 'UTF-8') ?>">
-            <?= htmlspecialchars((string) $item['title'], ENT_QUOTES, 'UTF-8') ?>
+        <a href="<?= htmlspecialchars(
+            (string) $item['url'],
+            ENT_QUOTES,
+            'UTF-8'
+        ) ?>">
+            <?= htmlspecialchars(
+                (string) $item['title'],
+                ENT_QUOTES,
+                'UTF-8'
+            ) ?>
         </a>
 
     <?php endforeach; ?>
+
 </nav>
 
 <main class="mv-admin-main">
@@ -110,6 +143,7 @@
 </main>
 
 <?php foreach (($jsFiles ?? []) as $js): ?>
+
     <script
         src="/themes/default/assets/js/<?= htmlspecialchars(
             (string) $js,
@@ -117,6 +151,7 @@
             'UTF-8'
         ) ?>.js"
         defer></script>
+
 <?php endforeach; ?>
 
 </body>

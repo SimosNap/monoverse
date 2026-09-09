@@ -110,7 +110,7 @@ final class FaqController extends BaseController
 			$sections[$section][] = $faq;
 		}
 
-		$html = $this->view->render(
+		$this->render(
 			'faq',
 			[
 				'title' => 'FAQ',
@@ -118,13 +118,5 @@ final class FaqController extends BaseController
 				'sections' => $sections,
 			]
 		);
-
-		$this->response
-			->status(200)
-			->header(
-				'Content-Type',
-				'text/html; charset=utf-8'
-			)
-			->send($html);
 	}
 }

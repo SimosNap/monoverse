@@ -836,6 +836,16 @@ return [
 				'help' => 'Nome del tema da utilizzare.',
 			],
 
+			'channel_filter' => [
+				'label' => 'Filtro canali',
+				'help' => 'Scegli quali canali mostrare nella lista e consentire di raggiungere dalla webchat.',
+				'options' => [
+					'all' => 'Tutti i canali',
+					'general' => 'Tutti tranne i canali per adulti',
+					'adult' => 'Solo canali per adulti',
+				],
+			],
+
 			'state_key' => [
 				'label' => 'State Key',
 				'help' => 'Chiave utilizzata per mantenere lo stato del client.',

@@ -836,6 +836,16 @@ return [
 				'help' => 'Name of the theme to use.',
 			],
 
+			'channel_filter' => [
+				'label' => 'Channel filter',
+				'help' => 'Choose which channels are shown in the list and can be joined from the webchat.',
+				'options' => [
+					'all' => 'All channels',
+					'general' => 'All except adult channels',
+					'adult' => 'Adult channels only',
+				],
+			],
+
 			'state_key' => [
 				'label' => 'State Key',
 				'help' => 'Key used to preserve the client state.',

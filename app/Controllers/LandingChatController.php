@@ -122,6 +122,9 @@ class LandingChatController extends BaseController
             'chatTheme' => (string) (
                 $settings['chat_theme'] ?? 'Osprey'
             ),
+            'channelFilter' => (string) (
+                $settings['chat_channel_filter'] ?? 'all'
+            ),
             'channelInfo' => $channelInfo,
             'channelFeatures' => $channelFeatures,
             'registeredOnly' => $registeredOnly,

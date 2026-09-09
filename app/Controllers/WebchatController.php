@@ -50,6 +50,25 @@ class WebchatController
         $this->settings->set('chat_default_channel', (string) $this->request->post('chat_default_channel', '#chat'));
         $this->settings->set('chat_title', (string) $this->request->post('chat_title', '#chat - Chat'));
         $this->settings->set('chat_theme', (string) $this->request->post('chat_theme', 'Osprey'));
+
+        $channelFilter = (string) $this->request->post(
+            'chat_channel_filter',
+            'all'
+        );
+
+        if (!in_array(
+            $channelFilter,
+            ['all', 'general', 'adult'],
+            true
+        )) {
+            $channelFilter = 'all';
+        }
+
+        $this->settings->set(
+            'chat_channel_filter',
+            $channelFilter
+        );
+
         $this->settings->set('chat_state_key', (string) $this->request->post('chat_state_key', ''));
 
         $this->settings->set(

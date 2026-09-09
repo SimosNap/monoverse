@@ -283,6 +283,72 @@ $success = trim(
 
             <div class="mv-admin-field">
 
+                <label for="chat_channel_filter">
+                    <?= htmlspecialchars(
+                        $t('admin.webchat.fields.channel_filter.label'),
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
+                </label>
+
+                <select
+                    id="chat_channel_filter"
+                    name="chat_channel_filter"
+                >
+
+                    <option
+                        value="all"
+                        <?= (($settings['chat_channel_filter'] ?? 'all') === 'all')
+                            ? 'selected'
+                            : '' ?>
+                    >
+                        <?= htmlspecialchars(
+                            $t('admin.webchat.fields.channel_filter.options.all'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </option>
+
+                    <option
+                        value="general"
+                        <?= (($settings['chat_channel_filter'] ?? 'all') === 'general')
+                            ? 'selected'
+                            : '' ?>
+                    >
+                        <?= htmlspecialchars(
+                            $t('admin.webchat.fields.channel_filter.options.general'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </option>
+
+                    <option
+                        value="adult"
+                        <?= (($settings['chat_channel_filter'] ?? 'all') === 'adult')
+                            ? 'selected'
+                            : '' ?>
+                    >
+                        <?= htmlspecialchars(
+                            $t('admin.webchat.fields.channel_filter.options.adult'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </option>
+
+                </select>
+
+                <span class="mv-admin-field-help">
+                    <?= htmlspecialchars(
+                        $t('admin.webchat.fields.channel_filter.help'),
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
+                </span>
+
+            </div>
+
+            <div class="mv-admin-field">
+
                 <label for="chat_state_key">
                     <?= htmlspecialchars(
                         $t('admin.webchat.fields.state_key.label'),

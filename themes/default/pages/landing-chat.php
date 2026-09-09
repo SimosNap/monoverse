@@ -1001,6 +1001,15 @@ $communityUpdates = [
 
 						<input
 							type="hidden"
+							name="channelFilter"
+							value="<?= htmlspecialchars(
+								(string) ($channelFilter ?? 'all'),
+								ENT_QUOTES,
+								'UTF-8'
+							) ?>">
+
+						<input
+							type="hidden"
 							name="theme"
 							value="<?= htmlspecialchars(
 								(string) $chatTheme,

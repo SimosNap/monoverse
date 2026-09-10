@@ -318,23 +318,16 @@ $escape = static fn (mixed $value): string => htmlspecialchars(
 
 						<?php endif; ?>
 
-							<?php if ($avatar !== null): ?>
-
-								<img
-									src="<?= $escape($avatar) ?>"
-									alt="<?= $escape($displayName) ?>"
-								>
-
-							<?php else: ?>
-
-								<span class="notification-avatar-placeholder">
-									<i
-										class="fas fa-user"
-										aria-hidden="true"
-									></i>
-								</span>
-
-							<?php endif; ?>
+							<?= $this->component(
+								'avatar',
+								[
+									'username' => $displayName,
+									'avatar_url' => $avatar !== null
+										? $avatar
+										: '',
+									'show_avatar' => $avatar !== null,
+								]
+							) ?>
 
 						<?php if ($profileUrl !== null): ?>
 

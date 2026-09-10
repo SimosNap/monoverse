@@ -149,29 +149,14 @@ $selectedSex = (string) ($profile['sex'] ?? 'U');
 
                         <div class="mv-following-avatar">
 
-                            <?php if ($showAvatar && $avatarUrl !== ''): ?>
-
-                                <img
-                                    src="<?= htmlspecialchars(
-                                        $avatarUrl,
-                                        ENT_QUOTES,
-                                        'UTF-8'
-                                    ) ?>"
-                                    alt="<?= htmlspecialchars(
-                                        $displayName,
-                                        ENT_QUOTES,
-                                        'UTF-8'
-                                    ) ?>"
-                                    loading="lazy"
-                                >
-
-                            <?php else: ?>
-
-                                <span aria-hidden="true">
-                                    <i class="fa-solid fa-user"></i>
-                                </span>
-
-                            <?php endif; ?>
+                            <?= $component(
+                                'avatar',
+                                [
+                                    'username' => $displayName,
+                                    'avatar_url' => $avatarUrl,
+                                    'show_avatar' => $showAvatar,
+                                ]
+                            ) ?>
 
                         </div>
 

@@ -131,32 +131,19 @@ $canDogeTipAuthor =
 					) ?>"
 				>
 
-					<?php if (
-						!empty($post['show_avatar'])
-						&& !empty($post['avatar_url'])
-					): ?>
-
-						<img
-							src="<?= htmlspecialchars(
-								(string) $post['avatar_url'],
-								ENT_QUOTES,
-								'UTF-8'
-							) ?>"
-							alt="@<?= htmlspecialchars(
-								$authorName,
-								ENT_QUOTES,
-								'UTF-8'
-							) ?>"
-						>
-
-					<?php else: ?>
-
-						<i
-							class="fa-solid fa-user"
-							aria-hidden="true"
-						></i>
-
-					<?php endif; ?>
+					<?= $this->component(
+						'avatar',
+						[
+							'username' => $authorName,
+							'avatar_url' => (string) (
+								$post['avatar_url']
+								?? ''
+							),
+							'show_avatar' => !empty(
+								$post['show_avatar']
+							),
+						]
+					) ?>
 
 				</a>
 
@@ -164,27 +151,21 @@ $canDogeTipAuthor =
 
 				<span class="ping-avatar ping-avatar-static">
 
-					<?php if (
-						$authorAccountExists
-						&& !empty($post['show_avatar'])
-						&& !empty($post['avatar_url'])
-					): ?>
+					<?php if ($authorAccountExists): ?>
 
-						<img
-							src="<?= htmlspecialchars(
-								(string) $post['avatar_url'],
-								ENT_QUOTES,
-								'UTF-8'
-							) ?>"
-							alt=""
-						>
-
-					<?php elseif ($authorAccountExists): ?>
-
-						<i
-							class="fa-solid fa-user"
-							aria-hidden="true"
-						></i>
+						<?= $this->component(
+							'avatar',
+							[
+								'username' => $authorName,
+								'avatar_url' => (string) (
+									$post['avatar_url']
+									?? ''
+								),
+								'show_avatar' => !empty(
+									$post['show_avatar']
+								),
+							]
+						) ?>
 
 					<?php else: ?>
 

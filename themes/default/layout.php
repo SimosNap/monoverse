@@ -1078,22 +1078,31 @@ $ogPublishedTime = trim(
                             aria-expanded="false"
                         >
 
-                            <?php if (!empty($user['avatar_url'])): ?>
+                            <div class="mv-nav-avatar">
 
-                                <img
-                                    class="mv-nav-avatar"
-                                    src="<?= htmlspecialchars(
-                                        (string) $user['avatar_url'],
-                                        ENT_QUOTES,
-                                        'UTF-8'
-                                    ) ?>"
-                                    alt="<?= htmlspecialchars(
-                                        $t('navigation.avatar'),
-                                        ENT_QUOTES,
-                                        'UTF-8'
-                                    ) ?>">
+                                <?= $component(
+                                    'avatar',
+                                    [
+                                        'username' => (string) (
+                                            $user['nickname']
+                                            ?? $user['preferred_username']
+                                            ?? ''
+                                        ),
+                                        'avatar_url' => !empty(
+                                            $currentProfile['show_avatar']
+                                        )
+                                            ? (string) (
+                                                $currentProfile['avatar_url']
+                                                ?? ''
+                                            )
+                                            : '',
+                                        'show_avatar' => !empty(
+                                            $currentProfile['show_avatar']
+                                        ),
+                                    ]
+                                ) ?>
 
-                            <?php endif; ?>
+                            </div>
 
                             <span>
                                 <?= htmlspecialchars(

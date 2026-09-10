@@ -299,10 +299,6 @@ $hasSidebar = $widgetsSidebar !== '';
                                 3
                             )
                             : [];
-
-                        $hasVisibleAvatar = !empty(
-                            $member['show_avatar']
-                        ) && $avatar !== '';
                         ?>
 
                         <article class="mv-member-card">
@@ -314,35 +310,16 @@ $hasSidebar = $widgetsSidebar !== '';
 
                                 <div class="mv-member-avatar">
 
-                                    <?php if ($hasVisibleAvatar): ?>
-
-                                        <img
-                                            src="<?= htmlspecialchars(
-                                                $avatar,
-                                                ENT_QUOTES,
-                                                'UTF-8'
-                                            ) ?>"
-                                            alt=""
-                                            loading="lazy"
-                                        >
-
-                                    <?php else: ?>
-
-                                        <span>
-                                            <?= htmlspecialchars(
-                                                mb_strtoupper(
-                                                    mb_substr(
-                                                        $username,
-                                                        0,
-                                                        1
-                                                    )
-                                                ),
-                                                ENT_QUOTES,
-                                                'UTF-8'
-                                            ) ?>
-                                        </span>
-
-                                    <?php endif; ?>
+                                    <?= $this->component(
+                                        'avatar',
+                                        [
+                                            'username' => $username,
+                                            'avatar_url' => $avatar,
+                                            'show_avatar' => !empty(
+                                                $member['show_avatar']
+                                            ),
+                                        ]
+                                    ) ?>
 
                                 </div>
 

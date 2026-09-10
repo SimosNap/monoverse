@@ -85,32 +85,19 @@ $dogeTipRecipient = trim(
 				) ?>"
 			>
 
-				<?php if (
-					!empty($comment['show_avatar'])
-					&& !empty($comment['avatar_url'])
-				): ?>
-
-					<img
-						src="<?= htmlspecialchars(
-							(string) $comment['avatar_url'],
-							ENT_QUOTES,
-							'UTF-8'
-						) ?>"
-						alt="@<?= htmlspecialchars(
-							$authorName,
-							ENT_QUOTES,
-							'UTF-8'
-						) ?>"
-					>
-
-				<?php else: ?>
-
-					<i
-						class="fa-solid fa-user"
-						aria-hidden="true"
-					></i>
-
-				<?php endif; ?>
+				<?= $component(
+					'avatar',
+					[
+						'username' => $authorName,
+						'avatar_url' => (string) (
+							$comment['avatar_url']
+							?? ''
+						),
+						'show_avatar' => !empty(
+							$comment['show_avatar']
+						),
+					]
+				) ?>
 
 			</a>
 
@@ -118,27 +105,21 @@ $dogeTipRecipient = trim(
 
 			<span class="pong-avatar pong-avatar-static">
 
-				<?php if (
-					$authorAccountExists
-					&& !empty($comment['show_avatar'])
-					&& !empty($comment['avatar_url'])
-				): ?>
+				<?php if ($authorAccountExists): ?>
 
-					<img
-						src="<?= htmlspecialchars(
-							(string) $comment['avatar_url'],
-							ENT_QUOTES,
-							'UTF-8'
-						) ?>"
-						alt=""
-					>
-
-				<?php elseif ($authorAccountExists): ?>
-
-					<i
-						class="fa-solid fa-user"
-						aria-hidden="true"
-					></i>
+					<?= $component(
+						'avatar',
+						[
+							'username' => $authorName,
+							'avatar_url' => (string) (
+								$comment['avatar_url']
+								?? ''
+							),
+							'show_avatar' => !empty(
+								$comment['show_avatar']
+							),
+						]
+					) ?>
 
 				<?php else: ?>
 

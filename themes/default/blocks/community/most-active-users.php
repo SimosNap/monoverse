@@ -73,11 +73,6 @@ $widthClass = 'mv-block-width-' . $blockWidth;
 					(string) ($user['avatar_url'] ?? '')
 				);
 
-				$hasAvatar =
-					$showAvatar
-					&& !empty($user['show_avatar'])
-					&& $avatarUrl !== '';
-
 				$pingCount = max(
 					0,
 					(int) ($user['ping_count'] ?? 0)
@@ -165,35 +160,15 @@ $widthClass = 'mv-block-width-' . $blockWidth;
 
 						<div class="mv-most-active-users-avatar">
 
-							<?php if ($hasAvatar): ?>
-
-								<img
-									src="<?= htmlspecialchars(
-										$avatarUrl,
-										ENT_QUOTES,
-										'UTF-8'
-									) ?>"
-									alt=""
-									loading="lazy"
-								>
-
-							<?php else: ?>
-
-								<span>
-									<?= htmlspecialchars(
-										mb_strtoupper(
-											mb_substr(
-												$username,
-												0,
-												1
-											)
-										),
-										ENT_QUOTES,
-										'UTF-8'
-									) ?>
-								</span>
-
-							<?php endif; ?>
+							<?= $this->component(
+								'avatar',
+								[
+									'username' => $username,
+									'avatar_url' => $avatarUrl,
+									'show_avatar' => $showAvatar
+										&& !empty($user['show_avatar']),
+								]
+							) ?>
 
 						</div>
 

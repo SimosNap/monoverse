@@ -131,31 +131,14 @@ $isPublicProfile = static function (array $record): bool {
 
 					<div class="mv-moderation-avatar">
 
-						<?php if ($avatarUrl !== ''): ?>
-
-							<img
-								src="<?= $escape($avatarUrl) ?>"
-								alt="<?= $escape(
-									$t(
-										'account.moderation_bans.user.avatar_alt',
-										[
-											'name' => $displayName,
-										]
-									)
-								) ?>"
-								loading="lazy"
-							>
-
-						<?php else: ?>
-
-							<div
-								class="mv-moderation-avatar-placeholder"
-								aria-hidden="true"
-							>
-								<i class="fa fa-user"></i>
-							</div>
-
-						<?php endif; ?>
+						<?= $component(
+							'avatar',
+							[
+								'username' => $displayName,
+								'avatar_url' => $avatarUrl,
+								'show_avatar' => $avatarUrl !== '',
+							]
+						) ?>
 
 					</div>
 

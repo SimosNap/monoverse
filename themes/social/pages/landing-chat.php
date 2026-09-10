@@ -24,7 +24,14 @@ $selectedNickname = (string) (
 $selectedAge = (string) ($profile['age'] ?? '');
 $selectedCity = (string) ($profile['city'] ?? '');
 $selectedSex = (string) ($profile['sex'] ?? 'U');
-$avatarUrl = (string) ($user['avatar_url'] ?? '');
+$avatarUrl = !empty($profile['show_avatar'])
+? trim(
+	(string) (
+		$profile['avatar_url']
+		?? ''
+	)
+)
+: '';
 
 $hasCompleteChatProfile =
 	$isLogged
@@ -317,36 +324,14 @@ $communityUpdates = [
 
 							<div class="mv-town-identity-avatar">
 
-								<?php if ($avatarUrl !== ''): ?>
-
-									<img
-										src="<?= htmlspecialchars(
-											$avatarUrl,
-											ENT_QUOTES,
-											'UTF-8'
-										) ?>"
-										alt=""
-									>
-
-								<?php else: ?>
-
-									<span>
-										<?= htmlspecialchars(
-											mb_strtoupper(
-												mb_substr(
-													$selectedNickname !== ''
-														? $selectedNickname
-														: 'U',
-													0,
-													1
-												)
-											),
-											ENT_QUOTES,
-											'UTF-8'
-										) ?>
-									</span>
-
-								<?php endif; ?>
+								<?= $component(
+									'avatar',
+									[
+										'username' => $selectedNickname,
+										'avatar_url' => $avatarUrl,
+										'show_avatar' => $avatarUrl !== '',
+									]
+								) ?>
 
 							</div>
 

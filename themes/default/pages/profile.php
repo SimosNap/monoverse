@@ -453,42 +453,18 @@ $hasIrcStats = (
 
                         <div class="mv-public-profile-identity-top">
 
-                            <?php if ($showAvatar): ?>
+                            <div class="mv-public-profile-avatar">
 
-                                <div class="mv-public-profile-avatar">
+                                <?= $component(
+                                    'avatar',
+                                    [
+                                        'username' => $username,
+                                        'avatar_url' => $avatarUrl,
+                                        'show_avatar' => $showAvatar,
+                                    ]
+                                ) ?>
 
-                                    <?php if ($avatarUrl !== ''): ?>
-
-                                        <img
-                                            src="<?= htmlspecialchars(
-                                                $avatarUrl,
-                                                ENT_QUOTES,
-                                                'UTF-8'
-                                            ) ?>"
-                                            alt=""
-                                        >
-
-                                    <?php else: ?>
-
-                                        <span>
-                                            <?= htmlspecialchars(
-                                                mb_strtoupper(
-                                                    mb_substr(
-                                                        $username,
-                                                        0,
-                                                        1
-                                                    )
-                                                ),
-                                                ENT_QUOTES,
-                                                'UTF-8'
-                                            ) ?>
-                                        </span>
-
-                                    <?php endif; ?>
-
-                                </div>
-
-                            <?php endif; ?>
+                            </div>
 
                             <div class="mv-public-profile-identity-name">
 

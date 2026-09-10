@@ -134,10 +134,6 @@ $statusLabels = [
                     continue;
                 }
 
-                $hasAvatar = $showAvatar
-                    && !empty($user['show_avatar'])
-                    && $avatarUrl !== '';
-
                 $status = trim(
                     (string) ($user['status'] ?? 'online')
                 );
@@ -155,35 +151,15 @@ $statusLabels = [
 
                         <span class="mv-users-in-chat-avatar">
 
-                            <?php if ($hasAvatar): ?>
-
-                                <img
-                                    src="<?= htmlspecialchars(
-                                        $avatarUrl,
-                                        ENT_QUOTES,
-                                        'UTF-8'
-                                    ) ?>"
-                                    alt=""
-                                    loading="lazy"
-                                >
-
-                            <?php else: ?>
-
-                                <span>
-                                    <?= htmlspecialchars(
-                                        mb_strtoupper(
-                                            mb_substr(
-                                                $displayName,
-                                                0,
-                                                1
-                                            )
-                                        ),
-                                        ENT_QUOTES,
-                                        'UTF-8'
-                                    ) ?>
-                                </span>
-
-                            <?php endif; ?>
+                            <?= $this->component(
+                                'avatar',
+                                [
+                                    'username' => $displayName,
+                                    'avatar_url' => $avatarUrl,
+                                    'show_avatar' => $showAvatar
+                                        && !empty($user['show_avatar']),
+                                ]
+                            ) ?>
 
                             <i
                                 class="fa-solid fa-circle mv-users-in-chat-presence is-<?= htmlspecialchars(

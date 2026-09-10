@@ -71,9 +71,6 @@ $widthClass = 'mv-block-width-' . $blockWidth;
                     )
                 );
 
-                $hasAvatar = $showAvatar
-                    && !empty($member['show_avatar'])
-                    && $avatarUrl !== '';
                 ?>
 
                 <li>
@@ -87,35 +84,15 @@ $widthClass = 'mv-block-width-' . $blockWidth;
 
                         <span class="mv-latest-members-avatar">
 
-                            <?php if ($hasAvatar): ?>
-
-                                <img
-                                    src="<?= htmlspecialchars(
-                                        $avatarUrl,
-                                        ENT_QUOTES,
-                                        'UTF-8'
-                                    ) ?>"
-                                    alt=""
-                                    loading="lazy"
-                                >
-
-                            <?php else: ?>
-
-                                <span>
-                                    <?= htmlspecialchars(
-                                        mb_strtoupper(
-                                            mb_substr(
-                                                $username,
-                                                0,
-                                                1
-                                            )
-                                        ),
-                                        ENT_QUOTES,
-                                        'UTF-8'
-                                    ) ?>
-                                </span>
-
-                            <?php endif; ?>
+                            <?= $this->component(
+                                'avatar',
+                                [
+                                    'username' => $username,
+                                    'avatar_url' => $avatarUrl,
+                                    'show_avatar' => $showAvatar
+                                        && !empty($member['show_avatar']),
+                                ]
+                            ) ?>
 
                         </span>
 

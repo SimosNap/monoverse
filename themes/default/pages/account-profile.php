@@ -11,11 +11,14 @@ $displayUsername = trim((string) (
     ?? $t('account.profile.user')
 ));
 
-$avatarUrl = trim((string) (
-    $profile['avatar_url']
-    ?? $user['avatar_url']
-    ?? ''
-));
+$avatarUrl = !empty($profile['show_avatar'])
+? trim(
+    (string) (
+        $profile['avatar_url']
+        ?? ''
+    )
+)
+: '';
 
 $selectedInterests = [];
 
@@ -529,33 +532,14 @@ $previewBioEmpty = $t(
 
                     <div class="mv-profile-preview-avatar">
 
-                        <?php if ($avatarUrl !== ''): ?>
-
-                            <img
-                                src="<?= htmlspecialchars(
-                                    $avatarUrl,
-                                    ENT_QUOTES,
-                                    'UTF-8'
-                                ) ?>"
-                                alt="">
-
-                        <?php else: ?>
-
-                            <span>
-                                <?= htmlspecialchars(
-                                    mb_strtoupper(
-                                        mb_substr(
-                                            $displayUsername,
-                                            0,
-                                            1
-                                        )
-                                    ),
-                                    ENT_QUOTES,
-                                    'UTF-8'
-                                ) ?>
-                            </span>
-
-                        <?php endif; ?>
+                        <?= $component(
+                            'avatar',
+                            [
+                                'username' => $displayUsername,
+                                'avatar_url' => $avatarUrl,
+                                'show_avatar' => $avatarUrl !== '',
+                            ]
+                        ) ?>
 
                     </div>
 

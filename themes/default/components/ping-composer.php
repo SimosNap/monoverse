@@ -9,21 +9,22 @@
 
 		<div class="ping-avatar">
 
-			<?php if (
-				!empty($profile['show_avatar']) &&
-				!empty($profile['avatar_url'])
-			): ?>
-
-				<img
-					src="<?= htmlspecialchars($profile['avatar_url']) ?>"
-					alt="@<?= htmlspecialchars($profile['username']) ?>"
-				>
-
-			<?php else: ?>
-
-				👤
-
-			<?php endif; ?>
+			<?= $this->component(
+				'avatar',
+				[
+					'username' => (string) (
+						$profile['username']
+						?? ''
+					),
+					'avatar_url' => (string) (
+						$profile['avatar_url']
+						?? ''
+					),
+					'show_avatar' => !empty(
+						$profile['show_avatar']
+					),
+				]
+			) ?>
 
 		</div>
 

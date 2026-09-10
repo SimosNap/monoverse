@@ -468,7 +468,7 @@
    border: 2px solid #fff;
    border-radius: 50%;
 
-   background: var(--mv-surface);
+   background: var(--mv-primary);
 
    box-shadow: 0 0 0 1px var(--mv-border);
 }

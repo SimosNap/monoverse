@@ -3970,14 +3970,43 @@ final class GitHubService
 			return [];
 		}
 
+		$statusCode = 0;
+
+		foreach (
+			(array) ($http_response_header ?? [])
+			as $responseHeader
+		) {
+			if (
+				preg_match(
+					'#^HTTP/\S+\s+(\d{3})#i',
+					$responseHeader,
+					$matches
+				)
+			) {
+				$statusCode = (int) $matches[1];
+			}
+		}
+
+		if (
+			$statusCode < 200
+			|| $statusCode >= 300
+		) {
+			return [];
+		}
+
 		$decoded = json_decode(
 			$responseBody,
 			true
 		);
 
-		return is_array($decoded)
-			? $decoded
-			: [];
+		if (
+			!is_array($decoded)
+			|| !empty($decoded['errors'])
+		) {
+			return [];
+		}
+
+		return $decoded;
 	}
 
 	private function request(
@@ -4019,6 +4048,30 @@ final class GitHubService
 		if (
 			$responseBody === false
 			|| $responseBody === ''
+		) {
+			return [];
+		}
+
+		$statusCode = 0;
+
+		foreach (
+			(array) ($http_response_header ?? [])
+			as $responseHeader
+		) {
+			if (
+				preg_match(
+					'#^HTTP/\S+\s+(\d{3})#i',
+					$responseHeader,
+					$matches
+				)
+			) {
+				$statusCode = (int) $matches[1];
+			}
+		}
+
+		if (
+			$statusCode < 200
+			|| $statusCode >= 300
 		) {
 			return [];
 		}

@@ -104,10 +104,9 @@ class PingController extends BaseController
 				$query,
 				$pageSize,
 				0,
-				$currentSub
+				$currentSub,
+				$feed
 			);
-
-			$feed = 'all';
 
 		} elseif ($feed === 'following') {
 
@@ -502,10 +501,9 @@ class PingController extends BaseController
 				$query,
 				$pageSize,
 				$offset,
-				$currentSub
+				$currentSub,
+				$feed
 			);
-
-			$feed = 'all';
 
 		} elseif ($feed === 'following') {
 

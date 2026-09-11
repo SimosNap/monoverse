@@ -329,21 +329,51 @@ class PostService
 		string $query,
 		int $limit = 20,
 		int $offset = 0,
-		?string $currentSub = null
+		?string $currentSub = null,
+		string $feed = 'all'
 	): array {
 		$query = trim($query);
+		$currentSub = trim(
+			(string) $currentSub
+		);
+		$feed = strtolower(
+			trim($feed)
+		);
 
 		if ($query === '') {
+			return [];
+		}
+
+		if (
+			!in_array(
+				$feed,
+				[
+					'all',
+					'audio',
+					'video',
+					'following',
+					'interactions',
+				],
+				true
+			)
+		) {
+			$feed = 'all';
+		}
+
+		if (
+			(
+				$feed === 'following'
+				|| $feed === 'interactions'
+			)
+			&& $currentSub === ''
+		) {
 			return [];
 		}
 
 		$limit = max(1, $limit);
 		$offset = max(0, $offset);
 
-		$currentSub = trim(
-			(string) $currentSub
-		);
-
+		$feedFilter = '';
 		$blockFilter = '';
 
 		$params = [
@@ -352,6 +382,73 @@ class PostService
 			'published',
 			'%' . $query . '%',
 		];
+
+		if (
+			$feed === 'audio'
+			|| $feed === 'video'
+		) {
+			$feedFilter = '
+				AND EXISTS (
+					SELECT 1
+					FROM community_post_media m
+					WHERE m.post_id = p.id
+					  AND m.media_type = ?
+					  AND m.status = \'active\'
+					  AND m.deleted_at IS NULL
+				)
+			';
+
+			$params[] = $feed;
+		}
+
+		if ($feed === 'following') {
+			$feedFilter = '
+				AND EXISTS (
+					SELECT 1
+					FROM user_follows uf
+					WHERE uf.followed_sub = p.author_sub
+					  AND uf.follower_sub = ?
+				)
+			';
+
+			$params[] = $currentSub;
+		}
+
+		if ($feed === 'interactions') {
+			$feedFilter = '
+				AND (
+					EXISTS (
+						SELECT 1
+						FROM community_post_votes iv
+						WHERE iv.post_id = p.id
+						  AND iv.author_sub = ?
+					)
+
+					OR EXISTS (
+						SELECT 1
+						FROM community_post_comments ic
+						WHERE ic.post_id = p.id
+						  AND ic.author_sub = ?
+						  AND ic.status = ?
+						  AND ic.deleted_at IS NULL
+					)
+
+					OR EXISTS (
+						SELECT 1
+						FROM community_saved_items si
+						WHERE si.user_sub = ?
+						  AND si.object_type = ?
+						  AND si.object_uuid = p.uuid
+					)
+				)
+			';
+
+			$params[] = $currentSub;
+			$params[] = $currentSub;
+			$params[] = 'published';
+			$params[] = $currentSub;
+			$params[] = 'post';
+		}
 
 		if ($currentSub !== '') {
 			$blockFilter = '
@@ -411,6 +508,7 @@ class PostService
 			WHERE p.status = ?
 			  AND p.deleted_at IS NULL
 			  AND p.content LIKE ?
+			  ' . $feedFilter . '
 			  ' . $blockFilter . '
 
 			GROUP BY p.id

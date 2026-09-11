@@ -318,6 +318,16 @@ $hasSidebar = true;
 								autocomplete="off"
 							>
 
+							<input
+								type="hidden"
+								name="feed"
+								value="<?= htmlspecialchars(
+									(string) ($feed ?? 'all'),
+									ENT_QUOTES,
+									'UTF-8'
+								) ?>"
+							>
+
 								<div class="ping-search-field">
 
 									<i
@@ -388,6 +398,16 @@ $hasSidebar = true;
 							action="/ping"
 							role="search"
 							autocomplete="off"
+						>
+
+						<input
+							type="hidden"
+							name="feed"
+							value="<?= htmlspecialchars(
+								(string) ($feed ?? 'all'),
+								ENT_QUOTES,
+								'UTF-8'
+							) ?>"
 						>
 
 							<div class="ping-search-field">

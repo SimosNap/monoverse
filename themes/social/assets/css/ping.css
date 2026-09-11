@@ -559,7 +559,7 @@ a.ping-username:hover {
 	width: 100%;
 	min-height: 110px;
 	margin: 0;
-	padding: 1px 0 0;
+	padding: 1px 8px 0;
 
 	resize: none;
 	overflow: hidden;
@@ -573,6 +573,8 @@ a.ping-username:hover {
 	font: inherit;
 	font-size: 15px;
 	line-height: 1.65;
+
+	box-sizing: border-box;
 }
 
 .ping-composer-textarea::placeholder {

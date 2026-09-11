@@ -35,6 +35,12 @@ class InstallationRunner
                 );
             }
 
+            if (!$this->writeAppConfig()) {
+                throw new \RuntimeException(
+                    'Unable to write application configuration.'
+                );
+            }
+
             if (!$this->writeInstalledLock($data)) {
                 throw new \RuntimeException(
                     'Unable to write installation lock.'
@@ -221,6 +227,50 @@ class InstallationRunner
         return file_put_contents(
             $configFile,
             $content,
+            LOCK_EX
+        ) !== false;
+    }
+
+    private function writeAppConfig(): bool
+    {
+        $configFile = __DIR__ . '/../../config/app.php';
+
+        $content = file_get_contents($configFile);
+
+        if ($content === false) {
+            return false;
+        }
+
+        $scheme = (
+            (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || strtolower((string) ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '')) === 'https'
+        )
+            ? 'https'
+            : 'http';
+
+        $host = trim((string) ($_SERVER['HTTP_HOST'] ?? ''));
+
+        if ($host === '') {
+            return false;
+        }
+
+        $baseUrl = $scheme . '://' . $host;
+
+        $updated = preg_replace(
+            "/('base_url'\\s*=>\\s*)'[^']*'/",
+            '$1' . var_export($baseUrl, true),
+            $content,
+            1,
+            $count
+        );
+
+        if ($updated === null || $count !== 1) {
+            return false;
+        }
+
+        return file_put_contents(
+            $configFile,
+            $updated,
             LOCK_EX
         ) !== false;
     }

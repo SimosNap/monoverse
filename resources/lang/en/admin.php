@@ -268,8 +268,12 @@ return [
 		'chanzine' => [
 			'title' => 'Chanzine',
 			'description' => 'Configure editorial features available to users.',
+
 			'user_submissions' => 'Allow users to submit articles',
 			'user_submissions_help' => 'Articles submitted by users are not published automatically. They remain pending review until an administrator approves, edits or rejects them.',
+
+			'ping_author_name' => 'Automatic Ping author name',
+			'ping_author_name_help' => 'Name displayed as the author of Pings generated automatically when a Chanzine article is published.',
 		],
 
 		'crypto' => [

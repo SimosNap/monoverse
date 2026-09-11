@@ -1197,6 +1197,40 @@ $success = trim(
 
                 </div>
 
+                <div class="mv-admin-field">
+
+                    <label for="chanzine_ping_author_name">
+                        <?= htmlspecialchars(
+                            $t('admin.settings.chanzine.ping_author_name'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="chanzine_ping_author_name"
+                        name="chanzine_ping_author_name"
+                        value="<?= htmlspecialchars(
+                            (string) (
+                                $settings['chanzine_ping_author_name']
+                                ?? 'Chanzine'
+                            ),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
+                        maxlength="100">
+
+                    <span class="mv-admin-field-help">
+                        <?= htmlspecialchars(
+                            $t('admin.settings.chanzine.ping_author_name_help'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </span>
+
+                </div>
+
             </div>
 
             <div class="mv-admin-settings-section">

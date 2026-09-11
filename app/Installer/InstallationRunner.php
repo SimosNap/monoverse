@@ -118,6 +118,7 @@ class InstallationRunner
             'media_require_text_with_audio_video' => '1',
 
             'chanzine_user_submissions_enabled' => '0',
+            'chanzine_ping_author_name' => 'Chanzine',
 
             'crypto_tips_enabled' => '0',
             'crypto_tips_profiles_enabled' => '0',

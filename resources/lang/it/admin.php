@@ -268,8 +268,12 @@ return [
 		'chanzine' => [
 			'title' => 'Chanzine',
 			'description' => 'Configura le funzionalità editoriali disponibili agli utenti.',
+
 			'user_submissions' => 'Consenti agli utenti di proporre articoli',
 			'user_submissions_help' => 'Gli articoli proposti dagli utenti non vengono pubblicati automaticamente. Restano in attesa di revisione finché un amministratore non li approva, modifica o rifiuta.',
+
+			'ping_author_name' => 'Nome autore dei Ping automatici',
+			'ping_author_name_help' => 'Nome mostrato come autore nei Ping generati automaticamente quando viene pubblicato un articolo della Chanzine.',
 		],
 
 		'crypto' => [

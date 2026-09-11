@@ -184,6 +184,22 @@ class SettingsController
                 : '0'
         );
 
+        $chanzinePingAuthorName = trim(
+            (string) $this->request->post(
+                'chanzine_ping_author_name',
+                'Chanzine'
+            )
+        );
+
+        if ($chanzinePingAuthorName === '') {
+            $chanzinePingAuthorName = 'Chanzine';
+        }
+
+        $this->settings->set(
+            'chanzine_ping_author_name',
+            $chanzinePingAuthorName
+        );
+
         $this->settings->set(
             'crypto_tips_enabled',
             $this->request->post('crypto_tips_enabled')

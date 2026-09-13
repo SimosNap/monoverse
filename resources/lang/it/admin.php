@@ -39,6 +39,7 @@ return [
 		'chat' => 'Chat',
 		'moderators' => 'Moderatori',
 		'chanzine' => 'Chanzine',
+		'events' => 'Eventi',
 		'categories' => 'Categorie',
 		'administrators' => 'Amministratori',
 	],
@@ -274,6 +275,14 @@ return [
 
 			'ping_author_name' => 'Nome autore dei Ping automatici',
 			'ping_author_name_help' => 'Nome mostrato come autore nei Ping generati automaticamente quando viene pubblicato un articolo della Chanzine.',
+		],
+
+		'events' => [
+			'title' => 'Eventi',
+			'description' => 'Configura le funzionalità degli eventi disponibili agli utenti.',
+
+			'user_submissions' => 'Consenti agli utenti di proporre eventi',
+			'user_submissions_help' => 'Gli eventi proposti dagli utenti non vengono pubblicati automaticamente. Restano in attesa di revisione finché un amministratore non li approva, modifica o rifiuta.',
 		],
 
 		'crypto' => [
@@ -611,6 +620,142 @@ return [
 		'cover' => [
 			'title' => 'Cover',
 			'current_alt' => 'Cover attuale dell’articolo',
+			'empty' => 'Nessuna cover selezionata',
+			'replace' => 'Sostituisci cover',
+			'upload' => 'Carica cover',
+			'formats' => 'Formati accettati: JPG, PNG e WebP.',
+		],
+	],
+	'events' => [
+		'title' => 'Eventi',
+		'description' => 'Gestisci gli eventi della community.',
+
+		'actions' => [
+			'new' => 'Nuovo evento',
+			'review' => 'Revisiona',
+			'reject' => 'Rifiuta',
+			'edit' => 'Modifica',
+			'publish' => 'Pubblica',
+			'delete' => 'Elimina',
+			'create_first' => 'Crea il primo evento',
+		],
+
+		'submissions' => [
+			'title' => 'Proposte in attesa',
+			'description' => 'Eventi inviati dagli utenti e in attesa di revisione.',
+			'default_user' => 'Utente',
+			'status' => 'In revisione',
+			'rejection_reason' => 'Motivo del rifiuto',
+		],
+
+		'empty' => [
+			'title' => 'Nessun evento',
+			'description' => 'Non ci sono ancora eventi pubblicati o in bozza.',
+		],
+
+		'status' => [
+			'published' => 'Pubblicato',
+			'draft' => 'Bozza',
+		],
+
+		'confirm' => [
+			'delete' => 'Eliminare definitivamente questo evento?',
+		],
+	],
+
+	'event_form' => [
+		'title' => [
+			'create' => 'Nuovo evento',
+			'edit' => 'Modifica evento',
+		],
+
+		'description' => [
+			'create' => 'Crea una nuova bozza evento.',
+			'edit' => 'Modifica i contenuti e le informazioni dell’evento.',
+		],
+
+		'back' => 'Torna agli eventi',
+
+		'submission' => [
+			'from' => 'Proposta inviata da',
+			'default_user' => 'Utente',
+			'on' => 'il',
+			'pending' => 'L’evento è in attesa di revisione e non è ancora pubblico.',
+		],
+
+		'fields' => [
+			'title' => [
+				'label' => 'Titolo',
+				'placeholder' => 'Inserisci il titolo dell’evento',
+			],
+
+			'description' => [
+				'label' => 'Descrizione',
+				'help' => 'Descrivi l’evento e fornisci tutte le informazioni utili.',
+				'placeholder' => 'Descrivi l’evento...',
+			],
+
+			'starts_at' => [
+				'label' => 'Data e ora di inizio',
+			],
+
+			'ends_at' => [
+				'label' => 'Data e ora di fine',
+				'help' => 'Facoltativa.',
+			],
+
+			'slug' => [
+				'label' => 'Slug',
+				'placeholder' => 'nome-del-mio-evento',
+				'help' => 'Verrà utilizzato nell’indirizzo pubblico dell’evento.',
+			],
+
+			'location' => [
+				'label' => 'Luogo',
+			],
+
+			'latitude' => [
+				'label' => 'Latitudine',
+			],
+
+			'longitude' => [
+				'label' => 'Longitudine',
+			],
+
+			'coordinates' => [
+				'help' => 'Inserisci entrambe le coordinate per abilitare la mappa dell’evento.',
+			],
+
+			'external_url' => [
+				'label' => 'Link esterno',
+				'help' => 'Facoltativo. Può rimandare al sito ufficiale o alla pagina dell’evento.',
+			],
+		],
+
+		'schedule' => [
+			'title' => 'Data e orari',
+		],
+
+		'publication' => [
+			'title' => 'Pubblicazione',
+			'save_changes' => 'Salva modifiche',
+			'save_draft' => 'Salva bozza',
+			'save_publish' => 'Salva e pubblica',
+			'confirm_publish' => 'Salvare le modifiche e pubblicare questa proposta?',
+			'cancel' => 'Annulla',
+		],
+
+		'address' => [
+			'title' => 'Indirizzo evento',
+		],
+
+		'location' => [
+			'title' => 'Luogo e collegamenti',
+		],
+
+		'cover' => [
+			'title' => 'Cover',
+			'current_alt' => 'Cover attuale dell’evento',
 			'empty' => 'Nessuna cover selezionata',
 			'replace' => 'Sostituisci cover',
 			'upload' => 'Carica cover',

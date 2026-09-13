@@ -278,6 +278,39 @@ CREATE TABLE `mv_articles` (
   CONSTRAINT `fk_mv_articles_category` FOREIGN KEY (`category_id`) REFERENCES `mv_categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `mv_events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mv_events` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` char(36) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `description` mediumtext NOT NULL,
+  `starts_at` datetime NOT NULL,
+  `ends_at` datetime DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `latitude` decimal(10,7) DEFAULT NULL,
+  `longitude` decimal(10,7) DEFAULT NULL,
+  `external_url` varchar(1000) DEFAULT NULL,
+  `cover` varchar(255) DEFAULT NULL,
+  `status` enum('draft','submitted','published','rejected') NOT NULL DEFAULT 'draft',
+  `published_at` datetime DEFAULT NULL,
+  `submitted_by_sub` varchar(190) DEFAULT NULL,
+  `submitted_by_nickname` varchar(100) DEFAULT NULL,
+  `submitted_at` datetime DEFAULT NULL,
+  `rejected_at` datetime DEFAULT NULL,
+  `rejection_reason` text DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uuid` (`uuid`),
+  UNIQUE KEY `slug` (`slug`),
+  KEY `idx_status_starts` (`status`,`starts_at`),
+  KEY `idx_submitted_by_sub` (`submitted_by_sub`),
+  KEY `idx_status_submitted` (`status`,`submitted_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `mv_blocks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;

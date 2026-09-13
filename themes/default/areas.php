@@ -49,6 +49,18 @@ return [
 		'after-content'  => 'Dopo l’articolo',
 	],
 
+	'events-public' => [
+		'before-content' => 'Prima degli eventi',
+		'sidebar'        => 'Sidebar',
+		'after-content'  => 'Dopo gli eventi',
+	],
+
+	'event' => [
+		'before-content' => 'Prima dell’evento',
+		'sidebar'        => 'Sidebar',
+		'after-content'  => 'Dopo l’evento',
+	],
+
 	'account' => [
 		'sidebar' => 'Sidebar',
 	],

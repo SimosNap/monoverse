@@ -43,6 +43,10 @@ return [
 			'published' => 'Pubblicato',
 			'empty' => 'Nessun articolo pubblicato.',
 		],
+		'upcoming_events' => [
+			'default_title' => 'Prossimi eventi',
+			'empty' => 'Nessun evento in programma.',
+		],
 		'latest_audio' => [
 			'empty' => 'Nessun audio condiviso.',
 			'file_fallback' => 'File audio',

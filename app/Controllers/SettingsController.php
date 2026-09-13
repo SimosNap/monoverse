@@ -184,6 +184,13 @@ class SettingsController
                 : '0'
         );
 
+        $this->settings->set(
+            'events_user_submissions_enabled',
+            $this->request->post('events_user_submissions_enabled')
+                ? '1'
+                : '0'
+        );
+
         $chanzinePingAuthorName = trim(
             (string) $this->request->post(
                 'chanzine_ping_author_name',

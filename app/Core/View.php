@@ -115,7 +115,14 @@ class View
             case 'chanzine':
             case 'chanzine-article':
             case 'chanzine-submit':
+            case 'events-public':
+            case 'event-submit':
                 $cssFiles[] = 'chanzine';
+                break;
+
+            case 'event':
+                $cssFiles[] = 'chanzine';
+                $cssFiles[] = 'vendor/leaflet/leaflet';
                 break;
 
             case 'page':
@@ -182,6 +189,11 @@ class View
                 $jsFiles[] = 'ping';
                 $jsFiles[] = 'ping-attachments';
                 $jsFiles[] = 'autocomplete';
+                break;
+
+            case 'event':
+                $jsFiles[] = 'vendor/leaflet/leaflet';
+                $jsFiles[] = 'event-map';
                 break;
 
             case 'widgets-area':

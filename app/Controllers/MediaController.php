@@ -31,18 +31,41 @@ class MediaController extends BaseController
 			. $year . '/'
 			. $month . '/'
 			. basename($file);
-	
+
 		if (!is_file($path)) {
 			http_response_code(404);
 			exit;
 		}
-	
+
 		$mime = mime_content_type($path);
-		
+
 		header('Content-Type: ' . $mime);
 		header('Content-Length: ' . filesize($path));
 		header('Cache-Control: public, max-age=31536000');
-	
+
+		readfile($path);
+		exit;
+	}
+
+	public function events(string $year, string $month, string $file): void
+	{
+		$path = __DIR__
+			. '/../../storage/events/'
+			. $year . '/'
+			. $month . '/'
+			. basename($file);
+
+		if (!is_file($path)) {
+			http_response_code(404);
+			exit;
+		}
+
+		$mime = mime_content_type($path);
+
+		header('Content-Type: ' . $mime);
+		header('Content-Length: ' . filesize($path));
+		header('Cache-Control: public, max-age=31536000');
+
 		readfile($path);
 		exit;
 	}

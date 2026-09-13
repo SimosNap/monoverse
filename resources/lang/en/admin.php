@@ -39,6 +39,7 @@ return [
 		'chat' => 'Chat',
 		'moderators' => 'Moderators',
 		'chanzine' => 'Chanzine',
+		'events' => 'Events',
 		'categories' => 'Categories',
 		'administrators' => 'Administrators',
 	],
@@ -274,6 +275,14 @@ return [
 
 			'ping_author_name' => 'Automatic Ping author name',
 			'ping_author_name_help' => 'Name displayed as the author of Pings generated automatically when a Chanzine article is published.',
+		],
+
+		'events' => [
+			'title' => 'Events',
+			'description' => 'Configure event features available to users.',
+
+			'user_submissions' => 'Allow users to submit events',
+			'user_submissions_help' => 'Events submitted by users are not published automatically. They remain pending review until an administrator approves, edits or rejects them.',
 		],
 
 		'crypto' => [
@@ -611,6 +620,142 @@ return [
 		'cover' => [
 			'title' => 'Cover',
 			'current_alt' => 'Current article cover',
+			'empty' => 'No cover selected',
+			'replace' => 'Replace cover',
+			'upload' => 'Upload cover',
+			'formats' => 'Accepted formats: JPG, PNG and WebP.',
+		],
+	],
+	'events' => [
+		'title' => 'Events',
+		'description' => 'Manage community events.',
+
+		'actions' => [
+			'new' => 'New event',
+			'review' => 'Review',
+			'reject' => 'Reject',
+			'edit' => 'Edit',
+			'publish' => 'Publish',
+			'delete' => 'Delete',
+			'create_first' => 'Create the first event',
+		],
+
+		'submissions' => [
+			'title' => 'Pending submissions',
+			'description' => 'Events submitted by users and awaiting review.',
+			'default_user' => 'User',
+			'status' => 'Under review',
+			'rejection_reason' => 'Reason for rejection',
+		],
+
+		'empty' => [
+			'title' => 'No events',
+			'description' => 'There are no draft or published events yet.',
+		],
+
+		'status' => [
+			'published' => 'Published',
+			'draft' => 'Draft',
+		],
+
+		'confirm' => [
+			'delete' => 'Permanently delete this event?',
+		],
+	],
+
+	'event_form' => [
+		'title' => [
+			'create' => 'New event',
+			'edit' => 'Edit event',
+		],
+
+		'description' => [
+			'create' => 'Create a new event draft.',
+			'edit' => 'Edit the event content and information.',
+		],
+
+		'back' => 'Back to events',
+
+		'submission' => [
+			'from' => 'Submission from',
+			'default_user' => 'User',
+			'on' => 'on',
+			'pending' => 'The event is awaiting review and is not public yet.',
+		],
+
+		'fields' => [
+			'title' => [
+				'label' => 'Title',
+				'placeholder' => 'Enter the event title',
+			],
+
+			'description' => [
+				'label' => 'Description',
+				'help' => 'Describe the event and provide all useful information.',
+				'placeholder' => 'Describe the event...',
+			],
+
+			'starts_at' => [
+				'label' => 'Start date and time',
+			],
+
+			'ends_at' => [
+				'label' => 'End date and time',
+				'help' => 'Optional.',
+			],
+
+			'slug' => [
+				'label' => 'Slug',
+				'placeholder' => 'my-event-name',
+				'help' => 'It will be used in the public event address.',
+			],
+
+			'location' => [
+				'label' => 'Location',
+			],
+
+			'latitude' => [
+				'label' => 'Latitude',
+			],
+
+			'longitude' => [
+				'label' => 'Longitude',
+			],
+
+			'coordinates' => [
+				'help' => 'Enter both coordinates to enable the event map.',
+			],
+
+			'external_url' => [
+				'label' => 'External link',
+				'help' => 'Optional. It can point to the official website or event page.',
+			],
+		],
+
+		'schedule' => [
+			'title' => 'Date and time',
+		],
+
+		'publication' => [
+			'title' => 'Publication',
+			'save_changes' => 'Save changes',
+			'save_draft' => 'Save draft',
+			'save_publish' => 'Save and publish',
+			'confirm_publish' => 'Save the changes and publish this submission?',
+			'cancel' => 'Cancel',
+		],
+
+		'address' => [
+			'title' => 'Event address',
+		],
+
+		'location' => [
+			'title' => 'Location and links',
+		],
+
+		'cover' => [
+			'title' => 'Cover',
+			'current_alt' => 'Current event cover',
 			'empty' => 'No cover selected',
 			'replace' => 'Replace cover',
 			'upload' => 'Upload cover',

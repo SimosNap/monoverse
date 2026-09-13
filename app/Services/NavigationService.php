@@ -104,6 +104,7 @@ class NavigationService
             '/admin',
             '/admin/articles',
             '/admin/categories',
+            '/admin/events',
             '/admin/moderators',
         ];
 

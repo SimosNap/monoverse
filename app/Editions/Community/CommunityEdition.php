@@ -24,6 +24,11 @@ class CommunityEdition
                 'url' => '/admin/articles',
             ],
             [
+                'title' => 'Eventi',
+                'translation_key' => 'admin.navigation.events',
+                'url' => '/admin/events',
+            ],
+            [
                 'title' => 'Categorie',
                 'translation_key' => 'admin.navigation.categories',
                 'url' => '/admin/categories',

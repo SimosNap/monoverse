@@ -1239,6 +1239,63 @@ $success = trim(
 
                     <h2>
                         <?= htmlspecialchars(
+                            $t('admin.settings.events.title'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </h2>
+
+                    <p>
+                        <?= htmlspecialchars(
+                            $t('admin.settings.events.description'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </p>
+
+                </div>
+
+                <div class="mv-admin-field">
+
+                    <label class="admin-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="events_user_submissions_enabled"
+                            value="1"
+                            <?= (($settings['events_user_submissions_enabled'] ?? '0') === '1')
+                                ? 'checked'
+                                : '' ?>
+                        >
+
+                        <span>
+                            <?= htmlspecialchars(
+                                $t('admin.settings.events.user_submissions'),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </span>
+
+                    </label>
+
+                    <span class="mv-admin-field-help">
+                        <?= htmlspecialchars(
+                            $t('admin.settings.events.user_submissions_help'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="mv-admin-settings-section">
+
+                <div class="mv-admin-settings-section-heading">
+
+                    <h2>
+                        <?= htmlspecialchars(
                             $t('admin.settings.crypto.title'),
                             ENT_QUOTES,
                             'UTF-8'

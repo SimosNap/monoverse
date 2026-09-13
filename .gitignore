@@ -15,6 +15,9 @@ storage/media/videos/*
 # Runtime Chanzine uploads
 storage/chanzine/*
 
+# Runtime Events uploads
+storage/events/*
+
 # Runtime logs
 storage/*.log
 

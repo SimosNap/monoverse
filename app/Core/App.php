@@ -186,6 +186,17 @@ class App
         );
 
         $this->container->set(
+            \Monoverse\Core\Blocks\Content\UpcomingEventsBlock::class,
+            function (Container $container) {
+                return new \Monoverse\Core\Blocks\Content\UpcomingEventsBlock(
+                    $container->get(
+                        \Monoverse\Services\EventService::class
+                    )
+                );
+            }
+        );
+
+        $this->container->set(
             \Monoverse\Core\Blocks\Content\SubmitArticleBlock::class,
             function (Container $container) {
                 return new \Monoverse\Core\Blocks\Content\SubmitArticleBlock(
@@ -802,6 +813,15 @@ class App
         });
 
         $this->container->set(
+            \Monoverse\Services\EventService::class,
+            function (Container $container) {
+                return new \Monoverse\Services\EventService(
+                    $container->get(Database::class)
+                );
+            }
+        );
+
+        $this->container->set(
             \Monoverse\Services\CategoryService::class,
             function (Container $container) {
                 return new \Monoverse\Services\CategoryService(
@@ -1112,6 +1132,27 @@ class App
         );
 
         $this->container->set(
+            \Monoverse\Controllers\EventController::class,
+            function (Container $container) {
+                return new \Monoverse\Controllers\EventController(
+                    $container->get(View::class),
+                    $container->get(Response::class),
+                    $container->get(Request::class),
+                    $container->get(Session::class),
+                    $container->get(
+                        \Monoverse\Services\AdminAuthService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\EventService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\NavigationService::class
+                    )
+                );
+            }
+        );
+
+        $this->container->set(
             \Monoverse\Controllers\CategoryController::class,
             function (Container $container) {
                 return new \Monoverse\Controllers\CategoryController(
@@ -1253,6 +1294,33 @@ class App
                     ),
                     $container->get(
                         \Monoverse\Services\SavedItemService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Core\Blocks\BlockManager::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\SettingsService::class
+                    )
+                );
+            }
+        );
+
+        $this->container->set(
+            \Monoverse\Controllers\EventsController::class,
+            function (Container $container) {
+                return new \Monoverse\Controllers\EventsController(
+                    $container->get(View::class),
+                    $container->get(Response::class),
+                    $container->get(Session::class),
+                    $container->get(Request::class),
+                    $container->get(
+                        \Monoverse\Services\NotificationService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\EventService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\MarkdownService::class
                     ),
                     $container->get(
                         \Monoverse\Core\Blocks\BlockManager::class
@@ -1543,6 +1611,9 @@ class App
         $articleController = $this->container->get(
             \Monoverse\Controllers\ArticleController::class
         );
+        $eventController = $this->container->get(
+            \Monoverse\Controllers\EventController::class
+        );
         $categoryController = $this->container->get(
             \Monoverse\Controllers\CategoryController::class
         );
@@ -1557,6 +1628,9 @@ class App
         );
         $chanzineController = $this->container->get(
             \Monoverse\Controllers\ChanzineController::class
+        );
+        $eventsController = $this->container->get(
+            \Monoverse\Controllers\EventsController::class
         );
         $sitemapController = $this->container->get(
             \Monoverse\Controllers\SitemapController::class
@@ -1740,6 +1814,11 @@ class App
         );
 
         $this->router->get(
+            '/storage/events/{year}/{month}/{file}',
+            [$mediaController, 'events']
+        );
+
+        $this->router->get(
             '/chanzine',
             [$chanzineController, 'index']
         );
@@ -1777,6 +1856,26 @@ class App
         $this->router->post(
             '/article/{uuid}/unsave',
             [$chanzineController, 'removeSaved']
+        );
+
+        $this->router->get(
+            '/events',
+            [$eventsController, 'index']
+        );
+
+        $this->router->get(
+            '/events/submit',
+            [$eventsController, 'submit']
+        );
+
+        $this->router->post(
+            '/events/submit',
+            [$eventsController, 'storeSubmission']
+        );
+
+        $this->router->get(
+            '/events/{slug}',
+            [$eventsController, 'show']
         );
 
         $this->router->get('/admin', [$dashboardController, 'index']);
@@ -1912,6 +2011,46 @@ class App
         $this->router->post(
             '/admin/categories/{uuid}/delete',
             [$categoryController, 'delete']
+        );
+
+        $this->router->get(
+            '/admin/events',
+            [$eventController, 'index']
+        );
+
+        $this->router->post(
+            '/admin/events',
+            [$eventController, 'store']
+        );
+
+        $this->router->get(
+            '/admin/events/{uuid}/edit',
+            [$eventController, 'edit']
+        );
+
+        $this->router->post(
+            '/admin/events/{uuid}/publish',
+            [$eventController, 'publish']
+        );
+
+        $this->router->post(
+            '/admin/events/{uuid}/reject',
+            [$eventController, 'reject']
+        );
+
+        $this->router->post(
+            '/admin/events/{uuid}/delete',
+            [$eventController, 'delete']
+        );
+
+        $this->router->post(
+            '/admin/events/{uuid}',
+            [$eventController, 'update']
+        );
+
+        $this->router->get(
+            '/admin/events/create',
+            [$eventController, 'create']
         );
 
         $this->router->get(

@@ -6,6 +6,7 @@ namespace Monoverse\Core\Blocks;
 use Monoverse\Core\Container;
 use Monoverse\Core\Blocks\Content\HtmlBlock;
 use Monoverse\Core\Blocks\Content\LatestArticlesBlock;
+use Monoverse\Core\Blocks\Content\UpcomingEventsBlock;
 use Monoverse\Core\Blocks\Community\UsersInChatBlock;
 use Monoverse\Core\Blocks\Community\LatestMembersBlock;
 use Monoverse\Core\Blocks\Content\CategoriesBlock;
@@ -36,6 +37,9 @@ final class BlockProvider
         );
         $registry->register(
             $container->get(LatestArticlesBlock::class)
+        );
+        $registry->register(
+            $container->get(UpcomingEventsBlock::class)
         );
         $registry->register(
             $container->get(SubmitArticleBlock::class)

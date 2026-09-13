@@ -586,57 +586,102 @@ $ogPublishedTime = trim(
                     ) ?>
                 </a>
 
-                <a
-                    href="/members"
-                    class="<?= str_starts_with($currentPath, '/members')
-                        ? 'is-active'
-                        : '' ?>"
-                    <?= str_starts_with($currentPath, '/members')
-                        ? 'aria-current="page"'
-                        : '' ?>>
-                    <?= htmlspecialchars(
-                        $t('navigation.members'),
-                        ENT_QUOTES,
-                        'UTF-8'
-                    ) ?>
-                </a>
+                <?php if (
+                    ($settings['navigation_show_members'] ?? '1') === '1'
+                ): ?>
 
-                <a
-                    href="/ping"
-                    class="<?= str_starts_with($currentPath, '/ping')
-                        ? 'is-active'
-                        : '' ?>"
-                    <?= str_starts_with($currentPath, '/ping')
-                        ? 'aria-current="page"'
-                        : '' ?>>
-                    Ping
-                </a>
+                    <a
+                        href="/members"
+                        class="<?= str_starts_with($currentPath, '/members')
+                            ? 'is-active'
+                            : '' ?>"
+                        <?= str_starts_with($currentPath, '/members')
+                            ? 'aria-current="page"'
+                            : '' ?>>
+                        <?= htmlspecialchars(
+                            $t('navigation.members'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </a>
 
-                <a
-                    href="/chanzine"
-                    class="<?= str_starts_with($currentPath, '/chanzine')
-                        ? 'is-active'
-                        : '' ?>"
-                    <?= str_starts_with($currentPath, '/chanzine')
-                        ? 'aria-current="page"'
-                        : '' ?>>
-                    Chanzine
-                </a>
+                <?php endif; ?>
 
-                <a
-                    href="/faq"
-                    class="<?= $currentPath === '/faq'
-                        ? 'is-active'
-                        : '' ?>"
-                    <?= $currentPath === '/faq'
-                        ? 'aria-current="page"'
-                        : '' ?>>
-                    <?= htmlspecialchars(
-                        $t('navigation.faq'),
-                        ENT_QUOTES,
-                        'UTF-8'
-                    ) ?>
-                </a>
+                <?php if (
+                    ($settings['navigation_show_ping'] ?? '1') === '1'
+                ): ?>
+
+                    <a
+                        href="/ping"
+                        class="<?= str_starts_with($currentPath, '/ping')
+                            ? 'is-active'
+                            : '' ?>"
+                        <?= str_starts_with($currentPath, '/ping')
+                            ? 'aria-current="page"'
+                            : '' ?>>
+                        Ping
+                    </a>
+
+                <?php endif; ?>
+
+                <?php if (
+                    ($settings['navigation_show_chanzine'] ?? '1') === '1'
+                ): ?>
+
+                    <a
+                        href="/chanzine"
+                        class="<?= str_starts_with($currentPath, '/chanzine')
+                            ? 'is-active'
+                            : '' ?>"
+                        <?= str_starts_with($currentPath, '/chanzine')
+                            ? 'aria-current="page"'
+                            : '' ?>>
+                        Chanzine
+                    </a>
+
+                <?php endif; ?>
+
+                <?php if (
+                    ($settings['navigation_show_events'] ?? '1') === '1'
+                ): ?>
+
+                    <a
+                        href="/events"
+                        class="<?= str_starts_with($currentPath, '/events')
+                            ? 'is-active'
+                            : '' ?>"
+                        <?= str_starts_with($currentPath, '/events')
+                            ? 'aria-current="page"'
+                            : '' ?>>
+                        <?= htmlspecialchars(
+                            $t('navigation.events'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </a>
+
+                <?php endif; ?>
+
+                <?php if (
+                    ($settings['navigation_show_faq'] ?? '1') === '1'
+                ): ?>
+
+                    <a
+                        href="/faq"
+                        class="<?= $currentPath === '/faq'
+                            ? 'is-active'
+                            : '' ?>"
+                        <?= $currentPath === '/faq'
+                            ? 'aria-current="page"'
+                            : '' ?>>
+                        <?= htmlspecialchars(
+                            $t('navigation.faq'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </a>
+
+                <?php endif; ?>
 
                 <?php if (
                     $pagesNavigationMain

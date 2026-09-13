@@ -11,6 +11,7 @@ return [
 	'members' => 'Members',
 	'pages' => 'Pages',
 	'faq' => 'FAQ',
+	'events' => 'Events',
 	'join_chat' => 'Join chat',
 
 	'account' => 'Account',

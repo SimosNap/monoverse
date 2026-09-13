@@ -886,6 +886,163 @@ $success = trim(
 
                     <h2>
                         <?= htmlspecialchars(
+                            $t('admin.settings.navigation.title'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </h2>
+
+                    <p>
+                        <?= htmlspecialchars(
+                            $t('admin.settings.navigation.description'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </p>
+
+                </div>
+
+                <div class="mv-admin-field">
+
+                    <label class="admin-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="navigation_show_ping"
+                            value="1"
+                            <?= (($settings['navigation_show_ping'] ?? '1') === '1')
+                                ? 'checked'
+                                : '' ?>
+                        >
+
+                        <span>
+                            <?= htmlspecialchars(
+                                $t('admin.settings.navigation.ping'),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </span>
+
+                    </label>
+
+                </div>
+
+                <div class="mv-admin-field">
+
+                    <label class="admin-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="navigation_show_members"
+                            value="1"
+                            <?= (($settings['navigation_show_members'] ?? '1') === '1')
+                                ? 'checked'
+                                : '' ?>
+                        >
+
+                        <span>
+                            <?= htmlspecialchars(
+                                $t('admin.settings.navigation.members'),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </span>
+
+                    </label>
+
+                </div>
+
+                <div class="mv-admin-field">
+
+                    <label class="admin-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="navigation_show_chanzine"
+                            value="1"
+                            <?= (($settings['navigation_show_chanzine'] ?? '1') === '1')
+                                ? 'checked'
+                                : '' ?>
+                        >
+
+                        <span>
+                            <?= htmlspecialchars(
+                                $t('admin.settings.navigation.chanzine'),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </span>
+
+                    </label>
+
+                </div>
+
+                <div class="mv-admin-field">
+
+                    <label class="admin-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="navigation_show_events"
+                            value="1"
+                            <?= (($settings['navigation_show_events'] ?? '1') === '1')
+                                ? 'checked'
+                                : '' ?>
+                        >
+
+                        <span>
+                            <?= htmlspecialchars(
+                                $t('admin.settings.navigation.events'),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </span>
+
+                    </label>
+
+                </div>
+
+                <div class="mv-admin-field">
+
+                    <label class="admin-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="navigation_show_faq"
+                            value="1"
+                            <?= (($settings['navigation_show_faq'] ?? '1') === '1')
+                                ? 'checked'
+                                : '' ?>
+                        >
+
+                        <span>
+                            <?= htmlspecialchars(
+                                $t('admin.settings.navigation.faq'),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </span>
+
+                    </label>
+
+                    <span class="mv-admin-field-help">
+                        <?= htmlspecialchars(
+                            $t('admin.settings.navigation.help'),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="mv-admin-settings-section">
+
+                <div class="mv-admin-settings-section-heading">
+
+                    <h2>
+                        <?= htmlspecialchars(
                             $t('admin.settings.pages_navigation.title'),
                             ENT_QUOTES,
                             'UTF-8'

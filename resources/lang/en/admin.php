@@ -233,6 +233,17 @@ return [
 			'token_help' => 'Optional GitHub token used to increase the API request limit. If a token is already configured, leave the field blank to keep it unchanged.',
 		],
 
+		'navigation' => [
+			'title' => 'Main navigation',
+			'description' => 'Choose which sections are shown in the site main navigation menu.',
+			'ping' => 'Show Ping',
+			'members' => 'Show Members',
+			'chanzine' => 'Show Chanzine',
+			'events' => 'Show Events',
+			'faq' => 'Show FAQ',
+			'help' => 'Hiding an item from the menu does not disable the related site section.',
+		],
+
 		'pages_navigation' => [
 			'title' => 'Page navigation',
 			'description' => 'Choose how published dynamic pages are made accessible.',

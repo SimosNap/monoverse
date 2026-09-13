@@ -109,6 +109,41 @@ class SettingsController
         );
 
         $this->settings->set(
+            'navigation_show_ping',
+            $this->request->post('navigation_show_ping')
+                ? '1'
+                : '0'
+        );
+
+        $this->settings->set(
+            'navigation_show_members',
+            $this->request->post('navigation_show_members')
+                ? '1'
+                : '0'
+        );
+
+        $this->settings->set(
+            'navigation_show_chanzine',
+            $this->request->post('navigation_show_chanzine')
+                ? '1'
+                : '0'
+        );
+
+        $this->settings->set(
+            'navigation_show_events',
+            $this->request->post('navigation_show_events')
+                ? '1'
+                : '0'
+        );
+
+        $this->settings->set(
+            'navigation_show_faq',
+            $this->request->post('navigation_show_faq')
+                ? '1'
+                : '0'
+        );
+
+        $this->settings->set(
             'media_audio_upload_enabled',
             $this->request->post('media_audio_upload_enabled')
                 ? '1'

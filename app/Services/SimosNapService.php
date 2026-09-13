@@ -239,7 +239,7 @@ class SimosNapService
         $cacheDirectory = __DIR__ . '/../../storage/cache';
 
         $cacheKey = strtolower(
-            $account . '|' . $channel
+            'stats|' . $account . '|' . $channel
         );
 
         $cacheFile = $cacheDirectory
@@ -267,7 +267,7 @@ class SimosNapService
         }
 
         $endpoint =
-            '/users/account/'
+            '/users/stats/'
             . rawurlencode($account)
             . '/activity';
 

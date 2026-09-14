@@ -20,6 +20,8 @@ storage/events/*
 
 # Runtime logs
 storage/*.log
+storage/logs/*
+!storage/logs/.gitkeep
 
 # Local runtime configuration
 config/database.php

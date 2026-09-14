@@ -87,10 +87,12 @@ class View
             case 'account-moderation-bans':
             case 'account-moderation-mutes':
             case 'account-articles':
+            case 'account-events':
                 $cssFiles[] = 'account';
                 break;
 
             case 'account-article-edit':
+            case 'account-event-edit':
                 $cssFiles[] = 'account';
                 $cssFiles[] = 'chanzine';
                 break;

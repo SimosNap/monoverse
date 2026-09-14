@@ -31,6 +31,11 @@ $isArticles = str_starts_with(
     '/account/articles'
 );
 
+$isEvents = str_starts_with(
+    $currentPath,
+    '/account/events'
+);
+
 $isPrivacy = str_starts_with(
     $currentPath,
     '/account/blocked'
@@ -46,6 +51,9 @@ $isModerator = !empty($user['is_moderator'])
 
 $articleSubmissionsEnabled =
     (($settings['chanzine_user_submissions_enabled'] ?? '0') === '1');
+
+$eventSubmissionsEnabled =
+    (($settings['events_user_submissions_enabled'] ?? '0') === '1');
 ?>
 
 <nav
@@ -92,6 +100,22 @@ $articleSubmissionsEnabled =
             'UTF-8'
         ) ?>
     </a>
+
+    <?php if ($eventSubmissionsEnabled): ?>
+
+        <a
+            href="/account/events"
+            class="<?= $isEvents ? 'is-active' : '' ?>"
+            <?= $isEvents ? 'aria-current="page"' : '' ?>
+        >
+            <?= htmlspecialchars(
+                $t('account.navigation.events'),
+                ENT_QUOTES,
+                'UTF-8'
+            ) ?>
+        </a>
+
+    <?php endif; ?>
 
     <?php if ($articleSubmissionsEnabled): ?>
 

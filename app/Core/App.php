@@ -930,6 +930,7 @@ class App
                 $container->get(\Monoverse\Services\SavedItemService::class),
                 $container->get(\Monoverse\Services\PostService::class),
                 $container->get(\Monoverse\Services\ArticleService::class),
+                $container->get(\Monoverse\Services\EventService::class),
                 $container->get(\Monoverse\Services\CategoryService::class),
                 $container->get(\Monoverse\Services\UserModerationService::class),
                 $container->get(\Monoverse\Services\SettingsService::class)
@@ -1564,7 +1565,41 @@ class App
             ->checkNextDueProfile();
 
         $this->registerWebRoutes();
-        $this->router->dispatch();
+
+        try {
+            $this->router->dispatch();
+        } catch (\Throwable $exception) {
+            $logDirectory = dirname(__DIR__, 2)
+                . '/storage/logs';
+
+            if (!is_dir($logDirectory)) {
+                @mkdir($logDirectory, 0755, true);
+            }
+
+            $logFile = $logDirectory
+                . '/application-error.log';
+
+            $message = sprintf(
+                "[%s] %s: %s in %s:%d\n%s\n\n",
+                date('Y-m-d H:i:s'),
+                get_class($exception),
+                $exception->getMessage(),
+                $exception->getFile(),
+                $exception->getLine(),
+                $exception->getTraceAsString()
+            );
+
+            @file_put_contents(
+                $logFile,
+                $message,
+                FILE_APPEND | LOCK_EX
+            );
+
+            http_response_code(500);
+            header('Content-Type: text/plain; charset=utf-8');
+
+            echo 'Application error. See storage/logs/application-error.log';
+        }
     }
 
     private function registerInstallerRoutes(): void
@@ -2190,6 +2225,18 @@ class App
             [$accountController, 'updateArticle']
         );
 
+        $this->router->get(
+            '/account/events',
+            [$accountController, 'events']
+        );
+        $this->router->get(
+            '/account/events/{uuid}/edit',
+            [$accountController, 'editEvent']
+        );
+        $this->router->post(
+            '/account/events/{uuid}',
+            [$accountController, 'updateEvent']
+        );
         $this->router->get(
             '/account/blocked',
             [$accountController, 'blocked']

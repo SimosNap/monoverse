@@ -324,7 +324,6 @@ class EventService
 			'
 			UPDATE mv_events
 			SET title = ?,
-				slug = ?,
 				description = ?,
 				starts_at = ?,
 				ends_at = ?,
@@ -340,7 +339,6 @@ class EventService
 			',
 			[
 				$data['title'],
-				$data['slug'],
 				$data['description'],
 				$data['starts_at'],
 				$data['ends_at'] ?? null,

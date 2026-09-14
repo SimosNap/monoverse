@@ -18,6 +18,7 @@ use Monoverse\Services\UserModerationService;
 use Monoverse\Services\FollowService;
 use Monoverse\Services\SimosNapService;
 use Monoverse\Services\ArticleService;
+use Monoverse\Services\EventService;
 use Monoverse\Services\CategoryService;
 
 class AccountController extends BaseController
@@ -36,6 +37,7 @@ class AccountController extends BaseController
         private SavedItemService $savedItems,
         private PostService $posts,
         private ArticleService $articles,
+        private EventService $events,
         private CategoryService $categories,
         private UserModerationService $userModeration,
         SettingsService $settings
@@ -61,16 +63,16 @@ class AccountController extends BaseController
         $profile = !empty($user['sub'])
             ? $this->profiles->findBySub((string) $user['sub'])
             : false;
-                
+
         $simosnapDogecoinAddress = null;
-        
+
         $username = trim((string) (
             $user['username']
             ?? $user['preferred_username']
             ?? $user['nickname']
             ?? ''
         ));
-        
+
         if ($username !== '') {
             $simosnapDogecoinAddress =
                 $this->simosnap->getDogecoinAddress($username);
@@ -176,67 +178,402 @@ class AccountController extends BaseController
             'savedItems' => $savedItems,
         ]);
     }
-    
+
     public function articles(): void
     {
         $user = $this->session->get('auth.user');
-    
+
         if (!$user) {
             $this->response->redirect('/oauth/login');
             return;
         }
-    
+
         $sub = trim((string) ($user['sub'] ?? ''));
-    
+
         if ($sub === '') {
             $this->response->redirect('/account');
             return;
         }
-    
+
         $articles = $this->articles->listSubmittedByUser($sub);
-    
+
         $this->response
             ->status(200)
             ->header('Content-Type', 'text/html; charset=utf-8');
-    
+
         $this->render('account-articles', [
             'title' => 'Articoli proposti',
             'articles' => $articles,
         ]);
     }
-    
-    public function editArticle(string $uuid): void
+
+    public function events(): void
     {
         $user = $this->session->get('auth.user');
-    
+
         if (!$user) {
             $this->response->redirect('/oauth/login');
             return;
         }
-    
+
         $sub = trim((string) ($user['sub'] ?? ''));
-    
+
+        if ($sub === '') {
+            $this->response->redirect('/account');
+            return;
+        }
+
+        $events = $this->events->listSubmittedByUser($sub);
+
+        $this->response
+            ->status(200)
+            ->header('Content-Type', 'text/html; charset=utf-8');
+
+        $this->render('account-events', [
+            'title' => 'Eventi proposti',
+            'events' => $events,
+        ]);
+    }
+
+    public function editEvent(string $uuid): void
+    {
+        $user = $this->session->get('auth.user');
+
+        if (!$user) {
+            $this->response->redirect('/oauth/login');
+            return;
+        }
+
+        $sub = trim((string) ($user['sub'] ?? ''));
+
+        if ($sub === '') {
+            $this->response->redirect('/account/events');
+            return;
+        }
+
+        $event = $this->events->findEditableSubmissionByUser(
+            $uuid,
+            $sub
+        );
+
+        if (!$event) {
+            $this->response->redirect('/account/events');
+            return;
+        }
+
+        $this->response
+            ->status(200)
+            ->header('Content-Type', 'text/html; charset=utf-8');
+
+        $this->render('account-event-edit', [
+            'title' => 'Modifica proposta',
+            'event' => $event,
+            'error' => $this->session->getFlash('error'),
+        ]);
+    }
+
+    public function updateEvent(string $uuid): void
+    {
+        $user = $this->session->get('auth.user');
+
+        if (!$user) {
+            $this->response->redirect('/oauth/login');
+            return;
+        }
+
+        $sub = trim((string) ($user['sub'] ?? ''));
+
+        if ($sub === '') {
+            $this->response->redirect('/account/events');
+            return;
+        }
+
+        $event = $this->events->findEditableSubmissionByUser(
+            $uuid,
+            $sub
+        );
+
+        if (!$event) {
+            $this->response->redirect('/account/events');
+            return;
+        }
+
+        $editPath = '/account/events/'
+            . rawurlencode($uuid)
+            . '/edit';
+
+        $title = trim(
+            (string) $this->request->post('title', '')
+        );
+
+        $description = trim(
+            (string) $this->request->post('description', '')
+        );
+
+        $startsAt = $this->normalizeDateTime(
+            (string) $this->request->post('starts_at', '')
+        );
+
+        $endsAtRaw = trim(
+            (string) $this->request->post('ends_at', '')
+        );
+
+        $endsAt = $endsAtRaw !== ''
+            ? $this->normalizeDateTime($endsAtRaw)
+            : null;
+
+        $location = trim(
+            (string) $this->request->post('location', '')
+        );
+
+        $latitude = trim(
+            (string) $this->request->post('latitude', '')
+        );
+
+        $longitude = trim(
+            (string) $this->request->post('longitude', '')
+        );
+
+        $externalUrl = trim(
+            (string) $this->request->post('external_url', '')
+        );
+
+        $coordinates = $this->normalizeCoordinates(
+            $latitude,
+            $longitude
+        );
+
+        if ($coordinates === null) {
+            $this->session->flash(
+                'error',
+                'Latitudine e longitudine devono essere entrambe valide.'
+            );
+
+            $this->response->redirect($editPath);
+            return;
+        }
+
+        if (
+            $title === ''
+            || $description === ''
+            || $startsAt === null
+        ) {
+            $this->session->flash(
+                'error',
+                'Titolo, descrizione e data di inizio sono obbligatori.'
+            );
+
+            $this->response->redirect($editPath);
+            return;
+        }
+
+        if ($endsAtRaw !== '' && $endsAt === null) {
+            $this->session->flash(
+                'error',
+                'La data di fine non è valida.'
+            );
+
+            $this->response->redirect($editPath);
+            return;
+        }
+
+        if (
+            $endsAt !== null
+            && strtotime($endsAt) < strtotime($startsAt)
+        ) {
+            $this->session->flash(
+                'error',
+                'La data di fine non può precedere quella di inizio.'
+            );
+
+            $this->response->redirect($editPath);
+            return;
+        }
+
+        if (
+            $externalUrl !== ''
+            && filter_var(
+                $externalUrl,
+                FILTER_VALIDATE_URL
+            ) === false
+        ) {
+            $this->session->flash(
+                'error',
+                'Il link esterno non è valido.'
+            );
+
+            $this->response->redirect($editPath);
+            return;
+        }
+
+        $cover = !empty($event['cover'])
+            ? (string) $event['cover']
+            : null;
+
+        $newCover = null;
+
+        if (
+            isset($_FILES['cover'])
+            && $_FILES['cover']['error'] === UPLOAD_ERR_OK
+        ) {
+            $mime = mime_content_type(
+                $_FILES['cover']['tmp_name']
+            );
+
+            $allowed = [
+                'image/jpeg' => 'jpg',
+                'image/png' => 'png',
+                'image/webp' => 'webp',
+            ];
+
+            if (!isset($allowed[$mime])) {
+                $this->session->flash(
+                    'error',
+                    'La cover deve essere JPEG, PNG o WebP.'
+                );
+
+                $this->response->redirect($editPath);
+                return;
+            }
+
+            $directory = __DIR__
+                . '/../../storage/events/'
+                . date('Y')
+                . '/'
+                . date('m');
+
+            if (!is_dir($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            $filename = bin2hex(random_bytes(16))
+                . '.'
+                . $allowed[$mime];
+
+            $destination = $directory . '/' . $filename;
+
+            if (
+                !move_uploaded_file(
+                    $_FILES['cover']['tmp_name'],
+                    $destination
+                )
+            ) {
+                $this->session->flash(
+                    'error',
+                    'Impossibile salvare la cover.'
+                );
+
+                $this->response->redirect($editPath);
+                return;
+            }
+
+            $newCover = '/storage/events/'
+                . date('Y')
+                . '/'
+                . date('m')
+                . '/'
+                . $filename;
+
+            $cover = $newCover;
+        }
+
+        $updated = $this->events->updateSubmissionByUser(
+            $uuid,
+            $sub,
+            [
+                'title' => $title,
+                'description' => $description,
+                'starts_at' => $startsAt,
+                'ends_at' => $endsAt,
+                'location' => $location !== ''
+                    ? $location
+                    : null,
+                'latitude' => $coordinates['latitude'],
+                'longitude' => $coordinates['longitude'],
+                'external_url' => $externalUrl !== ''
+                    ? $externalUrl
+                    : null,
+                'cover' => $cover,
+            ]
+        );
+
+        if (!$updated) {
+            if ($newCover !== null) {
+                $newCoverFile = __DIR__
+                    . '/../../'
+                    . ltrim($newCover, '/');
+
+                if (is_file($newCoverFile)) {
+                    @unlink($newCoverFile);
+                }
+            }
+
+            $this->session->flash(
+                'error',
+                'Non è stato possibile salvare le modifiche.'
+            );
+
+            $this->response->redirect($editPath);
+            return;
+        }
+
+        if (
+            $newCover !== null
+            && !empty($event['cover'])
+            && $event['cover'] !== $newCover
+        ) {
+            $oldCoverFile = __DIR__
+                . '/../../'
+                . ltrim(
+                    (string) $event['cover'],
+                    '/'
+                );
+
+            if (is_file($oldCoverFile)) {
+                @unlink($oldCoverFile);
+            }
+        }
+
+        $this->session->flash(
+            'success',
+            'Le modifiche alla proposta sono state salvate.'
+        );
+
+        $this->response->redirect('/account/events');
+    }
+
+    public function editArticle(string $uuid): void
+    {
+        $user = $this->session->get('auth.user');
+
+        if (!$user) {
+            $this->response->redirect('/oauth/login');
+            return;
+        }
+
+        $sub = trim((string) ($user['sub'] ?? ''));
+
         if ($sub === '') {
             $this->response->redirect('/account/articles');
             return;
         }
-    
+
         $article = $this->articles->findEditableSubmissionByUser(
             $uuid,
             $sub
         );
-    
+
         if (!$article) {
             $this->response->redirect('/account/articles');
             return;
         }
-        
+
        $categories = $this->categories->listAll('chanzine');
-    
+
         $this->response
             ->status(200)
             ->header('Content-Type', 'text/html; charset=utf-8');
-    
+
         $this->render('account-article-edit', [
             'title' => 'Modifica proposta',
             'article' => $article,
@@ -244,56 +581,56 @@ class AccountController extends BaseController
             'error' => $this->session->getFlash('error'),
         ]);
     }
-    
+
     public function updateArticle(string $uuid): void
     {
         $user = $this->session->get('auth.user');
-    
+
         if (!$user) {
             $this->response->redirect('/oauth/login');
             return;
         }
-    
+
         $sub = trim((string) ($user['sub'] ?? ''));
-    
+
         if ($sub === '') {
             $this->response->redirect('/account/articles');
             return;
         }
-    
+
         $article = $this->articles->findEditableSubmissionByUser(
             $uuid,
             $sub
         );
-    
+
         if (!$article) {
             $this->response->redirect('/account/articles');
             return;
         }
-    
+
         $title = trim(
             (string) $this->request->post('title', '')
         );
-    
+
         $excerpt = trim(
             (string) $this->request->post('excerpt', '')
         );
-    
+
         $content = trim(
             (string) $this->request->post('content', '')
         );
-    
+
         $categoryId = (int) $this->request->post(
             'category_id',
             0
         );
-    
+
         $editPath = '/account/articles/'
             . rawurlencode($uuid)
             . '/edit';
-    
+
         $isValidCategory = false;
-    
+
         if ($categoryId > 0) {
             foreach (
                 $this->categories->listAll('chanzine')
@@ -308,38 +645,38 @@ class AccountController extends BaseController
                 }
             }
         }
-    
+
         if (!$isValidCategory) {
             $this->session->flash(
                 'error',
                 'Seleziona una categoria valida.'
             );
-    
+
             $this->response->redirect($editPath);
             return;
         }
-    
+
         if ($title === '' || $content === '') {
             $this->session->flash(
                 'error',
                 'Titolo e contenuto sono obbligatori.'
             );
-    
+
             $this->response->redirect($editPath);
             return;
         }
-    
+
         $slug = $this->generateUniqueArticleSlug(
             $title,
             $uuid
         );
-    
+
         $cover = !empty($article['cover'])
             ? (string) $article['cover']
             : null;
-    
+
         $newCover = null;
-    
+
         if (
             isset($_FILES['cover'])
             && $_FILES['cover']['error'] === UPLOAD_ERR_OK
@@ -347,40 +684,40 @@ class AccountController extends BaseController
             $mime = mime_content_type(
                 $_FILES['cover']['tmp_name']
             );
-    
+
             $allowed = [
                 'image/jpeg' => 'jpg',
                 'image/png'  => 'png',
                 'image/webp' => 'webp',
             ];
-    
+
             if (!isset($allowed[$mime])) {
                 $this->session->flash(
                     'error',
                     'La cover deve essere JPEG, PNG o WebP.'
                 );
-    
+
                 $this->response->redirect($editPath);
                 return;
             }
-    
+
             $directory = __DIR__
                 . '/../../storage/chanzine/'
                 . date('Y')
                 . '/'
                 . date('m');
-    
+
             if (!is_dir($directory)) {
                 mkdir($directory, 0755, true);
             }
-    
+
             $filename = bin2hex(random_bytes(16))
                 . '.'
                 . $allowed[$mime];
-    
+
             $destination =
                 $directory . '/' . $filename;
-    
+
             if (!move_uploaded_file(
                 $_FILES['cover']['tmp_name'],
                 $destination
@@ -389,11 +726,11 @@ class AccountController extends BaseController
                     'error',
                     'Impossibile salvare la cover.'
                 );
-    
+
                 $this->response->redirect($editPath);
                 return;
             }
-    
+
             $newCover =
                 '/storage/chanzine/'
                 . date('Y')
@@ -401,10 +738,10 @@ class AccountController extends BaseController
                 . date('m')
                 . '/'
                 . $filename;
-    
+
             $cover = $newCover;
         }
-    
+
         $updated = $this->articles->updateSubmissionByUser(
             $uuid,
             $sub,
@@ -419,27 +756,27 @@ class AccountController extends BaseController
                 'category_id' => $categoryId,
             ]
         );
-    
+
         if (!$updated) {
             if ($newCover !== null) {
                 $newCoverFile = __DIR__
                     . '/../../'
                     . ltrim($newCover, '/');
-    
+
                 if (is_file($newCoverFile)) {
                     @unlink($newCoverFile);
                 }
             }
-    
+
             $this->session->flash(
                 'error',
                 'Non è stato possibile salvare le modifiche.'
             );
-    
+
             $this->response->redirect($editPath);
             return;
         }
-    
+
         if (
             $newCover !== null
             && !empty($article['cover'])
@@ -451,17 +788,17 @@ class AccountController extends BaseController
                     (string) $article['cover'],
                     '/'
                 );
-    
+
             if (is_file($oldCoverFile)) {
                 @unlink($oldCoverFile);
             }
         }
-    
+
         $this->session->flash(
             'success',
             'Le modifiche alla proposta sono state salvate.'
         );
-    
+
         $this->response->redirect('/account/articles');
     }
 
@@ -518,39 +855,39 @@ class AccountController extends BaseController
 
         $this->response->redirect('/account?saved=1');
     }
-    
+
     public function saveDogeTips(): void
     {
         $user = $this->session->get('auth.user');
-    
+
         if (!$user) {
             $this->response->redirect('/oauth/login');
             return;
         }
-    
+
         $sub = trim(
             (string) ($user['sub'] ?? '')
         );
-    
+
         if ($sub === '') {
             $this->response->redirect('/account');
             return;
         }
-    
+
         $profile = $this->profiles->findBySub($sub);
-    
+
         if (!$profile) {
             $this->response->redirect('/account');
             return;
         }
-    
+
         $source = trim(
             (string) $this->request->post(
                 'doge_tip_source',
                 ''
             )
         );
-    
+
         if (
             !in_array(
                 $source,
@@ -563,9 +900,9 @@ class AccountController extends BaseController
         ) {
             $source = null;
         }
-    
+
         $address = null;
-    
+
         if ($source === 'mydogemask') {
             $address = trim(
                 (string) $this->request->post(
@@ -573,12 +910,12 @@ class AccountController extends BaseController
                     ''
                 )
             );
-    
+
             if ($address === '') {
                 $address = null;
             }
         }
-    
+
         if ($source === 'simosnap') {
             $username = trim((string) (
                 $user['username']
@@ -586,28 +923,28 @@ class AccountController extends BaseController
                 ?? $user['nickname']
                 ?? ''
             ));
-    
+
             $simosnapAddress = $username !== ''
                 ? $this->simosnap->getDogecoinAddress($username)
                 : null;
-    
+
             if ($simosnapAddress === null) {
                 $this->session->flash(
                     'error',
                     'Non hai configurato un indirizzo Dogecoin sul tuo account SimosNap.'
                 );
-    
+
                 $this->response->redirect('/account');
                 return;
             }
         }
-    
+
         $this->profiles->updateDogeTipSettings(
             $sub,
             $source,
             $address
         );
-    
+
         $this->response->redirect(
             '/account?doge_saved=1'
         );
@@ -823,53 +1160,111 @@ class AccountController extends BaseController
             'moderation' => $moderation,
         ]);
     }
-    
+
+    private function normalizeDateTime(string $value): ?string
+    {
+        $value = trim($value);
+
+        if ($value === '') {
+            return null;
+        }
+
+        $timestamp = strtotime($value);
+
+        if ($timestamp === false) {
+            return null;
+        }
+
+        return date('Y-m-d H:i:s', $timestamp);
+    }
+
+    private function normalizeCoordinates(
+        string $latitude,
+        string $longitude
+    ): ?array {
+        $latitude = trim($latitude);
+        $longitude = trim($longitude);
+
+        if ($latitude === '' && $longitude === '') {
+            return [
+                'latitude' => null,
+                'longitude' => null,
+            ];
+        }
+
+        if (
+            $latitude === ''
+            || $longitude === ''
+            || !is_numeric($latitude)
+            || !is_numeric($longitude)
+        ) {
+            return null;
+        }
+
+        $latitudeValue = (float) $latitude;
+        $longitudeValue = (float) $longitude;
+
+        if (
+            $latitudeValue < -90
+            || $latitudeValue > 90
+            || $longitudeValue < -180
+            || $longitudeValue > 180
+        ) {
+            return null;
+        }
+
+        return [
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+        ];
+    }
+
     private function slugify(string $value): string
     {
         $value = trim($value);
-    
+
         $converted = iconv(
             'UTF-8',
             'ASCII//TRANSLIT//IGNORE',
             $value
         );
-    
+
         if ($converted !== false) {
             $value = $converted;
         }
-    
+
         $value = strtolower($value);
         $value = preg_replace('/[^a-z0-9]+/', '-', $value) ?? '';
         $value = trim($value, '-');
-    
+
         return substr($value, 0, 255);
     }
-    
+
     private function generateUniqueArticleSlug(
         string $title,
         string $uuid
     ): string {
         $baseSlug = $this->slugify($title);
-    
+
         if ($baseSlug === '') {
             $baseSlug = 'articolo';
         }
-    
+
         $slug = $baseSlug;
         $counter = 2;
-    
+
         while ($this->articles->slugExists($slug, $uuid)) {
             $suffix = '-' . $counter;
-    
+
             $slug = substr(
                 $baseSlug,
                 0,
                 255 - strlen($suffix)
             ) . $suffix;
-    
+
             $counter++;
         }
-    
+
         return $slug;
     }
 }

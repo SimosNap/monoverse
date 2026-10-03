@@ -134,6 +134,7 @@ $coverUrl = $cover !== ''
 	<?php endif; ?>
 
 	<form
+		id="admin-article-form"
 		class="admin-article-form"
 		method="post"
 		action="<?= $isEdit
@@ -321,23 +322,11 @@ $coverUrl = $cover !== ''
 						): ?>
 
 							<button
-								type="submit"
-								name="publish_after_update"
-								value="1"
+								type="button"
 								class="mv-admin-button is-success"
-								onclick="return confirm(<?= htmlspecialchars(
-									json_encode(
-										$t(
-											'admin.article_form.publication.confirm_publish'
-										),
-										JSON_HEX_TAG
-										| JSON_HEX_AMP
-										| JSON_HEX_APOS
-										| JSON_HEX_QUOT
-									),
-									ENT_QUOTES,
-									'UTF-8'
-								) ?>);"
+								onclick="document.getElementById(
+									'article-publish-modal'
+								).classList.add('is-open')"
 							>
 								<i
 									class="fa-solid fa-check"
@@ -600,5 +589,67 @@ $coverUrl = $cover !== ''
 		</div>
 
 	</form>
+
+	<?php if (
+		$isEdit
+		&& (($article['status'] ?? '') === 'submitted')
+	): ?>
+
+		<div
+			id="article-publish-modal"
+			class="mv-admin-modal"
+		>
+			<div
+				class="mv-admin-modal-backdrop"
+				onclick="this.parentElement.classList.remove('is-open')"
+			></div>
+
+			<div
+				class="mv-admin-modal-dialog"
+				role="dialog"
+				aria-modal="true"
+			>
+				<h3 class="mv-admin-modal-title">
+					Pubblica articolo
+				</h3>
+
+				<p class="mv-admin-modal-description">
+					Vuoi pubblicare anche un Ping per questo articolo?
+				</p>
+
+				<div class="mv-admin-modal-actions">
+					<button
+						type="submit"
+						form="admin-article-form"
+						name="publish_after_update"
+						value="1"
+						class="mv-admin-button is-secondary"
+					>
+						Solo articolo
+					</button>
+
+					<button
+						type="submit"
+						form="admin-article-form"
+						name="publish_after_update"
+						value="1"
+						class="mv-admin-button is-primary"
+						onclick="
+							const input = document.createElement('input');
+							input.type = 'hidden';
+							input.name = 'publish_ping';
+							input.value = '1';
+							document.getElementById(
+								'admin-article-form'
+							).appendChild(input);
+						"
+					>
+						Articolo + Ping
+					</button>
+				</div>
+			</div>
+		</div>
+
+	<?php endif; ?>
 
 </div>

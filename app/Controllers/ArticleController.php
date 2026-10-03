@@ -547,9 +547,16 @@ class ArticleController
 			return;
 		}
 
+		$publishPing = (
+			(string) $this->request->post(
+				'publish_ping',
+				''
+			) === '1'
+		);
+
 		$pingUuid = $article['ping_uuid'] ?? null;
 
-		if (!$pingUuid) {
+		if ($publishPing && !$pingUuid) {
 			$pingUuid = $this->posts->createChanzinePing(
 				(string) $article['title'],
 				(string) ($article['excerpt'] ?? ''),
@@ -579,7 +586,9 @@ class ArticleController
 
 		$this->session->flash(
 			'success',
-			'Articolo pubblicato e Ping creato.'
+			$publishPing && $pingUuid
+				? 'Articolo pubblicato e Ping creato.'
+				: 'Articolo pubblicato.'
 		);
 
 		$this->response->redirect('/admin/articles');

@@ -491,30 +491,83 @@
 
 							<?php if ($event['status'] === 'draft'): ?>
 
-								<form
-									method="post"
-									action="/admin/events/<?= rawurlencode(
-										$event['uuid']
-									) ?>/publish"
-								>
-									<button
-										type="submit"
-										class="mv-admin-button is-primary"
-									>
-										<i
-											class="fa fa-upload"
-											aria-hidden="true"
-										></i>
-
-										<?= htmlspecialchars(
-											$t(
-												'admin.events.actions.publish'
-											),
+								<button
+									type="button"
+									class="mv-admin-button is-primary"
+									onclick="document.getElementById(
+										'event-publish-modal-<?= htmlspecialchars(
+											$event['uuid'],
 											ENT_QUOTES,
 											'UTF-8'
-										) ?>
-									</button>
-								</form>
+										) ?>'
+									).classList.add('is-open')"
+								>
+									<i
+										class="fa fa-upload"
+										aria-hidden="true"
+									></i>
+
+									<?= htmlspecialchars(
+										$t('admin.events.actions.publish'),
+										ENT_QUOTES,
+										'UTF-8'
+									) ?>
+								</button>
+
+								<div
+									id="event-publish-modal-<?= htmlspecialchars(
+										$event['uuid'],
+										ENT_QUOTES,
+										'UTF-8'
+									) ?>"
+									class="mv-admin-modal"
+								>
+									<div
+										class="mv-admin-modal-backdrop"
+										onclick="this.parentElement.classList.remove('is-open')"
+									></div>
+
+									<div
+										class="mv-admin-modal-dialog"
+										role="dialog"
+										aria-modal="true"
+									>
+										<h3 class="mv-admin-modal-title">
+											Pubblica evento
+										</h3>
+
+										<p class="mv-admin-modal-description">
+											Vuoi pubblicare anche un Ping per questo evento?
+										</p>
+
+										<form
+											method="post"
+											action="/admin/events/<?= rawurlencode(
+												$event['uuid']
+											) ?>/publish"
+										>
+											<div class="mv-admin-modal-actions">
+
+												<button
+													type="submit"
+													class="mv-admin-button is-secondary"
+												>
+													Solo evento
+												</button>
+
+												<button
+													type="submit"
+													name="publish_ping"
+													value="1"
+													class="mv-admin-button is-primary"
+												>
+													Evento + Ping
+												</button>
+
+											</div>
+										</form>
+									</div>
+								</div>
 
 							<?php endif; ?>
 

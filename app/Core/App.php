@@ -1147,6 +1147,9 @@ class App
                         \Monoverse\Services\EventService::class
                     ),
                     $container->get(
+                        \Monoverse\Services\PostService::class
+                    ),
+                    $container->get(
                         \Monoverse\Services\NavigationService::class
                     )
                 );

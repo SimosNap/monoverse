@@ -2,14 +2,18 @@
 declare(strict_types=1);
 
 $isChanzine = ($post['source'] ?? 'user') === 'chanzine';
+$isEvent = ($post['source'] ?? 'user') === 'event';
 $isDogeTip = ($post['source'] ?? 'user') === 'doge_tip';
 $moderationMode = !empty($moderationMode);
+
 $chanzinePingAuthor = trim(
 	(string) (
 		$settings['chanzine_ping_author_name']
 		?? 'Chanzine'
 	)
 );
+
+$eventPingAuthor = 'Eventi';
 
 if ($chanzinePingAuthor === '') {
 	$chanzinePingAuthor = 'Chanzine';
@@ -91,51 +95,99 @@ $canDogeTipAuthor =
 
 		<?php if ($isChanzine): ?>
 
-		<a
-			class="ping-avatar ping-avatar-chanzine"
-			href="/chanzine"
-			aria-label="<?= htmlspecialchars(
-				$chanzinePingAuthor,
-				ENT_QUOTES,
-				'UTF-8'
-			) ?>"
-		>
-			<i
-				class="fa-solid fa-newspaper"
-				aria-hidden="true"
-			></i>
-		</a>
-
-		<div class="ping-author">
-
 			<a
-				class="ping-username ping-username-chanzine"
+				class="ping-avatar ping-avatar-chanzine"
 				href="/chanzine"
-			>
-				<?= htmlspecialchars(
+				aria-label="<?= htmlspecialchars(
 					$chanzinePingAuthor,
 					ENT_QUOTES,
 					'UTF-8'
-				) ?>
-			</a>
-
-			<a
-				class="ping-date"
-				href="/ping/<?= rawurlencode(
-					(string) ($post['uuid'] ?? '')
 				) ?>"
 			>
-				<?= htmlspecialchars(
-					(string) (
-						$post['published_at_formatted']
-						?? ''
-					),
-					ENT_QUOTES,
-					'UTF-8'
-				) ?>
+				<i
+					class="fa-solid fa-newspaper"
+					aria-hidden="true"
+				></i>
 			</a>
 
-		</div>
+			<div class="ping-author">
+
+				<a
+					class="ping-username ping-username-chanzine"
+					href="/chanzine"
+				>
+					<?= htmlspecialchars(
+						$chanzinePingAuthor,
+						ENT_QUOTES,
+						'UTF-8'
+					) ?>
+				</a>
+
+				<a
+					class="ping-date"
+					href="/ping/<?= rawurlencode(
+						(string) ($post['uuid'] ?? '')
+					) ?>"
+				>
+					<?= htmlspecialchars(
+						(string) (
+							$post['published_at_formatted']
+							?? ''
+						),
+						ENT_QUOTES,
+						'UTF-8'
+					) ?>
+				</a>
+
+			</div>
+
+		<?php elseif ($isEvent): ?>
+
+			<a
+				class="ping-avatar ping-avatar-chanzine"
+				href="/events"
+				aria-label="<?= htmlspecialchars(
+					$eventPingAuthor,
+					ENT_QUOTES,
+					'UTF-8'
+				) ?>"
+			>
+				<i
+					class="fa-solid fa-calendar-days"
+					aria-hidden="true"
+				></i>
+			</a>
+
+			<div class="ping-author">
+
+				<a
+					class="ping-username ping-username-chanzine"
+					href="/events"
+				>
+					<?= htmlspecialchars(
+						$eventPingAuthor,
+						ENT_QUOTES,
+						'UTF-8'
+					) ?>
+				</a>
+
+				<a
+					class="ping-date"
+					href="/ping/<?= rawurlencode(
+						(string) ($post['uuid'] ?? '')
+					) ?>"
+				>
+					<?= htmlspecialchars(
+						(string) (
+							$post['published_at_formatted']
+							?? ''
+						),
+						ENT_QUOTES,
+						'UTF-8'
+					) ?>
+				</a>
+
+			</div>
 
 		<?php else: ?>
 
@@ -856,7 +908,7 @@ $canDogeTipAuthor =
 
 					<?php endif; ?>
 
-					<?php if (!$isChanzine): ?>
+					<?php if (!$isChanzine && !$isEvent): ?>
 
 						<?php if ($canBlockAuthor): ?>
 

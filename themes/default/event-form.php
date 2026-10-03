@@ -142,6 +142,7 @@ $coverUrl = $cover !== ''
 	<?php endif; ?>
 
 	<form
+		id="admin-event-form"
 		class="admin-article-form"
 		method="post"
 		action="<?= $isEdit
@@ -358,27 +359,38 @@ $coverUrl = $cover !== ''
 
 						<?php if (
 							$isEdit
-							&& (($event['status'] ?? '') === 'submitted')
+							&& (($event['status'] ?? '') === 'published')
 						): ?>
 
 							<button
 								type="submit"
-								name="publish_after_update"
+								name="share_update_ping"
 								value="1"
+								class="mv-admin-button is-secondary"
+							>
+								<i
+									class="fa-solid fa-share-nodes"
+									aria-hidden="true"
+								></i>
+
+								<span>
+									Salva e ricondividi
+								</span>
+							</button>
+
+						<?php endif; ?>
+
+						<?php if (
+							$isEdit
+							&& (($event['status'] ?? '') === 'submitted')
+						): ?>
+
+							<button
+								type="button"
 								class="mv-admin-button is-success"
-								onclick="return confirm(<?= htmlspecialchars(
-									json_encode(
-										$t(
-											'admin.event_form.publication.confirm_publish'
-										),
-										JSON_HEX_TAG
-										| JSON_HEX_AMP
-										| JSON_HEX_APOS
-										| JSON_HEX_QUOT
-									),
-									ENT_QUOTES,
-									'UTF-8'
-								) ?>);"
+								onclick="document.getElementById(
+									'event-publish-modal'
+								).classList.add('is-open')"
 							>
 								<i
 									class="fa-solid fa-check"
@@ -703,5 +715,69 @@ $coverUrl = $cover !== ''
 		</div>
 
 	</form>
+
+	<?php if (
+		$isEdit
+		&& (($event['status'] ?? '') === 'submitted')
+	): ?>
+
+		<div
+			id="event-publish-modal"
+			class="mv-admin-modal"
+		>
+			<div
+				class="mv-admin-modal-backdrop"
+				onclick="this.parentElement.classList.remove('is-open')"
+			></div>
+
+			<div
+				class="mv-admin-modal-dialog"
+				role="dialog"
+				aria-modal="true"
+			>
+				<h3 class="mv-admin-modal-title">
+					Pubblica evento
+				</h3>
+
+				<p class="mv-admin-modal-description">
+					Vuoi pubblicare anche un Ping per questo evento?
+				</p>
+
+				<div class="mv-admin-modal-actions">
+
+					<button
+						type="submit"
+						form="admin-event-form"
+						name="publish_after_update"
+						value="1"
+						class="mv-admin-button is-secondary"
+					>
+						Solo evento
+					</button>
+
+					<button
+						type="submit"
+						form="admin-event-form"
+						name="publish_after_update"
+						value="1"
+						class="mv-admin-button is-primary"
+						onclick="
+							const input = document.createElement('input');
+							input.type = 'hidden';
+							input.name = 'publish_ping';
+							input.value = '1';
+							document.getElementById(
+								'admin-event-form'
+							).appendChild(input);
+						"
+					>
+						Evento + Ping
+					</button>
+
+				</div>
+			</div>
+		</div>
+
+	<?php endif; ?>
 
 </div>

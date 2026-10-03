@@ -9,6 +9,7 @@ use Monoverse\Core\Session;
 use Monoverse\Core\View;
 use Monoverse\Services\AdminAuthService;
 use Monoverse\Services\EventService;
+use Monoverse\Services\PostService;
 use Monoverse\Services\NavigationService;
 
 class EventController
@@ -20,6 +21,7 @@ class EventController
 		private Session $session,
 		private AdminAuthService $auth,
 		private EventService $events,
+		private PostService $posts,
 		private NavigationService $navigation
 	) {
 	}
@@ -487,6 +489,42 @@ class EventController
 			return;
 		}
 
+		$shareUpdatePing = (
+			(string) $this->request->post(
+				'share_update_ping',
+				''
+			) === '1'
+		);
+
+		if (
+			$shareUpdatePing
+			&& (($event['status'] ?? '') === 'published')
+		) {
+			$pingUuid = $this->posts->createEventPing(
+				$title,
+				$slug,
+				true
+			);
+
+			if (!$pingUuid) {
+				$this->session->flash(
+					'error',
+					'L’evento è stato aggiornato, ma non è stato possibile creare il Ping di aggiornamento.'
+				);
+
+				$this->response->redirect('/admin/events');
+				return;
+			}
+
+			$this->session->flash(
+				'success',
+				'Evento aggiornato e ricondiviso con un nuovo Ping.'
+			);
+
+			$this->response->redirect('/admin/events');
+			return;
+		}
+
 		$this->session->flash(
 			'success',
 			'Evento aggiornato.'
@@ -529,6 +567,13 @@ class EventController
 			return;
 		}
 
+		$publishPing = (
+			(string) $this->request->post(
+				'publish_ping',
+				''
+			) === '1'
+		);
+
 		if (!$this->events->publish($uuid)) {
 			$this->session->flash(
 				'error',
@@ -539,9 +584,29 @@ class EventController
 			return;
 		}
 
+		if ($publishPing) {
+			$pingUuid = $this->posts->createEventPing(
+				(string) $event['title'],
+				(string) $event['slug'],
+				false
+			);
+
+			if (!$pingUuid) {
+				$this->session->flash(
+					'error',
+					'L’evento è stato pubblicato, ma non è stato possibile creare il Ping.'
+				);
+
+				$this->response->redirect('/admin/events');
+				return;
+			}
+		}
+
 		$this->session->flash(
 			'success',
-			'Evento pubblicato.'
+			$publishPing
+				? 'Evento pubblicato e Ping creato.'
+				: 'Evento pubblicato.'
 		);
 
 		$this->response->redirect('/admin/events');

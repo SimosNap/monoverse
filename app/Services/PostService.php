@@ -1510,4 +1510,83 @@ class PostService
 
 		return $created ? $uuid : false;
 	}
+
+	public function createEventPing(
+		string $title,
+		string $slug,
+		bool $modified = false
+	): string|false {
+		$uuid = Uuid::v4();
+		$now = date('Y-m-d H:i:s');
+
+		$scheme = (
+			(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+			|| strtolower((string) ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '')) === 'https'
+		)
+			? 'https'
+			: 'http';
+
+		$host = trim((string) ($_SERVER['HTTP_HOST'] ?? ''));
+
+		$path = '/events/' . rawurlencode($slug);
+
+		$url = $host !== ''
+			? $scheme . '://' . $host . $path
+			: $path;
+
+		$content = $modified
+			? "L'evento è stato modificato\n\n" . $title
+			: $title;
+
+		$content .= "\n\n" . $url;
+
+		$links = $this->linkService->enrich(
+			$this->linkService->extract($content)
+		);
+
+		$metadata = json_encode(
+			[
+				'links' => $links,
+				'type' => 'event',
+				'event_slug' => $slug,
+				'event_update' => $modified,
+			],
+			JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+		);
+
+		$created = $this->database->execute(
+			'
+			INSERT INTO community_posts
+			(
+				uuid,
+				author_sub,
+				source,
+				content,
+				visibility,
+				status,
+				comments_enabled,
+				published_at,
+				created_at,
+				updated_at,
+				metadata
+			)
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			',
+			[
+				$uuid,
+				'',
+				'event',
+				$content,
+				'public',
+				'published',
+				1,
+				$now,
+				$now,
+				$now,
+				$metadata,
+			]
+		);
+
+		return $created ? $uuid : false;
+	}
 }

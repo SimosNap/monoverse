@@ -1701,9 +1701,99 @@
 	max-height: 64px;
 }
 
-/* ==========================================================
-   Admin buttons
-   ========================================================== */
+/* Admin modal */
+
+.mv-admin-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+
+	display: none;
+	align-items: center;
+	justify-content: center;
+
+	padding: 20px;
+}
+
+.mv-admin-modal.is-open {
+	display: flex;
+}
+
+.mv-admin-modal-backdrop {
+	position: absolute;
+	inset: 0;
+
+	background: rgba(15, 23, 42, 0.48);
+	backdrop-filter: blur(2px);
+}
+
+.mv-admin-modal-dialog {
+	position: relative;
+	z-index: 1;
+
+	width: min(100%, 420px);
+
+	padding: 22px;
+
+	background: var(--mv-surface);
+	border: 1px solid var(--mv-border);
+	border-radius: 14px;
+
+	box-shadow:
+		0 20px 50px rgba(15, 23, 42, 0.18);
+}
+
+.mv-admin-modal-title {
+	margin: 0 0 8px;
+
+	color: var(--mv-text);
+
+	font-size: 18px;
+	font-weight: 750;
+	line-height: 1.25;
+}
+
+.mv-admin-modal-description {
+	margin: 0;
+
+	color: var(--mv-muted);
+
+	font-size: 13px;
+	line-height: 1.55;
+}
+
+.mv-admin-modal-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 8px;
+
+	margin-top: 20px;
+}
+
+@media (max-width: 520px) {
+
+	.mv-admin-modal {
+		padding: 14px;
+	}
+
+	.mv-admin-modal-dialog {
+		padding: 18px;
+	}
+
+	.mv-admin-modal-actions {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.mv-admin-modal-actions .mv-admin-button {
+		justify-content: center;
+		width: 100%;
+	}
+
+}
+
+/* Admin buttons */
 
 .mv-admin-button {
 	display: inline-flex;

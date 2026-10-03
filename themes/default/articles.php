@@ -444,30 +444,83 @@
 
 							<?php if ($article['status'] === 'draft'): ?>
 
-								<form
-									method="post"
-									action="/admin/articles/<?= rawurlencode(
-										$article['uuid']
-									) ?>/publish"
-								>
-									<button
-										type="submit"
-										class="mv-admin-button is-primary"
-									>
-										<i
-											class="fa fa-upload"
-											aria-hidden="true"
-										></i>
-
-										<?= htmlspecialchars(
-											$t(
-												'admin.articles.actions.publish'
-											),
+								<button
+									type="button"
+									class="mv-admin-button is-primary"
+									onclick="document.getElementById(
+										'publish-modal-<?= htmlspecialchars(
+											$article['uuid'],
 											ENT_QUOTES,
 											'UTF-8'
-										) ?>
-									</button>
-								</form>
+										) ?>'
+									).classList.add('is-open')"
+								>
+									<i
+										class="fa fa-upload"
+										aria-hidden="true"
+									></i>
+
+									<?= htmlspecialchars(
+										$t('admin.articles.actions.publish'),
+										ENT_QUOTES,
+										'UTF-8'
+									) ?>
+								</button>
+
+								<div
+									id="publish-modal-<?= htmlspecialchars(
+										$article['uuid'],
+										ENT_QUOTES,
+										'UTF-8'
+									) ?>"
+									class="mv-admin-modal"
+								>
+									<div
+										class="mv-admin-modal-backdrop"
+										onclick="this.parentElement.classList.remove('is-open')"
+									></div>
+
+									<div
+										class="mv-admin-modal-dialog"
+										role="dialog"
+										aria-modal="true"
+									>
+										<h3 class="mv-admin-modal-title">
+											Pubblica articolo
+										</h3>
+
+										<p class="mv-admin-modal-description">
+											Vuoi pubblicare anche un Ping per questo articolo?
+										</p>
+
+										<form
+											method="post"
+											action="/admin/articles/<?= rawurlencode(
+												$article['uuid']
+											) ?>/publish"
+										>
+											<div class="mv-admin-modal-actions">
+
+												<button
+													type="submit"
+													class="mv-admin-button is-secondary"
+												>
+													Solo articolo
+												</button>
+
+												<button
+													type="submit"
+													name="publish_ping"
+													value="1"
+													class="mv-admin-button is-primary"
+												>
+													Articolo + Ping
+												</button>
+
+											</div>
+										</form>
+									</div>
+								</div>
 
 							<?php endif; ?>
 

@@ -21,7 +21,9 @@ return [
 		'choose' => 'Choose another nickname',
 		'registered' => 'This nickname is already registered.',
 		'available' => 'Perfect, this nickname is available.',
+		'online' => 'Online',
 		'checking' => 'Checking nickname...',
+		'acquiring_token' => 'Acquiring token...',
 		'registered_only' => 'You need a nickname registered on SimosNap to join this channel.',
 	],
 

@@ -1687,6 +1687,72 @@
 	font-size: 10px;
 }
 
+.mv-town-identity-option-name {
+	min-width: 0;
+	overflow: hidden;
+
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.mv-town-identity-presence {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+
+	flex: 0 0 auto;
+
+	margin-left: auto;
+	padding: 4px 8px;
+
+	border: 1px solid rgba(66, 185, 146, .18);
+	border-radius: 6px;
+
+	background: rgba(66, 185, 146, .07);
+
+	color: #278467;
+
+	font-size: 9px;
+	font-weight: 800;
+	line-height: 1;
+
+	letter-spacing: .025em;
+	text-transform: uppercase;
+}
+
+.mv-town-identity-presence[hidden] {
+	display: none !important;
+}
+
+.mv-town-identity-presence-dot {
+	position: relative;
+
+	display: block;
+	flex: 0 0 auto;
+
+	width: 6px;
+	height: 6px;
+
+	border-radius: 50%;
+
+	background: var(--mv-primary);
+
+	box-shadow:
+		0 0 0 3px rgba(66, 185, 146, .12);
+}
+
+.mv-town-identity-check {
+	flex: 0 0 auto;
+
+	margin-left: auto;
+
+	color: var(--mv-primary);
+	font-size: 10px;
+}
+
+.mv-town-identity-check + .mv-town-identity-presence {
+	margin-left: 4px;
+}
 
 /* ==========================================================
    Authentication step

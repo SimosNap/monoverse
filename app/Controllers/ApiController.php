@@ -5,6 +5,7 @@ namespace Monoverse\Controllers;
 
 use Monoverse\Core\Response;
 use Monoverse\Services\ProfileService;
+use Monoverse\Services\OAuthService;
 use Monoverse\Services\AzuraCastService;
 
 class ApiController
@@ -19,12 +20,20 @@ class ApiController
                 'nickname',
             ],
         ],
+        'chatpresence' => [
+            'method' => 'GET',
+            'path' => '/rest/service.php/chatpresence',
+            'query' => [
+                'account',
+            ],
+        ],
     ];
 
     public function __construct(
         private Response $response,
         private ProfileService $profiles,
-        private AzuraCastService $azuraCast
+        private AzuraCastService $azuraCast,
+        private OAuthService $oauth
     ) {
     }
 
@@ -219,6 +228,35 @@ class ApiController
         ], $status);
     }
 
+    public function ircSsoToken(): void
+    {
+        if (!$this->oauth->check()) {
+            $this->json([
+                'success' => false,
+                'error' => 'Autenticazione richiesta.',
+            ], 401);
+
+            return;
+        }
+
+        $tokens = $this->oauth->createIrcSsoToken();
+
+        if ($tokens === null) {
+            $this->json([
+                'success' => false,
+                'error' => 'Impossibile ottenere il token IRC.',
+            ], 502);
+
+            return;
+        }
+
+        $this->json([
+            'success' => true,
+            'token' => $tokens['token'],
+            'reconnect_token' => $tokens['reconnect_token'],
+        ], 200);
+    }
+
     public function simosnapProxy(string $endpoint): void
     {
         $endpoint = trim($endpoint, '/');
@@ -264,11 +302,32 @@ class ApiController
             $query['nickname'] = $nickname;
         }
 
+        if ($endpoint === 'chatpresence') {
+            $account = trim((string) ($query['account'] ?? ''));
+
+            if ($account === '') {
+                $this->json([
+                    'success' => false,
+                    'error' => 'Account mancante.',
+                ], 400);
+
+                return;
+            }
+
+            $query['account'] = $account;
+        }
+
         if ($endpoint === 'nick/check') {
 
             $url = self::SIMOSNAP_BASE_URL
                 . '/rest/service.php/checknick/'
                 . rawurlencode((string) $query['nickname']);
+
+        } elseif ($endpoint === 'chatpresence') {
+
+            $url = self::SIMOSNAP_BASE_URL
+                . '/rest/service.php/chatpresence/'
+                . rawurlencode((string) $query['account']);
 
         } else {
 

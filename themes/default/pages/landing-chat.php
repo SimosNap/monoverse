@@ -413,7 +413,7 @@ $communityUpdates = [
 															'UTF-8'
 														) ?>"
 													>
-														<span>
+														<span class="mv-town-identity-option-name">
 															<?= htmlspecialchars(
 																$alias,
 																ENT_QUOTES,
@@ -424,11 +424,30 @@ $communityUpdates = [
 														<?php if ($alias === $selectedNickname): ?>
 
 															<i
-																class="fa-solid fa-check"
+																class="fa-solid fa-check mv-town-identity-check"
 																aria-hidden="true"
 															></i>
 
 														<?php endif; ?>
+
+														<span
+															class="mv-town-identity-presence"
+															data-chat-identity-presence
+															hidden
+														>
+															<span
+																class="mv-town-identity-presence-dot"
+																aria-hidden="true"
+															></span>
+
+															<span>
+																<?= htmlspecialchars(
+																	$t('landing_chat.nickname.online'),
+																	ENT_QUOTES,
+																	'UTF-8'
+																) ?>
+															</span>
+														</span>
 
 													</button>
 
@@ -506,7 +525,19 @@ $communityUpdates = [
 
 								<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
 
-								<div class="mv-town-alert-content">
+								<div
+									class="mv-town-alert-content"
+									data-chat-loading-text
+									data-checking-text="<?= htmlspecialchars(
+										$t('landing_chat.nickname.checking'),
+										ENT_QUOTES,
+										'UTF-8'
+									) ?>"
+									data-acquiring-token-text="<?= htmlspecialchars(
+										$t('landing_chat.nickname.acquiring_token'),
+										ENT_QUOTES,
+										'UTF-8'
+									) ?>">
 									<?= htmlspecialchars(
 										$t('landing_chat.nickname.checking'),
 										ENT_QUOTES,
@@ -1005,6 +1036,8 @@ $communityUpdates = [
 						<input type="hidden" name="layout" value="">
 						<input type="hidden" name="conference" value="true">
 						<input type="hidden" name="fileuploader" value="true">
+						<input type="hidden" name="ssoToken" id="ssoToken" value="">
+						<input type="hidden" name="ssoReconnectToken" id="ssoReconnectToken" value="">
 
 						<input
 							type="hidden"

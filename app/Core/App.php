@@ -947,6 +947,9 @@ class App
                     ),
                     $container->get(
                         \Monoverse\Services\AzuraCastService::class
+                    ),
+                    $container->get(
+                        \Monoverse\Services\OAuthService::class
                     )
                 );
             }
@@ -2304,6 +2307,18 @@ class App
             function () use ($apiController): void {
                 $apiController->simosnapProxy('nick/check');
             }
+        );
+
+        $this->router->get(
+            '/api/simosnap/chatpresence',
+            function () use ($apiController): void {
+                $apiController->simosnapProxy('chatpresence');
+            }
+        );
+
+        $this->router->post(
+            '/api/simosnap/irc-token',
+            [$apiController, 'ircSsoToken']
         );
 
         $this->router->get(

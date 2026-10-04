@@ -65,7 +65,8 @@ class OAuthService
 		$ch = curl_init((string) ($oauth['token_url'] ?? ''));
 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 4);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postFields));
 
 		$response = curl_exec($ch);
@@ -132,6 +133,75 @@ class OAuthService
 			'token_type' => $token['token_type'] ?? 'Bearer',
 			'expires_at' => time() + (int) ($token['expires_in'] ?? 3600),
 		]);
+	}
+
+	public function createIrcSsoToken(): ?array
+	{
+		$authToken = $this->session->get('auth.token', []);
+
+		if (!is_array($authToken)) {
+			return null;
+		}
+
+		$accessToken = (string) ($authToken['access_token'] ?? '');
+		$expiresAt = (int) ($authToken['expires_at'] ?? 0);
+
+		if ($accessToken === '' || $expiresAt <= time()) {
+			return null;
+		}
+
+		$oauth = $this->config->get('oauth', []);
+		$url = (string) ($oauth['irc_token_url'] ?? '');
+
+		if ($url === '') {
+			return null;
+		}
+
+		$ch = curl_init($url);
+
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $accessToken,
+			'Accept: application/json',
+		]);
+
+		$response = curl_exec($ch);
+
+		if ($response === false) {
+			curl_close($ch);
+			return null;
+		}
+
+		$status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+		curl_close($ch);
+
+		if ($status !== 200) {
+			return null;
+		}
+
+		$data = json_decode($response, true);
+
+		if (!is_array($data)) {
+			return null;
+		}
+
+		$token = (string) ($data['token'] ?? '');
+		$reconnectToken = (string) ($data['reconnect_token'] ?? '');
+
+		if (!preg_match('/^[a-f0-9]{64}$/', $token)) {
+			return null;
+		}
+
+		if (!preg_match('/^[a-f0-9]{64}$/', $reconnectToken)) {
+			return null;
+		}
+
+		return [
+			'token' => $token,
+			'reconnect_token' => $reconnectToken,
+		];
 	}
 
     public function check(): bool

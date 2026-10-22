@@ -1,0 +1,130 @@
+/* ==========================================================
+   Blocks — struttura comune
+   ========================================================== */
+
+.mv-widget {
+    grid-column: span 12;
+
+    min-width: 0;
+    box-sizing: border-box;
+
+    padding: 20px;
+
+    border: 1px solid var(--mv-border);
+    border-radius: var(--mv-radius);
+
+    background: var(--mv-terminal-panel);
+
+    box-shadow: none;
+}
+
+.mv-widget-title {
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+
+    border-bottom: 1px solid var(--mv-border);
+
+    color: var(--mv-terminal-bright);
+
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.mv-widget-title::before {
+    content: "[";
+    color: var(--mv-terminal-dim);
+}
+
+.mv-widget-title::after {
+    content: "]";
+    color: var(--mv-terminal-dim);
+}
+
+.mv-widget-content {
+    min-width: 0;
+
+    color: var(--mv-terminal-soft);
+
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.mv-widget-content > :first-child {
+    margin-top: 0;
+}
+
+.mv-widget-content > :last-child {
+    margin-bottom: 0;
+}
+
+
+/* ==========================================================
+   Widths
+   ========================================================== */
+
+.mv-block-width-12 {
+    grid-column: span 12;
+}
+
+.mv-block-width-9 {
+    grid-column: span 9;
+}
+
+.mv-block-width-8 {
+    grid-column: span 8;
+}
+
+.mv-block-width-6 {
+    grid-column: span 6;
+}
+
+.mv-block-width-4 {
+    grid-column: span 4;
+}
+
+.mv-block-width-3 {
+    grid-column: span 3;
+}
+
+
+/* ==========================================================
+   Tablet
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+    .mv-block-width-9,
+    .mv-block-width-8,
+    .mv-block-width-6,
+    .mv-block-width-4,
+    .mv-block-width-3 {
+        grid-column: span 12;
+    }
+
+}
+
+
+/* ==========================================================
+   Mobile
+   ========================================================== */
+
+@media (max-width: 640px) {
+
+    .mv-widget {
+        padding: 16px;
+    }
+
+    .mv-widget-title {
+        margin-bottom: 13px;
+        padding-bottom: 10px;
+
+        font-size: 14px;
+    }
+
+    .mv-widget-content {
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+}

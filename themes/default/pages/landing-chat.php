@@ -103,13 +103,6 @@ $communityUpdates = [
 
 				<div class="mv-town-hero-visual">
 
-					<img
-						src="/themes/default/assets/images/landing-chat/community-hero-tight.webp"
-						alt=""
-						loading="eager"
-						decoding="async"
-					>
-
 				</div>
 
 			</header>

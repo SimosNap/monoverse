@@ -241,6 +241,7 @@ return [
 			'chanzine' => 'Mostra Chanzine',
 			'events' => 'Mostra Eventi',
 			'faq' => 'Mostra FAQ',
+			'askverse' => 'Mostra AskVerse nel menu',
 			'help' => 'Nascondere una voce dal menu non disabilita la relativa sezione del sito.',
 		],
 

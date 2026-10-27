@@ -241,6 +241,7 @@ return [
 			'chanzine' => 'Show Chanzine',
 			'events' => 'Show Events',
 			'faq' => 'Show FAQ',
+			'askverse' => 'Show AskVerse in navigation',
 			'help' => 'Hiding an item from the menu does not disable the related site section.',
 		],
 

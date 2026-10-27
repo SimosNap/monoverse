@@ -684,6 +684,23 @@ $ogPublishedTime = trim(
                 <?php endif; ?>
 
                 <?php if (
+                    ($settings['navigation_show_askverse'] ?? '1') === '1'
+                ): ?>
+
+                    <a
+                        href="/askverse"
+                        class="<?= str_starts_with($currentPath, '/askverse')
+                            ? 'is-active'
+                            : '' ?>"
+                        <?= str_starts_with($currentPath, '/askverse')
+                            ? 'aria-current="page"'
+                            : '' ?>>
+                        AskVerse
+                    </a>
+
+                <?php endif; ?>
+
+                <?php if (
                     $pagesNavigationMain
                     && $navigationPages !== []
                 ): ?>

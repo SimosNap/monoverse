@@ -1035,6 +1035,31 @@ $success = trim(
 
                 </div>
 
+                <div class="mv-admin-field">
+
+                    <label class="admin-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="navigation_show_askverse"
+                            value="1"
+                            <?= (($settings['navigation_show_askverse'] ?? '1') === '1')
+                                ? 'checked'
+                                : '' ?>
+                        >
+
+                        <span>
+                            <?= htmlspecialchars(
+                                $t('admin.settings.navigation.askverse'),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </span>
+
+                    </label>
+
+                </div>
+
             </div>
 
             <div class="mv-admin-settings-section">

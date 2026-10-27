@@ -630,6 +630,52 @@ class App
             );
         });
 
+        // AskVerse services
+        $this->container->set(
+            \Monoverse\Services\AskVerseService::class,
+            function (Container $container) {
+                return new \Monoverse\Services\AskVerseService(
+                    $container->get(Database::class)
+                );
+            }
+        );
+
+        $this->container->set(
+            \Monoverse\Services\AskVerseAnswerService::class,
+            function (Container $container) {
+                return new \Monoverse\Services\AskVerseAnswerService(
+                    $container->get(Database::class)
+                );
+            }
+        );
+
+        $this->container->set(
+            \Monoverse\Services\AskVerseCommentService::class,
+            function (Container $container) {
+                return new \Monoverse\Services\AskVerseCommentService(
+                    $container->get(Database::class)
+                );
+            }
+        );
+
+        $this->container->set(
+            \Monoverse\Services\AskVerseAttachmentService::class,
+            function (Container $container) {
+                return new \Monoverse\Services\AskVerseAttachmentService(
+                    $container->get(Database::class)
+                );
+            }
+        );
+
+        $this->container->set(
+            \Monoverse\Services\AskVerseVoteService::class,
+            function (Container $container) {
+                return new \Monoverse\Services\AskVerseVoteService(
+                    $container->get(Database::class)
+                );
+            }
+        );
+
         $this->container->set(\Monoverse\Services\PostService::class, function (Container $container) {
             return new \Monoverse\Services\PostService(
                 $container->get(Database::class),
@@ -1035,6 +1081,25 @@ class App
                     $container->get(
                         \Monoverse\Services\SettingsService::class
                     )
+                );
+            }
+        );
+
+        $this->container->set(
+            \Monoverse\Controllers\AskVerseController::class,
+            function (Container $container) {
+                return new \Monoverse\Controllers\AskVerseController(
+                    $container->get(View::class),
+                    $container->get(Response::class),
+                    $container->get(Session::class),
+                    $container->get(\Monoverse\Services\NotificationService::class),
+                    $container->get(\Monoverse\Services\SettingsService::class),
+                    $container->get(\Monoverse\Services\AskVerseService::class),
+                    $container->get(\Monoverse\Services\AskVerseAnswerService::class),
+                    $container->get(\Monoverse\Services\AskVerseCommentService::class),
+                    $container->get(\Monoverse\Services\AskVerseVoteService::class),
+                    $container->get(\Monoverse\Services\AskVerseAttachmentService::class),
+                    $container->get(\Monoverse\Services\AuthorizationService::class)
                 );
             }
         );
@@ -1708,6 +1773,9 @@ class App
         $moderationController = $this->container->get(
             \Monoverse\Controllers\ModerationController::class
         );
+        $askVerseController = $this->container->get(
+            \Monoverse\Controllers\AskVerseController::class
+        );
         $pingController = $this->container->get(
             \Monoverse\Controllers\PingController::class
         );
@@ -1789,6 +1857,82 @@ class App
         $this->router->get(
             '/members',
             [$membersController, 'index']
+        );
+
+        // AskVerse - Public routes
+        $this->router->get(
+            '/askverse',
+            [$askVerseController, 'index']
+        );
+
+        $this->router->post('/askverse/{uuid}/answers', [$askVerseController, 'storeAnswer']);
+
+        $this->router->post(
+            '/askverse/answers/{uuid}/update',
+            [$askVerseController, 'updateAnswer']
+        );
+
+        $this->router->post(
+            '/askverse/answers/{uuid}/delete',
+            [$askVerseController, 'deleteAnswer']
+        );
+
+        $this->router->post('/askverse/{uuid}/vote', [$askVerseController, 'voteQuestion']);
+
+        $this->router->post('/askverse/answers/{uuid}/vote', [$askVerseController, 'voteAnswer']);
+
+        $this->router->post('/askverse/answers/{uuid}/accept', [$askVerseController, 'acceptAnswer']);
+
+        $this->router->get(
+            '/askverse/answers/{uuid}/comments',
+            [$askVerseController, 'comments']
+        );
+
+        $this->router->post(
+            '/askverse/answers/{uuid}/comments',
+            [$askVerseController, 'storeComment']
+        );
+
+        $this->router->post(
+            '/askverse/comments/{uuid}/update',
+            [$askVerseController, 'updateComment']
+        );
+
+        $this->router->post(
+            '/askverse/comments/{uuid}/delete',
+            [$askVerseController, 'deleteComment']
+        );
+
+        $this->router->get(
+            '/askverse/new',
+            [$askVerseController, 'create']
+        );
+
+        $this->router->get(
+            '/askverse/{uuid}/edit',
+            [$askVerseController, 'edit']
+        );
+
+        $this->router->post(
+            '/askverse/{uuid}',
+            [$askVerseController, 'update']
+        );
+
+        $this->router->post(
+            '/askverse/{uuid}/delete',
+            [$askVerseController, 'delete']
+        );
+
+        $this->router->post('/askverse', [$askVerseController, 'store']);
+
+        $this->router->get(
+            '/askverse/attachments/{uuid}',
+            [$askVerseController, 'attachment']
+        );
+
+        $this->router->get(
+            '/askverse/{uuid}',
+            [$askVerseController, 'show']
         );
 
         $this->router->get('/ping', [$pingController, 'index']);

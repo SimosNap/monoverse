@@ -131,8 +131,15 @@ class View
                 $cssFiles[] = 'page';
                 break;
 
+
             case 'faq':
                 $cssFiles[] = 'faq';
+                break;
+
+            case 'askverse':
+            case 'askverse-show':
+            case 'askverse-create':
+                $cssFiles[] = 'askverse';
                 break;
 
             case 'members':

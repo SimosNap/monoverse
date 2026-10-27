@@ -87,3 +87,60 @@
         font-size: 17px;
     }
 }
+
+/* ==========================================================
+   Blocchi di codice — stile condiviso Ping / AskVerse
+   ========================================================== */
+
+.content-code-block {
+    margin-top: 14px;
+    overflow: hidden;
+    border: 1px solid #d8e0e8;
+    border-radius: 8px;
+    background: #f4f7fa;
+}
+
+.content-code-header {
+    display: flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 12px;
+    border-bottom: 1px solid #d8e0e8;
+    background: #eaf0f5;
+}
+
+.content-code-language {
+    color: #526477;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: .04em;
+}
+
+.content-code-pre {
+    box-sizing: border-box;
+    width: 100%;
+    max-height: 480px;
+    margin: 0;
+    padding: 14px 16px;
+    overflow: auto;
+    background: #f4f7fa;
+    color: #253342;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    tab-size: 4;
+}
+
+.content-code-pre code {
+    display: block;
+    min-width: max-content;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    white-space: pre;
+}

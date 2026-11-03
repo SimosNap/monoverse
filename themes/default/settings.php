@@ -879,11 +879,11 @@ $success = trim(
                 </div>
 
             </div>
-            
+
             <div class="mv-admin-settings-section">
-            
+
                 <div class="mv-admin-settings-section-heading">
-            
+
                     <h2>
                         <?= htmlspecialchars(
                             $t('admin.settings.modules.title'),
@@ -891,7 +891,7 @@ $success = trim(
                             'UTF-8'
                         ) ?>
                     </h2>
-            
+
                     <p>
                         <?= htmlspecialchars(
                             $t('admin.settings.modules.description'),
@@ -899,13 +899,13 @@ $success = trim(
                             'UTF-8'
                         ) ?>
                     </p>
-            
+
                 </div>
-            
+
                 <div class="mv-admin-field">
-            
+
                     <label class="admin-checkbox">
-            
+
                         <input
                             type="checkbox"
                             name="askverse_enabled"
@@ -914,7 +914,7 @@ $success = trim(
                                 ? 'checked'
                                 : '' ?>
                         >
-            
+
                         <span>
                             <?= htmlspecialchars(
                                 $t('admin.settings.modules.askverse.label'),
@@ -922,9 +922,9 @@ $success = trim(
                                 'UTF-8'
                             ) ?>
                         </span>
-            
+
                     </label>
-            
+
                     <span class="mv-admin-field-help">
                         <?= htmlspecialchars(
                             $t('admin.settings.modules.askverse.help'),
@@ -932,9 +932,9 @@ $success = trim(
                             'UTF-8'
                         ) ?>
                     </span>
-            
+
                 </div>
-            
+
             </div>
 
             <div class="mv-admin-settings-section">

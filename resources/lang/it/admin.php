@@ -125,6 +125,15 @@ return [
 			'description' => 'Configura le impostazioni principali del sito.',
 		],
 
+		'modules' => [
+			'title' => 'Moduli',
+			'description' => 'Abilita o disabilita i moduli della community.',
+			'askverse' => [
+				'label' => 'Abilita AskVerse',
+				'help' => 'Quando è disabilitato, AskVerse non è accessibile. I contenuti esistenti vengono conservati.',
+			],
+		],
+
 		'success' => [
 			'title' => 'Impostazioni salvate.',
 		],

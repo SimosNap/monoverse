@@ -684,7 +684,8 @@ $ogPublishedTime = trim(
                 <?php endif; ?>
 
                 <?php if (
-                    ($settings['navigation_show_askverse'] ?? '1') === '1'
+                    ($settings['askverse_enabled'] ?? '1') === '1'
+                    && ($settings['navigation_show_askverse'] ?? '1') === '1'
                 ): ?>
 
                     <a

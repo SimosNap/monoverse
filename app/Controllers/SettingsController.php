@@ -149,6 +149,13 @@ class SettingsController
                 ? '1'
                 : '0'
         );
+        
+        $this->settings->set(
+            'askverse_enabled',
+            $this->request->post('askverse_enabled')
+                ? '1'
+                : '0'
+        );
 
         $this->settings->set(
             'media_audio_upload_enabled',

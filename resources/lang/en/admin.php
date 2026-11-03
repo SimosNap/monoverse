@@ -125,6 +125,15 @@ return [
 			'description' => 'Configure the main site settings.',
 		],
 
+		'modules' => [
+			'title' => 'Modules',
+			'description' => 'Enable or disable community modules.',
+			'askverse' => [
+				'label' => 'Enable AskVerse',
+				'help' => 'When disabled, AskVerse is inaccessible. Existing content is preserved.',
+			],
+		],
+
 		'success' => [
 			'title' => 'Settings saved.',
 		],

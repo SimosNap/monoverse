@@ -2145,7 +2145,7 @@ class AskVerseController extends BaseController
     {
         $value = $this->settings?->get(
             'askverse_enabled',
-            '0'
+            '1'
         );
 
         return in_array(
